@@ -12,7 +12,7 @@ int main()
 {
 	try
 	{
-		CEmulation * Emulator= new CEmulation();
+ 		CEmulation * Emulator= new CEmulation();
 		Emulator->EmulationBuilder();
 		delete Emulator;
 		return(0);

@@ -129,7 +129,8 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 		if (ret == -1) {throw CException("Err: when retrieving devices list");}
 
 		//iterate over list
-		for (node = list; node != NULL; node = node->ifa_next)
+		int i = 0;
+		for (i=0,node = list; node != NULL; node = node->ifa_next,++i)
 		{
 			std::cout << "name:\t" << node->ifa_name << std::endl;
 
@@ -143,7 +144,11 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 			{
 				case AF_PACKET:
 					std::cout << "AF_PACKET";
-					mPhysicalConnections->push_back(new CPhysicalConnection(node));
+					if(strcmp(node->ifa_name,"lo")==0)
+					{
+						break;
+					}
+					mPhysicalConnections->push_back(new CPhysicalConnection(node,i));
 					break;
 				case AF_INET:
 					std::cout << "AF_INET";

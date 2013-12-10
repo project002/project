@@ -11,6 +11,7 @@
  */
 #include <iostream>
 #include <fstream>
+#include <cstring>
 using namespace std;
 
 /**
@@ -20,6 +21,12 @@ using namespace std;
 #include <sys/types.h>
 #include <ifaddrs.h>
 #include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <net/if.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <netpacket/packet.h>
+#include <net/ethernet.h>
 
 /**
  * Exception Related Inclusions
@@ -37,6 +44,11 @@ using namespace std;
  * Exception Related Inclusions
  */
 #include "CException.h"
+
+/**
+ * Error Related Inclusions
+ */
+#include <errno.h>
 
 #endif
 
