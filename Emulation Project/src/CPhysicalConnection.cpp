@@ -13,12 +13,12 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device,int device_index
 	//socket type?
 	//bind the socket to one device exclusively
 	struct ifreq ifr;
-	struct sockaddr_ll soll;
-	char buffer[1528]={0};
+//	struct sockaddr_ll socket_address;
+
 
 	try
 	{
-		mSocket = socket(device->ifa_addr->sa_family, SOCK_RAW | SOCK_NONBLOCK ,	0);
+		mSocket = socket(device->ifa_addr->sa_family, SOCK_RAW | SOCK_NONBLOCK , htons(ETH_P_ALL));
 
 		if (mSocket == -1) {throw CException("socket is bad");}
 
@@ -31,38 +31,15 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device,int device_index
 			throw CException("binding of the socket to single device FAILED");
 		}
 
-		//add the device index to the binding operation
-		memset(&soll,0,sizeof(soll));
-		soll.sll_ifindex = device_index;
-		soll.sll_protocol = 0;
-		//TODO: how the fuck can we bind anything with sockaddr_ll when the bind methos uses sockaddr?
-		//the manuel is lying to us!!!!
-		if (bind(mSocket,(struct sockaddr*) &soll,sizeof(soll)) < 0)
-		{
-			throw CException("binding have failed");
-		}
-
-		ssize_t recvSize;
-		// Command tries twice
-		recvSize=recvfrom(mSocket,buffer,1528,MSG_DONTWAIT,NULL,0);
-		if (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
-		{
-			cerr << "err number " << errno << endl;
-			throw CException("fatal error on recieve from socket");
-		}
-
-		cout << "packet: ";
-		for (int i=0;i<1528;++i) {printf("%X",(unsigned int)buffer[i]);}
-		cout << endl;
-
-		close(mSocket);
-
+		//read loop
+		run_recv_loop(30);
 
 	}
 	catch (CException & e)
 	{
 		std::cerr << e.what() << std::endl;
 		perror("socket");
+		close(mSocket);
 	}
 
 }
@@ -70,5 +47,70 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device,int device_index
 CPhysicalConnection::~CPhysicalConnection()
 {
 	// TODO Auto-generated destructor stub
+	close(mSocket);
+}
+
+bool CPhysicalConnection::is_packet_empty(char* buffer)
+{
+	int sum = 0;
+	for (int i=0;i<ETH_FRAME_LEN;++i)
+	{
+		sum += buffer[i];
+		if (sum>0) {return false;}
+	}
+	return true;
+}
+
+void CPhysicalConnection::run_recv_loop(int unsigned period_len)
+{
+	time_t start = time(NULL);
+	int len = (int) period_len;
+	char buffer[ETH_FRAME_LEN]={0};
+	ssize_t recvSize;
+	int dMAC_range[2] = {0,ETH_ALEN-1};
+	int sMAC_range[2] = {ETH_ALEN,(2*ETH_ALEN)-1};
+	while (time(NULL) < start+len)
+	{
+		try
+		{
+			recvSize=recvfrom(mSocket,buffer,ETH_FRAME_LEN,0,NULL,NULL);
+			if (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
+			{
+				cerr << "err number " << errno << endl;
+				throw CException("fatal error on receive from socket");
+			}
+
+			if (!is_packet_empty(buffer)) //don't print empty packets
+			{
+				cout << "packet: " << endl;
+				cout << "\t Dest MAC: ";
+				for (int dm=0;dm<ETH_ALEN;++dm) {printf("%02X:",buffer[dm]);}
+				cout << endl;
+
+				cout << "\t Src MAC:";
+				for (int sm=0;sm<ETH_ALEN;++sm) {printf("%02X:",buffer[ETH_ALEN+sm]);}
+				cout << endl;
+
+				cout << "\t Type ID:";
+				printf("%02X",buffer[ETH_ALEN*2]);
+				printf("%02X",buffer[(ETH_ALEN*2)+1]);
+				cout << endl;
+
+				cout << "\t RAW: ";
+				for (int i=0;i<ETH_FRAME_LEN;++i)
+				{
+					printf("%02X",buffer[i]);
+					buffer[i] = 0; //re-initialize the buffer
+				}
+				cout << endl;
+			}
+		}
+		catch (CException & e)
+		{
+			std::cerr << e.what() << std::endl;
+			perror("socket");
+			break;
+		}
+	}
 }
 
