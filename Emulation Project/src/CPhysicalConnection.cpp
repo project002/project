@@ -67,8 +67,7 @@ void CPhysicalConnection::run_recv_loop(int unsigned period_len)
 	int len = (int) period_len;
 	char buffer[ETH_FRAME_LEN]={0};
 	ssize_t recvSize;
-	int dMAC_range[2] = {0,ETH_ALEN-1};
-	int sMAC_range[2] = {ETH_ALEN,(2*ETH_ALEN)-1};
+	char* ipHead = &buffer[(ETH_ALEN*2)+2]; //after the Ethernet header
 	while (time(NULL) < start+len)
 	{
 		try
@@ -92,8 +91,23 @@ void CPhysicalConnection::run_recv_loop(int unsigned period_len)
 				cout << endl;
 
 				cout << "\t Type ID:";
-				printf("%02X",buffer[ETH_ALEN*2]);
-				printf("%02X",buffer[(ETH_ALEN*2)+1]);
+				int unsigned typeID = 0;
+				typeID = typeID | buffer[ETH_ALEN*2];
+				typeID = typeID << 8;
+				typeID = typeID | buffer[(ETH_ALEN*2)+1];
+
+				printf("%04X",typeID);
+
+				switch (typeID)
+				{
+					case IPV4ID : cout << "(IPv4)";
+								read_ipv4(ipHead);
+								break;
+					case IPV6ID : cout << "(IPv6)"; break;
+					case ARPID : cout << "(ARP)"; break;
+					case IPXID : cout << "(IPX)"; break;
+				}
+
 				cout << endl;
 
 				cout << "\t RAW: ";

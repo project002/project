@@ -10,6 +10,10 @@
 #include "BasicIncludes.h"
 
 #define ETH_FRAME_LEN 1518
+#define IPV4ID 0x0800
+#define ARPID  0x0806
+#define IPXID  0x8137
+#define IPV6ID 0x86DD
 
 class CPhysicalConnection
 {
@@ -28,6 +32,11 @@ private:
 	 */
 	void run_recv_loop(int unsigned period_len); //run a loop to catch packets
 	bool is_packet_empty(char* packet);
+	/**
+	 * outputs the input of the packet content which is a ipv4 packet
+	 * @param ipHead a pointer to ipv4 packet inside the ethernet packet
+	 */
+	void read_ipv4(char* ipHead);
 };
 
 #endif /* CPHYSICALCONNECTION_H_ */
