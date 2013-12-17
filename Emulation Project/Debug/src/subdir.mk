@@ -4,22 +4,31 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/CBuffer.cpp \
 ../src/CEmulation.cpp \
 ../src/CException.cpp \
+../src/CPacket.cpp \
+../src/CPacketCollector.cpp \
 ../src/CPhysicalConnection.cpp \
 ../src/CPhysicalConnectionsHandler.cpp \
 ../src/Emulation\ Project.cpp 
 
 OBJS += \
+./src/CBuffer.o \
 ./src/CEmulation.o \
 ./src/CException.o \
+./src/CPacket.o \
+./src/CPacketCollector.o \
 ./src/CPhysicalConnection.o \
 ./src/CPhysicalConnectionsHandler.o \
 ./src/Emulation\ Project.o 
 
 CPP_DEPS += \
+./src/CBuffer.d \
 ./src/CEmulation.d \
 ./src/CException.d \
+./src/CPacket.d \
+./src/CPacketCollector.d \
 ./src/CPhysicalConnection.d \
 ./src/CPhysicalConnectionsHandler.d \
 ./src/Emulation\ Project.d 

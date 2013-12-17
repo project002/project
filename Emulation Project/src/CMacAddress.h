@@ -20,6 +20,30 @@ public:
 		}
 	}
 
+	/**
+	 * creates a MAC address wrapper
+	 * @param data a char array
+	 * @param offset an offset in the given array that start with MAX address
+	 */
+	CMacAddress(char* data,int unsigned offset)
+	{
+		SetMAC(data,offset);
+	}
+
+	/**
+	 * creates a MAC address wrapper
+	 * @param data a char array
+	 * @param offset an offset in the given array that start with MAX address
+	 */
+	void SetMAC(char* data,unsigned int offset)
+	{
+		unsigned int di,i;
+		for (di=offset,i=0;di<offset+ETH_ALEN;++i,++di)
+		{
+			mMacAddress[i] = ((uint8_t) data[di]);
+		}
+	}
+
 	string GetMacAddress()
 	{
 		stringstream ss;
@@ -29,14 +53,22 @@ public:
 
 	void Print()
 	{
-		cout << mMacAddress << endl;
+		//cout << mMacAddress << endl;
+		for (int i=0;i<(ETH_ALEN-1);++i)
+		{
+			printf("%02X:",mMacAddress[i]);
+		}
+		printf("%02X",mMacAddress[ETH_ALEN-1]);
 	}
+
 	virtual ~CMacAddress()
 	{
 	}
 
 private:
 	unsigned char mMacAddress[ETH_ALEN];
+
+
 };
 
 #endif /* CMACADDRESS_H_ */
