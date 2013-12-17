@@ -57,6 +57,7 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 				mPhysicalConnections->push_back(new CPhysicalConnection(node));
 			}
 			cout<<"\n";
+
 		}
 
 		//clear the allocated list

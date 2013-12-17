@@ -19,7 +19,6 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mPacketCollecto
 
 		// Get the interface information
 		GetInterfaceInformation();
-
 	}
 	catch (CException & e)
 	{
