@@ -5,13 +5,14 @@
 
 #ifndef BASIC_INCLUDES_H
 #define BASIC_INCLUDES_H
-
 /**
  * Basic Streaming Inclusions
  */
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <string>
+#include <sstream>
 using namespace std;
 
 /**

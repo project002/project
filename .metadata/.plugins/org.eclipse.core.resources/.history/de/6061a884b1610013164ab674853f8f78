@@ -1,0 +1,48 @@
+/*
+ * CPhysicalConnection.cpp
+ *
+ *  Created on: Dec 10, 2013
+ *      Author: project
+ */
+
+#include "CPhysicalConnection.h"
+
+CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device)
+{
+	//read relevant data from stuct ifaddr and creates the appropriate
+	//socket type?
+	//bind the socket to one device exclusively
+	struct ifreq ifr;
+	try
+	{
+		mSocket = socket(device->ifa_addr->sa_family, SOCK_RAW | SOCK_NONBLOCK,	0);
+
+		if (mSocket == -1) {throw CException("socket is bad");}
+
+		// Binding the socket to a specific device:
+		memset(&ifr, 0, sizeof(ifr));
+		strncpy(ifr.ifr_ifrn.ifrn_name, "eth1", IFNAMSIZ);
+		if (setsockopt(mSocket, SOL_SOCKET, SO_BINDTODEVICE, (void *) &ifr,
+				sizeof(ifr)) < 0)
+		{
+			throw CException("binding of the socket to single device FAILED");
+		}
+
+		if (bind() < 0)
+		{
+			throw CException("binding of the socket to single device FAILED");
+		}
+
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+}
+
+CPhysicalConnection::~CPhysicalConnection()
+{
+	// TODO Auto-generated destructor stub
+}
+

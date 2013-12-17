@@ -1,0 +1,461 @@
+!SESSION 2013-12-08 06:47:29.968 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 2 0 2013-12-08 06:47:34.847
+!MESSAGE Warnings while parsing the viewer contributions from the 'org.eclipse.ui.popupMenus' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.ui.actions.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.848
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.848
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.848
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.ui.actions.asm.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.848
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='AUTOGEN:::org.eclipse.cdt.dsf.debug.ui.disassemblyRulerActions/org.eclipse.debug.ui.actions.RulerAddBreakpointAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:47:34.848
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='org.eclipse.cdt.dsf.debug.ui.disassembly.commands.rulerToggleBreakpoint'
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-12-08 06:47:56.040
+!MESSAGE Indexed 'test' (1 sources, 97 headers) in 2.62 sec: 8,129 declarations; 14,192 references; 0 unresolved inclusions; 6 syntax errors; 10 unresolved names (0.04%)
+
+!ENTRY org.eclipse.cdt.debug.core 4 105 2013-12-08 06:51:11.198
+!MESSAGE A program file was not specified in the launch configuration.
+!SESSION 2013-12-08 06:55:25.240 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-12-08 06:55:26.200
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE Warnings while parsing the viewer contributions from the 'org.eclipse.ui.popupMenus' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.ui.actions.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.ui.actions.asm.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='AUTOGEN:::org.eclipse.cdt.dsf.debug.ui.disassemblyRulerActions/org.eclipse.debug.ui.actions.RulerAddBreakpointAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 06:55:26.847
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='org.eclipse.cdt.dsf.debug.ui.disassembly.commands.rulerToggleBreakpoint'
+!SESSION 2013-12-08 07:06:23.647 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE Warnings while parsing the viewer contributions from the 'org.eclipse.ui.popupMenus' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.ui.actions.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.ui.actions.asm.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='AUTOGEN:::org.eclipse.cdt.dsf.debug.ui.disassemblyRulerActions/org.eclipse.debug.ui.actions.RulerAddBreakpointAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-08 07:06:30.837
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='org.eclipse.cdt.dsf.debug.ui.disassembly.commands.rulerToggleBreakpoint'
+!SESSION 2013-12-10 10:21:44.539 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 2 0 2013-12-10 10:21:51.918
+!MESSAGE Warnings while parsing the viewer contributions from the 'org.eclipse.ui.popupMenus' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.918
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.918
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.918
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.ui.actions.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.918
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.CBreakpointPropertiesRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.918
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.EnableDisableBreakpointRulerActionDelegate'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.919
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.ui.actions.asm.RulerCreateBreakpointInteractiveAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.919
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='AUTOGEN:::org.eclipse.cdt.dsf.debug.ui.disassemblyRulerActions/org.eclipse.debug.ui.actions.RulerAddBreakpointAction'
+!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-10 10:21:51.919
+!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='org.eclipse.cdt.dsf.debug.ui.disassembly.commands.rulerToggleBreakpoint'
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-12-10 10:26:33.523
+!MESSAGE Indexed 'Emulation' (0 sources, 0 headers) in 0.00 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 103 2013-12-10 11:29:38.822
+!MESSAGE Program file does not exist
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 103 2013-12-10 11:29:38.822
+!MESSAGE 
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-12-10 11:33:12.333
+!MESSAGE Indexed 'testttt' (1 sources, 97 headers) in 1.81 sec: 8,129 declarations; 14,192 references; 0 unresolved inclusions; 6 syntax errors; 10 unresolved names (0.04%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-12-10 11:43:35.808
+!MESSAGE Indexed 'Emulation Project' (1 sources, 97 headers) in 1.75 sec: 8,129 declarations; 14,192 references; 0 unresolved inclusions; 6 syntax errors; 10 unresolved names (0.04%)
+
+!ENTRY org.eclipse.core.resources 4 77 2013-12-10 12:11:49.001
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2013-12-10 12:11:49.001
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2013-12-10 12:11:49.001
+!MESSAGE /home/project/workspace/Emulation Project overlaps the location of another project: 'Emulation Project'
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-12-10 12:13:39.059
+!MESSAGE Indexed 'Emulation' (5 sources, 155 headers) in 2.61 sec: 11,698 declarations; 20,269 references; 0 unresolved inclusions; 6 syntax errors; 24 unresolved names (0.08%)
+
+!ENTRY org.eclipse.core.resources 4 77 2013-12-10 12:14:29.117
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2013-12-10 12:14:29.117
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2013-12-10 12:14:29.117
+!MESSAGE /home/project/workspace/Emulation Project overlaps the location of another project: 'Emulation Project'
+
+!ENTRY org.eclipse.help.base 4 0 2013-12-10 12:27:08.693
+!MESSAGE Help index declared, but missing for plugin org.eclipse.cdt.autotools.docs.
+
+!ENTRY org.eclipse.help.base 4 0 2013-12-10 12:27:10.252
+!MESSAGE An error occured while pre-processing help XHTML document "/org.eclipse.cdt.doc.user/concepts/cdt_c_whatsnew.htm" for search indexing
+!STACK 0
+org.xml.sax.SAXParseException; lineNumber: 95; columnNumber: 36; The reference to entity "gt" must end with the ';' delimiter.
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:253)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:288)
+	at org.eclipse.help.internal.dynamic.DocumentReader.read(DocumentReader.java:56)
+	at org.eclipse.help.internal.dynamic.XMLProcessor.process(XMLProcessor.java:49)
+	at org.eclipse.help.internal.xhtml.DynamicXHTMLProcessor.process(DynamicXHTMLProcessor.java:76)
+	at org.eclipse.help.internal.search.XHTMLSearchParticipant.preprocess(XHTMLSearchParticipant.java:106)
+	at org.eclipse.help.search.SearchParticipantXML.addDocument(SearchParticipantXML.java:296)
+	at org.eclipse.help.internal.search.HTMLSearchParticipant.addDocument(HTMLSearchParticipant.java:51)
+	at org.eclipse.help.internal.search.SearchIndex.addDocument(SearchIndex.java:231)
+	at org.eclipse.help.internal.search.IndexingOperation.addDocuments(IndexingOperation.java:252)
+	at org.eclipse.help.internal.search.IndexingOperation.addNewDocuments(IndexingOperation.java:159)
+	at org.eclipse.help.internal.search.IndexingOperation.execute(IndexingOperation.java:106)
+	at org.eclipse.help.internal.search.LocalSearchManager.updateIndex(LocalSearchManager.java:671)
+	at org.eclipse.help.internal.search.LocalSearchManager.ensureIndexUpdated(LocalSearchManager.java:645)
+	at org.eclipse.help.internal.search.federated.IndexerJob.run(IndexerJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.help.base 4 4 2013-12-10 12:27:10.543
+!MESSAGE Help documentation could not be indexed completely.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.543
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.ui.examples.propertysheet/doc-html/ui_propertysheet_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.543
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_helloworld_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.543
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_fileviewer_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.543
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_javaviewer_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.543
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.compare.examples.xml/doc-html/ui_xmlcompare_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.543
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.controls/doc-html/swt_customcontrols_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.browser/doc-html/swt_browser_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.ui.examples.readmetool/doc-html/ui_readmetool_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.team.examples.filesystem/doc-html/team_localhistory_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.team.examples.filesystem/doc-html/team_model_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_texteditor_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/opengl/package-summary.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.rse.doc.isv/reference/api/org/eclipse/rse/core/servicesubsystem/package-summary.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Exception occurred while adding document /org.eclipse.cdt.doc.user/concepts/cdt_c_whatsnew.htm to index.
+!STACK 0
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:198)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:391)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1404)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:1014)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:625)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:819)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:748)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1208)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:525)
+	at javax.xml.parsers.SAXParser.parse(SAXParser.java:392)
+	at javax.xml.parsers.SAXParser.parse(SAXParser.java:195)
+	at org.eclipse.help.search.SearchParticipantXML.addDocument(SearchParticipantXML.java:297)
+	at org.eclipse.help.internal.search.HTMLSearchParticipant.addDocument(HTMLSearchParticipant.java:51)
+	at org.eclipse.help.internal.search.SearchIndex.addDocument(SearchIndex.java:231)
+	at org.eclipse.help.internal.search.IndexingOperation.addDocuments(IndexingOperation.java:252)
+	at org.eclipse.help.internal.search.IndexingOperation.addNewDocuments(IndexingOperation.java:159)
+	at org.eclipse.help.internal.search.IndexingOperation.execute(IndexingOperation.java:106)
+	at org.eclipse.help.internal.search.LocalSearchManager.updateIndex(LocalSearchManager.java:671)
+	at org.eclipse.help.internal.search.LocalSearchManager.ensureIndexUpdated(LocalSearchManager.java:645)
+	at org.eclipse.help.internal.search.federated.IndexerJob.run(IndexerJob.java:31)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.compare.examples/doc-html/ui_structurecreator_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.layouts/doc-html/swt_layout_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_addressbook_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.ole.win32/doc-html/swt_ole_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.ui.examples.javaeditor/doc-html/ui_javaeditor_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.paint/doc-html/swt_paint_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.launcher/doc-html/swt_launcher_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_hoverhelp_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_imageanalyzer_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.ui.examples.multipageeditor/doc-html/ui_multipageeditor_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/ole/win32/package-summary.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_manual_setup.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/awt/package-summary.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.ui.examples.javaeditor/doc-html/ui_templateeditor_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.ui.examples.fieldassist/doc-html/ui_fieldassist_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.544
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.ui.examples.undo/doc-html/ui_undo_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.545
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples/doc-html/swt_clipboard_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.545
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.team.examples.filesystem/doc-html/team_filesystem_ex.html cannot be opened.
+!SUBENTRY 1 org.eclipse.help.base 4 4 2013-12-10 12:27:10.545
+!MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.controls/doc-html/swt_controls_ex.html cannot be opened.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2013-12-10 12:53:00.159
+!MESSAGE Error while launching command: gdb --version
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2013-12-10 12:53:41.357
+!MESSAGE Error while launching command: gdb --version
+
+!ENTRY org.eclipse.cdt.debug.mi.core 4 150 2013-12-10 12:54:31.338
+!MESSAGE Error creating session
+!STACK 0
+java.io.IOException: Cannot run program "gdb": Unknown reason
+	at org.eclipse.cdt.utils.spawner.Spawner.exec(Spawner.java:347)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:89)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:118)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:110)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:63)
+	at org.eclipse.cdt.debug.mi.core.MIProcessAdapter.createGDBProcess(MIProcessAdapter.java:116)
+	at org.eclipse.cdt.debug.mi.core.MIProcessAdapter.getGDBProcess(MIProcessAdapter.java:51)
+	at org.eclipse.cdt.debug.mi.core.MIProcessAdapter.<init>(MIProcessAdapter.java:38)
+	at org.eclipse.cdt.debug.mi.core.command.CommandFactory.createMIProcess(CommandFactory.java:467)
+	at org.eclipse.cdt.debug.mi.core.MIPlugin.createSession(MIPlugin.java:466)
+	at org.eclipse.cdt.debug.mi.core.AbstractGDBCDIDebugger.createGDBSession(AbstractGDBCDIDebugger.java:116)
+	at org.eclipse.cdt.debug.mi.core.AbstractGDBCDIDebugger.createSession(AbstractGDBCDIDebugger.java:70)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launchDebugSession(LocalCDILaunchDelegate.java:334)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.createCDISession(LocalCDILaunchDelegate.java:460)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launchLocalDebugSession(LocalCDILaunchDelegate.java:145)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launchDebugger(LocalCDILaunchDelegate.java:113)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launch(LocalCDILaunchDelegate.java:74)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.cdt.debug.mi.core 4 150 2013-12-10 12:54:31.338
+!MESSAGE Cannot run program "gdb": Unknown reason
+!STACK 0
+java.io.IOException: Cannot run program "gdb": Unknown reason
+	at org.eclipse.cdt.utils.spawner.Spawner.exec(Spawner.java:347)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:89)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:118)
+	at org.eclipse.cdt.utils.spawner.Spawner.<init>(Spawner.java:110)
+	at org.eclipse.cdt.utils.spawner.ProcessFactory.exec(ProcessFactory.java:63)
+	at org.eclipse.cdt.debug.mi.core.MIProcessAdapter.createGDBProcess(MIProcessAdapter.java:116)
+	at org.eclipse.cdt.debug.mi.core.MIProcessAdapter.getGDBProcess(MIProcessAdapter.java:51)
+	at org.eclipse.cdt.debug.mi.core.MIProcessAdapter.<init>(MIProcessAdapter.java:38)
+	at org.eclipse.cdt.debug.mi.core.command.CommandFactory.createMIProcess(CommandFactory.java:467)
+	at org.eclipse.cdt.debug.mi.core.MIPlugin.createSession(MIPlugin.java:466)
+	at org.eclipse.cdt.debug.mi.core.AbstractGDBCDIDebugger.createGDBSession(AbstractGDBCDIDebugger.java:116)
+	at org.eclipse.cdt.debug.mi.core.AbstractGDBCDIDebugger.createSession(AbstractGDBCDIDebugger.java:70)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launchDebugSession(LocalCDILaunchDelegate.java:334)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.createCDISession(LocalCDILaunchDelegate.java:460)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launchLocalDebugSession(LocalCDILaunchDelegate.java:145)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launchDebugger(LocalCDILaunchDelegate.java:113)
+	at org.eclipse.cdt.launch.internal.LocalCDILaunchDelegate.launch(LocalCDILaunchDelegate.java:74)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2013-12-10 12:55:22.982
+!MESSAGE Error while launching command: gdb --version
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2013-12-10 12:58:10.733
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@1d3274e): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2013-12-10 12:58:10.733
+!MESSAGE Context cannot be suspended.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2013-12-10 12:58:27.370
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@d825f0): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2013-12-10 12:58:27.370
+!MESSAGE Context cannot be suspended.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2013-12-10 12:58:29.833
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@18b5326): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2013-12-10 12:58:29.833
+!MESSAGE Context cannot be suspended.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2013-12-10 13:08:55.306
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@115ce7e): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2013-12-10 13:08:55.306
+!MESSAGE Context cannot be suspended.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2013-12-10 17:59:20.128
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@18628de): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2013-12-10 17:59:20.128
+!MESSAGE Context cannot be suspended.
+
+!ENTRY org.eclipse.core.jobs 4 2 2013-12-10 18:02:35.447
+!MESSAGE An internal error occurred during: "Launching Emulation Project Debug".
+!STACK 0
+java.util.concurrent.RejectedExecutionException
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:1992)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:822)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:299)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:465)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.execute(ScheduledThreadPoolExecutor.java:545)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.execute(DefaultDsfExecutor.java:462)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.cleanupLaunch(GdbLaunchDelegate.java:262)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:244)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:106)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:94)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.core.jobs 4 2 2013-12-10 18:02:35.453
+!MESSAGE An internal error occurred during: "Launching Emulation Project Debug".
+!STACK 0
+java.util.concurrent.RejectedExecutionException
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:1992)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:822)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:299)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:465)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.execute(ScheduledThreadPoolExecutor.java:545)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.execute(DefaultDsfExecutor.java:462)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.cleanupLaunch(GdbLaunchDelegate.java:262)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:244)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:106)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:94)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.core.jobs 4 2 2013-12-10 18:02:43.613
+!MESSAGE An internal error occurred during: "Launching Emulation Project Debug".
+!STACK 0
+java.util.concurrent.RejectedExecutionException
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:1992)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:822)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:299)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:465)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.execute(ScheduledThreadPoolExecutor.java:545)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.execute(DefaultDsfExecutor.java:462)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.cleanupLaunch(GdbLaunchDelegate.java:262)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:244)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:106)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:94)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.core.jobs 4 2 2013-12-10 18:02:43.614
+!MESSAGE An internal error occurred during: "Launching Emulation Project Debug".
+!STACK 0
+java.util.concurrent.RejectedExecutionException
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:1992)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:822)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:299)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:465)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.execute(ScheduledThreadPoolExecutor.java:545)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.execute(DefaultDsfExecutor.java:462)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.cleanupLaunch(GdbLaunchDelegate.java:262)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:244)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:106)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:94)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.core.jobs 4 2 2013-12-10 18:02:43.614
+!MESSAGE An internal error occurred during: "Launching Emulation Project Debug".
+!STACK 0
+java.util.concurrent.RejectedExecutionException
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:1992)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:822)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:299)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.schedule(ScheduledThreadPoolExecutor.java:465)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.schedule(DefaultDsfExecutor.java:438)
+	at java.util.concurrent.ScheduledThreadPoolExecutor.execute(ScheduledThreadPoolExecutor.java:545)
+	at org.eclipse.cdt.dsf.concurrent.DefaultDsfExecutor.execute(DefaultDsfExecutor.java:462)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.cleanupLaunch(GdbLaunchDelegate.java:262)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:244)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:106)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:94)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2013-12-10 18:08:16.072
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@52b100): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2013-12-10 18:08:16.072
+!MESSAGE Context cannot be suspended.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2013-12-10 18:13:27.031
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@e2d700): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2013-12-10 18:13:27.031
+!MESSAGE Context cannot be suspended.

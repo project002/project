@@ -7,50 +7,95 @@
 
 #include "CPhysicalConnection.h"
 
-CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device,int device_index)
+CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device)
 {
-	//read relevant data from stuct ifaddr and creates the appropriate
-	//socket type?
-	//bind the socket to one device exclusively
-	struct ifreq ifr;
-//	struct sockaddr_ll socket_address;
-
-
 	try
 	{
-		mSocket = socket(device->ifa_addr->sa_family, SOCK_RAW | SOCK_NONBLOCK , htons(ETH_P_ALL));
+		// Init the structs with 0's
+		InitStructs(device);
 
-		if (mSocket == -1) {throw CException("socket is bad");}
+		// Configuring the socket
+		ConfigureSocket(device);
 
-		// Binding the socket to a specific device:
-		memset(&ifr, 0, sizeof(ifr));
-		strncpy(ifr.ifr_ifrn.ifrn_name,device->ifa_name, IFNAMSIZ);
-		if (setsockopt(mSocket, SOL_SOCKET, SO_BINDTODEVICE, (void *) &ifr,
-				sizeof(ifr)) < 0)
-		{
-			throw CException("binding of the socket to single device FAILED");
-		}
-
-		//read loop
-		run_recv_loop(30);
-
+		// Get the interface information
+		GetInterfaceInformation();
 	}
 	catch (CException & e)
 	{
 		std::cerr << e.what() << std::endl;
-		perror("socket");
 		close(mSocket);
 	}
 
 }
+void CPhysicalConnection::GetInterfaceInformation()
+{
+	try
+	{
+		// Getting the interface index
+		if (ioctl(mSocket, SIOGIFINDEX, &mIfreq) < 0)
+		{
+			throw CException("Failed to retrieve interface index");
+		}
+		mInterfaceIndex = mIfreq.ifr_ifru.ifru_ivalue;
 
+		// Getting the mac address of the interface
+		if (ioctl(mSocket, SIOCGIFHWADDR, &mIfreq) < 0)
+		{
+			throw CException("Failed to retrieve interface index");
+		}
+
+		mMacAddress= new CMacAddress(mIfreq.ifr_addr.sa_data);
+
+	}
+	catch(CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+void CPhysicalConnection::ConfigureSocket(struct ifaddrs* device)
+{
+	try
+	{
+		// Opening the socket
+		mSocket = socket(device->ifa_addr->sa_family, SOCK_RAW | SOCK_NONBLOCK,
+				htons(ETH_P_ALL));
+		if (mSocket == -1)
+		{
+			throw CException("socket is bad");
+		}
+
+		// Adding flag to the socket to work only on a specific interface
+		if (setsockopt(mSocket, SOL_SOCKET, SO_BINDTODEVICE,
+				(void *) &mIfreq, sizeof(mIfreq)) < 0)
+		{
+			throw CException(
+					"Failed to add binding to specific interface flag");
+		}
+	}
+	catch(CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+void CPhysicalConnection::InitStructs(struct ifaddrs* device)
+{
+	try
+	{
+		memset(&mIfreq, 0, sizeof(mIfreq));
+		strncpy(mIfreq.ifr_ifrn.ifrn_name,device->ifa_name, IF_NAMESIZE);
+	}
+	catch(CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
 CPhysicalConnection::~CPhysicalConnection()
 {
 	// TODO Auto-generated destructor stub
 	close(mSocket);
 }
 
-bool CPhysicalConnection::is_packet_empty(char* buffer)
+bool CPhysicalConnection::IsPacketEmpty(char* buffer)
 {
 	int sum = 0;
 	for (int i=0;i<ETH_FRAME_LEN;++i)
@@ -61,13 +106,13 @@ bool CPhysicalConnection::is_packet_empty(char* buffer)
 	return true;
 }
 
-void CPhysicalConnection::run_recv_loop(int unsigned period_len)
+void CPhysicalConnection::Receive(int unsigned period_len)
 {
 	time_t start = time(NULL);
 	int len = (int) period_len;
 	char buffer[ETH_FRAME_LEN]={0};
 	ssize_t recvSize;
-	char* ipHead = &buffer[(ETH_ALEN*2)+2]; //after the Ethernet header
+	char* ipHead = &buffer[ETH_HLEN]; //after the Ethernet header
 	while (time(NULL) < start+len)
 	{
 		try
@@ -79,15 +124,15 @@ void CPhysicalConnection::run_recv_loop(int unsigned period_len)
 				throw CException("fatal error on receive from socket");
 			}
 
-			if (!is_packet_empty(buffer)) //don't print empty packets
+			if (!IsPacketEmpty(buffer)) //don't print empty packets
 			{
 				cout << "packet: " << endl;
 				cout << "\t Dest MAC: ";
-				for (int dm=0;dm<ETH_ALEN;++dm) {printf("%02X:",buffer[dm]);}
+				for (int dm=0;dm<ETH_ALEN;++dm) {printf("%02X:",(uint8_t)buffer[dm]);}
 				cout << endl;
 
 				cout << "\t Src MAC:";
-				for (int sm=0;sm<ETH_ALEN;++sm) {printf("%02X:",buffer[ETH_ALEN+sm]);}
+				for (int sm=0;sm<ETH_ALEN;++sm) {printf("%02X:",(uint8_t)buffer[ETH_ALEN+sm]);}
 				cout << endl;
 
 				cout << "\t Type ID:";
@@ -101,7 +146,7 @@ void CPhysicalConnection::run_recv_loop(int unsigned period_len)
 				switch (typeID)
 				{
 					case IPV4ID : cout << "(IPv4)";
-								read_ipv4(ipHead);
+								//read_ipv4(ipHead);
 								break;
 					case IPV6ID : cout << "(IPv6)"; break;
 					case ARPID : cout << "(ARP)"; break;
@@ -113,7 +158,7 @@ void CPhysicalConnection::run_recv_loop(int unsigned period_len)
 				cout << "\t RAW: ";
 				for (int i=0;i<ETH_FRAME_LEN;++i)
 				{
-					printf("%02X",buffer[i]);
+					printf("%02X",(uint8_t)buffer[i]);
 					buffer[i] = 0; //re-initialize the buffer
 				}
 				cout << endl;
