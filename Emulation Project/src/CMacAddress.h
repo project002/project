@@ -11,6 +11,14 @@
 class CMacAddress
 {
 public:
+	CMacAddress()
+	{
+		int i;
+		for (i = 0; i < ETH_ALEN; ++i)
+		{
+			mMacAddress[i] = 0;
+		}
+	}
 	CMacAddress(char * AddressArr)
 	{
 		int i;
@@ -53,12 +61,11 @@ public:
 
 	void Print()
 	{
-		//cout << mMacAddress << endl;
 		for (int i=0;i<(ETH_ALEN-1);++i)
 		{
 			printf("%02X:",mMacAddress[i]);
 		}
-		printf("%02X",mMacAddress[ETH_ALEN-1]);
+		printf("%02X\n",mMacAddress[ETH_ALEN-1]);
 	}
 
 	virtual ~CMacAddress()

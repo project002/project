@@ -8,7 +8,11 @@ CPP_SRCS += \
 ../src/CEmulation.cpp \
 ../src/CException.cpp \
 ../src/CPacket.cpp \
+../src/CPacketARP.cpp \
 ../src/CPacketCollector.cpp \
+../src/CPacketIPX.cpp \
+../src/CPacketIPv4.cpp \
+../src/CPacketIPv6.cpp \
 ../src/CPhysicalConnection.cpp \
 ../src/CPhysicalConnectionsHandler.cpp \
 ../src/Emulation\ Project.cpp 
@@ -18,7 +22,11 @@ OBJS += \
 ./src/CEmulation.o \
 ./src/CException.o \
 ./src/CPacket.o \
+./src/CPacketARP.o \
 ./src/CPacketCollector.o \
+./src/CPacketIPX.o \
+./src/CPacketIPv4.o \
+./src/CPacketIPv6.o \
 ./src/CPhysicalConnection.o \
 ./src/CPhysicalConnectionsHandler.o \
 ./src/Emulation\ Project.o 
@@ -28,7 +36,11 @@ CPP_DEPS += \
 ./src/CEmulation.d \
 ./src/CException.d \
 ./src/CPacket.d \
+./src/CPacketARP.d \
 ./src/CPacketCollector.d \
+./src/CPacketIPX.d \
+./src/CPacketIPv4.d \
+./src/CPacketIPv6.d \
 ./src/CPhysicalConnection.d \
 ./src/CPhysicalConnectionsHandler.d \
 ./src/Emulation\ Project.d 

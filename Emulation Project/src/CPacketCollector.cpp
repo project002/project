@@ -33,14 +33,10 @@ void CPacketCollector::ReceivePackets()
 {
 	try
 	{
-		time_t start = time(NULL);
 		char buffer[ETH_FRAME_LEN] = { 0 };
 		ssize_t recvSize;
 		char* ipHead = &buffer[ETH_HLEN]; //after the Ethernet header
-
-		CMacAddress dMAC(buffer, 0);
-		CMacAddress sMAC(buffer, ETH_ALEN);
-		CPacket * NewPacket;
+		CPacket * NewPacket=NULL;
 		while (1)
 		{
 			try
@@ -55,62 +51,18 @@ void CPacketCollector::ReceivePackets()
 
 				if (recvSize>0) //don't print empty packets
 				{
-				    NewPacket = new CPacket(buffer,recvSize);
-					mPackets.push_back(NewPacket);
-/*
-					cout << "packet: " << endl;
-					cout << "\t Dest MAC: ";
-					//for (int dm=0;dm<ETH_ALEN;++dm) {printf("%02X:",(uint8_t)buffer[dm]);}
-					dMAC.SetMAC(buffer, 0);
-					dMAC.Print();
-					cout << endl;
-
-					cout << "\t Src MAC:";
-					//for (int sm=0;sm<ETH_ALEN;++sm) {printf("%02X:",(uint8_t)buffer[ETH_ALEN+sm]);}
-					sMAC.SetMAC(buffer, ETH_ALEN);
-					sMAC.Print();
-					cout << endl;
-
-					cout << "\t Type ID:";
-					int unsigned typeID = 0;
-					typeID = typeID | buffer[ETH_ALEN * 2];
-					typeID = typeID << 8;
-					typeID = typeID | buffer[(ETH_ALEN * 2) + 1];
-
-					printf("%04X", typeID);
-
-					switch (typeID)
+					//TODO : get type id and decide which packet to create;
+					NewPacket= CreatePacket(buffer,recvSize);
+					if (NewPacket!=NULL)
 					{
-						case IPV4ID:
-							cout << "(IPv4)";
-							//read_ipv4(ipHead);
-							break;
-						case IPV6ID:
-							cout << "(IPv6)";
-							break;
-						case ARPID:
-							cout << "(ARP)";
-							break;
-						case IPXID:
-							cout << "(IPX)";
-							break;
+						mPackets.push_back(CreatePacket(buffer,recvSize));
 					}
 
-					cout << endl;
-
-					cout << "\t RAW: ";
-					for (int i = 0; i < ETH_FRAME_LEN; ++i)
-					{
-						printf("%02X", (uint8_t) buffer[i]);
-						buffer[i] = 0; //re-initialize the buffer
-					}
-					cout << endl;*/
 				}
 			}
 			catch (CException & e)
 			{
 				std::cerr << e.what() << std::endl;
-				perror("socket");
 				break;
 			}
 		}
@@ -120,3 +72,91 @@ void CPacketCollector::ReceivePackets()
 		std::cerr << e.what() << std::endl;
 	}
 }
+
+CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
+{
+
+	try
+	{
+		unsigned int ethernetType = uint16_t(buffer[ETH_ALEN * 2]);
+		switch (ethernetType)
+		{
+			case (ETH_P_IP):
+				return (new CPacketIPv4(buffer, recvSize)); // TODO check which protocol inside ipv4
+				break;
+			case (ETH_P_ARP):
+
+				break;
+			case (ETH_P_IPX):
+
+				break;
+			case (ETH_P_IPV6):
+
+				break;
+			default:
+				throw(CException("Can't find ethernet type"));
+				break;
+		}
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+CPacket * CPacketCollector::CreateIPv4Packet(char * buffer, ssize_t recvSize)
+{
+
+	try
+	{
+		//TODO :switch with ipv4 protocols
+		return NULL;
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+CPacket * CPacketCollector::CreateIPv6Packet(char * buffer, ssize_t recvSize)
+{
+
+	try
+	{
+		//TODO :switch with ipv6 protocols
+		return NULL;
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+CPacket * CPacketCollector::CreateIPXPacket(char * buffer, ssize_t recvSize)
+{
+
+	try
+	{
+		//TODO :switch with ipx protocols
+		return NULL;
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+
+	}
+}
+
+CPacket * CPacketCollector::CreateARPPacket(char * buffer, ssize_t recvSize)
+{
+
+	try
+	{
+		return new CPacketARP(buffer,recvSize);
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+

@@ -8,8 +8,7 @@
 #ifndef CPACKETCOLLECTOR_H_
 #define CPACKETCOLLECTOR_H_
 #include "BasicIncludes.h"
-#include "CPacket.h"
-#include "Protocols.h"
+#include "PacketTypes.h"
 class CPacketCollector
 {
 public:
@@ -20,6 +19,12 @@ public:
 private:
 	list<CPacket * > mPackets;
 	const int mSocket;
+private:
+	CPacket * CreatePacket(char * buffer, ssize_t recvSize);
+	CPacket * CreateIPv4Packet(char * buffer, ssize_t recvSize);
+	CPacket * CreateIPv6Packet(char * buffer, ssize_t recvSize);
+	CPacket * CreateIPXPacket(char * buffer, ssize_t recvSize);
+	CPacket * CreateARPPacket(char * buffer, ssize_t recvSize);
 };
 
 #endif /* CPACKETCOLLECTOR_H_ */

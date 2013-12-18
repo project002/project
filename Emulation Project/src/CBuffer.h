@@ -13,6 +13,8 @@ class CBuffer
 public:
 	CBuffer();
 	CBuffer(char * Buffer,ssize_t & bufferSize);
+	unsigned int GetSize()const{return mSize;}
+	void operator+=(const CBuffer & other);
 	virtual ~CBuffer();
 private:
 	char * mBuffer;

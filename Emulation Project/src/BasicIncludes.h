@@ -52,6 +52,16 @@ using namespace std;
  */
 #include <errno.h>
 
+/**
+ * Thread Related Inclusions
+ */
+#include <pthread.h>
+
+/**
+ * Defined missing STL
+ */
+#define IPv4_ALEN 4
+
 #endif
 
 

@@ -1,5 +1,6 @@
 src/CPacket.d: ../src/CPacket.cpp ../src/CPacket.h ../src/BasicIncludes.h \
- ../src/CException.h ../src/CMacAddress.h ../src/CBuffer.h
+ ../src/CException.h ../src/CMacAddress.h ../src/CIPv4Address.h \
+ ../src/CBuffer.h
 
 ../src/CPacket.h:
 
@@ -8,5 +9,7 @@ src/CPacket.d: ../src/CPacket.cpp ../src/CPacket.h ../src/BasicIncludes.h \
 ../src/CException.h:
 
 ../src/CMacAddress.h:
+
+../src/CIPv4Address.h:
 
 ../src/CBuffer.h:

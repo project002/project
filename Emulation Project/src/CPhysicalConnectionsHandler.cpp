@@ -39,9 +39,6 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 		struct ifaddrs* list;
 		struct ifaddrs* node;
 		int ret = 0;
-		int address_size = 0;
-		int address_int = 0;
-		char host_buffer[NI_MAXHOST];
 
 		//get devices list
 		ret = getifaddrs(&list);
@@ -56,8 +53,6 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 			{
 				mPhysicalConnections->push_back(new CPhysicalConnection(node));
 			}
-			cout<<"\n";
-
 		}
 
 		//clear the allocated list
@@ -138,7 +133,6 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 /**
  * Function performs system calls to check the connected Ethernet cards and open sockets accordingly
  * using the Physical Connection class
- * // TODO : check when a physical link should be created and what is not a real interface.
  */
 /*void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 {
