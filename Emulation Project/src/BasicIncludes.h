@@ -30,7 +30,6 @@ using namespace std;
 #include <unistd.h>
 #include <netpacket/packet.h>
 #include <net/ethernet.h>
-
 /**
  * Exception Related Inclusions
  */

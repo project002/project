@@ -4,7 +4,7 @@ src/CPhysicalConnectionsHandler.d: ../src/CPhysicalConnectionsHandler.cpp \
  ../src/CMacAddress.h ../src/CPacketCollector.h ../src/PacketTypes.h \
  ../src/CPacketIPv4.h ../src/CPacket.h ../src/CIPv4Address.h \
  ../src/CBuffer.h ../src/CPacketARP.h ../src/CPacketIPX.h \
- ../src/CPacketIPv6.h
+ ../src/CPacketIPv6.h ../src/CIPv6Addres.h
 
 ../src/CPhysicalConnectionsHandler.h:
 
@@ -35,3 +35,5 @@ src/CPhysicalConnectionsHandler.d: ../src/CPhysicalConnectionsHandler.cpp \
 ../src/CPacketIPX.h:
 
 ../src/CPacketIPv6.h:
+
+../src/CIPv6Addres.h:

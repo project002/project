@@ -16,6 +16,11 @@ public:
 	CPacketIPX(char * buffer,ssize_t &bufferSize);
 	virtual ~CPacketIPX();
 	virtual void Print();
+protected:
+
+private:
+	virtual void PrintLayerHead(){};
+	virtual void PrintLayerTail(){};
 };
 
 #endif /* CPACKETIPX_H_ */

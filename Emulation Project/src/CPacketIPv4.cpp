@@ -100,6 +100,9 @@ void CPacketIPv4::PrintLayerHead()
 
 		cout << "IPv4-Destination IP Address :\n";
 		mDestinationIPAddress -> Print();
+
+		cout << "IPv4-Options :\n";
+		printf("%016llX \n", mOptions);
 	}
 	catch (CException & e)
 	{

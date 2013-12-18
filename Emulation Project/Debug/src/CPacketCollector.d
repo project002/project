@@ -3,7 +3,7 @@ src/CPacketCollector.d: ../src/CPacketCollector.cpp \
  ../src/CException.h ../src/PacketTypes.h ../src/CPacketIPv4.h \
  ../src/CPacket.h ../src/CMacAddress.h ../src/CIPv4Address.h \
  ../src/CBuffer.h ../src/CPacketARP.h ../src/CPacketIPX.h \
- ../src/CPacketIPv6.h
+ ../src/CPacketIPv6.h ../src/CIPv6Addres.h
 
 ../src/CPacketCollector.h:
 
@@ -30,3 +30,5 @@ src/CPacketCollector.d: ../src/CPacketCollector.cpp \
 ../src/CPacketIPX.h:
 
 ../src/CPacketIPv6.h:
+
+../src/CIPv6Addres.h:
