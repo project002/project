@@ -14,6 +14,7 @@
 #include <string>
 #include <sstream>
 #include <stdlib.h>
+#include "Color.h"
 using namespace std;
 
 /**

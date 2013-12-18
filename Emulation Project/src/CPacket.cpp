@@ -14,7 +14,7 @@ CPacket::CPacket(char * buffer,ssize_t & bufferSize):mSourceMacAddress(NULL),mDe
 		mBuffer = new CBuffer(buffer, bufferSize);
 		mDestinationMacAddress = new CMacAddress(buffer, 0);
 		mSourceMacAddress = new CMacAddress(buffer, ETH_ALEN);
-		mEthernetType = uint16_t (buffer[ETH_ALEN * 2]);
+		mEthernetType = buffer[ETH_ALEN * 2]<<8 | buffer[(ETH_ALEN * 2) +1];
 		mFrameSequenceCheck = uint32_t(buffer+bufferSize-ETH_FCS_LEN);
 	}
 	catch (CException & e)
@@ -26,11 +26,12 @@ void CPacket::PrintLayerHead()
 {
 	try
 	{
-		cout<<"Ethernet- Printing Packet Ethernet Layer:\n";
+		const char * HeadLog =string("Ethernet- Printing Packet Ethernet Layer:\n").c_str();
+		LogColor(HeadLog,COLOR_BLUE);
 		cout<<"Ethernet- Source Mac Address: \n";
-		mSourceMacAddress->Print();
+		mDestinationMacAddress ->Print();
 		cout<<"Ethernet- Destination Mac Address: \n";
-		mDestinationMacAddress->Print();
+		mSourceMacAddress->Print();
 		cout<<"Ethernet- Type: \n";
 		PrintEthernetType();
 		cout<<"Ethernet- Data:\n";
@@ -45,7 +46,7 @@ void CPacket::PrintLayerTail()
 	try
 	{
 		cout<<"Ethernet- FCS:\n";
-		printf("%02X - IPv4 Type", mFrameSequenceCheck);
+		printf("%02X \n", mFrameSequenceCheck);
 	}
 	catch (CException & e)
 	{

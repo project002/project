@@ -14,15 +14,15 @@ CPacketARP::CPacketARP(char * buffer, ssize_t &bufferSize) :
 	try
 	{
 		unsigned int currentOffset = CPacket::GetHeadSize();
-		mHardwareType = uint16_t(buffer[currentOffset]);
+		mHardwareType = buffer[currentOffset]<<8 | buffer[currentOffset+1];
 		currentOffset += sizeof(uint16_t);
-		mProtocolType = uint16_t(buffer[currentOffset]);
+		mProtocolType = buffer[currentOffset]<<8 | buffer[currentOffset+1];
 		currentOffset += sizeof(uint16_t);
 		mHardwareAddressLength = uint8_t(buffer[currentOffset]);
 		currentOffset += sizeof(uint8_t);
 		mProtocolAddressLength = uint8_t(buffer[currentOffset]);
 		currentOffset += sizeof(uint8_t);
-		mOpCode = uint16_t(buffer[currentOffset]);
+		mOpCode = buffer[currentOffset]<<8 | buffer[currentOffset+1];
 		currentOffset += sizeof(uint16_t);
 		mSourceMacAddress= new CMacAddress(buffer, currentOffset);
 		currentOffset += ETH_ALEN;
@@ -58,7 +58,8 @@ void CPacketARP::PrintLayerHead()
 {
 	try
 	{
-		cout << "ARP- Printing Packet ARP Layer:\n";
+		string HeadLog ="ARP- Printing Packet ARP Layer:\n";
+		LogColor(HeadLog.c_str(),COLOR_BLUE);
 		cout << "ARP- Hardware Type:\n";
 		PrintHardwareType();
 		cout << "ARP- Protocol Type:\n";
@@ -68,7 +69,7 @@ void CPacketARP::PrintLayerHead()
 		cout << "ARP- Protocol Address Length:\n";
 		printf("%02X \n", mProtocolAddressLength);
 		cout << "ARP- Op Code :\n";
-		printf("%02X \n", mOpCode);
+		PrintOpCode();
 		cout << "ARP-Source Mac Address :\n";
 		mSourceMacAddress->Print();
 		cout << "ARP-Source IP Address :\n";
@@ -93,7 +94,7 @@ void CPacketARP::PrintProtocolType()
 		switch (mProtocolType)
 		{
 			case (ARP_IP_PROTOCOL):
-				printf("%02X - Ethernet \n", mProtocolType);
+				printf("%02X - IPv4 \n", mProtocolType);
 				break;
 			default:
 				printf("%02X - Unknown Type \n", mProtocolType);
@@ -124,7 +125,7 @@ void CPacketARP::PrintHardwareType()
 		std::cerr << e.what() << std::endl;
 	}
 }
-void CPacketARP::PringOpCode()
+void CPacketARP::PrintOpCode()
 {
 	try
 	{

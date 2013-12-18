@@ -25,6 +25,7 @@ private:
 	CPacket * CreateIPv6Packet(char * buffer, ssize_t recvSize);
 	CPacket * CreateIPXPacket(char * buffer, ssize_t recvSize);
 	CPacket * CreateARPPacket(char * buffer, ssize_t recvSize);
+	void PrintPacket(char * buffer, ssize_t recvSize);
 };
 
 #endif /* CPACKETCOLLECTOR_H_ */

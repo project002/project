@@ -36,7 +36,7 @@ private:
 	void PrintLayerTail();
 	void PrintProtocolType();
 	void PrintHardwareType();
-	void PringOpCode();
+	void PrintOpCode();
 };
 
 #endif /* CPACKETARP_H_ */
