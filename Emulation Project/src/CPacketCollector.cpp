@@ -80,7 +80,7 @@ CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
 
 	try
 	{
-		uint32_t ethernetType = buffer[ETH_ALEN * 2]<<8 | buffer[(ETH_ALEN * 2) +1];
+		uint16_t ethernetType = buffer[ETH_ALEN * 2]<<8 | buffer[(ETH_ALEN * 2) +1];
 		switch (ethernetType)
 		{
 			case (ETH_P_IP):
@@ -107,8 +107,13 @@ CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	return NULL;
 }
-
+/**
+ * Function for debugging. It prints the whole packet as it was received.
+ * @param buffer pointer to the array's beginning
+ * @param recvSize size of the received packet in bytes
+ */
 void CPacketCollector::PrintPacket(char * buffer, ssize_t recvSize)
 {
 	try
@@ -125,18 +130,19 @@ void CPacketCollector::PrintPacket(char * buffer, ssize_t recvSize)
 		std::cerr << e.what() << std::endl;
 	}
 }
+
 CPacket * CPacketCollector::CreateIPv4Packet(char * buffer, ssize_t recvSize)
 {
 
 	try
 	{
-		//TODO :switch with ipv4 protocols
-		return NULL;
+		return ( new CPacketIPv4 ( buffer,recvSize));
 	}
 	catch (CException & e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	return NULL;
 }
 
 CPacket * CPacketCollector::CreateIPv6Packet(char * buffer, ssize_t recvSize)
@@ -151,6 +157,7 @@ CPacket * CPacketCollector::CreateIPv6Packet(char * buffer, ssize_t recvSize)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	return NULL;
 }
 
 CPacket * CPacketCollector::CreateIPXPacket(char * buffer, ssize_t recvSize)
@@ -166,6 +173,7 @@ CPacket * CPacketCollector::CreateIPXPacket(char * buffer, ssize_t recvSize)
 		std::cerr << e.what() << std::endl;
 
 	}
+	return NULL;
 }
 
 CPacket * CPacketCollector::CreateARPPacket(char * buffer, ssize_t recvSize)
@@ -179,5 +187,80 @@ CPacket * CPacketCollector::CreateARPPacket(char * buffer, ssize_t recvSize)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	return NULL;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* // If we want to implement more packet types there is a need for a switch :
+CPacket * CPacketCollector::CreateIPv4Packet(char * buffer, ssize_t recvSize)
+{
+
+	try
+	{
+		uint8_t IPv4Type = buffer[ETH_HLEN +9];
+
+		switch (IPv4Type)
+		{
+			case (IPPROTO_TCP):
+					//TCP packet
+
+				break;
+			case (IPPROTO_ICMP):
+					//ICMP packet
+
+				break;
+			case (IPPROTO_UDP):
+					//UDP packet
+
+				break;
+			case (IPPROTO_RAW):
+					//RAW IP packet - no data
+
+				break;
+			default:
+				PrintPacket(buffer, recvSize);
+				cerr  << endl;
+				throw(CException("Can't find ethernet type"));
+				break;
+		}
+		//TODO :switch with ipv4 protocols
+		return NULL;
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}*/
