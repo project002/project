@@ -63,8 +63,9 @@ void CPacketIPv4::PrintLayerHead()
 {
 	try
 	{
-		string HeadLog ="IPv4- Printing Packet IPv4 Layer :\n";
-		LogColor(HeadLog.c_str(),COLOR_WHITE);
+		LogColorChange(COLOR_RED);
+
+		cout <<"IPv4- Printing Packet IPv4 Layer :\n";
 		cout << "IPv4- Version :\n";
 		printf("%02X \n", mVersion);
 
@@ -103,6 +104,8 @@ void CPacketIPv4::PrintLayerHead()
 
 		cout << "IPv4-Options :\n";
 		printf("%016llX \n", mOptions);
+
+		LogColorReset();
 	}
 	catch (CException & e)
 	{

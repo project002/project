@@ -13,6 +13,9 @@
 #define ARP_ETHERNET_PROTOCOL 0x1
 #define ARP_IP_PROTOCOL 0x800
 #define ARP_REQUEST_OP_CODE 0x1
+#define ARP_REPLY_OP_CODE 0x2
+#define RARP_REQUEST_OP_CODE 0x3
+#define RARP_REPLY_OP_CODE 0x4
 
 class CPacketARP: public CPacket
 {

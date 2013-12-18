@@ -63,8 +63,8 @@ void CPacketIPv6::PrintLayerHead()
 {
 	try
 	{
-		string HeadLog = "IPv6- Printing Packet IPv6 Layer :\n";
-		LogColor(HeadLog.c_str(), COLOR_YELLOW);
+		LogColorChange(COLOR_RED);
+		cout << "IPv6- Printing Packet IPv6 Layer :\n";
 		cout << "IPv6- Version :\n";
 		printf("%02X \n", mVersion);
 
@@ -88,6 +88,7 @@ void CPacketIPv6::PrintLayerHead()
 
 		cout << "IPv6-Destination IP Address :\n";
 		mDestinationIPAddress->Print();
+		LogColorReset();
 	}
 	catch (CException & e)
 	{

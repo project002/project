@@ -26,15 +26,16 @@ void CPacket::PrintLayerHead()
 {
 	try
 	{
-		const char * HeadLog =string("Ethernet- Printing Packet Ethernet Layer:\n").c_str();
-		LogColor(HeadLog,COLOR_BLUE);
-		cout<<"Ethernet- Source Mac Address: \n";
+		LogColorChange(COLOR_BLUE);
+		cout << "Ethernet- Printing Packet Ethernet Layer:\n";
+		cout << "Ethernet- Source Mac Address: \n";
 		mDestinationMacAddress ->Print();
-		cout<<"Ethernet- Destination Mac Address: \n";
+		cout << "Ethernet- Destination Mac Address: \n";
 		mSourceMacAddress->Print();
-		cout<<"Ethernet- Type: \n";
+		cout << "Ethernet- Type: \n";
 		PrintEthernetType();
-		cout<<"Ethernet- Data:\n";
+		cout << "Ethernet- Data:\n";
+		LogColorReset();
 	}
 	catch (CException & e)
 	{
@@ -45,8 +46,10 @@ void CPacket::PrintLayerTail()
 {
 	try
 	{
+		LogColorChange(COLOR_BLUE);
 		cout<<"Ethernet- FCS:\n";
 		printf("%02X \n", mFrameSequenceCheck);
+		LogColorReset();
 	}
 	catch (CException & e)
 	{

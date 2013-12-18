@@ -9,7 +9,7 @@
 
 CPacketCollector::CPacketCollector(const int Socket):mSocket(Socket)
 {
-	ReceivePackets();
+	//ReceivePackets();
 }
 
 CPacketCollector::~CPacketCollector()

@@ -10,7 +10,7 @@
 #include "BasicIncludes.h"
 #include "CMacAddress.h"
 #include "CPacketCollector.h"
-
+#include "CIPv4Address.h"
 class CPhysicalConnection
 {
 public:
@@ -24,6 +24,7 @@ private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
 	void GetInterfaceInformation();
+	void GetConnectedDevicesIPAddresses();
 	/**
 	 * run a recv loop for a period of time specified
 	 * @param period_len the duration of the rcv loop in seconds
@@ -40,6 +41,7 @@ private:
 	CMacAddress * mMacAddress;
 	struct ifreq mIfreq;
 	CPacketCollector * mPacketCollector;
+	set<CIPv4Address *> mConnectedDevicesIPv4Addresses;
 };
 
 #endif /* CPHYSICALCONNECTION_H_ */

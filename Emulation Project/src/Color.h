@@ -21,4 +21,12 @@ static inline void LogColor(const char * text, const char * color = COLOR_NORMAL
 	printf("%s",COLOR_NORMAL);
 }
 
+static inline void LogColorChange(const char * color = COLOR_NORMAL)
+{
+	printf("%s",color);
+}
+static inline void LogColorReset()
+{
+	printf("%s",COLOR_NORMAL);
+}
 #endif /* COLOR_H_ */

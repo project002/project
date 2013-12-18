@@ -19,6 +19,9 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mPacketCollecto
 
 		// Get the interface information
 		GetInterfaceInformation();
+
+		GetConnectedDevicesIPAddresses();
+		//TODO: Enable receiving of packets by calling ReceivePackets from CPhysicalConnection using a Thread!
 	}
 	catch (CException & e)
 	{
@@ -26,6 +29,23 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mPacketCollecto
 		close(mSocket);
 	}
 
+}
+/**
+ * Initialization level function
+ * The function sends an reversed ARP packet in order to retrieve all connected devices IP addresses
+ * //TODO : DHCP packet
+ */
+void CPhysicalConnection::GetConnectedDevicesIPAddresses()
+{
+	try
+	{
+
+	}
+	catch (CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+		close(mSocket);
+	}
 }
 void CPhysicalConnection::GetInterfaceInformation()
 {

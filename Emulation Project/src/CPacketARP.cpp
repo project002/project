@@ -7,6 +7,7 @@
 
 #include "CPacketARP.h"
 
+
 CPacketARP::CPacketARP(char * buffer, ssize_t &bufferSize) :
 		CPacket(buffer, bufferSize), mHardwareType(0), mProtocolType(0), mHardwareAddressLength(
 				0), mProtocolAddressLength(0), mOpCode(0)
@@ -58,8 +59,8 @@ void CPacketARP::PrintLayerHead()
 {
 	try
 	{
-		string HeadLog ="ARP- Printing Packet ARP Layer:\n";
-		LogColor(HeadLog.c_str(),COLOR_RED);
+		LogColorChange(COLOR_RED);
+		cout << "ARP- Printing Packet ARP Layer:\n";
 		cout << "ARP- Hardware Type:\n";
 		PrintHardwareType();
 		cout << "ARP- Protocol Type:\n";
@@ -80,6 +81,7 @@ void CPacketARP::PrintLayerHead()
 		mDestinationIPAddress -> Print();
 		cout << "ARP- Destination Mac Address: ";
 		mDestinationMacAddress->Print();
+		LogColorReset();
 	}
 	catch (CException & e)
 	{
@@ -132,10 +134,19 @@ void CPacketARP::PrintOpCode()
 		switch (mOpCode)
 		{
 			case (ARP_REQUEST_OP_CODE):
-				printf("%02X - Request \n", mOpCode);
+				printf("%02X - Arp Request \n", mOpCode);
+				break;
+			case (ARP_REPLY_OP_CODE):
+				printf("%02X - Arp Reply \n", mOpCode);
+				break;
+			case (RARP_REQUEST_OP_CODE):
+				printf("%02X - R-Arp Request \n", mOpCode);
+				break;
+			case (RARP_REPLY_OP_CODE):
+				printf("%02X - R-Arp Reply \n", mOpCode);
 				break;
 			default:
-				printf("%02X - Unknown Type(probably reply) \n", mOpCode);
+				printf("%02X - Unknown Type \n", mOpCode);
 				break;
 		}
 	}
