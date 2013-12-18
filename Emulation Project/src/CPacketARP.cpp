@@ -59,7 +59,7 @@ void CPacketARP::PrintLayerHead()
 	try
 	{
 		string HeadLog ="ARP- Printing Packet ARP Layer:\n";
-		LogColor(HeadLog.c_str(),COLOR_BLUE);
+		LogColor(HeadLog.c_str(),COLOR_RED);
 		cout << "ARP- Hardware Type:\n";
 		PrintHardwareType();
 		cout << "ARP- Protocol Type:\n";

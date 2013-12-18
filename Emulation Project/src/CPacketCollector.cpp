@@ -84,7 +84,7 @@ CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
 		switch (ethernetType)
 		{
 			case (ETH_P_IP):
-				return (new CPacketIPv4(buffer, recvSize)); // TODO check which protocol inside ipv4
+				return CreateIPv4Packet(buffer, recvSize);
 				break;
 			case (ETH_P_ARP):
 				return CreateARPPacket(buffer, recvSize);

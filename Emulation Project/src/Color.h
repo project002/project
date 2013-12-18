@@ -15,7 +15,7 @@
 #define COLOR_BLUE "\x1B[34m"
 #define COLOR_WHITE "\x1B[37m"
 
-static inline void LogColor(const char * text, const char * color)
+static inline void LogColor(const char * text, const char * color = COLOR_NORMAL)
 {
 	printf("%s%s",color,text);
 	printf("%s",COLOR_NORMAL);

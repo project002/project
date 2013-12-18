@@ -64,7 +64,7 @@ void CPacketIPv4::PrintLayerHead()
 	try
 	{
 		string HeadLog ="IPv4- Printing Packet IPv4 Layer :\n";
-		LogColor(HeadLog.c_str(),COLOR_BLUE);
+		LogColor(HeadLog.c_str(),COLOR_WHITE);
 		cout << "IPv4- Version :\n";
 		printf("%02X \n", mVersion);
 
