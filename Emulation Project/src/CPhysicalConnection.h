@@ -20,6 +20,7 @@ public:
 	 */
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
+	void SetNetmask(uint64_t maxNumberOfComputersInNetwork);
 private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
@@ -42,6 +43,7 @@ private:
 	struct ifreq mIfreq;
 	CPacketCollector * mPacketCollector;
 	set<CIPv4Address *> mConnectedDevicesIPv4Addresses;
+	char * mInterfaceName;
 };
 
 #endif /* CPHYSICALCONNECTION_H_ */

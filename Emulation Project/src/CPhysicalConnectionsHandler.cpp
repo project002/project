@@ -43,7 +43,7 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 		//get devices list
 		ret = getifaddrs(&list);
 		if (ret == -1) {throw CException("Err: when retrieving devices list");}
-
+		CPhysicalConnection * newConnection;
 		//iterate over list
 		int i = 0;
 		for (i=0,node = list; node != NULL; node = node->ifa_next,++i)
@@ -51,7 +51,9 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 			std::cout << "name:\t" << node->ifa_name << std::endl;
 			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo") != 0)
 			{
-				mPhysicalConnections->push_back(new CPhysicalConnection(node));
+				newConnection = new CPhysicalConnection(node);
+				newConnection->SetNetmask(MAX_NUMBER_OF_COMPUTERS_ON_NET);
+				mPhysicalConnections->push_back(newConnection);
 			}
 		}
 

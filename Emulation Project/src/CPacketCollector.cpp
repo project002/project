@@ -37,7 +37,7 @@ void CPacketCollector::ReceivePackets()
 		char buffer[ETH_FRAME_LEN] = { 0 };
 		ssize_t recvSize;
 		CPacket * NewPacket=NULL;
-		while (1)
+		while (true)
 		{
 			try
 			{

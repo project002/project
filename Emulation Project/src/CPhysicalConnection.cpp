@@ -7,7 +7,7 @@
 
 #include "CPhysicalConnection.h"
 
-CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mPacketCollector(NULL)
+CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mMacAddress(NULL),mPacketCollector(NULL),mInterfaceName(NULL)
 {
 	try
 	{
@@ -33,13 +33,12 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mPacketCollecto
 /**
  * Initialization level function
  * The function sends an reversed ARP packet in order to retrieve all connected devices IP addresses
- * //TODO : DHCP packet
  */
 void CPhysicalConnection::GetConnectedDevicesIPAddresses()
 {
 	try
 	{
-
+		//TODO: send arp request to all available ip addresses of subnet and get the active connected computers
 	}
 	catch (CException & e)
 	{
@@ -66,6 +65,35 @@ void CPhysicalConnection::GetInterfaceInformation()
 
 		mMacAddress= new CMacAddress(mIfreq.ifr_addr.sa_data);
 
+	}
+	catch(CException & e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void CPhysicalConnection::SetNetmask(uint64_t maxNumberOfComputersInNetwork)
+{
+	try
+	{
+		struct sockaddr_in* mask=NULL;
+		struct ifreq ifr;
+		memset(&ifr,0,sizeof(struct ifreq));
+		strncpy(ifr.ifr_name,mInterfaceName,IFNAMSIZ);
+		mask = (struct sockaddr_in *) & ifr.ifr_ifru.ifru_addr;
+
+		//TODO: calculate correct subnet according to parameter
+		char * maskAddress = (char*)(string("255.255.255.223").c_str());
+		mask->sin_family=AF_PACKET;
+		mask->sin_addr.s_addr=in_addr_t(maskAddress);
+
+		if(ioctl(mSocket,SIOCSIFNETMASK,&ifr)!=0)
+		{
+			perror("");
+			throw (CException("Can't set new netmask"));
+		}
+
+//TODO: fix here
 	}
 	catch(CException & e)
 	{
@@ -104,6 +132,8 @@ void CPhysicalConnection::InitStructs(struct ifaddrs* device)
 	{
 		memset(&mIfreq, 0, sizeof(mIfreq));
 		strncpy(mIfreq.ifr_ifrn.ifrn_name,device->ifa_name, IF_NAMESIZE);
+		mInterfaceName = new char [strlen(device->ifa_name)];
+		strcpy(mInterfaceName,device->ifa_name);
 	}
 	catch(CException & e)
 	{
@@ -114,6 +144,16 @@ CPhysicalConnection::~CPhysicalConnection()
 {
 	close(mSocket);
 	if(mPacketCollector!=NULL)
+	{
+		delete mPacketCollector;
+		mPacketCollector=NULL;
+	}
+	if(mMacAddress!=NULL)
+	{
+		delete mMacAddress;
+		mMacAddress=NULL;
+	}
+	if (mPacketCollector!=NULL)
 	{
 		delete mPacketCollector;
 		mPacketCollector=NULL;
