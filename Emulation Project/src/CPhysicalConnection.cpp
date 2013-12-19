@@ -20,7 +20,6 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mMacAddress(NUL
 		// Get the interface information
 		GetInterfaceInformation();
 
-		GetConnectedDevicesIPAddresses();
 		//TODO: Enable receiving of packets by calling ReceivePackets from CPhysicalConnection using a Thread!
 	}
 	catch (CException & e)
@@ -91,11 +90,12 @@ void CPhysicalConnection::SetNetmask(int8_t maxNumberOfComputersInNetwork)
 		maxNumberOfComputersInNetwork|=maxNumberOfComputersInNetwork >>16;
 		maxNumberOfComputersInNetwork++;
 
-		ifr.ifr_ifru.ifru_addr.sa_data[2]=0xa;
-		ifr.ifr_ifru.ifru_addr.sa_data[3]=0xb;
-		ifr.ifr_ifru.ifru_addr.sa_data[4]=0xc;
-		ifr.ifr_ifru.ifru_addr.sa_data[5]=0xd;
+		ifr.ifr_ifru.ifru_addr.sa_data[2]=rand()%255;
+		ifr.ifr_ifru.ifru_addr.sa_data[3]=rand()%255;
+		ifr.ifr_ifru.ifru_addr.sa_data[4]=rand()%255;
+		ifr.ifr_ifru.ifru_addr.sa_data[5]=rand()%255;
 
+		mIPAddress= new CIPv4Address(ifr.ifr_ifru.ifru_addr.sa_data,2);
 		if (ioctl(mSocket, SIOCSIFADDR, &ifr) < 0)
 		{
 			perror("SIOCSIFNETMASK");
@@ -125,6 +125,7 @@ void CPhysicalConnection::SetNetmask(int8_t maxNumberOfComputersInNetwork)
 			perror("SIOCSIFFLAGS");
 			throw(CException("Can't set network flags."));
 		}
+
 	}
 	catch(CException & e)
 	{
@@ -144,11 +145,30 @@ void CPhysicalConnection::ConfigureSocket(struct ifaddrs* device)
 		}
 
 		// Adding flag to the socket to work only on a specific interface
-		if (setsockopt(mSocket, SOL_SOCKET, SO_BINDTODEVICE,
+		// setsockopt won't work on AF_PACKET family!
+		/*if (setsockopt(mSocket, SOL_SOCKET, SO_BINDTODEVICE,
 				(void *) &mIfreq, sizeof(mIfreq)) < 0)
 		{
 			throw CException(
 					"Failed to add binding to specific interface flag");
+		}*/
+		struct ifreq ifr;
+		memset(&ifr, 0, sizeof(struct ifreq));
+		strncpy(ifr.ifr_ifrn.ifrn_name, mInterfaceName, IFNAMSIZ);
+		if (ioctl(mSocket, SIOCGIFINDEX, &ifr) < 0)
+		{
+			perror("SIOCGIFINDEX");
+			throw(CException("Can't get index."));
+		}
+		mInterfaceIndex= ifr.ifr_ifru.ifru_ivalue;
+
+		sockaddr_ll addr= { 0 };
+		addr.sll_family=AF_PACKET;
+		addr.sll_ifindex=mInterfaceIndex;
+		if(bind(mSocket,(sockaddr*)&addr,sizeof(sockaddr_ll))<0)
+		{
+			perror("Bind");
+			throw(CException("Can't bind socket to interface using its index"));
 		}
 
 		mPacketCollector= new CPacketCollector(mSocket);

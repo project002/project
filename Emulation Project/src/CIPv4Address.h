@@ -55,7 +55,7 @@ public:
 		}
 	}
 private:
-	unsigned char mIPAddress[ETH_ALEN];
+	unsigned char mIPAddress[IPv4_ALEN];
 };
 
 #endif /* CIPV4ADDRESS_H_ */

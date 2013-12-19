@@ -53,11 +53,12 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 			{
 				newConnection = new CPhysicalConnection(node);
 				newConnection->SetNetmask(MAX_NUMBER_OF_COMPUTERS_ON_NET);
+				newConnection->GetConnectedDevicesIPAddresses();
 				newConnection->Receive();
 				mPhysicalConnections->push_back(newConnection);
 			}
 		}
-		newConnection->Receive();
+		//newConnection->Receive();
 
 		//clear the allocated list
 		freeifaddrs(list);

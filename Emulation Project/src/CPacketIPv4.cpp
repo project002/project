@@ -16,6 +16,7 @@ CPacketIPv4::CPacketIPv4(char * buffer, ssize_t &bufferSize) :
 {
 	try
 	{
+		srand(time(NULL));
 		unsigned int currentOffset = CPacket::GetHeadSize();
 		mVersion = buffer[currentOffset]>>4;
 		mHeaderLength = buffer[currentOffset] & 0xf;
@@ -41,8 +42,9 @@ CPacketIPv4::CPacketIPv4(char * buffer, ssize_t &bufferSize) :
 		currentOffset+= IPv4_ALEN;
 
 		int i=mHeaderLength;
-		for (;i>5;i++)
+		for (;i>5;i--)
 		{
+			cout<< "\n LOOP " << i << "\n";
 			int j=0;
 			for (;j<4;j++)
 			{

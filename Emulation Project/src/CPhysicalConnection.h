@@ -22,11 +22,12 @@ public:
 	virtual ~CPhysicalConnection();
 	void SetNetmask(int8_t maxNumberOfComputersInNetwork);
 	void Receive(){mPacketCollector->ReceivePackets();}
+	void GetConnectedDevicesIPAddresses();
 private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
 	void GetInterfaceInformation();
-	void GetConnectedDevicesIPAddresses();
+
 	/**
 	 * run a recv loop for a period of time specified
 	 * @param period_len the duration of the rcv loop in seconds
@@ -41,6 +42,7 @@ private:
 	int mSocket;
 	int mInterfaceIndex;
 	CMacAddress * mMacAddress;
+	CIPv4Address * mIPAddress;
 	struct ifreq mIfreq;
 	CPacketCollector * mPacketCollector;
 	set<CIPv4Address *> mConnectedDevicesIPv4Addresses;

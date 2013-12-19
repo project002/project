@@ -41,7 +41,7 @@ void CPacketCollector::ReceivePackets()
 		{
 			try
 			{
-				recvSize = recvfrom(mSocket, buffer, ETH_FRAME_LEN, 0, NULL,
+				recvSize = recvfrom(mSocket, buffer, ETH_FRAME_LEN, MSG_DONTWAIT, NULL,
 						NULL);
 				if (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
 				{
@@ -57,11 +57,8 @@ void CPacketCollector::ReceivePackets()
 						NewPacket->Print();
 						mPackets.push_back(CreatePacket(buffer,recvSize));
 					}
-					int test;
-					cout<< "CIN for the run to hold is HERE !!!!\n";
-					//TODO: remove COUT
-					cin>> test;
 				}
+
 			}
 			catch (CException & e)
 			{
@@ -80,25 +77,30 @@ CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
 
 	try
 	{
-		uint16_t ethernetType = buffer[ETH_ALEN * 2]<<8 | buffer[(ETH_ALEN * 2) +1];
+		uint16_t ethernetType = buffer[ETH_ALEN * 2] << 8
+				| buffer[(ETH_ALEN * 2) + 1];
 		switch (ethernetType)
 		{
 			case (ETH_P_IP):
+				cout << "\n Creating IPv4 Packet \n";
 				return CreateIPv4Packet(buffer, recvSize);
 				break;
 			case (ETH_P_ARP):
+				cout << "\n Creating ARP Packet\n";
 				return CreateARPPacket(buffer, recvSize);
 				break;
 			case (ETH_P_IPX):
+				cout << "\n Creating IPX Packet\n";
 				return CreateIPXPacket(buffer, recvSize);
 				break;
 			case (ETH_P_IPV6):
+				cout << "\n Creating IPv6 Packet\n";
 				return CreateIPv6Packet(buffer, recvSize);
 				break;
 			default:
 				PrintPacket(buffer, recvSize);
 				cerr << ethernetType << endl;
-				throw(CException("Can't find ethernet type"));
+				throw(CException("\nCan't find ethernet type\n"));
 				break;
 		}
 		return NULL;
