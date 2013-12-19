@@ -27,9 +27,10 @@ CPacketIPv4::CPacketIPv4(char * buffer, ssize_t &bufferSize) :
 		currentOffset+= sizeof(uint16_t);
 		mIdentification = buffer[currentOffset] << 8 | buffer[currentOffset+1];
 		currentOffset+= sizeof(uint16_t);
+		//TODO: flags calculation is wrong but not important atm
 		mFlags = buffer[currentOffset] >>5;
 		mFragmentationOffset = buffer[currentOffset] & 0x1f;
-		currentOffset+= sizeof(uint8_t);
+		currentOffset+= sizeof(uint8_t)*2;
 		mTimeToLive = buffer[currentOffset];
 		currentOffset+= sizeof(uint8_t);
 		mProtocol = buffer[currentOffset];
@@ -44,7 +45,6 @@ CPacketIPv4::CPacketIPv4(char * buffer, ssize_t &bufferSize) :
 		int i=mHeaderLength;
 		for (;i>5;i--)
 		{
-			cout<< "\n LOOP " << i << "\n";
 			int j=0;
 			for (;j<4;j++)
 			{

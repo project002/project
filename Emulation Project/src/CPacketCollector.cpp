@@ -55,7 +55,8 @@ void CPacketCollector::ReceivePackets()
 					if (NewPacket!=NULL)
 					{
 						NewPacket->Print();
-						mPackets.push_back(CreatePacket(buffer,recvSize));
+						mPackets.push_back(NewPacket);
+						//TODO: handle the buffer so it won't over flow!!!!!!!!!!!!!!!!!!!!!!
 					}
 				}
 
@@ -77,8 +78,7 @@ CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
 
 	try
 	{
-		uint16_t ethernetType = buffer[ETH_ALEN * 2] << 8
-				| buffer[(ETH_ALEN * 2) + 1];
+		uint16_t ethernetType = ((buffer[ETH_ALEN * 2] & 0xFF) << 8) | (buffer[(ETH_ALEN * 2) + 1] & 0xFF) ;
 		switch (ethernetType)
 		{
 			case (ETH_P_IP):
@@ -152,8 +152,7 @@ CPacket * CPacketCollector::CreateIPv6Packet(char * buffer, ssize_t recvSize)
 
 	try
 	{
-		//TODO :switch with ipv6 protocols
-		return NULL;
+		return new CPacketIPv6(buffer,recvSize);
 	}
 	catch (CException & e)
 	{

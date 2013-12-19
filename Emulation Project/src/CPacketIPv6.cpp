@@ -14,17 +14,23 @@ CPacketIPv6::CPacketIPv6(char * buffer, ssize_t &bufferSize) :
 {
 	try
 		{
+			uint32_t calculator=0;
 			unsigned int currentOffset = CPacket::GetHeadSize();
-			mVersion = buffer[currentOffset]>>2;
-			currentOffset+= 6;
-
-			mTrafficClass = buffer[currentOffset];
+			mVersion = (buffer[currentOffset] & 0xf0 )>>4;
+			calculator =(buffer[currentOffset] & 0xf) <<4;
+			currentOffset+= 1;
+			calculator |= (buffer[currentOffset]>>4 &0xf );
+			mTrafficClass = calculator;
+			calculator=0;
+			calculator=(buffer[currentOffset] & 0xf) <<16;
 			currentOffset+= sizeof(uint8_t);
+			calculator |= (buffer[currentOffset] &0xff )<<8;
+			currentOffset+= sizeof(uint8_t);
+			calculator |= (buffer[currentOffset] &0xff );
+			currentOffset+= sizeof(uint8_t);
+			mFlowLabel =calculator;
 
-			mFlowLabel =(buffer[currentOffset] <<8) | (buffer[currentOffset + sizeof(uint8_t)] << 8) | (buffer[currentOffset + 2*(sizeof(uint8_t))] & 0xf);
-			currentOffset+= 2*sizeof(uint8_t) + 4;
-
-			mPayloadLength = ( buffer[currentOffset] << 8 ) | buffer[currentOffset+1];
+			mPayloadLength = ( (buffer[currentOffset] & 0xFF) << 8 ) | (buffer[currentOffset+1] & 0xFF);
 			currentOffset+= sizeof(uint16_t);
 
 			mNextHeader= buffer[currentOffset];
@@ -48,7 +54,16 @@ CPacketIPv6::CPacketIPv6(char * buffer, ssize_t &bufferSize) :
 
 CPacketIPv6::~CPacketIPv6()
 {
-
+	if (mSourceIPAddress!=NULL)
+	{
+		delete mSourceIPAddress;
+		mSourceIPAddress=NULL;
+	}
+	if (mDestinationIPAddress!=NULL)
+	{
+		delete mDestinationIPAddress;
+		mDestinationIPAddress=NULL;
+	}
 }
 
 void CPacketIPv6::Print()

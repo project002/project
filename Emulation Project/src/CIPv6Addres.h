@@ -36,10 +36,21 @@ public:
 	}
 	void Print()
 	{
-		for (int i=0;i<(IPv6_ALEN-1);++i)
+		int i;
+		for ( i=0;i<(IPv6_ALEN-1);++i)
 		{
 			printf("%u:",uint16_t(mIPAddress[i]));
 		}
+		printf("%u:",uint16_t(mIPAddress[i]));
+		cout<< endl;
+		for ( i=0;i<(IPv6_ALEN-1);i+=2)
+		{
+			printf("%02X",uint16_t(mIPAddress[i]));
+			printf("%02X:",uint16_t(mIPAddress[i+1]));
+		}
+		printf("%02X",uint16_t(mIPAddress[i]));
+		printf("%02X",uint16_t(mIPAddress[i+1]));
+		cout<< endl;
 		printf("%u\n",uint16_t(mIPAddress[IPv6_ALEN-1]));
 	}
 
@@ -57,7 +68,7 @@ public:
 		}
 	}
 private:
-	unsigned char mIPAddress[ETH_ALEN];
+	unsigned char mIPAddress[IPv6_ALEN];
 };
 
 #endif /* CIPV6ADDRES_H_ */

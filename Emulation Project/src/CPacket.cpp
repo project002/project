@@ -14,7 +14,7 @@ CPacket::CPacket(char * buffer,ssize_t & bufferSize):mSourceMacAddress(NULL),mDe
 		mBuffer = new CBuffer(buffer, bufferSize);
 		mDestinationMacAddress = new CMacAddress(buffer, 0);
 		mSourceMacAddress = new CMacAddress(buffer, ETH_ALEN);
-		mEthernetType = buffer[ETH_ALEN * 2]<<8 | buffer[(ETH_ALEN * 2) +1];
+		mEthernetType =((buffer[ETH_ALEN * 2] & 0xFF) << 8) | (buffer[(ETH_ALEN * 2) + 1] & 0xFF) ;
 		mFrameSequenceCheck = uint32_t(buffer+bufferSize-ETH_FCS_LEN);
 	}
 	catch (CException & e)

@@ -29,7 +29,7 @@ protected:
 	CMacAddress * mDestinationMacAddress;
 	CBuffer * mBuffer;
 	unsigned int mFrameSequenceCheck;
-	unsigned int mEthernetType;
+	int16_t mEthernetType;
 private:
 	void PrintEthernetType();
 };
