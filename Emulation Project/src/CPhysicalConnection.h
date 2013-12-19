@@ -20,7 +20,8 @@ public:
 	 */
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
-	void SetNetmask(uint64_t maxNumberOfComputersInNetwork);
+	void SetNetmask(int8_t maxNumberOfComputersInNetwork);
+	void Receive(){mPacketCollector->ReceivePackets();}
 private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);

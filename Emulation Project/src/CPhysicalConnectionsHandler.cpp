@@ -49,13 +49,15 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 		for (i=0,node = list; node != NULL; node = node->ifa_next,++i)
 		{
 			std::cout << "name:\t" << node->ifa_name << std::endl;
-			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo") != 0)
+			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo") )
 			{
 				newConnection = new CPhysicalConnection(node);
 				newConnection->SetNetmask(MAX_NUMBER_OF_COMPUTERS_ON_NET);
+				newConnection->Receive();
 				mPhysicalConnections->push_back(newConnection);
 			}
 		}
+		newConnection->Receive();
 
 		//clear the allocated list
 		freeifaddrs(list);

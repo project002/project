@@ -72,28 +72,59 @@ void CPhysicalConnection::GetInterfaceInformation()
 	}
 }
 
-void CPhysicalConnection::SetNetmask(uint64_t maxNumberOfComputersInNetwork)
+void CPhysicalConnection::SetNetmask(int8_t maxNumberOfComputersInNetwork)
 {
 	try
 	{
-		struct sockaddr_in* mask=NULL;
 		struct ifreq ifr;
 		memset(&ifr,0,sizeof(struct ifreq));
-		strncpy(ifr.ifr_name,mInterfaceName,IFNAMSIZ);
-		mask = (struct sockaddr_in *) & ifr.ifr_ifru.ifru_addr;
+		strncpy(ifr.ifr_ifrn.ifrn_name,mInterfaceName,IFNAMSIZ);
+		ifr.ifr_ifru.ifru_netmask.sa_family = AF_INET;
+		ifr.ifr_ifru.ifru_addr.sa_family = AF_INET;
 
-		//TODO: calculate correct subnet according to parameter
-		char * maskAddress = (char*)(string("255.255.255.223").c_str());
-		mask->sin_family=AF_PACKET;
-		mask->sin_addr.s_addr=in_addr_t(maskAddress);
+		// Setting maximum number of computers to be a power of 2 for the masking
+		maxNumberOfComputersInNetwork--;
+		maxNumberOfComputersInNetwork|=maxNumberOfComputersInNetwork >>1;
+		maxNumberOfComputersInNetwork|=maxNumberOfComputersInNetwork >>2;
+		maxNumberOfComputersInNetwork|=maxNumberOfComputersInNetwork >>4;
+		maxNumberOfComputersInNetwork|=maxNumberOfComputersInNetwork >>8;
+		maxNumberOfComputersInNetwork|=maxNumberOfComputersInNetwork >>16;
+		maxNumberOfComputersInNetwork++;
 
-		if(ioctl(mSocket,SIOCSIFNETMASK,&ifr)!=0)
+		ifr.ifr_ifru.ifru_addr.sa_data[2]=0xa;
+		ifr.ifr_ifru.ifru_addr.sa_data[3]=0xb;
+		ifr.ifr_ifru.ifru_addr.sa_data[4]=0xc;
+		ifr.ifr_ifru.ifru_addr.sa_data[5]=0xd;
+
+		if (ioctl(mSocket, SIOCSIFADDR, &ifr) < 0)
 		{
-			perror("");
-			throw (CException("Can't set new netmask"));
+			perror("SIOCSIFNETMASK");
+			throw(CException("Can't set a new IP"));
 		}
 
-//TODO: fix here
+		ifr.ifr_ifru.ifru_netmask.sa_data[2]=0xff;
+		ifr.ifr_ifru.ifru_netmask.sa_data[3]=0xff;
+		ifr.ifr_ifru.ifru_netmask.sa_data[4]=0xff;
+		ifr.ifr_ifru.ifru_netmask.sa_data[5]=0xff-maxNumberOfComputersInNetwork+1;
+
+
+		if (ioctl(mSocket, SIOCSIFNETMASK, &ifr) < 0)
+		{
+			perror("SIOCSIFNETMASK");
+			throw(CException("Can't set a new net mask - Check if cable is connected"));
+		}
+
+		if(ioctl(mSocket,SIOCGIFFLAGS,&ifr)<0)
+		{
+			perror("SIOCGIFFLAGS");
+			throw(CException("Can't get network flags."));
+		}
+		ifr.ifr_ifru.ifru_flags |= (IFF_UP | IFF_RUNNING);
+		if(ioctl(mSocket,SIOCSIFFLAGS,&ifr)<0)
+		{
+			perror("SIOCSIFFLAGS");
+			throw(CException("Can't set network flags."));
+		}
 	}
 	catch(CException & e)
 	{
@@ -119,6 +150,7 @@ void CPhysicalConnection::ConfigureSocket(struct ifaddrs* device)
 			throw CException(
 					"Failed to add binding to specific interface flag");
 		}
+
 		mPacketCollector= new CPacketCollector(mSocket);
 	}
 	catch(CException & e)
