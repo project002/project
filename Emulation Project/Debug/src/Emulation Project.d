@@ -3,8 +3,8 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp \
  ../src/CException.h ../src/CPhysicalConnection.h ../src/CMacAddress.h \
  ../src/CPacketCollector.h ../src/PacketTypes.h ../src/CPacketIPv4.h \
  ../src/CPacket.h ../src/CIPv4Address.h ../src/CBuffer.h \
- ../src/CPacketARP.h ../src/CPacketIPX.h ../src/CPacketIPv6.h \
- ../src/CIPv6Addres.h ../src/CPhysicalConnectionsHandler.h
+ ../src/CPacketARP.h ../src/CPacketIPv6.h ../src/CIPv6Addres.h \
+ ../src/CPhysicalConnectionsHandler.h
 
 ../src/CEmulation.h:
 
@@ -31,8 +31,6 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp \
 ../src/CBuffer.h:
 
 ../src/CPacketARP.h:
-
-../src/CPacketIPX.h:
 
 ../src/CPacketIPv6.h:
 

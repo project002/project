@@ -9,7 +9,15 @@
 
 CPhysicalConnectionsHandler::CPhysicalConnectionsHandler():mPhysicalConnections(NULL)
 {
-	mPhysicalConnections = new vector<CPhysicalConnection * >;
+	try
+	{
+		mPhysicalConnections = new vector<CPhysicalConnection * >;
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
 }
 
 CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
@@ -23,9 +31,10 @@ CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
 		}
 		delete mPhysicalConnections;
 	}
-	catch(CException & error)
+	catch (CException & error)
 	{
-
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 
@@ -54,7 +63,6 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 				newConnection = new CPhysicalConnection(node);
 				newConnection->SetNetmask(MAX_NUMBER_OF_COMPUTERS_ON_NET);
 				newConnection->GetConnectedDevicesIPAddresses();
-				newConnection->Receive();
 				mPhysicalConnections->push_back(newConnection);
 			}
 		}

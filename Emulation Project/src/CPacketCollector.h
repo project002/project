@@ -16,8 +16,10 @@ public:
 	virtual ~CPacketCollector();
 	// function should be called with a new thread
 	void ReceivePackets();
+	void SendPacket(char * buffer, ssize_t recvSize);
 private:
-	list<CPacket * > mPackets;
+	list<CPacket * > mReceivedPackets;
+	list<CPacket * > mTransmittedPackets;
 	const int mSocket;
 private:
 	CPacket * CreatePacket(char * buffer, ssize_t recvSize);

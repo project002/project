@@ -20,7 +20,7 @@ public:
 	 */
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
-	void SetNetmask(int8_t maxNumberOfComputersInNetwork);
+	void SetNetmask(int16_t maxNumberOfComputersInNetwork);
 	void Receive(){mPacketCollector->ReceivePackets();}
 	void GetConnectedDevicesIPAddresses();
 private:
@@ -43,6 +43,7 @@ private:
 	int mInterfaceIndex;
 	CMacAddress * mMacAddress;
 	CIPv4Address * mIPAddress;
+	CIPv4Address * mIPMaskAddress;
 	struct ifreq mIfreq;
 	CPacketCollector * mPacketCollector;
 	set<CIPv4Address *> mConnectedDevicesIPv4Addresses;

@@ -10,7 +10,6 @@ CPP_SRCS += \
 ../src/CPacket.cpp \
 ../src/CPacketARP.cpp \
 ../src/CPacketCollector.cpp \
-../src/CPacketIPX.cpp \
 ../src/CPacketIPv4.cpp \
 ../src/CPacketIPv6.cpp \
 ../src/CPhysicalConnection.cpp \
@@ -24,7 +23,6 @@ OBJS += \
 ./src/CPacket.o \
 ./src/CPacketARP.o \
 ./src/CPacketCollector.o \
-./src/CPacketIPX.o \
 ./src/CPacketIPv4.o \
 ./src/CPacketIPv6.o \
 ./src/CPhysicalConnection.o \
@@ -38,7 +36,6 @@ CPP_DEPS += \
 ./src/CPacket.d \
 ./src/CPacketARP.d \
 ./src/CPacketCollector.d \
-./src/CPacketIPX.d \
 ./src/CPacketIPv4.d \
 ./src/CPacketIPv6.d \
 ./src/CPhysicalConnection.d \

@@ -20,6 +20,14 @@ public:
 			mIPAddress[i] = 0 ;
 		}
 	}
+	CIPv4Address(char newIpAddress[4])
+	{
+		unsigned int i;
+		for (i=0;i<IPv4_ALEN;++i)
+		{
+			mIPAddress[i] =newIpAddress[i] ;
+		}
+	}
 	CIPv4Address(char* data,int unsigned offset)
 	{
 		unsigned int di,i;
@@ -40,7 +48,20 @@ public:
 		}
 		printf("%u\n",uint16_t(mIPAddress[IPv4_ALEN-1]));
 	}
-
+	CIPv4Address(const CIPv4Address &other)
+	{
+		int i=0;
+		for(;i<IPv4_ALEN;i++)
+		{
+			mIPAddress[i]=other.mIPAddress[i];
+		}
+	}
+	string GetIPv4Address()
+	{
+		stringstream ss;
+		ss<<mIPAddress;
+		return ss.str();
+	}
 	/**
 	 * creates a IP address wrapper
 	 * @param data a char array

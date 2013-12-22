@@ -28,13 +28,13 @@ private: // Private Functions
 	/**
 	 * Opening sockets for the physical Ethernet ports
 	 */
-	void InitRealConnections();
+	void InitEmulation();
 
 
 
 private: //Private Members
 	CPhysicalConnectionsHandler * mPhysicalConnectionsHandler;
-	vector<CPhysicalConnection * > * mPhysicalConnections; // Will be deleted through the handler destructor
+	vector<CPhysicalConnection * >  mPhysicalConnections;
 };
 
 #endif /* CEMULATION_H_ */

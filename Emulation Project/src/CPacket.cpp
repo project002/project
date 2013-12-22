@@ -17,9 +17,26 @@ CPacket::CPacket(char * buffer,ssize_t & bufferSize):mSourceMacAddress(NULL),mDe
 		mEthernetType =((buffer[ETH_ALEN * 2] & 0xFF) << 8) | (buffer[(ETH_ALEN * 2) + 1] & 0xFF) ;
 		mFrameSequenceCheck = uint32_t(buffer+bufferSize-ETH_FCS_LEN);
 	}
-	catch (CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
+
+CPacket::CPacket(CMacAddress * SourceMacAddress,
+		CMacAddress * DestinationMacAddress, uint16_t EthernetType) :
+		mSourceMacAddress(SourceMacAddress), mDestinationMacAddress(
+				DestinationMacAddress), mBuffer(NULL), mFrameSequenceCheck(0), mEthernetType(
+				EthernetType)
+{
+	try
+	{
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 void CPacket::PrintLayerHead()
@@ -37,9 +54,10 @@ void CPacket::PrintLayerHead()
 		cout << "Ethernet- Data:\n";
 		LogColorReset();
 	}
-	catch (CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 void CPacket::PrintLayerTail()
@@ -51,9 +69,10 @@ void CPacket::PrintLayerTail()
 		printf("%02X \n", mFrameSequenceCheck);
 		LogColorReset();
 	}
-	catch (CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 void CPacket::PrintEthernetType()
@@ -79,27 +98,71 @@ void CPacket::PrintEthernetType()
 				break;
 		}
 	}
-	catch (CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 CPacket::~CPacket()
 {
-	if (mBuffer!=NULL)
+	try
 	{
-		delete mBuffer;
-		mBuffer=NULL;
+		if (mBuffer != NULL)
+		{
+			delete mBuffer;
+			mBuffer = NULL;
+		}
+		if (mDestinationMacAddress != NULL)
+		{
+			delete mDestinationMacAddress;
+			mDestinationMacAddress = NULL;
+		}
+		if (mSourceMacAddress != NULL)
+		{
+			delete mSourceMacAddress;
+			mSourceMacAddress = NULL;
+		}
 	}
-	if (mDestinationMacAddress!=NULL)
+	catch (CException & error)
 	{
-		delete mDestinationMacAddress;
-		mDestinationMacAddress=NULL;
-	}
-	if (mSourceMacAddress!=NULL)
-	{
-		delete mSourceMacAddress;
-		mSourceMacAddress=NULL;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 
+void CPacket::BuildBuffer()
+{
+	try
+	{
+
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
+void CPacket::BuildBufferTail()
+{
+	char buffer[4];
+	memcpy(buffer, &mFrameSequenceCheck, 4);
+	(*mBuffer) += CBuffer(buffer, 4);
+}
+void CPacket::BuildBufferHeader()
+{
+	try
+	{
+		mBuffer = new CBuffer(mSourceMacAddress->GetMacAddress().c_str(),ETH_ALEN);
+		(*mBuffer) += CBuffer(mDestinationMacAddress->GetMacAddress().c_str(),ETH_ALEN);
+		char  buffer[2];
+		memcpy(buffer, &mEthernetType, 2);
+		(*mBuffer) += CBuffer(buffer, 2);
+		//FIXME : endian is messed up! it copies the 2 byte parameters reveresed.
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}

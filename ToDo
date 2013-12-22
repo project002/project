@@ -1,0 +1,5 @@
+init phase - just a function call in the Emulation class to get all connected devices
+packet building/modifying - completely seperated
+threading ability is just adding some flags and figuring out how to do it - for now ill do it on the packet receiving function but we will also need it for a packetS handling function.
+
+we can meet on Tuesday/Thursday  for the design 

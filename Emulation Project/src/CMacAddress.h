@@ -8,9 +8,34 @@
 #ifndef CMACADDRESS_H_
 #define CMACADDRESS_H_
 #include "BasicIncludes.h"
+enum EAddressType{
+	EEmptyAddress=0,
+	EBroadcastAddress=1
+};
+
 class CMacAddress
 {
 public:
+	CMacAddress(EAddressType type)
+	{
+		int i=0;
+		char ByteChar;
+		if (type==EEmptyAddress)
+		{
+			ByteChar=0x0;
+		}
+		else
+		{
+			if (type==EBroadcastAddress)
+			{
+				ByteChar=0xff;
+			}
+		}
+		for (; i < ETH_ALEN; i++)
+		{
+			mMacAddress[i]=ByteChar;
+		}
+	}
 	CMacAddress()
 	{
 		int i;
@@ -28,6 +53,14 @@ public:
 		}
 	}
 
+	CMacAddress(const CMacAddress &other)
+	{
+		int i=0;
+		for(;i<ETH_ALEN;i++)
+		{
+			mMacAddress[i]=other.mMacAddress[i];
+		}
+	}
 	/**
 	 * creates a MAC address wrapper
 	 * @param data a char array

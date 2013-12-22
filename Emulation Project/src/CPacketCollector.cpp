@@ -16,60 +16,70 @@ CPacketCollector::~CPacketCollector()
 {
 	try
 	{
-		list<CPacket * >::iterator it=mPackets.begin();
-		for (;it!=mPackets.end();it++)
+		list<CPacket * >::iterator it=mReceivedPackets.begin();
+		for (;it!=mReceivedPackets.end();it++)
 		{
 			delete (*it);
 		}
-		mPackets.clear();
+		mReceivedPackets.clear();
+		it=mTransmittedPackets.begin();
+		for (;it!=mTransmittedPackets.end();it++)
+		{
+			delete (*it);
+		}
+		mTransmittedPackets.clear();
 	}
-	catch(CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
-
 }
-
+void CPacketCollector::SendPacket(char * buffer, ssize_t recvSize)
+{
+	try
+	{
+		sendto(mSocket,buffer,recvSize,0,NULL,0);
+	}
+	catch(CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
 void CPacketCollector::ReceivePackets()
 {
 	try
 	{
 		char buffer[ETH_FRAME_LEN] = { 0 };
 		ssize_t recvSize;
-		CPacket * NewPacket=NULL;
+		CPacket * NewPacket = NULL;
 		while (true)
 		{
-			try
+			recvSize = recvfrom(mSocket, buffer, ETH_FRAME_LEN, MSG_DONTWAIT,
+					NULL, NULL);
+			if (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
 			{
-				recvSize = recvfrom(mSocket, buffer, ETH_FRAME_LEN, MSG_DONTWAIT, NULL,
-						NULL);
-				if (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
-				{
-					cerr << "err number " << errno << endl;
-					throw CException("fatal error on receive from socket");
-				}
-
-				if (recvSize>0) //don't print empty packets
-				{
-					NewPacket= CreatePacket(buffer,recvSize);
-					if (NewPacket!=NULL)
-					{
-						NewPacket->Print();
-						mPackets.push_back(NewPacket);
-						//TODO: handle the buffer so it won't over flow!!!!!!!!!!!!!!!!!!!!!!
-					}
-				}
-
+				cerr << "err number " << errno << endl;
+				throw CException("fatal error on receive from socket");
 			}
-			catch (CException & e)
+
+			if (recvSize > 0) //don't print empty packets
 			{
-				std::cerr << e.what() << std::endl;
+				NewPacket = CreatePacket(buffer, recvSize);
+				if (NewPacket != NULL)
+				{
+					NewPacket->Print();
+					mReceivedPackets.push_back(NewPacket);
+					//TODO: handle the buffer so it won't over flow!!!!!!!!!!!!!!!!!!!!!!
+				}
 			}
 		}
 	}
-	catch (CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 
@@ -89,10 +99,6 @@ CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
 				cout << "\n Creating ARP Packet\n";
 				return CreateARPPacket(buffer, recvSize);
 				break;
-			case (ETH_P_IPX):
-				cout << "\n Creating IPX Packet\n";
-				return CreateIPXPacket(buffer, recvSize);
-				break;
 			case (ETH_P_IPV6):
 				cout << "\n Creating IPv6 Packet\n";
 				return CreateIPv6Packet(buffer, recvSize);
@@ -105,9 +111,10 @@ CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
 		}
 		return NULL;
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 	return NULL;
 }
@@ -127,9 +134,10 @@ void CPacketCollector::PrintPacket(char * buffer, ssize_t recvSize)
 		}
 		cout<<endl;
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 
@@ -140,9 +148,10 @@ CPacket * CPacketCollector::CreateIPv4Packet(char * buffer, ssize_t recvSize)
 	{
 		return ( new CPacketIPv4 ( buffer,recvSize));
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 	return NULL;
 }
@@ -154,28 +163,14 @@ CPacket * CPacketCollector::CreateIPv6Packet(char * buffer, ssize_t recvSize)
 	{
 		return new CPacketIPv6(buffer,recvSize);
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 	return NULL;
 }
 
-CPacket * CPacketCollector::CreateIPXPacket(char * buffer, ssize_t recvSize)
-{
-
-	try
-	{
-		//TODO :switch with ipx protocols
-		return NULL;
-	}
-	catch (CException & e)
-	{
-		std::cerr << e.what() << std::endl;
-
-	}
-	return NULL;
-}
 
 CPacket * CPacketCollector::CreateARPPacket(char * buffer, ssize_t recvSize)
 {
@@ -184,9 +179,10 @@ CPacket * CPacketCollector::CreateARPPacket(char * buffer, ssize_t recvSize)
 	{
 		return new CPacketARP(buffer,recvSize);
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 	return NULL;
 }

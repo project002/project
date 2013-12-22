@@ -17,7 +17,7 @@ public:
 	CIPv6Address()
 	{
 		unsigned int i;
-		for (i=0;i<IPv4_ALEN;++i)
+		for (i=0;i<IPv6_ALEN;++i)
 		{
 			mIPAddress[i] = 0 ;
 		}
@@ -41,9 +41,9 @@ public:
 		{
 			printf("%u:",uint16_t(mIPAddress[i]));
 		}
-		printf("%u:",uint16_t(mIPAddress[i]));
+		printf("%u",uint16_t(mIPAddress[i]));
 		cout<< endl;
-		for ( i=0;i<(IPv6_ALEN-1);i+=2)
+		for ( i=0;i<(IPv6_ALEN-2);i+=2)
 		{
 			printf("%02X",uint16_t(mIPAddress[i]));
 			printf("%02X:",uint16_t(mIPAddress[i+1]));

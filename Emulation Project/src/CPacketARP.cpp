@@ -7,10 +7,30 @@
 
 #include "CPacketARP.h"
 
-
+CPacketARP::CPacketARP(CMacAddress * MacSource, CIPv4Address *IPv4Source,CIPv4Address *IPv4Destination):
+	CPacket(MacSource,new CMacAddress(EBroadcastAddress),ETH_P_ARP),
+		mHardwareType(0x1), mProtocolType(0x800), mHardwareAddressLength(0x6), mProtocolAddressLength(
+				0x4), mOpCode(0x1), mSourceMacAddress(NULL), mSourceIPAddress(NULL), mDestinationMacAddress(
+				NULL), mDestinationIPAddress(NULL)
+{
+	try
+	{
+		((this->mSourceMacAddress))=MacSource;
+		((this->mSourceIPAddress))=IPv4Source;
+		((this->mDestinationMacAddress))= new CMacAddress(EEmptyAddress);
+		((this->mDestinationIPAddress))=IPv4Destination;
+		//call BUILD BUFFER from creator function
+	}
+	catch(CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
 CPacketARP::CPacketARP(char * buffer, ssize_t &bufferSize) :
 		CPacket(buffer, bufferSize), mHardwareType(0), mProtocolType(0), mHardwareAddressLength(
-				0), mProtocolAddressLength(0), mOpCode(0)
+				0), mProtocolAddressLength(0), mOpCode(0),mSourceMacAddress(NULL),mSourceIPAddress(NULL),
+				mDestinationMacAddress(NULL),mDestinationIPAddress(NULL)
 {
 	try
 	{
@@ -33,12 +53,11 @@ CPacketARP::CPacketARP(char * buffer, ssize_t &bufferSize) :
 		currentOffset += ETH_ALEN;
 		mDestinationIPAddress=new CIPv4Address(buffer, currentOffset);
 		currentOffset += IPv4_ALEN;
-
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
-
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 
@@ -49,10 +68,18 @@ CPacketARP::~CPacketARP()
 
 void CPacketARP::Print()
 {
-	CPacket::PrintLayerHead();
-	PrintLayerHead();
-	PrintLayerTail();
-	CPacket::PrintLayerTail();
+	try
+	{
+		CPacket::PrintLayerHead();
+		PrintLayerHead();
+		PrintLayerTail();
+		CPacket::PrintLayerTail();
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
 }
 
 void CPacketARP::PrintLayerHead()
@@ -83,9 +110,10 @@ void CPacketARP::PrintLayerHead()
 		mDestinationMacAddress->Print();
 		LogColorReset();
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 
@@ -103,9 +131,10 @@ void CPacketARP::PrintProtocolType()
 				break;
 		}
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 void CPacketARP::PrintHardwareType()
@@ -122,9 +151,10 @@ void CPacketARP::PrintHardwareType()
 				break;
 		}
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 void CPacketARP::PrintOpCode()
@@ -150,9 +180,10 @@ void CPacketARP::PrintOpCode()
 				break;
 		}
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
 
@@ -162,8 +193,101 @@ void CPacketARP::PrintLayerTail()
 	{
 		// No tail for ARP packets
 	}
-	catch (CException & e)
+	catch(CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
+
+void CPacketARP::BuildBufferTail()
+{
+	try
+	{
+		CPacket::BuildBufferTail();
+		//no tail
+	}
+	catch(CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
+void CPacketARP::BuildBufferHeader()
+{
+	try
+	{
+		char buffer1Byte[1];
+		char buffer2Bytes[2];
+		CPacket::BuildBufferHeader();
+
+		memcpy(buffer2Bytes, &mHardwareType, 2);
+		(*mBuffer) += CBuffer(buffer2Bytes, 2);
+
+		memcpy(buffer2Bytes, &mProtocolType, 2);
+		(*mBuffer) += CBuffer(buffer2Bytes, 2);
+
+		memcpy(buffer1Byte, &mHardwareAddressLength, 1);
+		(*mBuffer) += CBuffer(buffer1Byte, 1);
+
+		memcpy(buffer1Byte, &mProtocolAddressLength, 1);
+		(*mBuffer) += CBuffer(buffer1Byte, 1);
+
+		memcpy(buffer2Bytes, &mOpCode, 2);
+		(*mBuffer) += CBuffer(buffer2Bytes, 2);
+
+		(*mBuffer) += CBuffer(mSourceMacAddress->GetMacAddress().c_str(),
+				ETH_ALEN);
+		(*mBuffer) += CBuffer(mSourceIPAddress->GetIPv4Address().c_str(),
+				IPv4_ALEN);
+		(*mBuffer) += CBuffer(mDestinationMacAddress->GetMacAddress().c_str(),
+				ETH_ALEN);
+		(*mBuffer) += CBuffer(mDestinationIPAddress->GetIPv4Address().c_str(),IPv4_ALEN);
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
+void CPacketARP::BuildBuffer()
+{
+	try
+	{
+		BuildBufferHeader();
+		BuildBufferTail();
+	}
+	catch(CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
+
+/*
+ *
+ *
+ * 	char * buffer=NULL;
+	memcpy(buffer, &mFrameSequenceCheck, 4);
+	(*mBuffer) += CBuffer(buffer, 4);
+
+
+			mBuffer = new CBuffer(mSourceMacAddress->GetMacAddress().c_str(),ETH_ALEN);
+		(*mBuffer) += CBuffer(mDestinationMacAddress->GetMacAddress().c_str(),ETH_ALEN);
+		char * buffer=NULL;
+		memcpy(buffer, &mEthernetType, 2);
+		(*mBuffer) += CBuffer(buffer, 2);
+
+
+
+
+	uint16_t mHardwareType; // Should be Ethernet = 0x1
+	uint16_t mProtocolType; // Should be IP = 0x800
+	uint8_t mHardwareAddressLength; // Should be MAC length = 0x6
+	uint8_t mProtocolAddressLength; // Should be IPv4 length = 0x4 since IPv6 is returned by NDP protocol and not ARP
+	uint16_t mOpCode; // When received it is a Request op code = 0x1
+	CMacAddress *mSourceMacAddress;
+	CIPv4Address *mSourceIPAddress;
+	CMacAddress *mDestinationMacAddress;
+	CIPv4Address *mDestinationIPAddress;
+*/

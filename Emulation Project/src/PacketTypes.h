@@ -8,10 +8,11 @@
 #ifndef PACKETTYPES_H_
 #define PACKETTYPES_H_
 
-
+/**
+ * Supported packet types of the emulation
+ */
 #include "CPacketIPv4.h"
 #include "CPacketARP.h"
-#include "CPacketIPX.h"
 #include "CPacketIPv6.h"
 
 #endif /* PACKETTYPES_H_ */

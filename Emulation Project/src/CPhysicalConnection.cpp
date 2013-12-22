@@ -7,7 +7,7 @@
 
 #include "CPhysicalConnection.h"
 
-CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mMacAddress(NULL),mPacketCollector(NULL),mInterfaceName(NULL)
+CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mSocket(-1),mMacAddress(NULL),mPacketCollector(NULL),mInterfaceName(NULL)
 {
 	try
 	{
@@ -20,11 +20,14 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mMacAddress(NUL
 		// Get the interface information
 		GetInterfaceInformation();
 
+		SetNetmask(30);
+		GetConnectedDevicesIPAddresses();
 		//TODO: Enable receiving of packets by calling ReceivePackets from CPhysicalConnection using a Thread!
 	}
-	catch (CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 		close(mSocket);
 	}
 
@@ -38,10 +41,16 @@ void CPhysicalConnection::GetConnectedDevicesIPAddresses()
 	try
 	{
 		//TODO: send arp request to all available ip addresses of subnet and get the active connected computers
+		char ipAddress[4]={10,0,0,1};
+		CPacketARP * Arping = new CPacketARP(mMacAddress,mIPAddress,new CIPv4Address(ipAddress));
+		Arping->BuildBuffer();
+		mPacketCollector->SendPacket(Arping->getBuffer()->GetBuffer(),Arping->getBuffer()->GetSize());
+
 	}
-	catch (CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 		close(mSocket);
 	}
 }
@@ -65,13 +74,15 @@ void CPhysicalConnection::GetInterfaceInformation()
 		mMacAddress= new CMacAddress(mIfreq.ifr_addr.sa_data);
 
 	}
-	catch(CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		close(mSocket);
 	}
 }
 
-void CPhysicalConnection::SetNetmask(int8_t maxNumberOfComputersInNetwork)
+void CPhysicalConnection::SetNetmask(int16_t maxNumberOfComputersInNetwork)
 {
 	try
 	{
@@ -80,6 +91,18 @@ void CPhysicalConnection::SetNetmask(int8_t maxNumberOfComputersInNetwork)
 		strncpy(ifr.ifr_ifrn.ifrn_name,mInterfaceName,IFNAMSIZ);
 		ifr.ifr_ifru.ifru_netmask.sa_family = AF_INET;
 		ifr.ifr_ifru.ifru_addr.sa_family = AF_INET;
+
+		// Setting random IP address for the connection
+		ifr.ifr_ifru.ifru_addr.sa_data[2]=rand()%255;
+		ifr.ifr_ifru.ifru_addr.sa_data[3]=rand()%255;
+		ifr.ifr_ifru.ifru_addr.sa_data[4]=rand()%255;
+		ifr.ifr_ifru.ifru_addr.sa_data[5]=rand()%255;
+		mIPAddress= new CIPv4Address(ifr.ifr_ifru.ifru_addr.sa_data,2);
+		if (ioctl(mSocket, SIOCSIFADDR, &ifr) < 0)
+		{
+			perror("SIOCSIFNETMASK");
+			throw(CException("Can't set a new IP"));
+		}
 
 		// Setting maximum number of computers to be a power of 2 for the masking
 		maxNumberOfComputersInNetwork--;
@@ -90,24 +113,11 @@ void CPhysicalConnection::SetNetmask(int8_t maxNumberOfComputersInNetwork)
 		maxNumberOfComputersInNetwork|=maxNumberOfComputersInNetwork >>16;
 		maxNumberOfComputersInNetwork++;
 
-		ifr.ifr_ifru.ifru_addr.sa_data[2]=rand()%255;
-		ifr.ifr_ifru.ifru_addr.sa_data[3]=rand()%255;
-		ifr.ifr_ifru.ifru_addr.sa_data[4]=rand()%255;
-		ifr.ifr_ifru.ifru_addr.sa_data[5]=rand()%255;
-
-		mIPAddress= new CIPv4Address(ifr.ifr_ifru.ifru_addr.sa_data,2);
-		if (ioctl(mSocket, SIOCSIFADDR, &ifr) < 0)
-		{
-			perror("SIOCSIFNETMASK");
-			throw(CException("Can't set a new IP"));
-		}
-
 		ifr.ifr_ifru.ifru_netmask.sa_data[2]=0xff;
 		ifr.ifr_ifru.ifru_netmask.sa_data[3]=0xff;
 		ifr.ifr_ifru.ifru_netmask.sa_data[4]=0xff;
 		ifr.ifr_ifru.ifru_netmask.sa_data[5]=0xff-maxNumberOfComputersInNetwork+1;
-
-
+		mIPMaskAddress= new CIPv4Address(ifr.ifr_ifru.ifru_netmask.sa_data,2);
 		if (ioctl(mSocket, SIOCSIFNETMASK, &ifr) < 0)
 		{
 			perror("SIOCSIFNETMASK");
@@ -127,9 +137,11 @@ void CPhysicalConnection::SetNetmask(int8_t maxNumberOfComputersInNetwork)
 		}
 
 	}
-	catch(CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		close(mSocket);
 	}
 }
 void CPhysicalConnection::ConfigureSocket(struct ifaddrs* device)
@@ -173,9 +185,11 @@ void CPhysicalConnection::ConfigureSocket(struct ifaddrs* device)
 
 		mPacketCollector= new CPacketCollector(mSocket);
 	}
-	catch(CException & e)
+	catch (CException & error)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		close(mSocket);
 	}
 }
 void CPhysicalConnection::InitStructs(struct ifaddrs* device)
@@ -194,34 +208,117 @@ void CPhysicalConnection::InitStructs(struct ifaddrs* device)
 }
 CPhysicalConnection::~CPhysicalConnection()
 {
-	close(mSocket);
-	if(mPacketCollector!=NULL)
+	try
 	{
-		delete mPacketCollector;
-		mPacketCollector=NULL;
+		if (mPacketCollector != NULL)
+		{
+			delete mPacketCollector;
+			mPacketCollector = NULL;
+		}
+		if (mMacAddress != NULL)
+		{
+			delete mMacAddress;
+			mMacAddress = NULL;
+		}
+		if (mPacketCollector != NULL)
+		{
+			delete mPacketCollector;
+			mPacketCollector = NULL;
+		}
+		close(mSocket);
 	}
-	if(mMacAddress!=NULL)
+	catch (CException & error)
 	{
-		delete mMacAddress;
-		mMacAddress=NULL;
-	}
-	if (mPacketCollector!=NULL)
-	{
-		delete mPacketCollector;
-		mPacketCollector=NULL;
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		close(mSocket);
 	}
 }
 
 bool CPhysicalConnection::IsPacketEmpty(char* buffer)
 {
-	int sum = 0;
-	for (int i=0;i<ETH_FRAME_LEN;++i)
+	try
 	{
-		sum += buffer[i];
-		if (sum>0) {return false;}
+		int sum = 0;
+		for (int i = 0; i < ETH_FRAME_LEN; ++i)
+		{
+			sum += buffer[i];
+			if (sum > 0)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
-	return true;
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		close(mSocket);
+	}
+	return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //
 //void CPhysicalConnection::Receive(int unsigned period_len)
