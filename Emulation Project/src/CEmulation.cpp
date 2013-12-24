@@ -27,6 +27,7 @@ CEmulation::~CEmulation()
 		if (mPhysicalConnectionsHandler != NULL)
 		{
 			delete mPhysicalConnectionsHandler;
+			mPhysicalConnectionsHandler=NULL;
 		}
 		vector<CPhysicalConnection *>::iterator it =
 				mPhysicalConnections.begin();
@@ -47,7 +48,7 @@ void CEmulation::InitEmulation()
 {
 	try
 	{
-
+		mPhysicalConnectionsHandler = new CPhysicalConnectionsHandler();
 		mPhysicalConnectionsHandler->CreatePhyiscalConnections();
 		//TODO ping all subnet addresses to check who is connected
 	}

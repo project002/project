@@ -7,11 +7,11 @@
 
 #include "CPhysicalConnectionsHandler.h"
 
-CPhysicalConnectionsHandler::CPhysicalConnectionsHandler():mPhysicalConnections(NULL)
+CPhysicalConnectionsHandler::CPhysicalConnectionsHandler()
 {
 	try
 	{
-		mPhysicalConnections = new vector<CPhysicalConnection * >;
+		mPhysicalConnections.clear();
 	}
 	catch (CException & error)
 	{
@@ -25,11 +25,10 @@ CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
 	try
 	{
 		vector<CPhysicalConnection * >::iterator it;
-		for (it = mPhysicalConnections->begin(); it!=mPhysicalConnections->end();it++)
+		for (it = mPhysicalConnections.begin(); it!=mPhysicalConnections.end();it++)
 		{
 			delete (*it);
 		}
-		delete mPhysicalConnections;
 	}
 	catch (CException & error)
 	{
@@ -52,22 +51,20 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 		//get devices list
 		ret = getifaddrs(&list);
 		if (ret == -1) {throw CException("Err: when retrieving devices list");}
-		CPhysicalConnection * newConnection;
+		CPhysicalConnection * newConnection=NULL;
 		//iterate over list
 		int i = 0;
 		for (i=0,node = list; node != NULL; node = node->ifa_next,++i)
 		{
 			std::cout << "name:\t" << node->ifa_name << std::endl;
+
 			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo") )
 			{
 				newConnection = new CPhysicalConnection(node);
-				newConnection->SetNetmask(MAX_NUMBER_OF_COMPUTERS_ON_NET);
-				newConnection->GetConnectedDevicesIPAddresses();
-				mPhysicalConnections->push_back(newConnection);
+				cout<<" test\n";
+				mPhysicalConnections.push_back(newConnection);
 			}
 		}
-		//newConnection->Receive();
-
 		//clear the allocated list
 		freeifaddrs(list);
 	}

@@ -16,18 +16,7 @@ CPacketCollector::~CPacketCollector()
 {
 	try
 	{
-		list<CPacket * >::iterator it=mReceivedPackets.begin();
-		for (;it!=mReceivedPackets.end();it++)
-		{
-			delete (*it);
-		}
-		mReceivedPackets.clear();
-		it=mTransmittedPackets.begin();
-		for (;it!=mTransmittedPackets.end();it++)
-		{
-			delete (*it);
-		}
-		mTransmittedPackets.clear();
+
 	}
 	catch(CException & error)
 	{
@@ -53,7 +42,6 @@ void CPacketCollector::ReceivePackets()
 	{
 		char buffer[ETH_FRAME_LEN] = { 0 };
 		ssize_t recvSize;
-		CPacket * NewPacket = NULL;
 		while (true)
 		{
 			recvSize = recvfrom(mSocket, buffer, ETH_FRAME_LEN, MSG_DONTWAIT,
@@ -66,13 +54,8 @@ void CPacketCollector::ReceivePackets()
 
 			if (recvSize > 0) //don't print empty packets
 			{
-				NewPacket = CreatePacket(buffer, recvSize);
-				if (NewPacket != NULL)
-				{
-					NewPacket->Print();
-					mReceivedPackets.push_back(NewPacket);
-					//TODO: handle the buffer so it won't over flow!!!!!!!!!!!!!!!!!!!!!!
-				}
+
+
 			}
 		}
 	}
@@ -83,41 +66,6 @@ void CPacketCollector::ReceivePackets()
 	}
 }
 
-CPacket * CPacketCollector::CreatePacket(char * buffer, ssize_t recvSize)
-{
-
-	try
-	{
-		uint16_t ethernetType = ((buffer[ETH_ALEN * 2] & 0xFF) << 8) | (buffer[(ETH_ALEN * 2) + 1] & 0xFF) ;
-		switch (ethernetType)
-		{
-			case (ETH_P_IP):
-				cout << "\n Creating IPv4 Packet \n";
-				return CreateIPv4Packet(buffer, recvSize);
-				break;
-			case (ETH_P_ARP):
-				cout << "\n Creating ARP Packet\n";
-				return CreateARPPacket(buffer, recvSize);
-				break;
-			case (ETH_P_IPV6):
-				cout << "\n Creating IPv6 Packet\n";
-				return CreateIPv6Packet(buffer, recvSize);
-				break;
-			default:
-				PrintPacket(buffer, recvSize);
-				cerr << ethernetType << endl;
-				throw(CException("\nCan't find ethernet type\n"));
-				break;
-		}
-		return NULL;
-	}
-	catch(CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-	}
-	return NULL;
-}
 /**
  * Function for debugging. It prints the whole packet as it was received.
  * @param buffer pointer to the array's beginning
@@ -140,66 +88,6 @@ void CPacketCollector::PrintPacket(char * buffer, ssize_t recvSize)
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
-
-CPacket * CPacketCollector::CreateIPv4Packet(char * buffer, ssize_t recvSize)
-{
-
-	try
-	{
-		return ( new CPacketIPv4 ( buffer,recvSize));
-	}
-	catch(CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-	}
-	return NULL;
-}
-
-CPacket * CPacketCollector::CreateIPv6Packet(char * buffer, ssize_t recvSize)
-{
-
-	try
-	{
-		return new CPacketIPv6(buffer,recvSize);
-	}
-	catch(CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-	}
-	return NULL;
-}
-
-
-CPacket * CPacketCollector::CreateARPPacket(char * buffer, ssize_t recvSize)
-{
-
-	try
-	{
-		return new CPacketARP(buffer,recvSize);
-	}
-	catch(CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-	}
-	return NULL;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

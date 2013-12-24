@@ -10,28 +10,20 @@
  */
 #include <iostream>
 #include <fstream>
-#include <cstring>
-#include <string>
 #include <sstream>
 #include <stdlib.h>
+#include <string>
+
+typedef std::pair<std::string, std::string> TStrStrPair;
 #include "Color.h"
 using namespace std;
 
 /**
- * Socket Related Inclusions
+ * Packet specific related inclusions
  */
-#include <netdb.h>
-#include <sys/types.h>
+#include <crafter.h>
+using namespace Crafter;
 #include <ifaddrs.h>
-#include <sys/socket.h>
-#include <sys/ioctl.h>
-#include <net/if.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <netpacket/packet.h>
-#include <net/ethernet.h>
-#include <arpa/inet.h>
-
 /**
  * Exception Related Inclusions
  */
@@ -44,6 +36,7 @@ using namespace std;
 #include <vector>
 #include <list>
 #include <map>
+typedef map<std::string, std::string> TStrStrMap;
 #include <set>
 
 /**
@@ -60,6 +53,8 @@ using namespace std;
  * Thread Related Inclusions
  */
 #include <pthread.h>
+
+
 
 /**
  * Defined missing STL

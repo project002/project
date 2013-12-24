@@ -9,7 +9,6 @@
 #define CPHYSICALCONNECTIONSHANDLER_H_
 #include "BasicIncludes.h"
 #include "CPhysicalConnection.h"
-#define MAX_NUMBER_OF_COMPUTERS_ON_NET 32
 /**
  * The class handles the physical connections of the device,
  * including opening sockets, connecting, and closing.
@@ -27,7 +26,7 @@ public:
 private: // Private Functions
 
 private: // Private Members
-	vector<CPhysicalConnection * > * mPhysicalConnections;
+	vector<CPhysicalConnection *>  mPhysicalConnections;
 };
 
 #endif /* CPHYSICALCONNECTIONSHANDLER_H_ */

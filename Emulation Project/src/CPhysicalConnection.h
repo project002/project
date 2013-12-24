@@ -8,9 +8,11 @@
 #ifndef CPHYSICALCONNECTION_H_
 #define CPHYSICALCONNECTION_H_
 #include "BasicIncludes.h"
-#include "CMacAddress.h"
+
 #include "CPacketCollector.h"
-#include "CIPv4Address.h"
+
+
+#define MAX_NUMBER_OF_COMPUTERS_ON_NET 32
 class CPhysicalConnection
 {
 public:
@@ -18,11 +20,23 @@ public:
 	 *
 	 * @param device the device must have a non-NULL ifa_addr
 	 */
+
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
-	void SetNetmask(int16_t maxNumberOfComputersInNetwork);
+	void SetNetmask();
 	void Receive(){mPacketCollector->ReceivePackets();}
-	void GetConnectedDevicesIPAddresses();
+	void GetConnectedDevicesMACAddresses();
+	/**
+	 * used as handler for the sniffer method this is why he gets
+	 * these arguments
+	 * @param sniff_packet
+	 * @param user
+	 */
+	void SetConnectedDevicesIPAddresses(Packet* sniff_packet, void* user);
+	/**
+	 * starts sniffing
+	 */
+	void SniffDHCPPackets();
 private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
@@ -41,12 +55,10 @@ private:
 	//void read_ipv4(char* ipHead);
 	int mSocket;
 	int mInterfaceIndex;
-	CMacAddress * mMacAddress;
-	CIPv4Address * mIPAddress;
-	CIPv4Address * mIPMaskAddress;
+	string mIPMaskAddress;
 	struct ifreq mIfreq;
 	CPacketCollector * mPacketCollector;
-	set<CIPv4Address *> mConnectedDevicesIPv4Addresses;
+	map<string,string> mConnectedDevicesIPv4Addresses;
 	char * mInterfaceName;
 };
 
