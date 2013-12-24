@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Emulation Project/src/BasicIncludes.h&apos; to &apos;BasicIncludess.h&apos;" description="Rename resource &apos;BasicIncludes.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/BasicIncludes.h" name="BasicIncludess.h" stamp="1386669011212" updateReferences="true"/>
-</session>

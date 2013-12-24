@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Emulation/Emulation/Header/Emulation.h&apos; to &apos;CEmulation.h&apos;" description="Rename resource &apos;Emulation.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Emulation/Header/Emulation.h" name="CEmulation.h" stamp="1386666315026" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Emulation/Emulation/Source/Emulation.cpp&apos; to &apos;CEmulation.cpp&apos;" description="Rename resource &apos;Emulation.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Emulation/Source/Emulation.cpp" name="CEmulation.cpp" stamp="1386666323660" updateReferences="true"/>
-</session>
