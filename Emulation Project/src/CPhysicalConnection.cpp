@@ -39,10 +39,12 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mSocket(-1),mPa
 void CPhysicalConnection::SniffDHCPPackets()
 {
 	string iFace(mInterfaceName);
+	CDHCPPacketHandler::mInterfaceName = mInterfaceName;
+	CDHCPPacketHandler::mIPMaskAddress = mIPMaskAddress;
+	CDHCPPacketHandler::mIPAddressSet = "10.0.0.2";
+	Sniffer sniff("udp and src port 68 and dst port 67",iFace,CDHCPPacketHandler::startDHCPhandshake);
 
-	Sniffer sniff("udp and src port 67 and dst port 68",iFace,CDHCPPacketHandler::startDHCPhandshake);
-
-	sniff.Capture(10);
+	sniff.Capture();
 }
 
 /**
