@@ -13,6 +13,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include <string>
+//#include <boost/function.hpp>
 
 typedef std::pair<std::string, std::string> TStrStrPair;
 #include "Color.h"

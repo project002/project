@@ -8,8 +8,10 @@
 #include "CPhysicalConnection.h"
 #include "CDHCPPacketHandler.h"
 
-CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mSocket(-1),mPacketCollector(NULL),mInterfaceName(NULL)
+CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):
+	mSocket(-1),mPacketCollector(NULL),mInterfaceName(NULL)
 {
+
 	try
 	{
 		// Init the structs with 0's
@@ -21,11 +23,14 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mSocket(-1),mPa
 		// Get the interface information
 		GetInterfaceInformation();
 
+		//TODO: Try to avoid sending packets
 		SetNetmask();
-		//start snifing for DHCP Discover packets
-		SniffDHCPPackets();
-//		SetConnectedDevicesIPAddresses(NULL,NULL);
-		//GetConnectedDevicesMACAddresses();
+
+		mDHCPsrv = new CDHCPService(mInterfaceName,mIPMaskAddress);
+		mDHCPSniffer = new Sniffer(DHCP_FILTER,string(mInterfaceName),runDHCPService);
+
+		mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
+
 	}
 	catch (CException & error)
 	{
@@ -39,176 +44,21 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):mSocket(-1),mPa
 void CPhysicalConnection::SniffDHCPPackets()
 {
 	string iFace(mInterfaceName);
-	CDHCPPacketHandler::mInterfaceName = mInterfaceName;
-	CDHCPPacketHandler::mIPMaskAddress = mIPMaskAddress;
-	CDHCPPacketHandler::mIPAddressSet = "10.0.0.2";
-	Sniffer sniff("udp and src port 68 and dst port 67",iFace,CDHCPPacketHandler::startDHCPhandshake);
+//	CDHCPPacketHandler::mInterfaceName = mInterfaceName;
+//	CDHCPPacketHandler::mIPMaskAddress = mIPMaskAddress;
+//	CDHCPPacketHandler::mIPAddressSet = "10.0.0.2";
+//	Sniffer sniff("udp and src port 68 and dst port 67",iFace,CDHCPPacketHandler::startDHCPhandshake);
 
-	sniff.Capture();
+//	CDHCPService DHCPsrv(mInterfaceName,mIPMaskAddress);
+
+
+	Sniffer sniff("",iFace,runDHCPService);
+
+	sniff.Capture(-1,static_cast<void*> (mDHCPSniffer));
 }
 
-/**
- * function uses DHCP packets to set clients IP addresses per request
- */
-void CPhysicalConnection::SetConnectedDevicesIPAddresses(Packet* sniff_packet, void* user)
-{
-	try
-	{
-		/* Get interface properties - IP & MAC */
-		string iface = mInterfaceName;
-		string MyIP = GetMyIP(iface);
-		string MyMAC = GetMyMAC(iface);
-
-		Ethernet ether_header;
-		ether_header.SetSourceMAC(MyMAC);         // <-- Set our MAC as a source
-		ether_header.SetDestinationMAC("ff:ff:ff:ff:ff:ff"); // <-- Set broadcast address
-		IP ip_header;
-		ip_header.SetSourceIP(MyIP);
-		ip_header.SetDestinationIP("255.255.255.255");
-		UDP udp_header;
-		udp_header.SetSrcPort(67);
-		udp_header.SetDstPort(68);
-		DHCP dhcp_header;
-		vector<std::string> IPsInsert;
-		dhcp_header.SetOperationCode(DHCP::Reply);
-		dhcp_header.SetFlags(0x0);
-//		dhcp_header.SetTransactionID(RNG32());
-		dhcp_header.SetTransactionID(0xe0cb1350);
-		dhcp_header.SetClientMAC("00:24:81:22:A0:B5");
-		dhcp_header.Options.push_back(
-				CreateDHCPOption(DHCPOptions::DHCPMsgType,
-						DHCPOptions::DHCPOFFER, DHCPOptions::BYTE));
-		dhcp_header.Options.push_back(
-				CreateDHCPOption(DHCPOptions::SubnetMask, mIPMaskAddress));
 
 
-		IPsInsert.push_back(MyIP);
-		dhcp_header.Options.push_back(
-				CreateDHCPOption(DHCPOptions::Router, IPsInsert));
-
-		dhcp_header.Options.push_back(
-				CreateDHCPOption(DHCPOptions::DHCPServerId, IPsInsert));
-		dhcp_header.Options.push_back(
-				CreateDHCPOption(DHCPOptions::DomainServer, IPsInsert));
-
-		IPsInsert.clear();
-		IPsInsert.push_back("7fffffff");
-		dhcp_header.Options.push_back(
-				CreateDHCPOption(DHCPOptions::AddressTime, IPsInsert));
-
-		dhcp_header.SetClientIP("0.0.0.0");
-		dhcp_header.SetYourIP("10.0.0.4");
-		dhcp_header.SetServerIP("0.0.0.0");
-		dhcp_header.SetGatewayIP("0.0.0.0");
-		Packet packet = ether_header / ip_header / udp_header / dhcp_header;
-		/* Send the packet */
-		Packet* rcv = packet.SendRecv(iface, 0.01, 3000,
-				"udp and src port 68 and dst port 67");
-
-		/* Received DHCP layer */
-		DHCP* dhcp_rcv = new DHCP();
-
-		if (rcv)
-		{
-			/*
-			 * An application protocol is always get from the network as a raw layer.
-			 */
-			dhcp_rcv->FromRaw(*GetRawLayer(*rcv));
-			/* Print the response to STDOUT to see how it looks like */
-			cout
-					<< "[@] ---------- DHCP response from server after a DISCOVERY message : "
-					<< endl;
-			dhcp_rcv->Print();
-			cout << "[@] ---------- " << endl;
-		}
-		else
-		{
-			cout << "[@] No response from any DHCP server" << endl;
-			CleanCrafter();
-		}
-
-	}
-	catch (CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-		close(mSocket);
-	}
-}
-/**
- * Initialization level function
- * The function sends an reversed ARP packet in order to retrieve all connected devices IP addresses
- */
-void CPhysicalConnection::GetConnectedDevicesMACAddresses()
-{
-	try
-	{
-		/* Get interface properties - IP & MAC */
-		string iface = mInterfaceName;
-		string MyIP = GetMyIP(iface);
-		string MyMAC = GetMyMAC(iface);
-
-		/* Set Packets Headers*/
-		Ethernet ether_header;
-		ether_header.SetSourceMAC(MyMAC);         // <-- Set our MAC as a source
-		ether_header.SetDestinationMAC("ff:ff:ff:ff:ff:ff"); // <-- Set broadcast address
-		ARP arp_header;
-		arp_header.SetOperation(ARP::Request); // <-- Set Operation (ARP Request)
-		arp_header.SetSenderIP(MyIP);                // <-- Set our network data
-		arp_header.SetSenderMAC(MyMAC);           // <-- Set our MAC as a sender
-
-		/* ---------------------------------------------- */
-		/* Define the network to scan */
-		vector<string> net = GetIPs("10.0.0.*"); // <-- Create a container of IP addresses from a "wildcard"
-		vector<string>::iterator ip_addr;                     // <-- Iterator
-		/* Create a container of packet pointers to hold all the ARP requests */
-		vector<Packet*> request_packets;
-		/* Iterate to access each string that defines an IP address */
-		for (ip_addr = net.begin(); ip_addr != net.end(); ip_addr++)
-		{
-			arp_header.SetTargetIP(*ip_addr); // <-- Set a destination IP address on ARP header
-			Packet* packet = new Packet;
-			packet->PushLayer(ether_header);
-			packet->PushLayer(arp_header);
-			request_packets.push_back(packet);
-		}
-		cout << "[@] Sending the ARP Requests. Wait..." << endl;
-		/* Create a container of packet with the same size of the request container to hold the responses */
-		vector<Packet*> replies_packets(request_packets.size());
-		SendRecv(request_packets.begin(), request_packets.end(),
-				replies_packets.begin(), iface, 0.1, 2, 48);
-
-		cout << "[@] SendRecv function returns :-) " << endl;
-
-		vector<Packet*>::iterator it_pck;
-		for (it_pck = replies_packets.begin(); it_pck < replies_packets.end();
-				it_pck++)
-		{
-			Packet* reply_packet = (*it_pck);
-			if (reply_packet!=NULL)
-			{
-				ARP* arp_layer = reply_packet->GetLayer<ARP>();
-				mConnectedDevicesIPv4Addresses.insert(TStrStrPair(arp_layer->GetSenderIP(),arp_layer->GetSenderMAC()));
-				cout <<mConnectedDevicesIPv4Addresses[arp_layer->GetSenderIP()].c_str();
-			}
-		}
-		for (it_pck = request_packets.begin(); it_pck < request_packets.end();
-				it_pck++)
-			delete (*it_pck);
-
-		for (it_pck = replies_packets.begin(); it_pck < replies_packets.end();
-				it_pck++)
-			delete (*it_pck);
-
-
-	}
-	catch (CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-		close(mSocket);
-	}
-}
 void CPhysicalConnection::GetInterfaceInformation()
 {
 	try
@@ -261,6 +111,7 @@ void CPhysicalConnection::SetNetmask()
 
 		ss<<ifr.ifr_ifru.ifru_netmask.sa_data[2]<<ifr.ifr_ifru.ifru_netmask.sa_data[3] << ifr.ifr_ifru.ifru_netmask.sa_data[4]<< ifr.ifr_ifru.ifru_netmask.sa_data[5];
 		mIPMaskAddress= ss.str();
+
 		if (ioctl(mSocket, SIOCSIFNETMASK, &ifr) < 0)
 		{
 			perror("SIOCSIFNETMASK");
@@ -343,6 +194,9 @@ void CPhysicalConnection::InitStructs(struct ifaddrs* device)
 }
 CPhysicalConnection::~CPhysicalConnection()
 {
+	mDHCPSniffer->Cancel();
+	delete mDHCPSniffer;
+	delete mDHCPsrv;
 	try
 	{
 		if (mPacketCollector != NULL)
@@ -385,8 +239,6 @@ bool CPhysicalConnection::IsPacketEmpty(char* buffer)
 	}
 	return false;
 }
-
-
 
 
 

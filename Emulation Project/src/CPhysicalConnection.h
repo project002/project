@@ -10,9 +10,11 @@
 #include "BasicIncludes.h"
 
 #include "CPacketCollector.h"
-
+#include "CDHCPService.h"
+#include "H_SNIFFER_FUNC.h"
 
 #define MAX_NUMBER_OF_COMPUTERS_ON_NET 32
+
 class CPhysicalConnection
 {
 public:
@@ -60,6 +62,16 @@ private:
 	CPacketCollector * mPacketCollector;
 	map<string,string> mConnectedDevicesIPv4Addresses;
 	char * mInterfaceName;
+
+	//DHCPServices for Physical Connection
+	CDHCPService* mDHCPsrv;
+
+	Sniffer* mDHCPSniffer;
+	Sniffer* mIPSniffer;
+
+	const string DHCP_FILTER = "udp and src port 68 and dst port 67";
+	const string IP_FILTER = "";
+
 };
 
 #endif /* CPHYSICALCONNECTION_H_ */

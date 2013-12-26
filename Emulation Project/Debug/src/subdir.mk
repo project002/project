@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../src/CBuffer.cpp \
 ../src/CDHCPPacketHandler.cpp \
+../src/CDHCPService.cpp \
 ../src/CEmulation.cpp \
 ../src/CException.cpp \
 ../src/CPacketCollector.cpp \
@@ -16,6 +17,7 @@ CPP_SRCS += \
 OBJS += \
 ./src/CBuffer.o \
 ./src/CDHCPPacketHandler.o \
+./src/CDHCPService.o \
 ./src/CEmulation.o \
 ./src/CException.o \
 ./src/CPacketCollector.o \
@@ -26,6 +28,7 @@ OBJS += \
 CPP_DEPS += \
 ./src/CBuffer.d \
 ./src/CDHCPPacketHandler.d \
+./src/CDHCPService.d \
 ./src/CEmulation.d \
 ./src/CException.d \
 ./src/CPacketCollector.d \
