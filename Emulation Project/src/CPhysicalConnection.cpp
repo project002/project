@@ -23,11 +23,17 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):
 		// Get the interface information
 		GetInterfaceInformation();
 
-		//TODO: Try to avoid sending packets
-		SetNetmask();
+		//Set the Subnet Mask
+		setMaskAddress();
 
-		mDHCPsrv = new CDHCPService(mInterfaceName,mIPMaskAddress);
-		mDHCPSniffer = new Sniffer(DHCP_FILTER,string(mInterfaceName),runDHCPService);
+		mDHCPsrv = new CDHCPService(mInterfaceName,mIPMaskAddress->getIpStrNoDot());
+		const char* getway_addr = mDHCPsrv->getIPAddr();
+		mGetwayAddress = new CUIPV4(string(getway_addr));
+
+		//TODO: Try to avoid sending packets
+		SetNetmask(mGetwayAddress,mIPMaskAddress);
+
+		mDHCPSniffer = new Sniffer(CDHCPService::DHCP_FILTER,string(mInterfaceName),runDHCPService);
 
 		mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
 
@@ -52,12 +58,18 @@ void CPhysicalConnection::SniffDHCPPackets()
 //	CDHCPService DHCPsrv(mInterfaceName,mIPMaskAddress);
 
 
-	Sniffer sniff("",iFace,runDHCPService);
-
-	sniff.Capture(-1,static_cast<void*> (mDHCPSniffer));
+//	Sniffer sniff("",iFace,runDHCPService);
+//
+//	sniff.Capture(-1,static_cast<void*> (mDHCPSniffer));
 }
 
 
+void CPhysicalConnection::setMaskAddress()
+{
+	stringstream ss;
+	int subnet[] = {0xff,0xff,0xff,0x00};
+	mIPMaskAddress = new CUIPV4((int*) subnet);
+}
 
 void CPhysicalConnection::GetInterfaceInformation()
 {
@@ -80,7 +92,7 @@ void CPhysicalConnection::GetInterfaceInformation()
 	}
 }
 
-void CPhysicalConnection::SetNetmask()
+void CPhysicalConnection::SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress)
 {
 	try
 	{
@@ -91,11 +103,13 @@ void CPhysicalConnection::SetNetmask()
 		ifr.ifr_ifru.ifru_netmask.sa_family = AF_INET;
 		ifr.ifr_ifru.ifru_addr.sa_family = AF_INET;
 
+		const uint8_t* addr = getway_addr->getIpArr();
+
 		// Setting random IP address for the connection
-		ifr.ifr_ifru.ifru_addr.sa_data[2]=/*rand()%255*/10;
-		ifr.ifr_ifru.ifru_addr.sa_data[3]=/*rand()%255*/0;
-		ifr.ifr_ifru.ifru_addr.sa_data[4]=/*rand()%255*/0;
-		ifr.ifr_ifru.ifru_addr.sa_data[5]=/*rand()%255*/5;
+		ifr.ifr_ifru.ifru_addr.sa_data[2]=addr[0];
+		ifr.ifr_ifru.ifru_addr.sa_data[3]=addr[1];
+		ifr.ifr_ifru.ifru_addr.sa_data[4]=addr[2];
+		ifr.ifr_ifru.ifru_addr.sa_data[5]=addr[3];
 
 		if (ioctl(mSocket, SIOCSIFADDR, &ifr) < 0)
 		{
@@ -104,13 +118,12 @@ void CPhysicalConnection::SetNetmask()
 		}
 		ss.clear();
 
-		ifr.ifr_ifru.ifru_netmask.sa_data[2]=0xff;
-		ifr.ifr_ifru.ifru_netmask.sa_data[3]=0xff;
-		ifr.ifr_ifru.ifru_netmask.sa_data[4]=0xff;
-		ifr.ifr_ifru.ifru_netmask.sa_data[5]=0;
+		const uint8_t* mask = mIPMaskAddress->getIpArr();
 
-		ss<<ifr.ifr_ifru.ifru_netmask.sa_data[2]<<ifr.ifr_ifru.ifru_netmask.sa_data[3] << ifr.ifr_ifru.ifru_netmask.sa_data[4]<< ifr.ifr_ifru.ifru_netmask.sa_data[5];
-		mIPMaskAddress= ss.str();
+		ifr.ifr_ifru.ifru_netmask.sa_data[2]=mask[0];
+		ifr.ifr_ifru.ifru_netmask.sa_data[3]=mask[1];
+		ifr.ifr_ifru.ifru_netmask.sa_data[4]=mask[2];
+		ifr.ifr_ifru.ifru_netmask.sa_data[5]=mask[3];
 
 		if (ioctl(mSocket, SIOCSIFNETMASK, &ifr) < 0)
 		{

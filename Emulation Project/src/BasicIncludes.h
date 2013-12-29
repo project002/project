@@ -62,6 +62,12 @@ typedef map<std::string, std::string> TStrStrMap;
  */
 #define IPv4_ALEN 4
 
+/**
+ * IPv4 Wrapper
+ */
+
+#include "CUIPV4.h"
+
 #endif
 
 

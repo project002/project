@@ -25,7 +25,7 @@ public:
 
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
-	void SetNetmask();
+	void SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress);
 	void Receive(){mPacketCollector->ReceivePackets();}
 	void GetConnectedDevicesMACAddresses();
 	/**
@@ -43,7 +43,7 @@ private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
 	void GetInterfaceInformation();
-
+	void setMaskAddress();
 	/**
 	 * run a recv loop for a period of time specified
 	 * @param period_len the duration of the rcv loop in seconds
@@ -57,7 +57,8 @@ private:
 	//void read_ipv4(char* ipHead);
 	int mSocket;
 	int mInterfaceIndex;
-	string mIPMaskAddress;
+	CUIPV4* mIPMaskAddress;
+	CUIPV4* mGetwayAddress;
 	struct ifreq mIfreq;
 	CPacketCollector * mPacketCollector;
 	map<string,string> mConnectedDevicesIPv4Addresses;
@@ -69,8 +70,6 @@ private:
 	Sniffer* mDHCPSniffer;
 	Sniffer* mIPSniffer;
 
-	const string DHCP_FILTER = "udp and src port 68 and dst port 67";
-	const string IP_FILTER = "";
 
 };
 
