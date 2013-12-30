@@ -36,9 +36,9 @@ public:
 	 */
 	void SetConnectedDevicesIPAddresses(Packet* sniff_packet, void* user);
 	/**
-	 * starts sniffing
+	 * starts DHCP service om the current interface
 	 */
-	void SniffDHCPPackets();
+	void startDHCPService();
 private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);

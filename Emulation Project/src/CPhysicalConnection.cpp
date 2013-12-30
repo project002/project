@@ -6,7 +6,6 @@
  */
 
 #include "CPhysicalConnection.h"
-#include "CDHCPPacketHandler.h"
 
 CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):
 	mSocket(-1),mPacketCollector(NULL),mInterfaceName(NULL)
@@ -26,16 +25,14 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):
 		//Set the Subnet Mask
 		setMaskAddress();
 
-		mDHCPsrv = new CDHCPService(mInterfaceName,mIPMaskAddress->getIpStrNoDot());
+		mDHCPsrv = new CDHCPService(mInterfaceName,mIPMaskAddress->getIpArr());
 		const char* getway_addr = mDHCPsrv->getIPAddr();
 		mGetwayAddress = new CUIPV4(string(getway_addr));
 
 		//TODO: Try to avoid sending packets
 		SetNetmask(mGetwayAddress,mIPMaskAddress);
 
-		mDHCPSniffer = new Sniffer(CDHCPService::DHCP_FILTER,string(mInterfaceName),runDHCPService);
-
-		mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
+		startDHCPService();
 
 	}
 	catch (CException & error)
@@ -47,28 +44,28 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):
 
 }
 
-void CPhysicalConnection::SniffDHCPPackets()
+void CPhysicalConnection::startDHCPService()
 {
-	string iFace(mInterfaceName);
+//	string iFace(mInterfaceName);
 //	CDHCPPacketHandler::mInterfaceName = mInterfaceName;
-//	CDHCPPacketHandler::mIPMaskAddress = mIPMaskAddress;
+//	CDHCPPacketHandler::mIPMaskAddress = mIPMaskAddress->getIpArr();
 //	CDHCPPacketHandler::mIPAddressSet = "10.0.0.2";
 //	Sniffer sniff("udp and src port 68 and dst port 67",iFace,CDHCPPacketHandler::startDHCPhandshake);
 
-//	CDHCPService DHCPsrv(mInterfaceName,mIPMaskAddress);
+//	sniff.Capture();
 
+	cout << "DHCP service started..." << endl;
+	mDHCPSniffer = new Sniffer(CDHCPService::DHCP_FILTER,string(mInterfaceName),runDHCPService);
 
-//	Sniffer sniff("",iFace,runDHCPService);
-//
-//	sniff.Capture(-1,static_cast<void*> (mDHCPSniffer));
+	mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
 }
 
 
 void CPhysicalConnection::setMaskAddress()
 {
 	stringstream ss;
-	int subnet[] = {0xff,0xff,0xff,0x00};
-	mIPMaskAddress = new CUIPV4((int*) subnet);
+	uint8_t subnet[] = {0xff,0xff,0xff,0x00};
+	mIPMaskAddress = new CUIPV4(subnet);
 }
 
 void CPhysicalConnection::GetInterfaceInformation()

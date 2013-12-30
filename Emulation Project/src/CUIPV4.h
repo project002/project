@@ -40,9 +40,9 @@ public:
 		ip_str_alt = ss1.str();
 	}
 
-	CUIPV4(int* ipv4)
+	CUIPV4(uint8_t* ipv4)
 	{
-		for (int i=0;i<IPLEN;++i) {ip_arr[i] = (uint8_t)ipv4[i];}
+		for (int i=0;i<IPLEN;++i) {ip_arr[i] = ipv4[i];}
 		std::stringstream ss;
 		ss << (int)ip_arr[0] << DOT << (int)ip_arr[1]<< DOT << (int)ip_arr[2]<< DOT << (int)ip_arr[3];
 		ip_str = ss.str();

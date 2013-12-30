@@ -11,25 +11,18 @@ string CDHCPService::DHCP_FILTER = "udp and src port 68 and dst port 67";
 string CDHCPService::DHCP_FILTER_RCV = "udp and src port 68 and dst port 67";
 vector< pair< string,bool > > CDHCPService::IP_TABLE = vector< pair< string,bool > >();
 
-CDHCPService::CDHCPService(char* iFaceName,const string &subNetName):
+CDHCPService::CDHCPService(char* iFaceName,const uint8_t* subNetName):
 		miFaceName(iFaceName),mSubnatName(subNetName)
 {
 
-	stringstream t;
-	char f[4];
-	f[0] = 0xff;
-	f[1] = 0xff;
-	f[2] = 0xff;
-	f[3] = 0x00;
-	t << f[0] << f[1] << f[2] << f[3];
-	mSubnatName = t.str();
-
 	//init ip table
-	int table_sz = getIPTableSizeFromSubnet(mSubnatName.c_str());
+	int table_sz = getIPTableSizeFromSubnet(mSubnatName);
 	fillupIPTable(table_sz);
 	cout << "ip table filled" << endl;
 	mHandshakeIP = getIPAddr(); //allocate a IP address for the handshake
 }
+
+
 
 const char* CDHCPService::getIPAddr()
 {
@@ -57,7 +50,7 @@ void CDHCPService::fillupIPTable(int tableSize)
 }
 
 
-int CDHCPService::getIPTableSizeFromSubnet(const char* subnet)
+int CDHCPService::getIPTableSizeFromSubnet(const uint8_t* subnet)
 {
 	int sz = 0; //number of ip address
 	int shifts = 0; //counter for number of shifts for each octet
@@ -65,7 +58,7 @@ int CDHCPService::getIPTableSizeFromSubnet(const char* subnet)
 	uint8_t octet;
 	for (int i=0;i<IPV4_ADDR_SZ;++i)
 	{
-		octet = (uint8_t) subnet[i];
+		octet = subnet[i];
 		shifts = max_shifts;
 		while (octet>0)
 		{
@@ -204,7 +197,7 @@ void CDHCPService::buildDHCP_OFFER(word XID,string &clientMAC,Packet* DHCP_OFFER
 			CreateDHCPOption(DHCPOptions::DHCPMsgType,
 					DHCPOptions::DHCPOFFER, DHCPOptions::BYTE));
 	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::SubnetMask, mSubnatName));
+			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnatName,sizeof(uint8_t)*IPv4_ALEN));
 
 
 	IPsInsert.push_back(MyIP);
@@ -259,7 +252,7 @@ void CDHCPService::buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK)
 			CreateDHCPOption(DHCPOptions::DHCPMsgType,
 					DHCPOptions::DHCPACK, DHCPOptions::BYTE));
 	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::SubnetMask, mSubnatName));
+			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnatName,sizeof(uint8_t)*IPv4_ALEN));
 
 
 	IPsInsert.push_back(MyIP);

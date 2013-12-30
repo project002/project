@@ -5,7 +5,6 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/CBuffer.cpp \
-../src/CDHCPPacketHandler.cpp \
 ../src/CDHCPService.cpp \
 ../src/CEmulation.cpp \
 ../src/CException.cpp \
@@ -16,7 +15,6 @@ CPP_SRCS += \
 
 OBJS += \
 ./src/CBuffer.o \
-./src/CDHCPPacketHandler.o \
 ./src/CDHCPService.o \
 ./src/CEmulation.o \
 ./src/CException.o \
@@ -27,7 +25,6 @@ OBJS += \
 
 CPP_DEPS += \
 ./src/CBuffer.d \
-./src/CDHCPPacketHandler.d \
 ./src/CDHCPService.d \
 ./src/CEmulation.d \
 ./src/CException.d \

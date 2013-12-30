@@ -36,7 +36,7 @@ public:
 	static const byte MT_ACK      = 0x05; //Message Type ACK on DHCP Request
 
 
-	CDHCPService(char* iFaceName,const string &subNetName);
+	CDHCPService(char* iFaceName,const uint8_t* subNetName);
 
 	void start(Packet* packet);
 
@@ -51,14 +51,14 @@ public:
 private:
 	const int IPV4_ADDR_SZ = 4;
 	char* miFaceName; //the interface name
-	string mSubnatName; //the subnet ip mask
+	const uint8_t* mSubnatName; //the subnet ip mask
 	string mHandshakeIP; //the offered ip adress for the current handshake
 
 	/**
 	 * @param subnet each char is the numeric (not ascii) valur of a octet
 	 * @return the number of IP address that can be available with the subnet
 	 */
-	int getIPTableSizeFromSubnet(const char* subnet);
+	int getIPTableSizeFromSubnet(const uint8_t* subnet);
 
 	/**
 	 * this method will only make the ip address for subnet of type

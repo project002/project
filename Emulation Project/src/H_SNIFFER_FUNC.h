@@ -22,7 +22,6 @@
  */
 inline void runDHCPService(Packet* p,void* DHCPService)
 {
-	cout << "DHCP service started..." << endl;
 	CDHCPService* srv = (static_cast<CDHCPService*>(DHCPService));
 	srv->start(p);
 }
