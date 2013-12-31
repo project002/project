@@ -8,8 +8,8 @@
 #ifndef CUIPV4_H_
 #define CUIPV4_H_
 
-#include <stdlib.h>
-#include <strstream>
+#include <cstdlib>
+#include <sstream>
 #include <string>
 /**
  * C-class U- utility

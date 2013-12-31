@@ -5,33 +5,45 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/CBuffer.cpp \
+../src/CConnection.cpp \
 ../src/CDHCPService.cpp \
 ../src/CEmulation.cpp \
 ../src/CException.cpp \
 ../src/CPacketCollector.cpp \
 ../src/CPhysicalConnection.cpp \
 ../src/CPhysicalConnectionsHandler.cpp \
-../src/Emulation\ Project.cpp 
+../src/CRouter.cpp \
+../src/CVirtualConnection.cpp \
+../src/Emulation\ Project.cpp \
+../src/pugixml.cpp 
 
 OBJS += \
 ./src/CBuffer.o \
+./src/CConnection.o \
 ./src/CDHCPService.o \
 ./src/CEmulation.o \
 ./src/CException.o \
 ./src/CPacketCollector.o \
 ./src/CPhysicalConnection.o \
 ./src/CPhysicalConnectionsHandler.o \
-./src/Emulation\ Project.o 
+./src/CRouter.o \
+./src/CVirtualConnection.o \
+./src/Emulation\ Project.o \
+./src/pugixml.o 
 
 CPP_DEPS += \
 ./src/CBuffer.d \
+./src/CConnection.d \
 ./src/CDHCPService.d \
 ./src/CEmulation.d \
 ./src/CException.d \
 ./src/CPacketCollector.d \
 ./src/CPhysicalConnection.d \
 ./src/CPhysicalConnectionsHandler.d \
-./src/Emulation\ Project.d 
+./src/CRouter.d \
+./src/CVirtualConnection.d \
+./src/Emulation\ Project.d \
+./src/pugixml.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

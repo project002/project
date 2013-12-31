@@ -7,13 +7,41 @@
 //============================================================================
 
 #include "CEmulation.h"
+#define SETUP_XML_ARGUMENT_POSITION 1
 
-int main()
+/**
+ * Verifying the XML was declared as an argument.
+ *
+ * @param argc
+ * @param argv
+ */
+void EmulationParametersValidator(int argc, char *argv[])
 {
 	try
 	{
+		if (argc<2)
+		{
+			cout<< "Please enter a setup xml file name as first argument\n";
+			exit(EXIT_FAILURE);
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+	}
+}
+
+
+int main(int argc, char *argv[])
+{
+	try
+	{
+
  		CEmulation * Emulator= new CEmulation();
-		Emulator->EmulationBuilder();
+ 		EmulationParametersValidator(argc,argv);
+ 		Emulator->EmulationBuilder(argv[SETUP_XML_ARGUMENT_POSITION]);
+ 		Emulator->StartEmulation();
 		delete Emulator;
 		return(EXIT_SUCCESS);
 	}
@@ -23,3 +51,4 @@ int main()
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 	}
 }
+

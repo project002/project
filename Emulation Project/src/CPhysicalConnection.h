@@ -12,10 +12,11 @@
 #include "CPacketCollector.h"
 #include "CDHCPService.h"
 #include "H_SNIFFER_FUNC.h"
+#include "CConnection.h"
 
 #define MAX_NUMBER_OF_COMPUTERS_ON_NET 32
 
-class CPhysicalConnection
+class CPhysicalConnection:public CConnection
 {
 public:
 	/**
@@ -39,6 +40,12 @@ public:
 	 * starts DHCP service om the current interface
 	 */
 	void startDHCPService();
+
+	const char* getInterfaceName() const
+	{
+		return mInterfaceName;
+	}
+
 private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
@@ -55,7 +62,7 @@ private:
 	 * @param ipHead a pointer to ipv4 packet inside the ethernet packet
 	 */
 	//void read_ipv4(char* ipHead);
-	int mSocket;
+
 	int mInterfaceIndex;
 	CUIPV4* mIPMaskAddress;
 	CUIPV4* mGetwayAddress;

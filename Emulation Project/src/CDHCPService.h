@@ -11,6 +11,7 @@
 #include "BasicIncludes.h"
 #include <cmath>
 
+#define IPV4_ADDR_SZ 4
 /**
  * should be a function object that starts the DHCP
  * service in the emulation initialization
@@ -49,7 +50,6 @@ public:
 
 	virtual ~CDHCPService();
 private:
-	const int IPV4_ADDR_SZ = 4;
 	char* miFaceName; //the interface name
 	const uint8_t* mSubnatName; //the subnet ip mask
 	string mHandshakeIP; //the offered ip adress for the current handshake

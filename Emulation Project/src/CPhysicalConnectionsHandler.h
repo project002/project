@@ -22,7 +22,7 @@ public:
 	CPhysicalConnectionsHandler();
 	virtual ~CPhysicalConnectionsHandler();
 	void CreatePhyiscalConnections();
-
+	CPhysicalConnection * GetPhysicalConnectionByName(const char * InterfaceName);
 private: // Private Functions
 
 private: // Private Members

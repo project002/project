@@ -61,7 +61,6 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo") )
 			{
 				newConnection = new CPhysicalConnection(node);
-				cout<<" test\n";
 				mPhysicalConnections.push_back(newConnection);
 			}
 		}
@@ -75,8 +74,29 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 	}
 }
 
+CPhysicalConnection * CPhysicalConnectionsHandler::GetPhysicalConnectionByName(
+		const char * InterfaceName)
+{
+	try
+	{
+		vector<CPhysicalConnection *>::iterator it;
+		for (it = mPhysicalConnections.begin();it!=mPhysicalConnections.end();it++)
+		{
+			const char * PhysicalInterfaceName=(*it)->getInterfaceName();
+			if(!strcmp(PhysicalInterfaceName, InterfaceName))
+			{
+				return (*it);
+			}
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 
-
+	}
+	return NULL;
+}
 
 
 

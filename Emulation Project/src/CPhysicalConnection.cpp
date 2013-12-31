@@ -7,8 +7,8 @@
 
 #include "CPhysicalConnection.h"
 
-CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device):
-	mSocket(-1),mPacketCollector(NULL),mInterfaceName(NULL)
+CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device) :
+		CConnection(), mPacketCollector(NULL), mInterfaceName(NULL)
 {
 
 	try
@@ -57,7 +57,7 @@ void CPhysicalConnection::startDHCPService()
 	cout << "DHCP service started..." << endl;
 	mDHCPSniffer = new Sniffer(CDHCPService::DHCP_FILTER,string(mInterfaceName),runDHCPService);
 
-	mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
+	mDHCPSniffer->Spawn(-1,static_cast<void*> (mDHCPsrv));
 }
 
 
