@@ -10,6 +10,7 @@
 
 #include "BasicIncludes.h"
 #include <cmath>
+#include <algorithm>
 
 #define IPV4_ADDR_SZ 4
 /**
@@ -23,12 +24,21 @@ public:
 	static string DHCP_FILTER;
 	//packet recieve filer
 	static string DHCP_FILTER_RCV;
+	//holds if the IP_TABLE should be initiliazed
+	//or left as is by the DHCP service
+	static bool INIT_TABLE;
 	/**
-	 * ip table for available ip addresses
-	 * each pair had the ip address (string)
-	 * and if it's free or nor (bool)
+	 * holds all the free IPv4 left for
+	 * any DHCP service
 	 */
-	static vector< pair< string,bool > > IP_TABLE;
+	static vector<string> IP_TABLE;
+	/**
+	 * holds all the IPv4 addresses
+	 * this this specific instance of the DHCP
+	 * service (with the appropriate interface) has allocated
+	 */
+	vector<string> mLocal_Table;
+
 	//TODO: find these consts in the crafeter lib
 	static const byte OPCODE_REQ  = 0x01; //Opcode for Request
 	static const byte OPCODE_REP  = 0x02; //Opcode for Replay
@@ -42,16 +52,31 @@ public:
 	void start(Packet* packet);
 
 	/**
-	 * returns a free IPv4 adrress in the subnet
+	 * returns a free IPv4 address in the subnet
 	 * if the table is full an CEXception will be thrown
 	 * @return a free IPv4 address
 	 */
 	const char* getIPAddr();
 
+	/**
+	 * release the given ip address back to the IP_TABLE
+	 * @param IPv4 an ipv4 ip address
+	 */
+	void releaseIPAddr(string IPv4);
+
+	/**
+	 * returns a vector of all the allocated ip addresses
+	 * in thos DHCP service (thus all the ips that are connected
+	 * to the interface running this service)
+	 * @return a vector of ip addresses in string form
+	 */
+	vector<string>& getAllocatedIPs();
+
 	virtual ~CDHCPService();
 private:
 	char* miFaceName; //the interface name
-	const uint8_t* mSubnatName; //the subnet ip mask
+	const uint8_t* mSubnetName; //the subnet ip mask
+	const string DEF_IPv4;
 	string mHandshakeIP; //the offered ip adress for the current handshake
 
 	/**

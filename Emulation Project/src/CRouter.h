@@ -9,6 +9,7 @@
 #define CROUTER_H_
 #include "BasicIncludes.h"
 #include "CConnection.h"
+#include "CUIPV4.h"
 #define DEFAULT_ROUTER_BUFFER_SIZE 100
 class CRouter
 {
@@ -16,7 +17,8 @@ public:
 	CRouter();
 	virtual ~CRouter();
 	void AddConnection(CConnection * connection){mConnections.push_back(connection);}
-	void RequestTables();//TODO:implement get table from physical connection and virtual connection
+	void RequestTables();
+	void StartSniffing(){};//TODO implement sniffing from all connections
 	unsigned int GetBufferSize() const
 	{
 		return mBufferSize;
@@ -29,6 +31,7 @@ public:
 
 private:
 	list<CConnection *> mConnections;
+	map<string,CConnection*> mRoutingTable;
 	unsigned int mBufferSize;
 	//TODO: add list of connections which includes virtual ones and physical ones
 };

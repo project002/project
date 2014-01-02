@@ -14,6 +14,11 @@
 #include "CPhysicalConnectionsHandler.h"
 #include "pugixml.hpp"
 #include "CRouter.h"
+/**
+ * Thread Related Inclusions
+ */
+#include <boost/thread.hpp>
+#include "boost/date_time/posix_time/posix_time.hpp"
 class CEmulation
 {
 public: // Public Functions
@@ -39,12 +44,15 @@ private: // Private Functions
 	void XMLParser(char * SetupFile);
 	void XMLRoutersParser(pugi::xml_document & doc);
 	void XMLVirtualConnectionsParser(pugi::xml_document & doc);
+	void XMLRoutingTableParser(pugi::xml_document & doc);
+	void XMLParseRoutingTable(pugi::xml_document & doc);
 
 	void TableSwapping();
 private: //Private Members
 	CPhysicalConnectionsHandler * mPhysicalConnectionsHandler;
 	vector<CPhysicalConnection * >  mPhysicalConnections;
 	vector<CRouter *> mRouters;
+	bool mStaticRoutingTable;
 };
 
 #endif /* CEMULATION_H_ */

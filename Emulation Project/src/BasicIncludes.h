@@ -50,10 +50,7 @@ typedef map<std::string, std::string> TStrStrMap;
  */
 #include <errno.h>
 
-/**
- * Thread Related Inclusions
- */
-#include <pthread.h>
+
 
 
 

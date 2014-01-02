@@ -32,16 +32,26 @@ void EmulationParametersValidator(int argc, char *argv[])
 	}
 }
 
+void DisableNetworkManager()
+{
+	cout<< "Disabling Network Manager\n";
+	int status = system("sudo service network-manager stop");
+	if (status ==-1 || WEXITSTATUS(status)==-1)
+	{
+		throw CException("Can't call a system command to disable the network manager");
+	}
+}
 
 int main(int argc, char *argv[])
 {
 	try
 	{
-
+		DisableNetworkManager();
  		CEmulation * Emulator= new CEmulation();
  		EmulationParametersValidator(argc,argv);
  		Emulator->EmulationBuilder(argv[SETUP_XML_ARGUMENT_POSITION]);
  		Emulator->StartEmulation();
+
 		delete Emulator;
 		return(EXIT_SUCCESS);
 	}

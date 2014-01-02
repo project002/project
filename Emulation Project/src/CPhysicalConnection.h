@@ -28,14 +28,7 @@ public:
 	virtual ~CPhysicalConnection();
 	void SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress);
 	void Receive(){mPacketCollector->ReceivePackets();}
-	void GetConnectedDevicesMACAddresses();
-	/**
-	 * used as handler for the sniffer method this is why he gets
-	 * these arguments
-	 * @param sniff_packet
-	 * @param user
-	 */
-	void SetConnectedDevicesIPAddresses(Packet* sniff_packet, void* user);
+	virtual vector<string>& GetTable()const;
 	/**
 	 * starts DHCP service om the current interface
 	 */

@@ -14,8 +14,9 @@ public:
 	CConnection();
 	virtual  Crafter::Packet* GetPacket();
 	//TODO: get table in sub classes - physical connections will return addresses according to the DHCP availability table
-	// and virtual connections will return according to XML
-	virtual void GetTable(){throw(CException("Impolement get table in connections"));}virtual ~CConnection();
+	// and virtual connections will return according to XML or dynamically populated tables
+	virtual vector<string>& GetTable()const{throw(CException("Impolement get table in connections"));}
+	virtual ~CConnection();
 protected:
 	int mSocket;
 	//TODO: hold table of "connections" to computers by IP

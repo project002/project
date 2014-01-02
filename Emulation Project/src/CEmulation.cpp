@@ -7,7 +7,7 @@
 
 #include "CEmulation.h"
 
-CEmulation::CEmulation(): mPhysicalConnectionsHandler(NULL)
+CEmulation::CEmulation(): mPhysicalConnectionsHandler(NULL),mStaticRoutingTable(false)
 {
 	try
 	{
@@ -71,7 +71,6 @@ void CEmulation::EmulationBuilder(char* SetupFile)
 	try
 	{
 		XMLParser(SetupFile);
-		TableSwapping();
 
 	}
 	catch(CException & error)
@@ -88,11 +87,25 @@ void CEmulation::TableSwapping()
 {
 	try
 	{
-		vector<CRouter *>::iterator iter;
-		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
+		while(1)
 		{
-			(*iter)->RequestTables();
+
+			vector<CRouter *>::iterator iter;
+			for (iter=mRouters.begin();iter!=mRouters.end();iter++)
+			{
+				(*iter)->RequestTables();// router is requesting tables from each connection TODO
+										// this needs to be called every minute.
+			}
+			boost::posix_time::time_duration interval(
+					boost::posix_time::seconds(10));
+			boost::posix_time::ptime timer =
+					boost::posix_time::microsec_clock::local_time() + interval;
+
+			boost::this_thread::sleep(
+					timer - boost::posix_time::microsec_clock::local_time());
+
 		}
+
 	}
 	catch(CException & error)
 	{
@@ -195,6 +208,45 @@ void CEmulation::XMLVirtualConnectionsParser(pugi::xml_document & doc)
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 		throw;
 	}
+}
+
+void CEmulation::XMLRoutingTableParser(pugi::xml_document & doc)
+{
+	try
+	{
+		mStaticRoutingTable= doc.child("Network").child("StaticTable").attribute("isStatic").as_bool();
+		if(mStaticRoutingTable)
+		{
+			XMLParseRoutingTable(doc);
+		}
+		else
+		{
+			boost::thread m_thread;
+			m_thread = boost::thread(&CEmulation::TableSwapping, this);
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
+}
+void CEmulation::XMLParseRoutingTable(pugi::xml_document & doc)
+{
+	try
+	{
+		//TODO: Parse routing table of routers - Leave at tableswapping for now since only 1 router is alive.
+		// TOTHINKABOUT: if the emulation is used on a known network DHCP service isn't worth activating since the network is set
+		// and the routing table is set as well.
+		// Should an XML boolean be added to prevent the calling of DHCP services or do we even care if its active?
+		// I think we don't. and overloading the xml should be avoided
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
 	}
 }
 void CEmulation::XMLParser(char * SetupFile)
@@ -210,7 +262,7 @@ void CEmulation::XMLParser(char * SetupFile)
 		}
 		XMLVirtualConnectionsParser(doc);
 		XMLRoutersParser(doc);
-
+		XMLRoutingTableParser(doc);
 	}
 	catch (CException & error)
 	{
@@ -224,6 +276,23 @@ void CEmulation::StartEmulation()
 {
 	try
 	{
+		vector<CRouter *>::iterator iter;
+		//STARTing sniffer on all routers
+		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
+		{
+			(*iter)->StartSniffing();
+		}
+
+		//TODO remove when done
+		cout << "busy wait - TODO remove when done" << endl;
+		time_t c = time(NULL);
+		int t = 300000000;
+		int h = c+t;
+		while (c<h)
+		{
+			//busy wait
+			c = time(NULL);
+		}
 	}
 	catch (CException & error)
 	{

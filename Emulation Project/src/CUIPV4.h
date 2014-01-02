@@ -51,7 +51,6 @@ public:
 		ss1 << (int)ip_arr[0] << (int)ip_arr[1] << (int)ip_arr[2] << (int)ip_arr[3];
 		ip_str_alt = ss1.str();
 	}
-
 	inline const uint8_t* getIpArr() const {return ip_arr;}
 
 	inline const std::string& getIpStr() const {return ip_str;}

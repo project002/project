@@ -46,18 +46,12 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device) :
 
 void CPhysicalConnection::startDHCPService()
 {
-//	string iFace(mInterfaceName);
-//	CDHCPPacketHandler::mInterfaceName = mInterfaceName;
-//	CDHCPPacketHandler::mIPMaskAddress = mIPMaskAddress->getIpArr();
-//	CDHCPPacketHandler::mIPAddressSet = "10.0.0.2";
-//	Sniffer sniff("udp and src port 68 and dst port 67",iFace,CDHCPPacketHandler::startDHCPhandshake);
-
-//	sniff.Capture();
 
 	cout << "DHCP service started..." << endl;
 	mDHCPSniffer = new Sniffer(CDHCPService::DHCP_FILTER,string(mInterfaceName),runDHCPService);
 
 	mDHCPSniffer->Spawn(-1,static_cast<void*> (mDHCPsrv));
+	//	mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
 }
 
 
@@ -225,6 +219,12 @@ CPhysicalConnection::~CPhysicalConnection()
 		close(mSocket);
 	}
 }
+
+vector<string>& CPhysicalConnection::GetTable()const
+{
+	return mDHCPsrv->getAllocatedIPs();
+}
+
 
 bool CPhysicalConnection::IsPacketEmpty(char* buffer)
 {

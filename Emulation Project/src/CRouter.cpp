@@ -27,9 +27,17 @@ void CRouter::RequestTables()
 	try
 	{
 		list<CConnection *>::iterator iter;
+		//iterate over all connections
 		for(iter = mConnections.begin();iter!=mConnections.end();iter++)
 		{
-			(*iter)->GetTable();
+			//iterate over all ips in the table you got from the connection
+			vector<string>& tables=(*iter)->GetTable();
+			vector<string>::iterator it=tables.begin();
+			for (;it!=tables.end();it++)
+			{
+				mRoutingTable.insert(pair<string,CConnection*>((*it),(*iter)));
+				cout<< (*it)<<endl;
+			}
 		}
 	}
 	catch(CException & error)

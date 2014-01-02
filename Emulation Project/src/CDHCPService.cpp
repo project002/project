@@ -9,33 +9,56 @@
 
 string CDHCPService::DHCP_FILTER = "udp and src port 68 and dst port 67";
 string CDHCPService::DHCP_FILTER_RCV = "udp and src port 68 and dst port 67";
-vector< pair< string,bool > > CDHCPService::IP_TABLE = vector< pair< string,bool > >();
+vector< string > CDHCPService::IP_TABLE = vector<string>();
+bool CDHCPService::INIT_TABLE = true; //mark the first time to init the IP Table
 
 CDHCPService::CDHCPService(char* iFaceName,const uint8_t* subNetName):
-		miFaceName(iFaceName),mSubnatName(subNetName)
+		mLocal_Table(vector<string>()),miFaceName(iFaceName),mSubnetName(subNetName),DEF_IPv4("0.0.0.0")
 {
 
-	//init ip table
-	int table_sz = getIPTableSizeFromSubnet(mSubnatName);
-	fillupIPTable(table_sz);
-	cout << "ip table filled" << endl;
-	mHandshakeIP = getIPAddr(); //allocate a IP address for the handshake
+	int table_sz = 0;
+	if (CDHCPService::INIT_TABLE) //if the table need to be initialized
+	{
+		//init ip table
+		table_sz = getIPTableSizeFromSubnet(mSubnetName);
+		fillupIPTable(table_sz);
+		CDHCPService::INIT_TABLE = false; //don't init in next service
+		cout << "ip table init complete" << endl;
+	}
+	mHandshakeIP = DEF_IPv4;
 }
 
 
 
 const char* CDHCPService::getIPAddr()
 {
-	vector< pair< string,bool > >::iterator it = CDHCPService::IP_TABLE.begin();
-	for (;it!=CDHCPService::IP_TABLE.end();++it)
+	if (CDHCPService::IP_TABLE.empty())
 	{
-		if (!it->second) //not taken
-		{
-			it->second = true; //mark as taken
-			return it->first.c_str();
-		}
+		throw new CException("DHCP table is empty, no More ip addresses available");
 	}
-	return "";
+	string addr = CDHCPService::IP_TABLE.back();
+	CDHCPService::IP_TABLE.pop_back();
+	mLocal_Table.push_back(addr);
+	cout << "last added ip address: " << mLocal_Table.back().c_str() << endl;
+	return mLocal_Table.back().c_str();
+}
+
+void CDHCPService::releaseIPAddr(string IPv4)
+{
+	//if default ip address do nothing
+	if (IPv4.compare(DEF_IPv4)==0) {return;}
+	//check duplicates
+	vector<string>::iterator ip_it = find(CDHCPService::IP_TABLE.begin(),CDHCPService::IP_TABLE.end(),IPv4);
+	vector<string>::iterator cur_it = find(mLocal_Table.begin(),mLocal_Table.end(),IPv4);
+	//add the IPv4 back to the IP_TABLE
+	if (ip_it==CDHCPService::IP_TABLE.end()) {CDHCPService::IP_TABLE.push_back(IPv4);}
+	//remove the IPv4 from the local ip table
+	if (cur_it!=mLocal_Table.end()) {mLocal_Table.erase(cur_it);}
+}
+
+vector<string>& CDHCPService::getAllocatedIPs()
+{
+	return CDHCPService::mLocal_Table;
 }
 
 void CDHCPService::fillupIPTable(int tableSize)
@@ -44,9 +67,12 @@ void CDHCPService::fillupIPTable(int tableSize)
 	for (int i=0;i<tableSize;++i)
 	{
 		ss << "10.0.0." <<  (i+1);
-		CDHCPService::IP_TABLE.push_back(pair<string,bool>(ss.str(),false));
+		CDHCPService::IP_TABLE.push_back(ss.str());
 		ss.str("");
 	}
+	//revrse the vector so the logically first address will be in the end
+	//so when used with pop_back we'll get the logically initial ip addresses
+	reverse(CDHCPService::IP_TABLE.begin(),CDHCPService::IP_TABLE.end());
 }
 
 
@@ -80,7 +106,6 @@ void CDHCPService::start(Packet* packet)
 
 void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 {
-	cout << "Started Handshake Offering " << mHandshakeIP << endl;
 	word XID = 0;
 	string clientMAC("");
 	try
@@ -89,12 +114,14 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 		getDHCP(sniff_packet,OPCODE_REQ,MT_DISCOVER,dhcp_packet);
 		XID = dhcp_packet->GetTransactionID();
 		clientMAC = dhcp_packet->GetClientMAC();
-
+		mHandshakeIP = getIPAddr(); //allocate a IP address for the handshake
+		cout << "Started Handshake Offering " << mHandshakeIP << endl;
 		delete dhcp_packet;
 	}
 	catch (CException & error)
 	{
 		cerr << "When Parsing DHCP Packet: " << error.what() << endl;
+		releaseIPAddr(mHandshakeIP);
 		return;
 	}
 
@@ -105,7 +132,7 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 	buildDHCP_OFFER(XID,clientMAC,&DHCP_OFFER);
 
 	/* Send the packet */
-	Packet* rcv = DHCP_OFFER.SendRecv(iface,0.2, 2,DHCP_FILTER_RCV);
+	Packet* rcv = DHCP_OFFER.SendRecv(iface,0.3, 2,DHCP_FILTER_RCV);
 
 	if (rcv)
 	{
@@ -126,16 +153,20 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 
 			cout << "Handshake Finished With Setting " << mHandshakeIP << endl;
 
+			mHandshakeIP = DEF_IPv4; //re-init the handshake ip
+
 		}
 		catch (CException & error)
 		{
 			cerr << "When Parsing DHCP Packet That Was Received After OFFER: " << error.what() << endl;
+			releaseIPAddr(mHandshakeIP);
 			return;
 		}
 	}
 	else
 	{
-		cout << "[@] No response from any DHCP server" << endl;
+		cout << "[@] No response to DHCP offer with ip " << mHandshakeIP << endl;
+		releaseIPAddr(mHandshakeIP);
 		CleanCrafter();
 	}
 
@@ -197,7 +228,7 @@ void CDHCPService::buildDHCP_OFFER(word XID,string &clientMAC,Packet* DHCP_OFFER
 			CreateDHCPOption(DHCPOptions::DHCPMsgType,
 					DHCPOptions::DHCPOFFER, DHCPOptions::BYTE));
 	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnatName,sizeof(uint8_t)*IPv4_ALEN));
+			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnetName,sizeof(uint8_t)*IPv4_ALEN));
 
 
 	IPsInsert.push_back(MyIP);
@@ -222,7 +253,6 @@ void CDHCPService::buildDHCP_OFFER(word XID,string &clientMAC,Packet* DHCP_OFFER
 
 	(*DHCP_OFFER) = ether_header / ip_header / udp_header / dhcp_header;
 }
-
 
 void CDHCPService::buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK)
 {
@@ -252,7 +282,7 @@ void CDHCPService::buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK)
 			CreateDHCPOption(DHCPOptions::DHCPMsgType,
 					DHCPOptions::DHCPACK, DHCPOptions::BYTE));
 	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnatName,sizeof(uint8_t)*IPv4_ALEN));
+			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnetName,sizeof(uint8_t)*IPv4_ALEN));
 
 
 	IPsInsert.push_back(MyIP);
@@ -281,7 +311,13 @@ void CDHCPService::buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK)
 
 CDHCPService::~CDHCPService()
 {
-	// TODO Auto-generated destructor stub
+	//clear all the allocated ip addresses by this service
+	vector<string>::iterator it = mLocal_Table.begin();
+	for(;it!=mLocal_Table.end();++it)
+	{
+		CDHCPService::IP_TABLE.push_back(*it);
+	}
+	mLocal_Table.clear();
 }
 
 

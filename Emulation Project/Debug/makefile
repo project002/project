@@ -44,7 +44,7 @@ all: Emulation\ Project
 Emulation\ Project: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -lcrafter -o "Emulation Project" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
