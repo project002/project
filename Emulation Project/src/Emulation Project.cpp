@@ -12,7 +12,13 @@
 #define STATUS_FAILURE -1
 #define ERROR_MSG_XML_FILE_ARGUMENT_MISSING "Please enter a setup xml file name as first argument\n"
 #define ERROR_MSG_DISABLING_NETWORK_MANAGER "Can't disable the Network Manager"
+#define ERROR_MSG_DISABLING_IP_FORWARDING "Can't disable the IP forwarding"
+#define ERROR_MSG_DISABLING_ICMP_RESPONSE "Can't disable the ICMP response"
+
+#define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
+#define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
 #define STOP_NETWORK_MANAGER_COMMAND "sudo service network-manager stop"
+#define SYSTEM_COMMANDS_TIME_TO_COMPLETE 3
 
 /**
  * Verifying that the Setup XML file was provided while lunching the
@@ -56,6 +62,23 @@ void DisableNetworkManager()
 		{
 			throw CException(ERROR_MSG_DISABLING_NETWORK_MANAGER);
 		}
+
+		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+
+		status = system(STOP_IP_FORWARDING);
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(ERROR_MSG_DISABLING_IP_FORWARDING);
+		}
+
+		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+
+		status = system(STOP_ICMP_RESPONSE);
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(ERROR_MSG_DISABLING_ICMP_RESPONSE);
+		}
+		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 	}
 	catch (CException & error)
 	{
