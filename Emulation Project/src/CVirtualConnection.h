@@ -14,6 +14,7 @@ class CVirtualConnection: public CConnection
 {
 public:
 	CVirtualConnection();
+	CUIPV4*& getGetwayAddress() {throw CException("missing implementation of get gateway in virtual connection");}
 	virtual ~CVirtualConnection();
 };
 

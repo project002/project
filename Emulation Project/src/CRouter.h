@@ -10,15 +10,23 @@
 #include "BasicIncludes.h"
 #include "CConnection.h"
 #include "CUIPV4.h"
+#include "CPacketCollector.h"
+/**
+ * Thread Related Inclusions
+ */
+#include <boost/thread.hpp>
+#include "boost/date_time/posix_time/posix_time.hpp"
+
 #define DEFAULT_ROUTER_BUFFER_SIZE 100
 class CRouter
 {
 public:
 	CRouter();
 	virtual ~CRouter();
-	void AddConnection(CConnection * connection){mConnections.push_back(connection);}
+	void AddConnection(const CConnection * connection){mConnections.push_back(connection);}
 	void RequestTables();
-	void StartSniffing(){};//TODO implement sniffing from all connections
+	void Sniffer();
+
 	unsigned int GetBufferSize() const
 	{
 		return mBufferSize;
@@ -30,10 +38,15 @@ public:
 	}
 
 private:
-	list<CConnection *> mConnections;
-	map<string,CConnection*> mRoutingTable;
+	void Sniff();
+	void PacketHandler();
+	list<CConnection const *> mConnections;
+	map<string,CConnection const*> mRoutingTable;
 	unsigned int mBufferSize;
-	//TODO: add list of connections which includes virtual ones and physical ones
+	boost::thread mSniffingThread;
+	boost::thread mPacketsHandlingThread;
+	CPacketCollector * mPacketCollector;
+
 };
 
 #endif /* CROUTER_H_ */

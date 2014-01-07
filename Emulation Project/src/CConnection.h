@@ -8,14 +8,17 @@
 #ifndef CCONNECTION_H_
 #define CCONNECTION_H_
 #include "BasicIncludes.h"
+
 class CConnection
 {
 public:
 	CConnection();
-	virtual  Crafter::Packet* GetPacket();
+	virtual  Crafter::Packet* GetPacket()=0;
+	virtual CUIPV4*& getGetwayAddress() {throw CException("missing implementation of get gateway in cconnection");}
 	//TODO: get table in sub classes - physical connections will return addresses according to the DHCP availability table
 	// and virtual connections will return according to XML or dynamically populated tables
-	virtual vector<string>& GetTable()const{throw(CException("Impolement get table in connections"));}
+	virtual vector<string>& GetTable()const{throw(CException("Impelement get table in connections"));}
+	virtual bool SendPacket(Packet* packet)const{throw(CException("Impelement sendPacket in connections"));}
 	virtual ~CConnection();
 protected:
 	int mSocket;

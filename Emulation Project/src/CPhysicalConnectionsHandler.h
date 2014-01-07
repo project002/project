@@ -12,9 +12,6 @@
 /**
  * The class handles the physical connections of the device,
  * including opening sockets, connecting, and closing.
- *
- * //TODO: Class will loop through all physical connections and create a CPhysicalConnection class for each
- * //TODO: Eventually it will return a vector of pointers for physical connections for the emulation to use.
  */
 class CPhysicalConnectionsHandler
 {
@@ -22,7 +19,7 @@ public:
 	CPhysicalConnectionsHandler();
 	virtual ~CPhysicalConnectionsHandler();
 	void CreatePhyiscalConnections();
-	CPhysicalConnection * GetPhysicalConnectionByName(const char * InterfaceName);
+	 CPhysicalConnection const * GetPhysicalConnectionByName(const char * InterfaceName) ;
 private: // Private Functions
 
 private: // Private Members

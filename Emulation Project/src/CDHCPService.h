@@ -38,13 +38,12 @@ public:
 	 * service (with the appropriate interface) has allocated
 	 */
 	vector<string> mLocal_Table;
-
 	//TODO: find these consts in the crafeter lib
 	static const byte OPCODE_REQ  = 0x01; //Opcode for Request
 	static const byte OPCODE_REP  = 0x02; //Opcode for Replay
-	static const byte MT_DISCOVER = 0x01; //Message Type Discover
-	static const byte MT_REQUEST  = 0x03; //Message Type REQUEST
-	static const byte MT_ACK      = 0x05; //Message Type ACK on DHCP Request
+	static const byte MT_DISCOVER = Crafter::DHCPOptions::DHCPDISCOVER; //Message Type Discover
+	static const byte MT_REQUEST  = Crafter::DHCPOptions::DHCPREQUEST; //Message Type REQUEST
+	static const byte MT_ACK      = Crafter::DHCPOptions::DHCPACK; //Message Type ACK on DHCP Request
 
 
 	CDHCPService(char* iFaceName,const uint8_t* subNetName);

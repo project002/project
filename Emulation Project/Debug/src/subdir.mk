@@ -4,7 +4,6 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/CBuffer.cpp \
 ../src/CConnection.cpp \
 ../src/CDHCPService.cpp \
 ../src/CEmulation.cpp \
@@ -18,7 +17,6 @@ CPP_SRCS += \
 ../src/pugixml.cpp 
 
 OBJS += \
-./src/CBuffer.o \
 ./src/CConnection.o \
 ./src/CDHCPService.o \
 ./src/CEmulation.o \
@@ -32,7 +30,6 @@ OBJS += \
 ./src/pugixml.o 
 
 CPP_DEPS += \
-./src/CBuffer.d \
 ./src/CConnection.d \
 ./src/CDHCPService.d \
 ./src/CEmulation.d \

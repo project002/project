@@ -8,47 +8,76 @@
 
 #include "CEmulation.h"
 #define SETUP_XML_ARGUMENT_POSITION 1
+#define MINIMUM_NUMBER_OF_ARGUMENTS 2
+#define STATUS_FAILURE -1
+#define ERROR_MSG_XML_FILE_ARGUMENT_MISSING "Please enter a setup xml file name as first argument\n"
+#define ERROR_MSG_DISABLING_NETWORK_MANAGER "Can't disable the Network Manager"
+#define STOP_NETWORK_MANAGER_COMMAND "sudo service network-manager stop"
 
 /**
- * Verifying the XML was declared as an argument.
+ * Verifying that the Setup XML file was provided while lunching the
+ * emulation.
+ * If no file was provided an exception will be thrown and program will
+ * be terminated
  *
- * @param argc
- * @param argv
+ * @param argc number of arguments provided for the emulation
+ * @param argv the arguments themselves
  */
 void EmulationParametersValidator(int argc, char *argv[])
 {
 	try
 	{
-		if (argc<2)
+		if (argc<MINIMUM_NUMBER_OF_ARGUMENTS)
 		{
-			cout<< "Please enter a setup xml file name as first argument\n";
-			exit(EXIT_FAILURE);
+			throw CException(ERROR_MSG_XML_FILE_ARGUMENT_MISSING);
 		}
 	}
 	catch (CException & error)
 	{
 		std::cerr << error.what() << std::endl;
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
 	}
 }
 
+/**
+ * Calling System to disabled the Network Manager service in order for the emulation
+ * to determine IP's subnet masks and more.
+ *
+ * If the Manager couldn't be stopped an exception will be throw
+ * and the emulation will be terminated.
+ */
 void DisableNetworkManager()
 {
-	cout<< "Disabling Network Manager\n";
-	int status = system("sudo service network-manager stop");
-	if (status ==-1 || WEXITSTATUS(status)==-1)
+	try
 	{
-		throw CException("Can't call a system command to disable the network manager");
+		int status = system(STOP_NETWORK_MANAGER_COMMAND);
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(ERROR_MSG_DISABLING_NETWORK_MANAGER);
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
 	}
 }
 
+/**
+ *
+ * @param argc number of arguments provided for the emulation
+ * @param argv the arguments themselves
+ * @return Failure value if at some point an exception was thrown
+ */
 int main(int argc, char *argv[])
 {
 	try
 	{
 		DisableNetworkManager();
- 		CEmulation * Emulator= new CEmulation();
  		EmulationParametersValidator(argc,argv);
+ 		CEmulation * Emulator= new CEmulation();
  		Emulator->EmulationBuilder(argv[SETUP_XML_ARGUMENT_POSITION]);
  		Emulator->StartEmulation();
 
@@ -59,6 +88,7 @@ int main(int argc, char *argv[])
 	{
 		std::cerr << error.what() << std::endl;
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		return(EXIT_FAILURE);
 	}
 }
 

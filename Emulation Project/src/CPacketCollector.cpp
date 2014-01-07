@@ -7,9 +7,17 @@
 
 #include "CPacketCollector.h"
 
-CPacketCollector::CPacketCollector(const int Socket):mSocket(Socket)
+CPacketCollector::CPacketCollector(unsigned int bufferSize):mBufferSize(bufferSize)
 {
-
+	try
+	{
+	}
+	catch(CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
 }
 
 CPacketCollector::~CPacketCollector()
@@ -22,47 +30,70 @@ CPacketCollector::~CPacketCollector()
 	{
 		std::cerr << error.what() << std::endl;
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
 	}
 }
-void CPacketCollector::SendPacket(char * buffer, ssize_t recvSize)
+
+void CPacketCollector::PushBack(Crafter::Packet * pkt)
 {
 	try
 	{
-		sendto(mSocket,buffer,recvSize,0,NULL,0);
-	}
-	catch(CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-	}
-}
-void CPacketCollector::ReceivePackets()
-{
-	try
-	{
-		char buffer[ETH_FRAME_LEN] = { 0 };
-		ssize_t recvSize;
-		while (true)
+		if (mPackets.size()<mBufferSize)
 		{
-			recvSize = recvfrom(mSocket, buffer, ETH_FRAME_LEN, MSG_DONTWAIT,
-					NULL, NULL);
-			if (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK)
-			{
-				cerr << "err number " << errno << endl;
-				throw CException("fatal error on receive from socket");
-			}
+			mPackets.push_back(pkt);
+		}
+		else
+		{
+			delete (pkt);
 
-			if (recvSize > 0) //don't print empty packets
-			{
-
-
-			}
 		}
 	}
 	catch (CException & error)
 	{
 		std::cerr << error.what() << std::endl;
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
+}
+
+Crafter::Packet * CPacketCollector::PopFront()
+{
+	try
+	{
+		if (!mPackets.empty())
+		{
+			Crafter::Packet * toret = mPackets.front();
+			mPackets.pop_front();
+			return toret;
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
+	return NULL;
+}
+
+void CPacketCollector::DropRandomPacket()
+{
+	try
+	{
+		if (!mPackets.empty())
+		{
+			list<Crafter::Packet*>::iterator iter = mPackets.begin();
+			unsigned int cellNumber=rand()% mPackets.size();
+			for (unsigned int i=0;i<cellNumber-1;i++,iter++);
+			delete (*iter);
+			mPackets.erase(iter);
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
 	}
 }
 
@@ -71,21 +102,17 @@ void CPacketCollector::ReceivePackets()
  * @param buffer pointer to the array's beginning
  * @param recvSize size of the received packet in bytes
  */
-void CPacketCollector::PrintPacket(char * buffer, ssize_t recvSize)
+void CPacketCollector::PrintPacket()
 {
 	try
 	{
-		int i=0;
-		for (;i<recvSize;i++)
-		{
-			printf("%02X:",uint8_t(buffer[i]));
-		}
-		cout<<endl;
+		mPackets.front()->Print();
 	}
-	catch(CException & error)
+	catch (CException & error)
 	{
 		std::cerr << error.what() << std::endl;
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
 	}
 }
 

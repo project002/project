@@ -13,9 +13,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include <string>
-//#include <boost/function.hpp>
 
-typedef std::pair<std::string, std::string> TStrStrPair;
 #include "Color.h"
 using namespace std;
 
@@ -37,7 +35,6 @@ using namespace Crafter;
 #include <vector>
 #include <list>
 #include <map>
-typedef map<std::string, std::string> TStrStrMap;
 #include <set>
 
 /**
@@ -49,10 +46,6 @@ typedef map<std::string, std::string> TStrStrMap;
  * Error Related Inclusions
  */
 #include <errno.h>
-
-
-
-
 
 /**
  * Defined missing STL

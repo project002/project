@@ -6,14 +6,24 @@
  */
 
 #include "CPhysicalConnection.h"
+#define ERROR_MSG_SETTING_IP "Can't set a new IP"
+#define ERROR_MSG_SETTING_NET_MASK "Can't set a new net mask - Check if cable is connected"
+#define ERROR_MSG_SETTING_FLAGS "Can't get network flags"
+#define ERROR_MSG_GET_INTERFACE_INDEX "Failed to retrieve interface index"
+#define IFREQ_STRUCT_IP_OFFSET 2
 
+/**
+ * Class C-tor, calls all sub functions to create the physical link properly.
+ *
+ * @param device ifaddrs struct to open the socket according to.
+ */
 CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device) :
-		CConnection(), mPacketCollector(NULL), mInterfaceName(NULL)
+		CConnection(), mInterfaceName(NULL)
 {
 
 	try
 	{
-		// Init the structs with 0's
+		// Init the structs with 0's and get the interface name
 		InitStructs(device);
 
 		// Configuring the socket
@@ -25,15 +35,16 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device) :
 		//Set the Subnet Mask
 		setMaskAddress();
 
+		//Initiating the DHCP service in order to get the IP's list
 		mDHCPsrv = new CDHCPService(mInterfaceName,mIPMaskAddress->getIpArr());
 		const char* getway_addr = mDHCPsrv->getIPAddr();
 		mGetwayAddress = new CUIPV4(string(getway_addr));
 
-		//TODO: Try to avoid sending packets
+		//Setting subnet masking
 		SetNetmask(mGetwayAddress,mIPMaskAddress);
 
+		//Starting the DHCP service
 		startDHCPService();
-
 	}
 	catch (CException & error)
 	{
@@ -44,6 +55,9 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device) :
 
 }
 
+/**
+ * Starting the DHCP service
+ */
 void CPhysicalConnection::startDHCPService()
 {
 
@@ -54,14 +68,37 @@ void CPhysicalConnection::startDHCPService()
 	//	mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
 }
 
+bool CPhysicalConnection::SendPacket(Packet* packet) const
+{
+	try
+	{
+		cout << "sending packet" << endl;
+		packet->Print();
+		cout << " ////////////////////////////" << endl;
+		return (bool) packet->Send(mInterfaceName);
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		close(mSocket);
+	}
+	return false;
+}
 
+/**
+ * Setting subnet masking as 255.255.255.0
+ */
 void CPhysicalConnection::setMaskAddress()
 {
-	stringstream ss;
 	uint8_t subnet[] = {0xff,0xff,0xff,0x00};
 	mIPMaskAddress = new CUIPV4(subnet);
 }
 
+/**
+ * Getting interface index number for future use of getting
+ * and setting socket flags and more.
+ */
 void CPhysicalConnection::GetInterfaceInformation()
 {
 	try
@@ -69,11 +106,9 @@ void CPhysicalConnection::GetInterfaceInformation()
 		// Getting the interface index
 		if (ioctl(mSocket, SIOGIFINDEX, &mIfreq) < 0)
 		{
-			throw CException("Failed to retrieve interface index");
+			throw CException(ERROR_MSG_GET_INTERFACE_INDEX);
 		}
 		mInterfaceIndex = mIfreq.ifr_ifru.ifru_ivalue;
-
-
 	}
 	catch (CException & error)
 	{
@@ -83,6 +118,12 @@ void CPhysicalConnection::GetInterfaceInformation()
 	}
 }
 
+/**
+ * Setting subnet masking using OS commands
+ *
+ * @param getway_addr the gateway to be set
+ * @param mIPMaskAddress the ip masking to be set
+ */
 void CPhysicalConnection::SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress)
 {
 	try
@@ -96,42 +137,41 @@ void CPhysicalConnection::SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress)
 
 		const uint8_t* addr = getway_addr->getIpArr();
 
-		// Setting random IP address for the connection
-		ifr.ifr_ifru.ifru_addr.sa_data[2]=addr[0];
-		ifr.ifr_ifru.ifru_addr.sa_data[3]=addr[1];
-		ifr.ifr_ifru.ifru_addr.sa_data[4]=addr[2];
-		ifr.ifr_ifru.ifru_addr.sa_data[5]=addr[3];
+		ifr.ifr_ifru.ifru_addr.sa_data[0+IFREQ_STRUCT_IP_OFFSET]=addr[0];
+		ifr.ifr_ifru.ifru_addr.sa_data[1+IFREQ_STRUCT_IP_OFFSET]=addr[1];
+		ifr.ifr_ifru.ifru_addr.sa_data[2+IFREQ_STRUCT_IP_OFFSET]=addr[2];
+		ifr.ifr_ifru.ifru_addr.sa_data[3+IFREQ_STRUCT_IP_OFFSET]=addr[3];
 
 		if (ioctl(mSocket, SIOCSIFADDR, &ifr) < 0)
 		{
 			perror("SIOCSIFNETMASK");
-			throw(CException("Can't set a new IP"));
+			throw(CException(ERROR_MSG_SETTING_IP));
 		}
 		ss.clear();
 
 		const uint8_t* mask = mIPMaskAddress->getIpArr();
 
-		ifr.ifr_ifru.ifru_netmask.sa_data[2]=mask[0];
-		ifr.ifr_ifru.ifru_netmask.sa_data[3]=mask[1];
-		ifr.ifr_ifru.ifru_netmask.sa_data[4]=mask[2];
-		ifr.ifr_ifru.ifru_netmask.sa_data[5]=mask[3];
+		ifr.ifr_ifru.ifru_netmask.sa_data[0+IFREQ_STRUCT_IP_OFFSET]=mask[0];
+		ifr.ifr_ifru.ifru_netmask.sa_data[1+IFREQ_STRUCT_IP_OFFSET]=mask[1];
+		ifr.ifr_ifru.ifru_netmask.sa_data[2+IFREQ_STRUCT_IP_OFFSET]=mask[2];
+		ifr.ifr_ifru.ifru_netmask.sa_data[3+IFREQ_STRUCT_IP_OFFSET]=mask[3];
 
 		if (ioctl(mSocket, SIOCSIFNETMASK, &ifr) < 0)
 		{
 			perror("SIOCSIFNETMASK");
-			throw(CException("Can't set a new net mask - Check if cable is connected"));
+			throw(CException(ERROR_MSG_SETTING_NET_MASK));
 		}
 
 		if(ioctl(mSocket,SIOCGIFFLAGS,&ifr)<0)
 		{
 			perror("SIOCGIFFLAGS");
-			throw(CException("Can't get network flags."));
+			throw(CException(ERROR_MSG_SETTING_FLAGS));
 		}
 		ifr.ifr_ifru.ifru_flags |= (IFF_UP | IFF_RUNNING);
 		if(ioctl(mSocket,SIOCSIFFLAGS,&ifr)<0)
 		{
 			perror("SIOCSIFFLAGS");
-			throw(CException("Can't set network flags."));
+			throw(CException(ERROR_MSG_SETTING_FLAGS));
 		}
 
 	}
@@ -173,7 +213,6 @@ void CPhysicalConnection::ConfigureSocket(struct ifaddrs* device)
 			throw(CException("Can't bind socket to interface using its index"));
 		}
 
-		mPacketCollector= new CPacketCollector(mSocket);
 	}
 	catch (CException & error)
 	{
@@ -203,12 +242,6 @@ CPhysicalConnection::~CPhysicalConnection()
 	delete mDHCPsrv;
 	try
 	{
-		if (mPacketCollector != NULL)
-		{
-			delete mPacketCollector;
-			mPacketCollector = NULL;
-		}
-
 		close(mSocket);
 		free(mInterfaceName);
 	}
@@ -225,21 +258,32 @@ vector<string>& CPhysicalConnection::GetTable()const
 	return mDHCPsrv->getAllocatedIPs();
 }
 
-
-bool CPhysicalConnection::IsPacketEmpty(char* buffer)
+Crafter::Packet* CPhysicalConnection::GetPacket()
 {
+	bool fail_cond_err = false;
+	bool fail_cond_empty = false;
+	memset(buffer,0,ETH_FRAME_LEN);
+	ethPacket = new Packet();
 	try
 	{
-		int sum = 0;
-		for (int i = 0; i < ETH_FRAME_LEN; ++i)
+		ssize_t recvSize=recvfrom(mSocket,buffer,ETH_FRAME_LEN,0,NULL,NULL);
+		fail_cond_err = (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK);
+		fail_cond_empty = (recvSize < 1);
+
+		if (fail_cond_err)
 		{
-			sum += buffer[i];
-			if (sum > 0)
-			{
-				return false;
-			}
+			delete ethPacket;
+			throw CException("fatal error on receive from socket");
 		}
-		return true;
+
+		if (fail_cond_empty)
+		{
+			delete ethPacket;
+			return NULL;
+		}
+
+		ethPacket->PacketFromEthernet(buffer,recvSize);
+		return ethPacket;
 	}
 	catch (CException & error)
 	{
@@ -247,7 +291,7 @@ bool CPhysicalConnection::IsPacketEmpty(char* buffer)
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 		close(mSocket);
 	}
-	return false;
+	return NULL;
 }
 
 

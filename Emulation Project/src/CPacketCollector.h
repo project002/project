@@ -11,16 +11,19 @@
 class CPacketCollector
 {
 public:
-	CPacketCollector(const int Socket);
+	CPacketCollector(unsigned int bufferSize);
 	virtual ~CPacketCollector();
-	// function should be called with a new thread
-	void ReceivePackets();
-	void SendPacket(char * buffer, ssize_t recvSize);
+	void PushBack(Crafter::Packet * pkt);
+	/**
+	 * @return if empty NULL is returned
+	 */
+	Crafter::Packet * PopFront();
+	void DropRandomPacket();
 private:
-	const int mSocket;
-private:
-
-	void PrintPacket(char * buffer, ssize_t recvSize);
+	void PrintPacket();
+	list<Crafter::Packet * > mPackets;
+	unsigned int mBufferSize;
+	static map<string,unsigned long long > mPacketsStatistics;
 };
 
 #endif /* CPACKETCOLLECTOR_H_ */

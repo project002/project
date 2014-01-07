@@ -6,7 +6,12 @@
  */
 
 #include "CPhysicalConnectionsHandler.h"
+#define STATUS_FAILURE -1
+#define ERROR_MSG_GETTING_DEVICE_LIST "Err: when retrieving devices list"
 
+/**
+ * Class C-tor - Nothing to do so cleaning the vector.
+ */
 CPhysicalConnectionsHandler::CPhysicalConnectionsHandler()
 {
 	try
@@ -20,6 +25,10 @@ CPhysicalConnectionsHandler::CPhysicalConnectionsHandler()
 	}
 }
 
+/**
+ * Class D-tor - releasing all allocated physical connection.
+ * All of them should be freed only here!
+ */
 CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
 {
 	try
@@ -38,7 +47,7 @@ CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
 }
 
 /**
- *  modefied method for testing
+ * Creating the physical functions
  */
 void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 {
@@ -50,8 +59,9 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 
 		//get devices list
 		ret = getifaddrs(&list);
-		if (ret == -1) {throw CException("Err: when retrieving devices list");}
+		if (ret == STATUS_FAILURE) {throw CException(ERROR_MSG_GETTING_DEVICE_LIST);}
 		CPhysicalConnection * newConnection=NULL;
+
 		//iterate over list
 		int i = 0;
 		for (i=0,node = list; node != NULL; node = node->ifa_next,++i)
@@ -64,7 +74,8 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 				mPhysicalConnections.push_back(newConnection);
 			}
 		}
-		//clear the allocated list
+
+		//free the device list
 		freeifaddrs(list);
 	}
 	catch (CException & error)
@@ -74,7 +85,14 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 	}
 }
 
-CPhysicalConnection * CPhysicalConnectionsHandler::GetPhysicalConnectionByName(
+/**
+ * Returning a physical connection pointer on demand, using its name to be added to the
+ * router using it.
+ *
+ * @param InterfaceName
+ * @return physical connection pointer
+ */
+ CPhysicalConnection const * CPhysicalConnectionsHandler::GetPhysicalConnectionByName(
 		const char * InterfaceName)
 {
 	try
