@@ -36,8 +36,9 @@ public:
 	 * holds all the IPv4 addresses
 	 * this this specific instance of the DHCP
 	 * service (with the appropriate interface) has allocated
+	 * this also holds the MAC addresses that the ip is connected to
 	 */
-	vector<string> mLocal_Table;
+	vector<pair< string,string> > mLocal_Table;
 	//TODO: find these consts in the crafeter lib
 	static const byte OPCODE_REQ  = 0x01; //Opcode for Request
 	static const byte OPCODE_REP  = 0x02; //Opcode for Replay
@@ -53,15 +54,18 @@ public:
 	/**
 	 * returns a free IPv4 address in the subnet
 	 * if the table is full an CEXception will be thrown
+	 * @param MACaddr the MAC address to bind to this ip
 	 * @return a free IPv4 address
 	 */
-	const char* getIPAddr();
+	const char* getIPAddr(string MAC);
 
 	/**
 	 * release the given ip address back to the IP_TABLE
+	 * implicitly also releases the MAC address binded to it
 	 * @param IPv4 an ipv4 ip address
 	 */
 	void releaseIPAddr(string IPv4);
+
 
 	/**
 	 * returns a vector of all the allocated ip addresses
@@ -69,7 +73,7 @@ public:
 	 * to the interface running this service)
 	 * @return a vector of ip addresses in string form
 	 */
-	vector<string>& getAllocatedIPs();
+	vector< pair<string,string> >& getAllocatedIPs();
 
 	virtual ~CDHCPService();
 private:

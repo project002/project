@@ -27,7 +27,7 @@ public:
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
 	void SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress);
-	virtual vector<string>& GetTable()const;
+	virtual vector< pair<string,string> >& GetTable()const;
 	virtual Crafter::Packet* GetPacket();
 	virtual bool SendPacket(Packet* packet) const;
 	/**

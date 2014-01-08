@@ -15,6 +15,7 @@
  * Thread Related Inclusions
  */
 #include <boost/thread.hpp>
+#include <boost/tuple/tuple.hpp>
 #include "boost/date_time/posix_time/posix_time.hpp"
 
 #define DEFAULT_ROUTER_BUFFER_SIZE 100
@@ -41,7 +42,11 @@ private:
 	void Sniff();
 	void PacketHandler();
 	list<CConnection const *> mConnections;
-	map<string,CConnection const*> mRoutingTable;
+	//holds tuples of threes
+	//1 - the ip address
+	//2 - the connection to send for this ip address
+	//3 - the MAC address of the next hop for this ip address
+	map<string,pair<CConnection const*,string> > mRoutingTable;
 	unsigned int mBufferSize;
 	boost::thread mSniffingThread;
 	boost::thread mPacketsHandlingThread;

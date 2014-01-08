@@ -13,7 +13,7 @@ vector< string > CDHCPService::IP_TABLE = vector<string>();
 bool CDHCPService::INIT_TABLE = true; //mark the first time to init the IP Table
 
 CDHCPService::CDHCPService(char* iFaceName,const uint8_t* subNetName):
-		mLocal_Table(vector<string>()),miFaceName(iFaceName),mSubnetName(subNetName),DEF_IPv4("0.0.0.0")
+		mLocal_Table(vector< pair<string,string> >()),miFaceName(iFaceName),mSubnetName(subNetName),DEF_IPv4("0.0.0.0")
 {
 
 	int table_sz = 0;
@@ -30,7 +30,7 @@ CDHCPService::CDHCPService(char* iFaceName,const uint8_t* subNetName):
 
 
 
-const char* CDHCPService::getIPAddr()
+const char* CDHCPService::getIPAddr(string MAC)
 {
 	if (CDHCPService::IP_TABLE.empty())
 	{
@@ -38,9 +38,9 @@ const char* CDHCPService::getIPAddr()
 	}
 	string addr = CDHCPService::IP_TABLE.back();
 	CDHCPService::IP_TABLE.pop_back();
-	mLocal_Table.push_back(addr);
-	cout << "last added ip address: " << mLocal_Table.back().c_str() << endl;
-	return mLocal_Table.back().c_str();
+	mLocal_Table.push_back(pair<string,string> (addr,MAC) );
+	cout << "last added ip address: " << mLocal_Table.back().first << " for MAC: " << mLocal_Table.back().second << endl;
+	return mLocal_Table.back().first.c_str();
 }
 
 void CDHCPService::releaseIPAddr(string IPv4)
@@ -49,14 +49,20 @@ void CDHCPService::releaseIPAddr(string IPv4)
 	if (IPv4.compare(DEF_IPv4)==0) {return;}
 	//check duplicates
 	vector<string>::iterator ip_it = find(CDHCPService::IP_TABLE.begin(),CDHCPService::IP_TABLE.end(),IPv4);
-	vector<string>::iterator cur_it = find(mLocal_Table.begin(),mLocal_Table.end(),IPv4);
+	//vector<pair< string,string> >::iterator cur_it = find(mLocal_Table.begin(),mLocal_Table.end(),IPv4);
+	//find with pair:
+	vector<pair< string,string> >::iterator cur_it = mLocal_Table.begin();
+	for (;cur_it!=mLocal_Table.end();++cur_it)
+	{if (cur_it->first.compare(IPv4)==0) {break;}}
+
 	//add the IPv4 back to the IP_TABLE
 	if (ip_it==CDHCPService::IP_TABLE.end()) {CDHCPService::IP_TABLE.push_back(IPv4);}
+
 	//remove the IPv4 from the local ip table
 	if (cur_it!=mLocal_Table.end()) {mLocal_Table.erase(cur_it);}
 }
 
-vector<string>& CDHCPService::getAllocatedIPs()
+vector< pair<string,string> >& CDHCPService::getAllocatedIPs()
 {
 	return CDHCPService::mLocal_Table;
 }
@@ -70,7 +76,7 @@ void CDHCPService::fillupIPTable(int tableSize)
 		CDHCPService::IP_TABLE.push_back(ss.str());
 		ss.str("");
 	}
-	//revrse the vector so the logically first address will be in the end
+	//reverse the vector so the logically first address will be in the end
 	//so when used with pop_back we'll get the logically initial ip addresses
 	reverse(CDHCPService::IP_TABLE.begin(),CDHCPService::IP_TABLE.end());
 }
@@ -114,7 +120,7 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 		getDHCP(sniff_packet,OPCODE_REQ,MT_DISCOVER,dhcp_packet);
 		XID = dhcp_packet->GetTransactionID();
 		clientMAC = dhcp_packet->GetClientMAC();
-		mHandshakeIP = getIPAddr(); //allocate a IP address for the handshake
+		mHandshakeIP = getIPAddr(clientMAC); //allocate a IP address for the handshake
 		cout << "Started Handshake Offering " << mHandshakeIP << endl;
 		delete dhcp_packet;
 	}
@@ -312,10 +318,10 @@ void CDHCPService::buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK)
 CDHCPService::~CDHCPService()
 {
 	//clear all the allocated ip addresses by this service
-	vector<string>::iterator it = mLocal_Table.begin();
+	vector<pair <string,string> >::iterator it = mLocal_Table.begin();
 	for(;it!=mLocal_Table.end();++it)
 	{
-		CDHCPService::IP_TABLE.push_back(*it);
+		CDHCPService::IP_TABLE.push_back(it->first);
 	}
 	mLocal_Table.clear();
 }

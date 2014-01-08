@@ -37,7 +37,8 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device) :
 
 		//Initiating the DHCP service in order to get the IP's list
 		mDHCPsrv = new CDHCPService(mInterfaceName,mIPMaskAddress->getIpArr());
-		const char* getway_addr = mDHCPsrv->getIPAddr();
+		string interface_mac = GetMyMAC(mInterfaceName);
+		const char* getway_addr = mDHCPsrv->getIPAddr(interface_mac);
 		mGetwayAddress = new CUIPV4(string(getway_addr));
 
 		//Setting subnet masking
@@ -259,7 +260,7 @@ CPhysicalConnection::~CPhysicalConnection()
 	}
 }
 
-vector<string>& CPhysicalConnection::GetTable()const
+vector< pair<string,string> >& CPhysicalConnection::GetTable()const
 {
 	return mDHCPsrv->getAllocatedIPs();
 }

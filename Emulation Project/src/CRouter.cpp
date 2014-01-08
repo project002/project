@@ -29,11 +29,14 @@ void CRouter::RequestTables()
 		for(iter = mConnections.begin();iter!=mConnections.end();iter++)
 		{
 			//iterate over all ips in the table you got from the connection
-			vector<string>& tables=(*iter)->GetTable();
-			vector<string>::iterator it=tables.begin();
+			vector< pair<string,string> >& tables=(*iter)->GetTable();
+			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
-				mRoutingTable.insert(pair<string,CConnection const*>((*it),(*iter)));
+				mRoutingTable.insert(pair<string,pair<CConnection const*,string> >(
+						it->first,
+						pair<CConnection const*,string>((*iter),it->second)
+					));
 			}
 		}
 	}
@@ -65,7 +68,7 @@ void CRouter::PacketHandler()
 {
 	Packet* packet;
 	CConnection* send_connection;
-	map<string,CConnection const*>::iterator pos;
+	map<string,pair< CConnection const*,string> >::iterator pos;
 	try
 	{
 		//this function is in a new thread. TODO: make it handle all packets in packet handler
@@ -80,7 +83,7 @@ void CRouter::PacketHandler()
 					pos  = mRoutingTable.find(ip_layer->GetDestinationIP());
 					if (pos!=mRoutingTable.end())
 					{
-						send_connection = (const_cast<CConnection*> (pos->second));
+						send_connection = (const_cast<CConnection*> (pos->second.first));
 						if(!send_connection->getGetwayAddress()->getIpStr().compare(pos->first))
 						{
 							//TODO:Handle packet as Router's mission
