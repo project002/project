@@ -1,0 +1,18 @@
+what was done:
+
+	echo "0" >  /proc/sys/net/ipv4/conf/all/accept_redirects 
+
+	echo "0" > /proc/sys/net/ipv4/ip_forward
+
+	echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+	
+	echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
+
+	echo "0" > /proc/sys/net/ipv4/conf/all/accept_source_route
+
+	echo "0" > /proc/sys/net/ipv4/conf/all/send_redirects
+
+	echo "1"> /proc/sys/net/ipv4/conf/all/arp_ignore
+
+	echo "1" > /proc/sys/net/ipv6/conf/all/disable_ipv6 
+
