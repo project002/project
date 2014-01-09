@@ -93,6 +93,11 @@ bool CPhysicalConnection::SendPacket(Packet* packet) const
 	return false;
 }
 
+string CPhysicalConnection::GetMAC() const
+{
+	return GetMyMAC(mInterfaceName);
+}
+
 /**
  * Setting subnet masking as 255.255.255.0
  */
@@ -297,6 +302,7 @@ Crafter::Packet* CPhysicalConnection::GetPacket()
 		std::cerr << error.what() << std::endl;
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 		close(mSocket);
+		throw CException("Emulation Terminated Socket Physical Socket Error");
 	}
 	return NULL;
 }

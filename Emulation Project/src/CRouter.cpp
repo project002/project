@@ -30,6 +30,13 @@ void CRouter::RequestTables()
 		{
 			//iterate over all ips in the table you got from the connection
 			vector< pair<string,string> >& tables=(*iter)->GetTable();
+			//print table
+			vector< pair<string,string> >::iterator b = tables.begin();
+			for(;b!=tables.end();++b)
+			{
+				cout << b->first << " | " << b->second << endl;
+			}
+			/////////////
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
@@ -64,6 +71,31 @@ void CRouter::Sniffer()
 	}
 }
 
+
+void CRouter::ProcessSendPakcet(Packet* packet)
+{
+	cout << "[#] before change" << endl;
+	packet->Print();
+	map<string,pair< CConnection const*,string> >::iterator table_pos;
+	IP* ip_layer = packet->GetLayer<IP>();
+	Ethernet eth_layer;
+
+	table_pos = mRoutingTable.find(ip_layer->GetDestinationIP());
+
+	string DestMAC = table_pos->second.second;
+	string SrcMAC = table_pos->second.first->GetMAC();
+
+	eth_layer.SetSourceMAC(SrcMAC);
+	eth_layer.SetDestinationMAC(DestMAC);
+
+	packet->PopLayer(); //remove the original Ethernet layer
+	packet->PushLayer(eth_layer); //add the new layer
+
+	cout << "[#] after change" << endl;
+	packet->Print();
+
+}
+
 void CRouter::PacketHandler()
 {
 	Packet* packet;
@@ -84,14 +116,17 @@ void CRouter::PacketHandler()
 					if (pos!=mRoutingTable.end())
 					{
 						send_connection = (const_cast<CConnection*> (pos->second.first));
-						if(!send_connection->getGetwayAddress()->getIpStr().compare(pos->first))
+						string dest_ip = send_connection->getGetwayAddress()->getIpStr();
+						if(!dest_ip.compare(pos->first))
 						{
-							//TODO:Handle packet as Router's mission
-							cout<<"Packet meant for router\n";
+							//then the IP packet is meant to this router. ignore it?
+							//TODO: what to do with non DHCP packets aimed at this router
+							cout<<"[#] Packet meant for router and ignored " << dest_ip <<endl;
 						}
 						else
 						{
-							cout<<"Packet will be sent to next hop\n";
+							cout<<"[#] Packet will be sent to next hop " << endl;
+							ProcessSendPakcet(packet);
 							send_connection->SendPacket(packet);
 						}
 					}

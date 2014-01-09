@@ -41,6 +41,8 @@ public:
 
 	void setGetwayAddress( CUIPV4*& getwayAddress){mGetwayAddress = getwayAddress;}
 
+	virtual string GetMAC()const;
+
 private:
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
