@@ -18,7 +18,7 @@
 #define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
 #define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
 #define STOP_NETWORK_MANAGER_COMMAND "sudo service network-manager stop"
-#define SYSTEM_COMMANDS_TIME_TO_COMPLETE 3
+#define SYSTEM_COMMANDS_TIME_TO_COMPLETE 1
 
 /**
  * Verifying that the Setup XML file was provided while lunching the

@@ -72,12 +72,13 @@ void CRouter::Sniffer()
 }
 
 
-void CRouter::ProcessSendPakcet(Packet* packet)
+bool CRouter::ProcessSendPakcet(Packet* packet)
 {
 	cout << "[#] before change" << endl;
 	packet->Print();
 	map<string,pair< CConnection const*,string> >::iterator table_pos;
 	IP* ip_layer = packet->GetLayer<IP>();
+
 	Ethernet eth_layer;
 
 	table_pos = mRoutingTable.find(ip_layer->GetDestinationIP());
@@ -93,6 +94,9 @@ void CRouter::ProcessSendPakcet(Packet* packet)
 
 	cout << "[#] after change" << endl;
 	packet->Print();
+
+	ip_layer->SetTTL(ip_layer->GetTTL()-1);
+	return (ip_layer->GetTTL() >= 1);
 
 }
 
@@ -126,8 +130,55 @@ void CRouter::PacketHandler()
 						else
 						{
 							cout<<"[#] Packet will be sent to next hop " << endl;
-							ProcessSendPakcet(packet);
+							if (ProcessSendPakcet(packet))
+							{send_connection->SendPacket(packet);}
+						}
+					}
+				}
+				else
+				{
+					ARP* arp_layer = packet->GetLayer<ARP>();
+					if (arp_layer != NULL) //answer arp requests
+					{
+						cout<< "************************ Received Packet ************************\n";
+						packet->Print();
+						cout << "[#] handeling ARP" << endl;
+						pos = mRoutingTable.find(arp_layer->GetTargetIP());
+
+						if (pos!=mRoutingTable.end())
+						{
+							cout << "[#] handeling ARP: formulating replay" << endl;
+							send_connection = (const_cast<CConnection*> (pos->second.first));
+
+							arp_layer->SetTargetMAC(send_connection->GetMAC());
+
+							//change for replay OpCode
+							arp_layer->SetOperation(ARP::Reply);
+
+							//Set target properties as Requester PC
+							string senderIP = arp_layer->GetTargetIP();
+							arp_layer->SetTargetIP(arp_layer->GetSenderIP());
+							arp_layer->SetTargetMAC(arp_layer->GetSenderMAC());
+
+							//Set sender properties as ME (Emulation)
+							arp_layer->SetSenderIP(senderIP);
+							arp_layer->SetSenderMAC(pos->second.second);
+
+							//Setting ethernet layer properties
+							Ethernet* eth_layer = packet->GetLayer<Ethernet>();
+
+							string DestMAC = eth_layer->GetSourceMAC();
+							string SrcMAC = pos->second.first->GetMAC();
+
+							eth_layer->SetSourceMAC(SrcMAC);
+							eth_layer->SetDestinationMAC(DestMAC);
+
+//							packet->PopLayer(); //remove the original Ethernet layer
+//							packet->PushLayer(eth_layer); //add the new layer
+
+							cout << "[#] handeling ARP: sending packet" << endl;
 							send_connection->SendPacket(packet);
+
 						}
 					}
 				}

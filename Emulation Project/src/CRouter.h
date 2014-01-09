@@ -41,7 +41,7 @@ public:
 private:
 	void Sniff();
 	void PacketHandler();
-	void ProcessSendPakcet(Packet* packet);
+	bool ProcessSendPakcet(Packet* packet);
 	list<CConnection const *> mConnections;
 	//holds tuples of threes
 	//1 - the ip address

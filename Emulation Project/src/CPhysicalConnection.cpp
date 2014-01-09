@@ -73,16 +73,10 @@ bool CPhysicalConnection::SendPacket(Packet* packet) const
 {
 	try
 	{
-		cout << "sending packet" << endl;
+		cout<< "************************ Sent Packet ************************\n";
 		packet->Print();
-		Ethernet* eth_layer  = packet->GetLayer<Ethernet>();
-		IP* ip_layer  = packet->GetLayer<IP>();
-		ip_layer->SetTTL(ip_layer->GetTTL()-1);
-		eth_layer->SetSourceMAC(GetMyMAC(mInterfaceName));
-		//TODO: get destination MAC address - make DHCP service save the MAC addresses
-		if (ip_layer->GetTTL() >= 1)
-			return (bool) packet->Send(mInterfaceName);
-		return false;
+		cout<<endl;
+		return (bool) packet->Send(mInterfaceName);
 	}
 	catch (CException & error)
 	{
