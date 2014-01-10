@@ -16,3 +16,75 @@ what was done:
 
 	echo "1" > /proc/sys/net/ipv6/conf/all/disable_ipv6 
 
+sudo ufw enable
+sudo ufw deny out 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/tcp
+sudo ufw deny out 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/udp
+sudo ufw deny in 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/tcp
+sudo ufw deny in 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/udp
+
+sudo ufw delete deny out 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/tcp
+sudo ufw delete deny out 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/udp
+sudo ufw delete deny in 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/tcp
+sudo ufw delete deny in 138,3989,1900,137,3994,1037,1947,17500,3999,1056,443,59966,80,51816,53182,35416,53,953/udp
+sudo ufw disable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOT ANYMORE:
+sudo gedit /etc/dhcp/dhclient.conf
+	CHANGED THIS :
+	request subnet-mask, broadcast-address, time-offset, routers,
+		domain-name, domain-name-server, domain-search, host-name,
+		dhcp6.name-servers, dhcp6.domain-search,
+		netbios-name-servers, netbios-scope, interface-mtu,
+		rfc3442-classless-static-routes, ntp-servers;
+	TO THIS:
+	request subnet-mask, broadcast-address, time-offset,
+		domain-name, domain-search, host-name,
+		dhcp6.name-servers, dhcp6.domain-search,
+		netbios-name-servers, netbios-scope, interface-mtu,
+		rfc3442-classless-static-routes, ntp-servers;

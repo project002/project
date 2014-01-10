@@ -26,14 +26,9 @@ public:
 
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
-	void SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress);
 	virtual vector< pair<string,string> >& GetTable()const;
 	virtual Crafter::Packet* GetPacket();
 	virtual bool SendPacket(Packet* packet) const;
-	/**
-	 * starts DHCP service om the current interface
-	 */
-	void startDHCPService();
 
 	const char* getInterfaceName() const{return mInterfaceName;}
 
@@ -44,11 +39,16 @@ public:
 	virtual string GetMAC()const;
 
 private:
+	/**
+	 * starts DHCP service om the current interface
+	 */
+	void startDHCPService();
+	void SetNetmask(CUIPV4* getway_addr, CUIPV4* mIPMaskAddress);
 	void InitStructs(struct ifaddrs* device);
 	void ConfigureSocket(struct ifaddrs* device);
 	void GetInterfaceInformation();
 	void setMaskAddress();
-
+	void InitiateDHCPService();
 	int mInterfaceIndex;
 	CUIPV4* mIPMaskAddress;
 	CUIPV4* mGetwayAddress;

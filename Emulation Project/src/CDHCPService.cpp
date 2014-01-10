@@ -7,6 +7,9 @@
 
 #include "CDHCPService.h"
 
+#define BROADCAST_MAC_ADDRESS "ff:ff:ff:ff:ff:ff"
+#define BROADCAST_IP_ADDRESS "255.255.255.255"
+#define EMPTY_IP_ADDRESS "0.0.0.0"
 string CDHCPService::DHCP_FILTER = "udp and src port 68 and dst port 67";
 string CDHCPService::DHCP_FILTER_RCV = "udp and src port 68 and dst port 67";
 vector< string > CDHCPService::IP_TABLE = vector<string>();
@@ -208,113 +211,77 @@ void CDHCPService::getDHCP(Packet* sniff_packet,byte OpCode,byte MsgType,DHCP* d
 
 void CDHCPService::buildDHCP_OFFER(word XID,string &clientMAC,Packet* DHCP_OFFER)
 {
-	/* Get interface properties - IP & MAC */
-	string iface(miFaceName);
-	string MyIP = GetMyIP(iface);
-	string MyMAC = GetMyMAC(iface);
-
-	Ethernet ether_header;
-	ether_header.SetSourceMAC(MyMAC);         // <-- Set our MAC as a source
-	ether_header.SetDestinationMAC("ff:ff:ff:ff:ff:ff"); // <-- Set broadcast address
-	IP ip_header;
-	ip_header.SetSourceIP(MyIP);
-	ip_header.SetDestinationIP("255.255.255.255");
-
-	UDP udp_header;
-	udp_header.SetSrcPort(67);
-	udp_header.SetDstPort(68);
-
-	DHCP dhcp_header;
-	vector<std::string> IPsInsert;
-	dhcp_header.SetOperationCode(DHCP::Reply);
-	dhcp_header.SetFlags(0x0);
-	dhcp_header.SetTransactionID(XID);
-	dhcp_header.SetClientMAC(clientMAC);
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::DHCPMsgType,
-					DHCPOptions::DHCPOFFER, DHCPOptions::BYTE));
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnetName,sizeof(uint8_t)*IPv4_ALEN));
-
-
-	IPsInsert.push_back(MyIP);
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::Router, IPsInsert));
-
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::DHCPServerId, IPsInsert));
-
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::DomainServer, IPsInsert));
-
-	IPsInsert.clear();
-	IPsInsert.push_back("7fffffff"); //TODO: what is this?
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::AddressTime, IPsInsert));
-
-	dhcp_header.SetClientIP("0.0.0.0");
-	dhcp_header.SetYourIP(mHandshakeIP);
-	dhcp_header.SetServerIP("0.0.0.0");
-	dhcp_header.SetGatewayIP("0.0.0.0");
-
-	(*DHCP_OFFER) = ether_header / ip_header / udp_header / dhcp_header;
+	BuildDHCPPacket(XID,clientMAC,DHCP_OFFER,DHCPOptions::DHCPOFFER);
 }
 
 void CDHCPService::buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK)
 {
-	/* Get interface properties - IP & MAC */
-	string iface(miFaceName);
-	string MyIP = GetMyIP(iface);
-	string MyMAC = GetMyMAC(iface);
-
-	Ethernet ether_header;
-	ether_header.SetSourceMAC(MyMAC);         // <-- Set our MAC as a source
-	ether_header.SetDestinationMAC("ff:ff:ff:ff:ff:ff"); // <-- Set broadcast address
-	IP ip_header;
-	ip_header.SetSourceIP(MyIP);
-	ip_header.SetDestinationIP("255.255.255.255");
-
-	UDP udp_header;
-	udp_header.SetSrcPort(67);
-	udp_header.SetDstPort(68);
-
-	DHCP dhcp_header;
-	vector<std::string> IPsInsert;
-	dhcp_header.SetOperationCode(DHCP::Reply);
-	dhcp_header.SetFlags(0x0);
-	dhcp_header.SetTransactionID(XID);
-	dhcp_header.SetClientMAC(clientMAC);
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::DHCPMsgType,
-					DHCPOptions::DHCPACK, DHCPOptions::BYTE));
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnetName,sizeof(uint8_t)*IPv4_ALEN));
-
-
-	IPsInsert.push_back(MyIP);
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::Router, IPsInsert));
-
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::DHCPServerId, IPsInsert));
-
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::DomainServer, IPsInsert));
-
-	IPsInsert.clear();
-	IPsInsert.push_back("7fffffff"); //TODO: what is this?
-	dhcp_header.Options.push_back(
-			CreateDHCPOption(DHCPOptions::AddressTime, IPsInsert));
-
-	dhcp_header.SetClientIP("0.0.0.0");
-	dhcp_header.SetYourIP(mHandshakeIP);
-	dhcp_header.SetServerIP("0.0.0.0");
-	dhcp_header.SetGatewayIP("0.0.0.0");
-
-	(*DHCP_ACK) = ether_header / ip_header / udp_header / dhcp_header;
+	BuildDHCPPacket(XID,clientMAC,DHCP_ACK,DHCPOptions::DHCPACK);
 }
 
+void CDHCPService::BuildDHCPPacket(word XID,string &clientMAC,Packet* DHCP_PACKET,const word MsgType)
+{
+	try
+	{
+		/* Get interface properties - IP & MAC */
+			string iface(miFaceName);
+			string MyIP = GetMyIP(iface);
+			string MyMAC = GetMyMAC(iface);
 
+			Ethernet ether_header;
+			ether_header.SetSourceMAC(MyMAC);         // <-- Set our MAC as a source
+			ether_header.SetDestinationMAC(BROADCAST_MAC_ADDRESS); // <-- Set broadcast address
+			IP ip_header;
+			ip_header.SetSourceIP(MyIP);
+			ip_header.SetDestinationIP(BROADCAST_IP_ADDRESS);
+
+			UDP udp_header;
+			udp_header.SetSrcPort(67);
+			udp_header.SetDstPort(68);
+
+			DHCP dhcp_header;
+			vector<std::string> IPsInsert;
+			dhcp_header.SetOperationCode(DHCP::Reply);
+			dhcp_header.SetFlags(0x0);
+			dhcp_header.SetTransactionID(XID);
+			dhcp_header.SetClientMAC(clientMAC);
+			dhcp_header.Options.push_back(
+					CreateDHCPOption(DHCPOptions::DHCPMsgType,
+							DHCPOptions::DHCPACK, DHCPOptions::BYTE));
+			dhcp_header.Options.push_back(
+					CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnetName,sizeof(uint8_t)*IPv4_ALEN));
+
+
+			IPsInsert.push_back(MyIP);
+			dhcp_header.Options.push_back(
+					CreateDHCPOption(DHCPOptions::Router, IPsInsert));
+
+			dhcp_header.Options.push_back(
+					CreateDHCPOption(DHCPOptions::DHCPServerId, IPsInsert));
+
+			dhcp_header.Options.push_back(
+					CreateDHCPOption(DHCPOptions::DomainServer, IPsInsert));
+
+			IPsInsert.clear();
+			IPsInsert.push_back("7fffffff"); //TODO: what is this?
+			dhcp_header.Options.push_back(
+					CreateDHCPOption(DHCPOptions::AddressTime, IPsInsert));
+
+			dhcp_header.SetClientIP(EMPTY_IP_ADDRESS);
+			dhcp_header.SetYourIP(mHandshakeIP);
+			dhcp_header.SetServerIP(EMPTY_IP_ADDRESS);
+			dhcp_header.SetGatewayIP(EMPTY_IP_ADDRESS);
+
+			(*DHCP_PACKET) = ether_header / ip_header / udp_header / dhcp_header;
+	}
+
+	catch (CException & error)
+	{
+		cerr << error.what() << endl;
+		releaseIPAddr(mHandshakeIP);
+		return;
+	}
+}
 CDHCPService::~CDHCPService()
 {
 	//clear all the allocated ip addresses by this service

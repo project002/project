@@ -127,6 +127,7 @@ private:
 	 */
 	void buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK);
 
+	void BuildDHCPPacket(word XID,string &clientMAC,Packet* DHCP_PACKET,const word MsgType);
 };
 
 #endif /* CDHCPSERVICE_H_ */
