@@ -41,6 +41,7 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		if (mPackets.size()<mBufferSize)
 		{
 			mPackets.push_back(pkt);
+			AnalyzePacketForStatistics(pkt);
 		}
 		else
 		{
@@ -55,7 +56,32 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		throw;
 	}
 }
+void CPacketCollector::AnalyzePacketForStatistics(Crafter::Packet * packet)
+{
+	try
+	{
+		ARP* arp_layer = packet->GetLayer<ARP>();
+		if (arp_layer != NULL)
+		{
+			//TODO: add to statistics that its an arp packet
+		}
+		else
+		{
+			IP* ip_layer = packet->GetLayer<IP>();
+			if (ip_layer != NULL)
+			{
+				//TODO: add to statistics that its an IP packet
+			}
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
 
+}
 Crafter::Packet * CPacketCollector::PopFront()
 {
 	try

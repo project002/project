@@ -32,11 +32,11 @@ void CRouter::RequestTables()
 			vector< pair<string,string> >& tables=(*iter)->GetTable();
 			//print table
 			vector< pair<string,string> >::iterator b = tables.begin();
-			for(;b!=tables.end();++b)
-			{
-				cout << b->first << " | " << b->second << endl;
-			}
-			/////////////
+//			for(;b!=tables.end();++b)
+//			{
+//				cout << b->first << " | " << b->second << endl;
+//			}
+//			/////////////
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
@@ -107,7 +107,6 @@ void CRouter::PacketHandler()
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	try
 	{
-		//this function is in a new thread. TODO: make it handle all packets in packet handler
 		while (true)
 		{
 			packet = mPacketCollector->PopFront();
@@ -123,8 +122,6 @@ void CRouter::PacketHandler()
 						string dest_ip = send_connection->getGetwayAddress()->getIpStr();
 						if(!dest_ip.compare(pos->first))
 						{
-							//then the IP packet is meant to this router. ignore it?
-							//TODO: what to do with non DHCP packets aimed at this router
 							cout<<"[#] Packet meant for router and ignored " << dest_ip <<endl;
 						}
 						else
@@ -173,9 +170,6 @@ void CRouter::PacketHandler()
 							eth_layer->SetSourceMAC(SrcMAC);
 							eth_layer->SetDestinationMAC(DestMAC);
 
-//							packet->PopLayer(); //remove the original Ethernet layer
-//							packet->PushLayer(eth_layer); //add the new layer
-
 							cout << "[#] handeling ARP: sending packet" << endl;
 							send_connection->SendPacket(packet);
 
@@ -209,7 +203,6 @@ void CRouter::Sniff()
 				{mPacketCollector->PushBack(temp_packet);}
 			}
 		}
-		//this function is in a new thread. TODO: make it sniff all packets
 	}
 	catch (CException & error)
 	{

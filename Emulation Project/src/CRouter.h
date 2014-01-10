@@ -43,16 +43,12 @@ private:
 	void PacketHandler();
 	bool ProcessSendPakcet(Packet* packet);
 	list<CConnection const *> mConnections;
-	//holds tuples of threes
-	//1 - the ip address
-	//2 - the connection to send for this ip address
-	//3 - the MAC address of the next hop for this ip address
+	//MAP < IP , <Connection,MAC> >
 	map<string,pair<CConnection const*,string> > mRoutingTable;
 	unsigned int mBufferSize;
 	boost::thread mSniffingThread;
 	boost::thread mPacketsHandlingThread;
 	CPacketCollector * mPacketCollector;
-
 };
 
 #endif /* CROUTER_H_ */

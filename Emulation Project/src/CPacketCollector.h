@@ -20,6 +20,7 @@ public:
 	Crafter::Packet * PopFront();
 	void DropRandomPacket();
 private:
+	void AnalyzePacketForStatistics(Crafter::Packet * packet);
 	void PrintPacket();
 	list<Crafter::Packet * > mPackets;
 	unsigned int mBufferSize;
