@@ -6,6 +6,8 @@
  */
 
 #include "CPacketCollector.h"
+//Defining the map
+map<string,unsigned long long int> CPacketCollector::mPacketsStatistics;
 
 CPacketCollector::CPacketCollector(unsigned int bufferSize):mBufferSize(bufferSize)
 {
@@ -63,14 +65,28 @@ void CPacketCollector::AnalyzePacketForStatistics(Crafter::Packet * packet)
 		ARP* arp_layer = packet->GetLayer<ARP>();
 		if (arp_layer != NULL)
 		{
-			//TODO: add to statistics that its an arp packet
+			mPacketsStatistics["ARP"]=mPacketsStatistics["ARP"]+1;
 		}
 		else
 		{
 			IP* ip_layer = packet->GetLayer<IP>();
 			if (ip_layer != NULL)
 			{
-				//TODO: add to statistics that its an IP packet
+				mPacketsStatistics["IPv4"]=mPacketsStatistics["IPv4"]+1;
+				TCP* tcp_layer = packet->GetLayer<TCP>();
+				if(tcp_layer!=NULL)
+				{
+					mPacketsStatistics["TCP"]=mPacketsStatistics["TCP"]+1;
+				}
+				else
+				{
+					UDP* udp_layer = packet->GetLayer<UDP>();
+					if (udp_layer!=NULL)
+					{
+						mPacketsStatistics["UDP"]=mPacketsStatistics["UDP"]+1;
+					}
+				}
+
 			}
 		}
 	}

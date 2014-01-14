@@ -247,7 +247,7 @@ void CDHCPService::BuildDHCPPacket(word XID,string &clientMAC,Packet* DHCP_PACKE
 			dhcp_header.SetClientMAC(clientMAC);
 			dhcp_header.Options.push_back(
 					CreateDHCPOption(DHCPOptions::DHCPMsgType,
-							DHCPOptions::DHCPACK, DHCPOptions::BYTE));
+							MsgType, DHCPOptions::BYTE));
 			dhcp_header.Options.push_back(
 					CreateDHCPOption(DHCPOptions::SubnetMask, (byte*) mSubnetName,sizeof(uint8_t)*IPv4_ALEN));
 

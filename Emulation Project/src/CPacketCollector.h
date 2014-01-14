@@ -24,7 +24,7 @@ private:
 	void PrintPacket();
 	list<Crafter::Packet * > mPackets;
 	unsigned int mBufferSize;
-	static map<string,unsigned long long > mPacketsStatistics;
+	static map<string,unsigned long long int> mPacketsStatistics;
 };
 
 #endif /* CPACKETCOLLECTOR_H_ */
