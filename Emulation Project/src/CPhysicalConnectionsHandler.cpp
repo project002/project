@@ -68,7 +68,7 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 		{
 			std::cout << "name:\t" << node->ifa_name << std::endl;
 
-			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo") )
+			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo")  )
 			{
 				newConnection = new CPhysicalConnection(node);
 				mPhysicalConnections.push_back(newConnection);

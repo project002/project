@@ -2,7 +2,7 @@
 <Network FormatVersion="1">
 	<StaticTable isStatic="false"></StaticTable>
     <Routers>
-        <Router Number="0" BufferSize="50">
+        <Router Number="0" BufferSize="5000000">
         	<PhysicalConnection>eth0</PhysicalConnection>
         	<PhysicalConnection>eth1</PhysicalConnection>
         </Router>

@@ -41,7 +41,7 @@ public:
 private:
 	void Sniff();
 	void PacketHandler();
-	bool ProcessSendPakcet(Packet* packet);
+	bool ProcessSendPacket(Packet* packet);
 	list<CConnection const *> mConnections;
 	//MAP < IP , <Connection,MAC> >
 	map<string,pair<CConnection const*,string> > mRoutingTable;
