@@ -85,9 +85,6 @@ bool CPhysicalConnection::SendPacket(Packet* packet) const
 {
 	try
 	{
-		cout<< "************************ Sent Packet ************************\n";
-		packet->Print();
-		cout<<endl;
 		return (bool) packet->Send(mInterfaceName);
 	}
 	catch (CException & error)

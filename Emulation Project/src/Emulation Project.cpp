@@ -15,10 +15,12 @@
 #define ERROR_MSG_DISABLING_IP_FORWARDING "Can't disable the IP forwarding"
 #define ERROR_MSG_DISABLING_ICMP_RESPONSE "Can't disable the ICMP response"
 #define ERROR_DISABLING_PACKETS_TRAFFIC "Can't disable packets traffic using UFW deny commands"
+#define ERROR_FW "Can't Enable Firewall"
 
 #define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
 #define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
 #define STOP_NETWORK_MANAGER_COMMAND "sudo service network-manager stop"
+#define ENABLE_FIREWALL "sudo ufw enable"
 #define STOP_ALL_INCOMING_PACKETS "sudo ufw default deny incoming"
 #define STOP_ALL_OUTGOING_PACKETS "sudo ufw default deny outgoing"
 #define SYSTEM_COMMANDS_TIME_TO_COMPLETE 0.5
@@ -83,12 +85,20 @@ void DisableNetworkManager()
 		}
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 
+		status = system(ENABLE_FIREWALL);
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(ERROR_FW);
+		}
+		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+
 		status = system(STOP_ALL_INCOMING_PACKETS);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
 		}
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+
 
 		status = system(STOP_ALL_OUTGOING_PACKETS);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
