@@ -28,6 +28,7 @@ void CRouter::RequestTables()
 		//iterate over all connections
 		for(iter = mConnections.begin();iter!=mConnections.end();iter++)
 		{
+			cout << "Print Routing Table For " << (*iter)->GetMAC() << endl;
 			//iterate over all ips in the table you got from the connection
 			vector< pair<string,string> >& tables=(*iter)->GetTable();
 			//print table
@@ -35,6 +36,8 @@ void CRouter::RequestTables()
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
+
+				cout << "/t " << it->first << "|" << (*iter)->GetMAC() << "|" << it->second << endl;
 				mRoutingTable.insert(pair<string,pair<CConnection const*,string> >(
 						it->first,
 						pair<CConnection const*,string>((*iter),it->second)
@@ -103,7 +106,7 @@ void CRouter::PacketHandler()
 				IP* ip_layer = packet->GetLayer<IP>();
 				if (ip_layer != NULL)
 				{
-					cout << "[#] handeling IP" << endl;
+//					cout << "[#] handeling IP" << endl;
 					pos  = mRoutingTable.find(ip_layer->GetDestinationIP());
 					if (pos!=mRoutingTable.end())
 					{
@@ -119,8 +122,8 @@ void CRouter::PacketHandler()
 							if (eth_layer != NULL && eth_layer->GetSourceMAC().compare(send_connection->GetMAC()))
 							{
 
-								eth_layer->SetSourceMAC(
-										send_connection->GetMAC());
+//								eth_layer->SetSourceMAC(
+//										send_connection->GetMAC());
 								if (ProcessSendPacket(packet))
 								{
 									send_connection->SendPacket(packet);
@@ -134,7 +137,7 @@ void CRouter::PacketHandler()
 					ARP* arp_layer = packet->GetLayer<ARP>();
 					if (arp_layer != NULL) //answer arp requests
 					{
-						cout << "[#] handeling ARP" << endl;
+//						cout << "[#] handeling ARP" << endl;
 						con_pos = mRoutingTable.find(arp_layer->GetSenderIP());
 						pos = mRoutingTable.find(arp_layer->GetTargetIP());
 						if (pos!=mRoutingTable.end() && con_pos!=mRoutingTable.end())
@@ -145,7 +148,8 @@ void CRouter::PacketHandler()
 								arp_layer->SetOperation(ARP::Reply);
 								eth_layer->SetDestinationMAC(arp_layer->GetSenderMAC());
 								arp_layer->SetTargetMAC(arp_layer->GetSenderMAC());
-								arp_layer->SetSenderMAC(pos->second.first->GetMAC());
+//								arp_layer->SetSenderMAC(pos->second.first->GetMAC());
+								arp_layer->SetSenderMAC(con_pos->second.first->GetMAC());
 								arp_layer->SetTargetIP(arp_layer->GetSenderIP());
 								arp_layer->SetSenderIP(pos->first);
 								eth_layer->SetSourceMAC(pos->second.first->GetMAC());
