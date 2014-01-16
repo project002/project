@@ -40,11 +40,14 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 {
 	try
 	{
+		//cout<< "[@]1[@]\n";
 		if (mPackets.size()<mBufferSize)
 		{
+			//cout<< "[@]2[@]\n";
 			mPackets.push_back(pkt);
-			AnalyzePacketForStatistics(pkt);
-			cout << "Buffer size: "<< mPackets.size() << endl;
+			cout<< mPackets.size() << endl;
+			//AnalyzePacketForStatistics(pkt);
+			//cout<< "[@]4[@]\n";
 		}
 		else
 		{
@@ -55,6 +58,7 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 				pkt = NULL;
 			}
 		}
+		//cout<< "[@]6[@]\n";
 	}
 	catch (CException & error)
 	{

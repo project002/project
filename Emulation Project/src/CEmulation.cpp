@@ -6,7 +6,7 @@
  */
 
 #include "CEmulation.h"
-#define TABLE_SWAPPING_INTERVALS 60
+#define TABLE_SWAPPING_INTERVALS 15
 #define ERROR_MSG_XML_PARSER "Error parsing file, make sure a *valid* XML file is present in the Emulation base folder\n"
 #define ERROR_MSG_ADDING_PHYSICAL_CONNECTION_TO_ROUTER "Can't find wanted physical connection, make sure XML is provided with legitimate connection name"
 

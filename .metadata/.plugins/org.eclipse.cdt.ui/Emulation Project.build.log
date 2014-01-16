@@ -1,125 +1,15 @@
-10:57:23 **** Build of configuration Debug for project Emulation Project ****
+21:16:37 **** Incremental Build of configuration Default for project Emulation Project ****
 make all 
-Building file: ../src/CBuffer.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CBuffer.d" -MT"src/CBuffer.d" -o "src/CBuffer.o" "../src/CBuffer.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CBuffer.h:10,
-                 from ../src/CBuffer.cpp:8:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-Finished building: ../src/CBuffer.cpp
- 
-Building file: ../src/CDHCPService.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CDHCPService.h:11,
-                 from ../src/CDHCPService.cpp:8:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-In file included from ../src/CDHCPService.cpp:8:0:
-../src/CDHCPService.h:52:27: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11 [enabled by default]
-Finished building: ../src/CDHCPService.cpp
- 
 Building file: ../src/CEmulation.cpp
 Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CEmulation.h:11,
-                 from ../src/CEmulation.cpp:8:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-In file included from ../src/CPhysicalConnection.h:13:0,
-                 from ../src/CEmulation.h:12,
-                 from ../src/CEmulation.cpp:8:
-../src/CDHCPService.h:52:27: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11 [enabled by default]
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
 Finished building: ../src/CEmulation.cpp
- 
-Building file: ../src/CException.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CException.d" -MT"src/CException.d" -o "src/CException.o" "../src/CException.cpp"
-Finished building: ../src/CException.cpp
- 
-Building file: ../src/CPacketCollector.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CPacketCollector.h:10,
-                 from ../src/CPacketCollector.cpp:8:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-Finished building: ../src/CPacketCollector.cpp
- 
-Building file: ../src/CPhysicalConnection.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnection.d" -MT"src/CPhysicalConnection.d" -o "src/CPhysicalConnection.o" "../src/CPhysicalConnection.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CPhysicalConnection.h:10,
-                 from ../src/CPhysicalConnection.cpp:8:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-In file included from ../src/CPhysicalConnection.h:13:0,
-                 from ../src/CPhysicalConnection.cpp:8:
-../src/CDHCPService.h:52:27: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11 [enabled by default]
-Finished building: ../src/CPhysicalConnection.cpp
- 
-Building file: ../src/CPhysicalConnectionsHandler.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnectionsHandler.d" -MT"src/CPhysicalConnectionsHandler.d" -o "src/CPhysicalConnectionsHandler.o" "../src/CPhysicalConnectionsHandler.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CPhysicalConnectionsHandler.h:10,
-                 from ../src/CPhysicalConnectionsHandler.cpp:8:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-In file included from ../src/CPhysicalConnection.h:13:0,
-                 from ../src/CPhysicalConnectionsHandler.h:11,
-                 from ../src/CPhysicalConnectionsHandler.cpp:8:
-../src/CDHCPService.h:52:27: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11 [enabled by default]
-Finished building: ../src/CPhysicalConnectionsHandler.cpp
- 
-Building file: ../src/CRouter.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CRouter.h:10,
-                 from ../src/CRouter.cpp:8:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-Finished building: ../src/CRouter.cpp
- 
-Building file: ../src/Emulation Project.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/Emulation Project.d" -MT"src/Emulation\ Project.d" -o "src/Emulation Project.o" "../src/Emulation Project.cpp"
-In file included from /usr/include/c++/4.7/backward/strstream:52:0,
-                 from ../src/CUIPV4.h:12,
-                 from ../src/BasicIncludes.h:69,
-                 from ../src/CEmulation.h:11,
-                 from ../src/Emulation Project.cpp:9:
-/usr/include/c++/4.7/backward/backward_warning.h:33:2: warning: #warning This file includes at least one deprecated or antiquated header which may be removed without further notice at a future date. Please use a non-deprecated interface with equivalent functionality instead. For a listing of replacement headers and interfaces, consult the file backward_warning.h. To disable this warning use -Wno-deprecated. [-Wcpp]
-In file included from ../src/CPhysicalConnection.h:13:0,
-                 from ../src/CEmulation.h:12,
-                 from ../src/Emulation Project.cpp:9:
-../src/CDHCPService.h:52:27: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11 [enabled by default]
-Finished building: ../src/Emulation Project.cpp
- 
-Building file: ../src/pugixml.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -c -fmessage-length=0 -MMD -MP -MF"src/pugixml.d" -MT"src/pugixml.d" -o "src/pugixml.o" "../src/pugixml.cpp"
-Finished building: ../src/pugixml.cpp
  
 Building target: Emulation Project
 Invoking: GCC C++ Linker
-g++ -lcrafter -o "Emulation Project"  ./src/CBuffer.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/Emulation\ Project.o ./src/pugixml.o   
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
 Finished building target: Emulation Project
  
 
-10:57:31 Build Finished (took 7s.174ms)
+21:16:41 Build Finished (took 3s.468ms)
 

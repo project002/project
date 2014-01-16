@@ -99,28 +99,38 @@ void CRouter::PacketHandler()
 	{
 		while (true)
 		{
+			//cout<< "[@]1[@]\n";
 			packet = mPacketCollector->PopFront();
+			//cout<< "[@]1.1[@]\n";
 			if (packet != NULL)
 			{
+				//cout<< "[@]1.2[@]\n";
 				IP* ip_layer = packet->GetLayer<IP>();
+				//cout<< "[@]1.3[@]\n";
 				if (ip_layer != NULL)
 				{
+					//cout<< "[@]2[@]\n";
 					HandleIPv4(packet);
 				}
 				else
 				{
+					//cout<< "[@]2.2[@]\n";
 					ARP* arp_layer = packet->GetLayer<ARP>();
+					//cout<< "[@]2.3@]\n";
 					if (arp_layer != NULL) //answer arp requests
 					{
+						//cout<< "[@]3[@]\n";
 						HandleArp(packet);
 					}
 				}
 				if (packet!=NULL)
 				{
+					//cout<< "[@]5[@]\n";
 					delete packet;
 					packet=NULL;
 				}
 			}
+			//cout<< "[@]6[@]\n";
 		}
 	}
 	catch (CException & error)
@@ -195,13 +205,24 @@ void CRouter::Sniff()
 	{
 		while(true)
 		{
+			//cout<< "[@]1[@]\n";
+			//cout<< "[@]1[@]\n";
 			list< CConnection const *>::iterator iter = mConnections.begin();
+			//cout<< "[@]2[@]\n";
 			for (;iter!=mConnections.end();iter++)
 			{
+
+				//cout<< "[@]3[@]\n";
 				CConnection * connection = const_cast<CConnection*>(*iter);
+				//cout<< "[@]4[@]\n";
 				temp_packet= connection->GetPacket();
+				//cout<< "[@]5";
 				if (temp_packet != NULL)
-				{mPacketCollector->PushBack(temp_packet);}
+				{
+					//cout<< "[@]6[@]\n";
+					mPacketCollector->PushBack(temp_packet);
+				}
+				//cout<< "[@]7[@]\n";
 			}
 		}
 	}
