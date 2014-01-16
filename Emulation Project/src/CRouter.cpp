@@ -86,14 +86,13 @@ bool CRouter::ProcessSendPacket(Packet* packet)
 	eth_layer->SetSourceMAC(SrcMAC);
 	eth_layer->SetDestinationMAC(DestMAC);
 
-//	ip_layer->SetTTL(ip_layer->GetTTL()-1);
+	ip_layer->SetTTL(ip_layer->GetTTL()-1);
 	return (ip_layer->GetTTL() >= 1);
 }
 
 void CRouter::PacketHandler()
 {
 	Packet* packet;
-	CConnection* send_connection;
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	map<string,pair< CConnection const*,string> >::iterator con_pos;
 	try
@@ -106,58 +105,20 @@ void CRouter::PacketHandler()
 				IP* ip_layer = packet->GetLayer<IP>();
 				if (ip_layer != NULL)
 				{
-//					cout << "[#] handeling IP" << endl;
-					pos  = mRoutingTable.find(ip_layer->GetDestinationIP());
-					if (pos!=mRoutingTable.end())
-					{
-						send_connection = (const_cast<CConnection*> (pos->second.first));
-						string dest_ip = send_connection->getGetwayAddress()->getIpStr();
-						if(!dest_ip.compare(pos->first))
-						{
-							;//TODO: ignoring packets to the router - maybe we want to respond?
-						}
-						else
-						{
-							Ethernet* eth_layer = packet->GetLayer<Ethernet>();
-							if (eth_layer != NULL && eth_layer->GetSourceMAC().compare(send_connection->GetMAC()))
-							{
-
-//								eth_layer->SetSourceMAC(
-//										send_connection->GetMAC());
-								if (ProcessSendPacket(packet))
-								{
-									send_connection->SendPacket(packet);
-								}
-							}
-						}
-					}
+					HandleIPv4(packet);
 				}
 				else
 				{
 					ARP* arp_layer = packet->GetLayer<ARP>();
 					if (arp_layer != NULL) //answer arp requests
 					{
-//						cout << "[#] handeling ARP" << endl;
-						con_pos = mRoutingTable.find(arp_layer->GetSenderIP());
-						pos = mRoutingTable.find(arp_layer->GetTargetIP());
-						if (pos!=mRoutingTable.end() && con_pos!=mRoutingTable.end())
-						{
-							Ethernet* eth_layer = packet->GetLayer<Ethernet>();
-							if(arp_layer->GetOperation()==ARP::Request && eth_layer!=NULL)
-							{
-								arp_layer->SetOperation(ARP::Reply);
-								eth_layer->SetDestinationMAC(arp_layer->GetSenderMAC());
-								arp_layer->SetTargetMAC(arp_layer->GetSenderMAC());
-//								arp_layer->SetSenderMAC(pos->second.first->GetMAC());
-								arp_layer->SetSenderMAC(con_pos->second.first->GetMAC());
-								arp_layer->SetTargetIP(arp_layer->GetSenderIP());
-								arp_layer->SetSenderIP(pos->first);
-								eth_layer->SetSourceMAC(pos->second.first->GetMAC());
-								send_connection = (const_cast<CConnection*> (con_pos->second.first));
-								send_connection->SendPacket(packet);
-							}
-						}
+						HandleArp(packet);
 					}
+				}
+				if (packet!=NULL)
+				{
+					delete packet;
+					packet=NULL;
 				}
 			}
 		}
@@ -167,6 +128,64 @@ void CRouter::PacketHandler()
 		std::cerr << error.what() << std::endl;
 		std::cerr << __PRETTY_FUNCTION__ << std::endl;
 		throw;
+	}
+}
+
+void CRouter::HandleArp(Packet * pkt)
+{
+	CConnection* send_connection;
+	map<string,pair< CConnection const*,string> >::iterator pos;
+	map<string,pair< CConnection const*,string> >::iterator con_pos;
+	ARP* arp_layer = pkt->GetLayer<ARP>();
+	//cout<<arp_layer->GetTargetIP()<<"\n";
+	con_pos = mRoutingTable.find(arp_layer->GetSenderIP());
+	pos = mRoutingTable.find(arp_layer->GetTargetIP());
+	if (pos != mRoutingTable.end() && con_pos != mRoutingTable.end())
+	{
+		Ethernet* eth_layer = pkt->GetLayer<Ethernet>();
+		if (arp_layer->GetOperation() == ARP::Request && eth_layer != NULL)
+		{
+			arp_layer->SetOperation(ARP::Reply);
+			eth_layer->SetDestinationMAC(arp_layer->GetSenderMAC());
+			//cout<<arp_layer->GetTargetIP()<<"\n";
+			arp_layer->SetTargetMAC(arp_layer->GetSenderMAC());
+			arp_layer->SetSenderMAC(con_pos->second.first->GetMAC());
+			arp_layer->SetTargetIP(arp_layer->GetSenderIP());
+			arp_layer->SetSenderIP(pos->first);
+			eth_layer->SetSourceMAC(pos->second.first->GetMAC());
+			send_connection = (const_cast<CConnection*>(con_pos->second.first));
+			send_connection->SendPacket(pkt);
+		}
+	}
+}
+void CRouter::HandleIPv4(Packet * pkt)
+{
+	CConnection* send_connection;
+	map<string,pair< CConnection const*,string> >::iterator pos;
+	IP* ip_layer = pkt->GetLayer<IP>();
+	pos = mRoutingTable.find(ip_layer->GetDestinationIP());
+	if (pos != mRoutingTable.end())
+	{
+		send_connection = (const_cast<CConnection*>(pos->second.first));
+		string dest_ip = send_connection->getGetwayAddress()->getIpStr();
+		if (!dest_ip.compare(pos->first)) //TODO: ignoring packets to the router - maybe we want to respond?
+		{;}
+		else
+		{
+			Ethernet* eth_layer = pkt->GetLayer<Ethernet>();
+			if (eth_layer != NULL
+					&& eth_layer->GetSourceMAC().compare(
+							send_connection->GetMAC()))
+			{
+				if (ProcessSendPacket (pkt))
+				{
+					Packet * newpkt= new Packet();
+					newpkt->PacketFromEthernet(pkt->GetRawPtr(),ETH_HLEN+ip_layer->GetTotalLength());
+					send_connection->SendPacket(newpkt);
+					delete newpkt;
+				}
+			}
+		}
 	}
 }
 void CRouter::Sniff()

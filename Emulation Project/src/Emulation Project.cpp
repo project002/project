@@ -132,7 +132,6 @@ int main(int argc, char *argv[])
  		CEmulation * Emulator= new CEmulation();
  		Emulator->EmulationBuilder(argv[SETUP_XML_ARGUMENT_POSITION]);
  		Emulator->StartEmulation();
-
 		delete Emulator;
 		return(EXIT_SUCCESS);
 	}

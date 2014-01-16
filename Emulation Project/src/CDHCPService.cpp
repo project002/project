@@ -125,7 +125,11 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 		clientMAC = dhcp_packet->GetClientMAC();
 		mHandshakeIP = getIPAddr(clientMAC); //allocate a IP address for the handshake
 		cout << "Started Handshake Offering " << mHandshakeIP << endl;
-		delete dhcp_packet;
+		if (dhcp_packet != NULL)
+		{
+			delete dhcp_packet;
+			dhcp_packet = NULL;
+		}
 	}
 	catch (CException & error)
 	{
@@ -158,8 +162,11 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 
 			DHCP_ACK.Send(iface);
 
-			delete dhcp_rcv;
-
+			if (dhcp_rcv != NULL)
+			{
+				delete dhcp_rcv;
+				dhcp_rcv = NULL;
+			}
 			cout << "Handshake Finished With Setting " << mHandshakeIP << endl;
 
 			mHandshakeIP = DEF_IPv4; //re-init the handshake ip

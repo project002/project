@@ -36,7 +36,12 @@ CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
 		vector<CPhysicalConnection * >::iterator it;
 		for (it = mPhysicalConnections.begin(); it!=mPhysicalConnections.end();it++)
 		{
-			delete (*it);
+			if ((*it)!=NULL)
+			{
+				delete (*it);
+				(*it)=NULL;
+			}
+
 		}
 	}
 	catch (CException & error)

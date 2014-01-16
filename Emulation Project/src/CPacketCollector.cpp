@@ -44,11 +44,16 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		{
 			mPackets.push_back(pkt);
 			AnalyzePacketForStatistics(pkt);
+			cout << "Buffer size: "<< mPackets.size() << endl;
 		}
 		else
 		{
-			delete (pkt);
-
+			cout << "packet discarded" << endl;
+			if (pkt!=NULL)
+			{
+				delete (pkt);
+				pkt = NULL;
+			}
 		}
 	}
 	catch (CException & error)
@@ -127,7 +132,11 @@ void CPacketCollector::DropRandomPacket()
 			list<Crafter::Packet*>::iterator iter = mPackets.begin();
 			unsigned int cellNumber=rand()% mPackets.size();
 			for (unsigned int i=0;i<cellNumber-1;i++,iter++);
-			delete (*iter);
+			if ((*iter)!=NULL)
+			{
+				delete (*iter);
+				(*iter)=NULL;
+			}
 			mPackets.erase(iter);
 		}
 	}

@@ -253,8 +253,16 @@ void CPhysicalConnection::InitStructs(struct ifaddrs* device)
 CPhysicalConnection::~CPhysicalConnection()
 {
 	mDHCPSniffer->Cancel();
-	delete mDHCPSniffer;
-	delete mDHCPsrv;
+	if( mDHCPSniffer!=NULL)
+	{
+		delete mDHCPSniffer;
+		mDHCPSniffer=NULL;
+	}
+	if (mDHCPsrv!=NULL)
+	{
+		delete mDHCPsrv;
+		mDHCPsrv=NULL;
+	}
 	try
 	{
 		close(mSocket);
@@ -282,22 +290,24 @@ Crafter::Packet* CPhysicalConnection::GetPacket()
 	try
 	{
 		ssize_t recvSize=recvfrom(mSocket,buffer,ETH_FRAME_LEN,0,NULL,NULL);
+
 		fail_cond_err = (recvSize == -1 && errno != EAGAIN && errno != EWOULDBLOCK);
 		fail_cond_empty = (recvSize < 1);
 
 		if (fail_cond_err)
 		{
 			delete ethPacket;
+			ethPacket=NULL;
 			throw CException("fatal error on receive from socket");
 		}
 
 		if (fail_cond_empty)
 		{
 			delete ethPacket;
+			ethPacket=NULL;
 			return NULL;
 		}
-
-		ethPacket->PacketFromEthernet(buffer,recvSize);
+		ethPacket->PacketFromEthernet(buffer, recvSize);
 		return ethPacket;
 	}
 	catch (CException & error)

@@ -39,6 +39,8 @@ public:
 	}
 
 private:
+	void HandleArp(Packet * pkt);
+	void HandleIPv4(Packet * pkt);
 	void Sniff();
 	void PacketHandler();
 	bool ProcessSendPacket(Packet* packet);
