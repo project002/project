@@ -11,6 +11,7 @@
 #include "BasicIncludes.h"
 #include <cmath>
 #include <algorithm>
+#include "CDHCPMsgTypeException.h"
 
 #define IPV4_ADDR_SZ 4
 /**
@@ -43,6 +44,8 @@ public:
 	static const byte OPCODE_REQ  = 0x01; //Opcode for Request
 	static const byte OPCODE_REP  = 0x02; //Opcode for Replay
 	static const byte MT_DISCOVER = Crafter::DHCPOptions::DHCPDISCOVER; //Message Type Discover
+	static const byte MT_INFORM   = Crafter::DHCPOptions::DHCPINFORM; //Message Type Information
+	static const byte MT_RELEASE   = Crafter::DHCPOptions::DHCPRELEASE; //Message Type Release
 	static const byte MT_REQUEST  = Crafter::DHCPOptions::DHCPREQUEST; //Message Type REQUEST
 	static const byte MT_ACK      = Crafter::DHCPOptions::DHCPACK; //Message Type ACK on DHCP Request
 
@@ -96,6 +99,19 @@ private:
 	 * @param tableSize size of the table
 	 */
 	void fillupIPTable(int tableSize);
+
+	/**
+	 * Handle the release IP address protocol
+	 * @param release_packet a DHCP packet of release request
+	 */
+	void handleRelease(Packet* release_packet);
+
+	/**
+	 * Handle the request IP address protocol
+	 * @param release_packet a DHCP packet of "request" request
+	 */
+	void handleRequest(Packet* request_packet);
+
 
 	void startDHCPhandshake(Packet* sniff_packet);
 

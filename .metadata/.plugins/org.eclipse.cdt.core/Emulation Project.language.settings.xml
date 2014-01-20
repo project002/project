@@ -38,7 +38,7 @@
 					</resource>
 					<resource project-relative-path="src/CDHCPService.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 					<resource project-relative-path="src/CPhysicalConnectionsHandler.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>

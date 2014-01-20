@@ -5977,3 +5977,1211 @@ java.lang.NullPointerException
 	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:37:06.400
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:37:08.132
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+!SESSION 2014-01-20 16:21:52.236 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 16:22:14.297
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+!SESSION 2014-01-20 16:28:51.550 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for ALT+CTRL+I:
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1015823,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1015823,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@141928f,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@141928f,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for F3:
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1fd13f6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1fd13f6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@298ffc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@298ffc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for F4:
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@ac169c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@ac169c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6451,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6451,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1ba0b12,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1ba0b12,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for ALT+CTRL+H:
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@12cf7bc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@12cf7bc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
+!MESSAGE A conflict occurred for CTRL+SHIFT+H:
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@13c94c4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@13c94c4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:03:08.957
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTForStatement.accept(CPPASTForStatement.java:143)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:03:30.877
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTForStatement.accept(CPPASTForStatement.java:143)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:03:32.525
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTForStatement.accept(CPPASTForStatement.java:143)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:13:06.542
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:16:07.926
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:01.221
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:04.821
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:06.901
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:27.627
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:31.851
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:40.894
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:31.423
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:46.538
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:50.122
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:51.706
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:52.789
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:54.904
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:57.052
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:58.653
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:00.258
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:02.346
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:03.430
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:10.013
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:11.094
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:13.181
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:15.268
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:16.382
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:17.990
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:21.584
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:22.673
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:24.284
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)

@@ -37,7 +37,7 @@ void CRouter::RequestTables()
 			for (;it!=tables.end();it++)
 			{
 
-				cout << "/t " << it->first << "|" << (*iter)->GetMAC() << "|" << it->second << endl;
+				cout << "\t " << it->first << "|" << (*iter)->GetMAC() << "|" << it->second << endl;
 				mRoutingTable.insert(pair<string,pair<CConnection const*,string> >(
 						it->first,
 						pair<CConnection const*,string>((*iter),it->second)

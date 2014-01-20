@@ -52,7 +52,6 @@ void CDHCPService::releaseIPAddr(string IPv4)
 	if (IPv4.compare(DEF_IPv4)==0) {return;}
 	//check duplicates
 	vector<string>::iterator ip_it = find(CDHCPService::IP_TABLE.begin(),CDHCPService::IP_TABLE.end(),IPv4);
-	//vector<pair< string,string> >::iterator cur_it = find(mLocal_Table.begin(),mLocal_Table.end(),IPv4);
 	//find with pair:
 	vector<pair< string,string> >::iterator cur_it = mLocal_Table.begin();
 	for (;cur_it!=mLocal_Table.end();++cur_it)
@@ -131,6 +130,19 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 			dhcp_packet = NULL;
 		}
 	}
+	catch (CDHCPMsgTypeException & error)
+	{
+		//handle other dhcp requests
+		byte msg_type = error.getMsgType();
+		switch (msg_type)
+		{
+			case MT_RELEASE : handleRelease(sniff_packet);break;
+			case MT_REQUEST : handleRequest(sniff_packet);break;
+			default : cerr << "No Handler found for message type:" << (int) msg_type << endl;break;
+		}
+		return;
+
+	}
 	catch (CException & error)
 	{
 		cerr << "When Parsing DHCP Packet: " << error.what() << endl;
@@ -149,35 +161,7 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 
 	if (rcv)
 	{
-		try
-		{
-			/* Received DHCP layer */
-			DHCP* dhcp_rcv = new DHCP();
-
-			getDHCP(rcv,OPCODE_REQ,MT_REQUEST,dhcp_rcv);
-
-			Packet DHCP_ACK;
-
-			buildDHCP_ACK(XID,clientMAC,&DHCP_ACK);
-
-			DHCP_ACK.Send(iface);
-
-			if (dhcp_rcv != NULL)
-			{
-				delete dhcp_rcv;
-				dhcp_rcv = NULL;
-			}
-			cout << "Handshake Finished With Setting " << mHandshakeIP << endl;
-
-			mHandshakeIP = DEF_IPv4; //re-init the handshake ip
-
-		}
-		catch (CException & error)
-		{
-			cerr << "When Parsing DHCP Packet That Was Received After OFFER: " << error.what() << endl;
-			releaseIPAddr(mHandshakeIP);
-			return;
-		}
+		handleRequest(rcv);
 	}
 	else
 	{
@@ -186,6 +170,74 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 		CleanCrafter();
 	}
 
+}
+
+void CDHCPService::handleRelease(Packet* release_packet)
+{
+	try
+	{
+		DHCP* dhcp_packet = new DHCP();
+		getDHCP(release_packet,OPCODE_REQ,MT_RELEASE,dhcp_packet);
+		//release the ip address
+
+		string MAC = dhcp_packet->GetClientMAC();
+		string IP  = dhcp_packet->GetClientIP();
+		//find if that ip is bind to that mac
+		vector<pair<string,string> >::iterator it = find(mLocal_Table.begin(),mLocal_Table.end(),pair<string,string>(IP,MAC));
+		if (it!=mLocal_Table.end())
+		{
+			releaseIPAddr(IP);
+			cout << "IP " << IP << " Released" << endl;
+		}
+		//else ignore
+	}
+	catch (CDHCPMsgTypeException &error)
+	{
+		cerr << "should not have been here:" << endl << __PRETTY_FUNCTION__ << endl;
+	}
+	catch (CException &error)
+	{
+		cerr << "should not have been here:" << endl << __PRETTY_FUNCTION__ << endl;
+	}
+}
+
+void CDHCPService::handleRequest(Packet* request_packet)
+{
+	word XID = 0;
+	string clientMAC("");
+	string iface(miFaceName);
+	try
+	{
+		/* Received DHCP layer */
+		DHCP* dhcp_rcv = new DHCP();
+
+		getDHCP(request_packet,OPCODE_REQ,MT_REQUEST,dhcp_rcv);
+
+		XID = dhcp_rcv->GetTransactionID();
+		clientMAC = dhcp_rcv->GetClientMAC();
+
+		Packet DHCP_ACK;
+
+		buildDHCP_ACK(XID,clientMAC,&DHCP_ACK);
+
+		DHCP_ACK.Send(iface);
+
+		if (dhcp_rcv != NULL)
+		{
+			delete dhcp_rcv;
+			dhcp_rcv = NULL;
+		}
+		cout << "Handshake Finished With Setting " << mHandshakeIP << endl;
+
+		mHandshakeIP = DEF_IPv4; //re-init the handshake ip
+
+	}
+	catch (CException & error)
+	{
+		cerr << "When handeling expected request packet: " << error.what() << endl;
+		releaseIPAddr(mHandshakeIP);
+		return;
+	}
 }
 
 void CDHCPService::getDHCP(Packet* sniff_packet,byte OpCode,byte MsgType,DHCP* dhcp_rcv)
@@ -209,7 +261,7 @@ void CDHCPService::getDHCP(Packet* sniff_packet,byte OpCode,byte MsgType,DHCP* d
 			{
 				stringstream ss;
 				ss << "Wrong Message Type Found in Packet. Expected : " << (int)MsgType << " Got:" << (*it_opt)->GetNumber();
-				throw CException(ss.str());
+				throw CDHCPMsgTypeException((*it_opt)->GetNumber(),ss.str());
 			}
 		}
 	}
@@ -225,6 +277,7 @@ void CDHCPService::buildDHCP_ACK(word XID,string &clientMAC,Packet* DHCP_ACK)
 {
 	BuildDHCPPacket(XID,clientMAC,DHCP_ACK,DHCPOptions::DHCPACK);
 }
+
 
 void CDHCPService::BuildDHCPPacket(word XID,string &clientMAC,Packet* DHCP_PACKET,const word MsgType)
 {

@@ -45,7 +45,7 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		{
 			//cout<< "[@]2[@]\n";
 			mPackets.push_back(pkt);
-			cout<< mPackets.size() << endl;
+			cout << mPackets.size() << endl;
 			//AnalyzePacketForStatistics(pkt);
 			//cout<< "[@]4[@]\n";
 		}

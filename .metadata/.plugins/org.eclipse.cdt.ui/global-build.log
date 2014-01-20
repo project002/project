@@ -1343,3 +1343,166 @@ Invoking: GCC C++ Linker
 g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
 Finished building target: Emulation Project
  
+16:47:36 **** Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+16:52:57 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:52:57 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:52:58 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:52:58 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:52:58 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:01 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:02 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:02 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:02 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:02 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:03 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:03 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:03 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:03 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:03 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:33 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:35 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:35 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:36 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:36 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+16:53:36 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+17:52:09 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+../src/CDHCPService.cpp: In member function ‘void CDHCPService::handleRelease(Crafter::Packet*)’:
+../src/CDHCPService.cpp:186:28: error: ‘>>’ should be ‘> >’ within a nested template argument list
+make: *** [src/CDHCPService.o] Error 1
+17:52:33 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+17:53:04 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CPacketCollector.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
+Finished building: ../src/CPacketCollector.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+17:53:32 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CRouter.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
+Finished building: ../src/CRouter.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+17:54:52 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+18:05:45 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+19:16:16 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CPacketCollector.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
+../src/CPacketCollector.cpp: In member function ‘void CPacketCollector::PushBack(Crafter::Packet*)’:
+../src/CPacketCollector.cpp:48:29: error: expected primary-expression before ‘<<’ token
+make: *** [src/CPacketCollector.o] Error 1
+19:16:22 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CPacketCollector.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
+Finished building: ../src/CPacketCollector.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
