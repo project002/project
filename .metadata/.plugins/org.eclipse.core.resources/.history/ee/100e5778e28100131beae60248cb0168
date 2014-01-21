@@ -1,0 +1,33 @@
+/*
+ * CDHCPMsgTypeException.h
+ *
+ *  Created on: Jan 20, 2014
+ *      Author: root
+ */
+
+#ifndef CDHCPMSGTYPEEXCEPTION_H_
+#define CDHCPMSGTYPEEXCEPTION_H_
+
+
+#include <exception>
+#include <string>
+#include <strstream>
+
+class CDHCPMsgTypeException: public std::exception
+{
+public:
+	CDHCPMsgTypeException();
+	CDHCPMsgTypeException(const uint8_t mt):_msg_type(mt) {}
+	virtual const char* what() const throw()
+	{
+		stringstream ss;
+		ss << "CDHCP Meesage Type Exception with Message Type: " << _msg_type;
+		return ss.str().c_str();
+	}
+	~CDHCPMsgTypeException() throw() {};
+private:
+	uint8_t _msg_type;
+};
+
+
+#endif /* CDHCPMSGTYPEEXCEPTION_H_ */

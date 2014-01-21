@@ -308,6 +308,7 @@ Crafter::Packet* CPhysicalConnection::GetPacket()
 			return NULL;
 		}
 		ethPacket->PacketFromEthernet(buffer, recvSize);
+
 		return ethPacket;
 	}
 	catch (CException & error)

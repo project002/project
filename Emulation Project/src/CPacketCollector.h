@@ -8,6 +8,8 @@
 #ifndef CPACKETCOLLECTOR_H_
 #define CPACKETCOLLECTOR_H_
 #include "BasicIncludes.h"
+#include <boost/signals2/mutex.hpp>
+
 class CPacketCollector
 {
 public:
@@ -25,6 +27,8 @@ private:
 	list<Crafter::Packet * > mPackets;
 	unsigned int mBufferSize;
 	static map<string,unsigned long long int> mPacketsStatistics;
+
+	boost::signals2::mutex mMtx;
 };
 
 #endif /* CPACKETCOLLECTOR_H_ */

@@ -6,7 +6,7 @@
 				<language id="org.eclipse.cdt.core.g++">
 					<resource project-relative-path="src/CVirtualConnection.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 					<resource project-relative-path="src/CRouter.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
@@ -14,7 +14,7 @@
 					</resource>
 					<resource project-relative-path="src/CException.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 					<resource project-relative-path="src/CEmulation.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
@@ -26,15 +26,15 @@
 					</resource>
 					<resource project-relative-path="src/Emulation Project.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 					<resource project-relative-path="src/pugixml.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 					<resource project-relative-path="src/CPhysicalConnection.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 					<resource project-relative-path="src/CDHCPService.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
@@ -42,11 +42,11 @@
 					</resource>
 					<resource project-relative-path="src/CPhysicalConnectionsHandler.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 					<resource project-relative-path="src/CConnection.cpp">
 						<entry kind="libraryFile" name="libcrafter.a"/>
-						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libboost_thread-mt.a"/>
 					</resource>
 				</language>
 			</provider>

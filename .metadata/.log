@@ -1,57 +1,4 @@
-!SESSION 2013-12-31 10:50:25.032 -----------------------------------------------
-eclipse.buildId=I20120502-2000
-java.version=1.6.0_27
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
-Command-line arguments:  -os linux -ws gtk -arch x86
-
-!ENTRY org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE Warnings while parsing the viewer contributions from the 'org.eclipse.ui.popupMenus' extension point
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.CBreakpointPropertiesRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.EnableDisableBreakpointRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.ui.actions.RulerCreateBreakpointInteractiveAction'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.CBreakpointPropertiesRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.EnableDisableBreakpointRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.ui.actions.asm.RulerCreateBreakpointInteractiveAction'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='AUTOGEN:::org.eclipse.cdt.dsf.debug.ui.disassemblyRulerActions/org.eclipse.debug.ui.actions.RulerAddBreakpointAction'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:50:29.850
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='org.eclipse.cdt.dsf.debug.ui.disassembly.commands.rulerToggleBreakpoint'
-!SESSION 2013-12-31 10:51:12.433 -----------------------------------------------
-eclipse.buildId=I20120502-2000
-java.version=1.6.0_27
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
-Command-line arguments:  -os linux -ws gtk -arch x86 -data /home/project/workspace
-
-!ENTRY org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE Warnings while parsing the viewer contributions from the 'org.eclipse.ui.popupMenus' extension point
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.CBreakpointPropertiesRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.EnableDisableBreakpointRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.CEditorRulerActions/org.eclipse.cdt.debug.ui.actions.RulerCreateBreakpointInteractiveAction'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.CBreakpointPropertiesRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.internal.ui.actions.asm.EnableDisableBreakpointRulerActionDelegate'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.debug.ui', id='AUTOGEN:::org.eclipse.cdt.debug.ui.AsmEditorRulerActions/org.eclipse.cdt.debug.ui.actions.asm.RulerCreateBreakpointInteractiveAction'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='AUTOGEN:::org.eclipse.cdt.dsf.debug.ui.disassemblyRulerActions/org.eclipse.debug.ui.actions.RulerAddBreakpointAction'
-!SUBENTRY 1 org.eclipse.ui 2 0 2013-12-31 10:51:14.087
-!MESSAGE invalid keybinding: Cannot bind to an incomplete key sequence: plug-in='org.eclipse.cdt.dsf.ui', id='org.eclipse.cdt.dsf.debug.ui.disassembly.commands.rulerToggleBreakpoint'
-
-!ENTRY org.eclipse.cdt.core 1 0 2013-12-31 10:52:05.310
-!MESSAGE Indexed 'Emulation Project' (36 sources, 328 headers) in 7.81 sec: 24,872 declarations; 53,930 references; 0 unresolved inclusions; 7 syntax errors; 25 unresolved names (0.03%)
-!SESSION 2014-01-16 20:11:08.881 -----------------------------------------------
+!SESSION 2014-01-21 12:27:07.677 -----------------------------------------------
 eclipse.buildId=4.3.0.M20130911-1000
 java.version=1.6.0_27
 java.vendor=Sun Microsystems Inc.
@@ -59,175 +6,10 @@ BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
 Framework arguments:  -product org.eclipse.epp.package.cpp.product
 Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product
 
-!ENTRY org.eclipse.cdt.core 1 0 2014-01-16 20:11:55.784
-!MESSAGE Indexed 'Emulation Project' (14 sources, 1,288 headers) in 42.68 sec: 79,812 declarations; 442,650 references; 32 unresolved inclusions; 0 syntax errors; 717 unresolved names (0.14%)
-
-!ENTRY org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for ALT+CTRL+I:
-Binding(ALT+CTRL+I,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
-		Open an include browser on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1da0630,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(ALT+CTRL+I,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
-		Open an include browser on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1da0630,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for ALT+SHIFT+R:
-Binding(ALT+SHIFT+R,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
-		Rename the selected element,
-		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@cc6765,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(ALT+SHIFT+R,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
-		Rename the selected element,
-		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@cc6765,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for F3:
-Binding(F3,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
-		Open an editor on the selected element's declaration(s),
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@19855d8,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(F3,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
-		Open an editor on the selected element's declaration(s),
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@19855d8,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for CTRL+SHIFT+T:
-Binding(CTRL+SHIFT+T,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
-		Open an element in an Editor,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2bf25e,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+SHIFT+T,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
-		Open an element in an Editor,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2bf25e,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for F4:
-Binding(F4,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
-		Open a type hierarchy on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1352584,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(F4,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
-		Open a type hierarchy on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1352584,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for CTRL+G:
-Binding(CTRL+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
-		Search for declarations of the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@322df1,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
-		Search for declarations of the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@322df1,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for CTRL+SHIFT+G:
-Binding(CTRL+SHIFT+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
-		Search for references to the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6636a6,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+SHIFT+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
-		Search for references to the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6636a6,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for ALT+CTRL+H:
-Binding(ALT+CTRL+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
-		Open the call hierarchy for the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@8df794,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(ALT+CTRL+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
-		Open the call hierarchy for the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@8df794,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:23:06.982
-!MESSAGE A conflict occurred for CTRL+SHIFT+H:
-Binding(CTRL+SHIFT+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
-		Open a type in the type hierarchy view,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7916db,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+SHIFT+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
-		Open a type in the type hierarchy view,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7916db,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
+This is a continuation of log file /home/project/workspace/.metadata/.bak_1.log
+Created Time: 2014-01-21 19:05:37.976
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:19.570
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:05:37.976
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -250,14 +32,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:33.464
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:05:39.905
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -287,7 +69,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:35.766
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:03.206
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -317,7 +99,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:38.995
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:08.991
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -347,7 +129,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:40.725
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:10.306
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -377,7 +159,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:42.018
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:18.269
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -407,7 +189,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:45.244
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:23.194
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -437,7 +219,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:46.576
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:24.489
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -467,7 +249,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:53.475
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:30.718
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -497,7 +279,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:54.780
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:35.615
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -527,7 +309,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:56.001
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:37.836
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -557,7 +339,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:57.388
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:39.560
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -587,7 +369,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:23:59.130
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:43.094
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -617,7 +399,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:00.448
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:45.132
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -647,7 +429,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:03.182
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:48.696
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -677,7 +459,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:06.641
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:50.007
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -707,7 +489,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:08.873
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:56.603
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -737,7 +519,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:10.206
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:06:57.938
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -767,7 +549,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:11.437
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:08:27.180
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -797,7 +579,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:13.756
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:08:29.594
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -827,7 +609,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:24:16.413
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:08:30.833
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -857,7 +639,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:23.007
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:08:54.242
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -887,7 +669,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:25.954
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:08:54.624
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -917,7 +699,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:31.864
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:09:04.720
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -947,7 +729,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:35.357
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:09:09.831
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -977,7 +759,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:36.592
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:10:13.039
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1007,7 +789,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:38.413
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:10:21.625
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1037,7 +819,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:40.651
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:10:27.766
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1067,7 +849,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:25:43.589
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:10:28.874
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1097,28 +879,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.jface 2 0 2014-01-16 20:29:48.802
-!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-16 20:29:48.802
-!MESSAGE A conflict occurred for CTRL+D:
-Binding(CTRL+D,
-	ParameterizedCommand(Command(org.eclipse.debug.ui.commands.eof,EOF,
-		Send end of file,
-		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@f8f3d6,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.debug.ui.console,,,system)
-Binding(CTRL+D,
-	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
-		Delete a line of text,
-		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5089fa,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.ui.textEditorScope,,,system)
-
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:39:54.337
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:10:40.257
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1148,7 +909,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:02.637
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:10:53.253
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1178,7 +939,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:11.497
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:19:36.771
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1208,7 +969,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:17.230
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:19:59.988
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1238,7 +999,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:19.461
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:20:37.711
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1268,7 +1029,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:28.447
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:22:36.748
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1298,7 +1059,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:31.008
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:22:44.980
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1328,7 +1089,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:45.847
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:22:52.563
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1358,7 +1119,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:48.674
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:23:19.798
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1388,7 +1149,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:40:51.965
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:23:53.609
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1418,7 +1179,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:42.727
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:25:23.844
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1448,7 +1209,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:44.027
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:25:30.305
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1478,7 +1239,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:45.254
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:48:31.377
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1508,7 +1269,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:47.189
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:48:38.644
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1538,7 +1299,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:48.933
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:48:45.971
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1568,7 +1329,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:50.260
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:48:49.389
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1598,7 +1359,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:52.097
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:48:52.208
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1628,7 +1389,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:54.327
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:48:53.446
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1658,7 +1419,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:57.237
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:02.158
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1688,7 +1449,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:44:59.056
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:03.875
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1718,7 +1479,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:01.279
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:11.364
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1748,7 +1509,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:03.093
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:12.650
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1778,7 +1539,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:31.152
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:16.366
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1801,14 +1562,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:34.928
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:18.588
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1831,14 +1592,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:36.020
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:22.418
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1868,7 +1629,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:37.134
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:24.144
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1898,7 +1659,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:39.525
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:27.471
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1928,7 +1689,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:40.735
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:29.684
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1958,7 +1719,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:50.067
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:32.610
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -1988,7 +1749,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:53.801
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:39.392
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2018,7 +1779,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:57.522
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:44.264
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2048,7 +1809,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:45:59.352
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:46.924
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2078,7 +1839,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:46:03.079
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:48.489
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2108,7 +1869,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:46:04.953
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:53.542
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2138,7 +1899,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:46:06.695
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:55.351
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2168,7 +1929,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:46:08.515
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:49:57.607
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2198,7 +1959,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:46:15.746
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:51:17.152
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2228,7 +1989,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:46:18.077
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:51:18.484
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2258,7 +2019,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:46:20.381
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:55:40.333
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2288,7 +2049,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:47:57.131
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:55:42.552
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2311,14 +2072,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:47:59.147
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:55:44.310
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2348,7 +2109,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:48:21.378
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:55:51.157
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2378,7 +2139,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:48:27.174
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:55:54.386
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2408,7 +2169,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:48:37.760
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:55:58.920
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2438,7 +2199,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:13.897
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:56:05.662
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2461,14 +2222,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:22.305
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:56:06.958
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2498,7 +2259,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:28.160
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:56:12.180
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2528,7 +2289,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:31.485
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:56:13.402
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2558,7 +2319,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:33.217
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 19:59:13.327
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2588,7 +2349,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:42.048
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:02:22.211
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2618,7 +2379,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:43.781
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:00.658
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2648,7 +2409,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:50:46.513
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:23.985
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2678,7 +2439,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:26.880
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:30.096
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2708,7 +2469,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:29.235
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:34.709
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2738,7 +2499,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:30.478
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:43.507
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2768,7 +2529,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:33.927
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:45.233
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2798,7 +2559,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:35.647
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:51.082
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2828,7 +2589,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:37.455
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:55.308
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2858,7 +2619,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:41.187
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:03:57.631
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2888,7 +2649,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:44.148
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:02.273
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2918,7 +2679,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:48.887
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:06.196
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2948,7 +2709,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:54.791
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:09.434
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -2978,7 +2739,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:51:56.146
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:12.685
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3008,7 +2769,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:36.480
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:16.568
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3038,7 +2799,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:39.960
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:17.921
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3068,7 +2829,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:42.187
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:19.787
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3098,7 +2859,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:48.949
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:04:21.070
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3128,7 +2889,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:50.787
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:07:54.547
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3158,7 +2919,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:53.508
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:08:01.963
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3188,7 +2949,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:55.355
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:08:04.216
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3218,7 +2979,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:54:56.732
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:08:05.445
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3248,7 +3009,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:00.091
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:08:06.719
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3278,7 +3039,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:01.819
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:08:11.013
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3308,7 +3069,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:04.732
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:16:36.839
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3338,7 +3099,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:06.465
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:16:44.367
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3368,7 +3129,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:09.777
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:16:50.879
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3398,7 +3159,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:12.509
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:16:51.381
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3428,7 +3189,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:13.834
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:17:20.131
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3458,7 +3219,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:17.663
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:17:27.638
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3488,7 +3249,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:20.394
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:17:37.112
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3518,7 +3279,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:22.748
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:17:40.047
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3548,7 +3309,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:24.098
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:17:45.410
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3578,7 +3339,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:26.350
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:17:46.773
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3608,7 +3369,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:27.675
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:01.111
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3638,7 +3399,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:30.484
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:05.070
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3668,7 +3429,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:55:44.986
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:07.650
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3698,7 +3459,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 20:58:10.514
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:12.981
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3728,7 +3489,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:00:50.673
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:15.397
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3751,14 +3512,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:00:54.482
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:17.306
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3788,7 +3549,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:03.256
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:20.604
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3818,7 +3579,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:08.721
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:22.090
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3848,7 +3609,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:13.892
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:43.328
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3878,7 +3639,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:16.313
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:18:44.655
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3908,7 +3669,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:17.608
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:19:00.631
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3938,7 +3699,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:18.838
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:19:19.271
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3968,7 +3729,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:22.379
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:21:30.309
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -3998,7 +3759,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:25.076
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:21:31.806
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4028,7 +3789,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:27.163
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:21:49.239
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4058,7 +3819,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:28.247
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:21:51.368
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4088,7 +3849,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:29.832
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:25:20.901
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4118,7 +3879,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:31.421
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:25:55.642
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4148,7 +3909,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:32.507
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:06.361
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4178,7 +3939,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:36.597
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:07.673
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4208,7 +3969,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:39.681
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:10.898
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4238,7 +3999,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:42.347
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:13.125
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4268,7 +4029,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:43.934
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:19.338
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4298,7 +4059,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:45.522
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:20.626
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4328,7 +4089,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:47.111
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:26.806
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4358,7 +4119,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:48.702
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:26:28.129
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4388,7 +4149,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:49.794
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:27:54.365
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4418,7 +4179,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:01:51.880
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:27:59.127
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4448,7 +4209,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:02:03.843
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:05.670
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4478,7 +4239,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:02:05.062
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:09.598
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4508,7 +4269,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:02:09.976
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:12.436
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4538,7 +4299,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:07.596
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:14.326
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4568,7 +4329,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:19.187
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:16.302
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4598,7 +4359,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:21.276
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:22.400
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4628,7 +4389,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:22.865
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:29.157
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4658,7 +4419,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:23.951
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:30.399
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4688,7 +4449,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:25.039
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:32.163
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4718,7 +4479,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:26.125
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:46.147
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4748,7 +4509,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:27.362
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:47.476
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4778,7 +4539,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:28.474
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:28:59.666
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4808,7 +4569,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:03:30.609
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:29:01.520
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4838,7 +4599,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:04:04.897
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:08.728
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4868,7 +4629,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:04:06.014
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:12.063
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4898,7 +4659,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:04:07.604
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:13.827
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4928,7 +4689,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:04:18.693
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:17.131
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4958,7 +4719,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:07:06.749
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:23.094
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -4988,7 +4749,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:10:41.907
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:28.899
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5018,7 +4779,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:10:51.079
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:33.324
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5048,7 +4809,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:10:53.732
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:32:35.620
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5078,7 +4839,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:10:54.913
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:05.764
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5108,7 +4869,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:10:57.203
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:07.738
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5138,7 +4899,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:10:58.356
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:11.522
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5168,7 +4929,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:11:27.985
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:13.844
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5198,7 +4959,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:13:14.631
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:23.074
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5228,7 +4989,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:13:38.312
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:24.408
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5251,14 +5012,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:14:17.683
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:27.712
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5288,7 +5049,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:14:21.750
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:30.608
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5318,7 +5079,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:14:29.302
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:33.504
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5348,7 +5109,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:14:31.939
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:35.465
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5378,7 +5139,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:02.839
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:40.747
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5408,7 +5169,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:04.462
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:33:42.545
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5438,7 +5199,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:12.599
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:34:03.037
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5468,7 +5229,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:16.282
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:34:06.536
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5498,7 +5259,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:18.430
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:34:08.658
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5528,7 +5289,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:20.028
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:34:12.393
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5558,7 +5319,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:21.669
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:34:14.856
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5588,7 +5349,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:25.787
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:35:31.886
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5618,7 +5379,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:15:36.379
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:35:33.277
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5648,7 +5409,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:10.972
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:38:53.658
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5678,7 +5439,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:12.060
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:39:24.643
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5708,7 +5469,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:17.650
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:39:32.418
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5738,7 +5499,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:18.734
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:39:51.342
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5768,7 +5529,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:22.361
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:39:53.362
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5798,7 +5559,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:28.117
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:39:55.591
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5828,7 +5589,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:33.628
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:39:59.972
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5858,7 +5619,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:35.464
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:40:02.220
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5888,7 +5649,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:37.245
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:40:04.790
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5918,7 +5679,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:16:43.700
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:40:06.167
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5948,7 +5709,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:26:25.703
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:09.488
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -5978,7 +5739,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:37:06.400
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:14.283
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6008,7 +5769,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-16 21:37:08.132
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:16.007
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6037,15 +5798,8 @@ java.lang.NullPointerException
 	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
-!SESSION 2014-01-20 16:21:52.236 -----------------------------------------------
-eclipse.buildId=4.3.0.M20130911-1000
-java.version=1.6.0_27
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
-Framework arguments:  -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 16:22:14.297
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:18.254
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6068,186 +5822,44 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
-!SESSION 2014-01-20 16:28:51.550 -----------------------------------------------
-eclipse.buildId=4.3.0.M20130911-1000
-java.version=1.6.0_27
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
-Framework arguments:  -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for ALT+CTRL+I:
-Binding(ALT+CTRL+I,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
-		Open an include browser on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1015823,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(ALT+CTRL+I,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
-		Open an include browser on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1015823,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for ALT+SHIFT+R:
-Binding(ALT+SHIFT+R,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
-		Rename the selected element,
-		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@141928f,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(ALT+SHIFT+R,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
-		Rename the selected element,
-		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@141928f,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for F3:
-Binding(F3,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
-		Open an editor on the selected element's declaration(s),
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1fd13f6,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(F3,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
-		Open an editor on the selected element's declaration(s),
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1fd13f6,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for CTRL+SHIFT+T:
-Binding(CTRL+SHIFT+T,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
-		Open an element in an Editor,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@298ffc,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+SHIFT+T,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
-		Open an element in an Editor,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@298ffc,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for F4:
-Binding(F4,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
-		Open a type hierarchy on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@ac169c,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(F4,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
-		Open a type hierarchy on the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@ac169c,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for CTRL+G:
-Binding(CTRL+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
-		Search for declarations of the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6451,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
-		Search for declarations of the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6451,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for CTRL+SHIFT+G:
-Binding(CTRL+SHIFT+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
-		Search for references to the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1ba0b12,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+SHIFT+G,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
-		Search for references to the selected element in the workspace,
-		Category(org.eclipse.cdt.ui.category.source,Source,Source commands,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1ba0b12,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for ALT+CTRL+H:
-Binding(ALT+CTRL+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
-		Open the call hierarchy for the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@12cf7bc,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(ALT+CTRL+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
-		Open the call hierarchy for the selected element,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@12cf7bc,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
-!SUBENTRY 1 org.eclipse.jface 2 0 2014-01-20 16:38:50.035
-!MESSAGE A conflict occurred for CTRL+SHIFT+H:
-Binding(CTRL+SHIFT+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
-		Open a type in the type hierarchy view,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@13c94c4,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cEditorScope,,,system)
-Binding(CTRL+SHIFT+H,
-	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
-		Open a type in the type hierarchy view,
-		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
-		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@13c94c4,
-		,,true),null),
-	org.eclipse.ui.defaultAcceleratorConfiguration,
-	org.eclipse.cdt.ui.cViewScope,,,system)
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:21.606
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:03:08.957
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:25.340
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6257,11 +5869,38 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:29.592
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTForStatement.accept(CPPASTForStatement.java:143)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
 	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
@@ -6280,7 +5919,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:03:30.877
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:35.636
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6290,11 +5929,38 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:36.875
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTForStatement.accept(CPPASTForStatement.java:143)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
 	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
@@ -6313,7 +5979,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:03:32.525
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:38.771
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6323,11 +5989,38 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:145)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.processAst(StatementHasNoEffectChecker.java:48)
+	at org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker.processModel(AbstractIndexAstChecker.java:111)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.processResource(CodanRunner.java:88)
+	at org.eclipse.cdt.codan.internal.core.CodanRunner.runInEditor(CodanRunner.java:42)
+	at org.eclipse.cdt.codan.core.cxx.internal.model.CxxCodanReconciler.reconciledAst(CxxCodanReconciler.java:36)
+	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
+	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
+
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:42.514
+!MESSAGE Internal Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.usesOverloadedOperator(StatementHasNoEffectChecker.java:186)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker.access$3(StatementHasNoEffectChecker.java:181)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.hasNoEffect(StatementHasNoEffectChecker.java:96)
+	at org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectChecker$CheckStmpVisitor.visit(StatementHasNoEffectChecker.java:60)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement.accept(CPPASTExpressionStatement.java:65)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTForStatement.accept(CPPASTForStatement.java:143)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCatchHandler.accept(CPPASTCatchHandler.java:109)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTryBlockStatement.accept(CPPASTTryBlockStatement.java:102)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:85)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:198)
 	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:263)
@@ -6346,7 +6039,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:13:06.542
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:44.927
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6376,7 +6069,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:16:07.926
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:54.671
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6399,14 +6092,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:01.221
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:41:57.908
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6429,14 +6122,14 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.codan.internal.ui.cxx.CodanCReconciler.reconciled(CodanCReconciler.java:57)
 	at org.eclipse.cdt.internal.ui.editor.CEditor.reconciled(CEditor.java:3225)
 	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:99)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.initialReconcile(CReconcilingStrategy.java:122)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:117)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.initialReconcile(CCompositeReconcilingStrategy.java:108)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.initialProcess(CReconciler.java:347)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:77)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:04.821
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:42:05.087
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6466,7 +6159,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:06.901
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:42:11.800
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6496,7 +6189,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:27.627
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:42:13.211
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6526,7 +6219,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:31.851
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:42:18.044
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6556,7 +6249,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 17:53:40.894
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:42:20.328
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6586,7 +6279,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:31.423
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:42:31.351
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6616,7 +6309,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:46.538
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:42:32.644
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6646,7 +6339,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:50.122
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:44:22.446
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6676,7 +6369,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:51.706
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:44:24.289
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6706,7 +6399,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:52.789
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:44:40.703
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6736,7 +6429,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:54.904
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:44:41.942
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6766,7 +6459,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:57.052
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:10.248
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6796,7 +6489,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:15:58.653
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:13.329
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6826,7 +6519,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:00.258
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:14.584
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6856,7 +6549,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:02.346
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:19.474
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6886,7 +6579,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:03.430
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:23.311
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6916,7 +6609,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:10.013
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:32.020
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6946,7 +6639,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:11.094
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:34.815
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -6976,7 +6669,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:13.181
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 20:46:59.638
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -7006,7 +6699,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:15.268
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 21:01:10.711
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -7036,7 +6729,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:16.382
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 21:01:13.374
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -7066,7 +6759,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:17.990
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 21:06:09.965
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -7096,7 +6789,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:21.584
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 21:06:11.252
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -7126,7 +6819,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:22.673
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 21:06:22.273
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException
@@ -7156,7 +6849,7 @@ java.lang.NullPointerException
 	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:358)
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 
-!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-20 19:16:24.284
+!ENTRY org.eclipse.cdt.codan.core 4 1 2014-01-21 21:06:23.497
 !MESSAGE Internal Error
 !STACK 0
 java.lang.NullPointerException

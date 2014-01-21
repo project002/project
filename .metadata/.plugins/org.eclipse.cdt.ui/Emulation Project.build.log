@@ -1,15 +1,6 @@
-19:16:22 **** Incremental Build of configuration Default for project Emulation Project ****
+21:06:20 **** Incremental Build of configuration Default for project Emulation Project ****
 make all 
-Building file: ../src/CPacketCollector.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
-Finished building: ../src/CPacketCollector.cpp
- 
-Building target: Emulation Project
-Invoking: GCC C++ Linker
-g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
-Finished building target: Emulation Project
- 
+make: Nothing to be done for `all'.
 
-19:16:23 Build Finished (took 971ms)
+21:06:20 Build Finished (took 66ms)
 

@@ -17,7 +17,7 @@
 #include <boost/thread.hpp>
 #include <boost/tuple/tuple.hpp>
 #include "boost/date_time/posix_time/posix_time.hpp"
-
+#include <boost/signals2/mutex.hpp>
 #define DEFAULT_ROUTER_BUFFER_SIZE 100
 class CRouter
 {

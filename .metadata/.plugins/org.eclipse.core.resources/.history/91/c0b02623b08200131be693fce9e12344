@@ -1,0 +1,185 @@
+/*
+ * CPacketCollector.cpp
+ *
+ *  Created on: Dec 17, 2013
+ *      Author: root
+ */
+
+#include "CPacketCollector.h"
+//Defining the map
+map<string,unsigned long long int> CPacketCollector::mPacketsStatistics;
+
+CPacketCollector::CPacketCollector(unsigned int bufferSize):mBufferSize(bufferSize)
+{
+	try
+	{
+	}
+	catch(CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
+}
+
+CPacketCollector::~CPacketCollector()
+{
+	try
+	{
+
+	}
+	catch(CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
+}
+
+void CPacketCollector::PushBack(Crafter::Packet * pkt)
+{
+	try
+	{
+		mMtx.lock();
+		if (mPackets.size()<mBufferSize)
+		{
+			cout<< "Buffer Size : "<<mPackets.size()<<endl;
+			mPackets.push_back(pkt);
+			mMtx.unlock();
+		}
+		else
+		{
+			cout << "packet discarded" << endl;
+			if (pkt!=NULL)
+			{
+				delete (pkt);
+				pkt = NULL;
+			}
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		mMtx.unlock();
+		throw;
+	}
+	mMtx.unlock();
+}
+void CPacketCollector::AnalyzePacketForStatistics(Crafter::Packet * packet)
+{
+	try
+	{
+		ARP* arp_layer = packet->GetLayer<ARP>();
+		if (arp_layer != NULL)
+		{
+			mPacketsStatistics["ARP"]=mPacketsStatistics["ARP"]+1;
+		}
+		else
+		{
+			IP* ip_layer = packet->GetLayer<IP>();
+			if (ip_layer != NULL)
+			{
+				mPacketsStatistics["IPv4"]=mPacketsStatistics["IPv4"]+1;
+				TCP* tcp_layer = packet->GetLayer<TCP>();
+				if(tcp_layer!=NULL)
+				{
+					mPacketsStatistics["TCP"]=mPacketsStatistics["TCP"]+1;
+				}
+				else
+				{
+					UDP* udp_layer = packet->GetLayer<UDP>();
+					if (udp_layer!=NULL)
+					{
+						mPacketsStatistics["UDP"]=mPacketsStatistics["UDP"]+1;
+					}
+				}
+
+			}
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		throw;
+	}
+
+}
+Crafter::Packet * CPacketCollector::PopFront()
+{
+	try
+	{
+		mMtx.lock();
+		if (!mPackets.empty())
+		{
+			Crafter::Packet * toret = mPackets.front();
+			mPackets.pop_front();
+			mMtx.unlock();
+			return toret;
+		}
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		mMtx.unlock();
+		throw;
+	}
+	mMtx.unlock();
+	return NULL;
+
+}
+
+void CPacketCollector::DropRandomPacket()
+{
+	try
+	{
+		mMtx.lock();
+		if (!mPackets.empty())
+		{
+			list<Crafter::Packet*>::iterator iter = mPackets.begin();
+			unsigned int cellNumber=rand()% mPackets.size();
+			for (unsigned int i=0;i<cellNumber-1;i++,iter++);
+			if ((*iter)!=NULL)
+			{
+				delete (*iter);
+				(*iter)=NULL;
+			}
+			mPackets.erase(iter);
+		}
+		mMtx.unlock();
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		mMtx.unlock();
+		throw;
+	}
+	mMtx.unlock();
+}
+
+/**
+ * Function for debugging. It prints the whole packet as it was received.
+ * @param buffer pointer to the array's beginning
+ * @param recvSize size of the received packet in bytes
+ */
+void CPacketCollector::PrintPacket()
+{
+	try
+	{
+		mMtx.lock();
+		mPackets.front()->Print();
+		mMtx.unlock();
+	}
+	catch (CException & error)
+	{
+		std::cerr << error.what() << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		mMtx.unlock();
+		throw;
+	}
+	mMtx.unlock();
+}
+

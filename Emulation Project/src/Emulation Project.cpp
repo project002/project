@@ -19,10 +19,10 @@
 
 #define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
 #define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
-#define STOP_NETWORK_MANAGER_COMMAND "sudo service network-manager stop"
-#define ENABLE_FIREWALL "sudo ufw enable"
-#define STOP_ALL_INCOMING_PACKETS "sudo ufw default deny incoming"
-#define STOP_ALL_OUTGOING_PACKETS "sudo ufw default deny outgoing"
+#define STOP_NETWORK_MANAGER_COMMAND "service network-manager stop"
+#define ENABLE_FIREWALL "ufw enable"
+#define STOP_ALL_INCOMING_PACKETS "ufw default deny incoming"
+#define STOP_ALL_OUTGOING_PACKETS "ufw default deny outgoing"
 #define SYSTEM_COMMANDS_TIME_TO_COMPLETE 0.5
 
 /**
