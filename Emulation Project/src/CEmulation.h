@@ -41,6 +41,7 @@ private: //Private Members
 	CPhysicalConnectionsHandler * mPhysicalConnectionsHandler;
 	vector<CRouter *> mRouters;
 	bool mStaticRoutingTable;
+	boost::thread mTableSwappingThread;
 };
 
 #endif /* CEMULATION_H_ */

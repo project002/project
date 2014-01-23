@@ -20,8 +20,8 @@ CPhysicalConnectionsHandler::CPhysicalConnectionsHandler()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 	}
 }
 
@@ -46,8 +46,8 @@ CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 	}
 }
 
@@ -58,6 +58,7 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 {
 	try
 	{
+		stringstream s;
 		struct ifaddrs* list;
 		struct ifaddrs* node;
 		int ret = 0;
@@ -71,8 +72,8 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 		int i = 0;
 		for (i=0,node = list; node != NULL; node = node->ifa_next,++i)
 		{
-			std::cout << "name:\t" << node->ifa_name << std::endl;
-
+			s << "name:\t" << node->ifa_name ;
+			SLogger::getInstance().Log(s.str().c_str());
 			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo")  )
 			{
 				newConnection = new CPhysicalConnection(node);
@@ -85,8 +86,8 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 	}
 }
 
@@ -114,152 +115,11 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 
 	}
 	return NULL;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Function performs system calls to check the connected Ethernet cards and open sockets accordingly
- * using the Physical Connection class
- */
-/*void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
-{
-	try
-	{
-		struct ifaddrs* list;
-		struct ifaddrs* node;
-		int ret = 0;
-		int address_size = 0;
-		int address_int = 0;
-		char host_buffer[NI_MAXHOST];
-
-		//get devices list
-		ret = getifaddrs(&list);
-		if (ret == -1) {throw CException("Err: when retrieving devices list");}
-
-		//iterate over list
-		for (node = list; node != NULL; node = node->ifa_next)
-		{
-			std::cout << "name:\t" << node->ifa_name << std::endl;
-
-			if (node->ifa_addr == NULL)
-			{
-				std::cout << "empty address" << std::endl;
-				continue;
-			}
-
-			std::cout << "\tfamily type:";
-			switch (node->ifa_addr->sa_family)
-			{
-				case AF_PACKET:
-					std::cout << "AF_PACKET";
-					break;
-				case AF_INET:
-					std::cout << "AF_INET";
-					break;
-				case AF_INET6:
-					std::cout << "AF_INET6";
-					break;
-			}
-			std::cout << std::endl;
-
-			std::cout << "\taddress:";
-			switch (node->ifa_addr->sa_family)
-			{
-				case AF_INET:
-					address_size = sizeof(struct sockaddr_in);
-					break;
-				case AF_INET6:
-					address_size = sizeof(struct sockaddr_in6);
-					break;
-			}
-			address_int = getnameinfo(node->ifa_addr, address_size, host_buffer,
-					NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
-
-			if (address_int != 0)
-			{
-				std::cout << "no address" << std::endl;
-				continue;
-			}
-			else
-			{
-				std::cout << host_buffer << std::endl;
-			}
-
-		}
-
-		//clear the allocated list
-		freeifaddrs(list);
-	}
-	catch (CException & error)
-	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
-	}
-}*/
 

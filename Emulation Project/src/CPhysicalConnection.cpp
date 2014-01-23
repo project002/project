@@ -46,8 +46,8 @@ CPhysicalConnection::CPhysicalConnection(struct ifaddrs* device) :
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
 
@@ -63,8 +63,8 @@ void CPhysicalConnection::InitiateDHCPService()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
 }
@@ -74,7 +74,7 @@ void CPhysicalConnection::InitiateDHCPService()
 void CPhysicalConnection::startDHCPService()
 {
 
-	cout << "DHCP service started..." << endl;
+	SLogger::getInstance().Log("DHCP service started...");
 	mDHCPSniffer = new Sniffer(CDHCPService::DHCP_FILTER,string(mInterfaceName),runDHCPService);
 
 	mDHCPSniffer->Spawn(-1,static_cast<void*> (mDHCPsrv));
@@ -89,8 +89,8 @@ bool CPhysicalConnection::SendPacket(Packet* packet) const
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
 	return false;
@@ -127,8 +127,8 @@ void CPhysicalConnection::GetInterfaceInformation()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
 }
@@ -192,8 +192,8 @@ void CPhysicalConnection::SetNetmask(CUIPV4* getway_addr,CUIPV4* mIPMaskAddress)
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
 }
@@ -231,8 +231,8 @@ void CPhysicalConnection::ConfigureSocket(struct ifaddrs* device)
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
 }
@@ -247,7 +247,8 @@ void CPhysicalConnection::InitStructs(struct ifaddrs* device)
 	}
 	catch(CException & e)
 	{
-		std::cerr << e.what() << std::endl;
+		SLogger::getInstance().Log("Exception!");
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 	}
 }
 CPhysicalConnection::~CPhysicalConnection()
@@ -270,8 +271,8 @@ CPhysicalConnection::~CPhysicalConnection()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
 }
@@ -313,8 +314,8 @@ Crafter::Packet* CPhysicalConnection::GetPacket()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 		throw CException("Emulation Terminated Socket Physical Socket Error");
 	}

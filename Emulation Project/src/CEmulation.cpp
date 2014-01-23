@@ -20,8 +20,8 @@ CEmulation::CEmulation(): mPhysicalConnectionsHandler(new CPhysicalConnectionsHa
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -33,16 +33,23 @@ CEmulation::~CEmulation()
 {
 	try
 	{
+		vector<CRouter *>::iterator iter;
+		//STARTing sniffer on all routers
+		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
+		{
+			(*iter)->StopEmulation();
+		}
 		if (mPhysicalConnectionsHandler != NULL)
 		{
 			delete mPhysicalConnectionsHandler;
 			mPhysicalConnectionsHandler=NULL;
 		}
+
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -62,8 +69,8 @@ void CEmulation::EmulationBuilder(char* SetupFile)
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -99,8 +106,8 @@ void CEmulation::TableSwapping()
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -155,7 +162,6 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 							"VirtualConnections"))
 			{
 				unsigned int RouterNumber = iter.attribute("Number").as_int();
-				cout<<RouterNumber<<endl;
 				//Virtual connections will be created in the virtual connection parser
 				//BEFORE the router parser is called.
 				//Once all the virtual connections are created, here it will be iterated over
@@ -174,8 +180,8 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -208,8 +214,8 @@ void CEmulation::XMLVirtualConnectionsParser(pugi::xml_document & doc)
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -231,14 +237,13 @@ void CEmulation::XMLRoutingTableParserAvailability(pugi::xml_document & doc)
 		}
 		else
 		{
-			boost::thread m_thread;
-			m_thread = boost::thread(&CEmulation::TableSwapping, this);
+			mTableSwappingThread = boost::thread(&CEmulation::TableSwapping, this);
 		}
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -257,8 +262,8 @@ void CEmulation::XMLParseRoutingTable(pugi::xml_document & doc)
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -288,8 +293,8 @@ void CEmulation::XMLParser(char * SetupFile)
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -310,16 +315,23 @@ void CEmulation::StartEmulation()
 		{
 			(*iter)->Sniffer();
 		}
-
+		string command="init";
 		//TODO remove when done
-		cout << "busy wait - TODO remove when done" << endl;
-		while(true);
+		while(command.compare("exit"))
+		{
+			cin>> command;
+		}
+
+		if(!mStaticRoutingTable)
+		{
+			mTableSwappingThread.interrupt();
+		}
 
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }

@@ -7,6 +7,7 @@
 //============================================================================
 
 #include "CEmulation.h"
+#include "SLogger.h"
 #define SETUP_XML_ARGUMENT_POSITION 1
 #define MINIMUM_NUMBER_OF_ARGUMENTS 2
 #define STATUS_FAILURE -1
@@ -45,8 +46,8 @@ void EmulationParametersValidator(int argc, char *argv[])
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -109,12 +110,35 @@ void DisableNetworkManager()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
 
+void EnableNetworkManager()
+{
+	try
+	{
+		int status = system("fix_the_internets");
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
+		}
+		status = system("ufw disable");
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
+		}
+		sleep(3);
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
 /**
  *
  * @param argc number of arguments provided for the emulation
@@ -125,20 +149,28 @@ int main(int argc, char *argv[])
 {
 	try
 	{
+		SLogger::getInstance().InitLogger();
+		SLogger::getInstance().Log("Disabling Linux Networking");
 		DisableNetworkManager();
-		//Double call to avoid errors on socket
-		DisableNetworkManager();
+		SLogger::getInstance().Log("Validating XML file is present");
  		EmulationParametersValidator(argc,argv);
  		CEmulation * Emulator= new CEmulation();
+ 		SLogger::getInstance().Log("Building the emulation");
  		Emulator->EmulationBuilder(argv[SETUP_XML_ARGUMENT_POSITION]);
+ 		SLogger::getInstance().Log("Starting the emulation");
  		Emulator->StartEmulation();
+ 		SLogger::getInstance().Log("Emulation exiting");
 		delete Emulator;
+		SLogger::getInstance().Log("Enabling Networking");
+		EnableNetworkManager();
+		SLogger::getInstance().Log("Destroying Logger and exiting program");
+		SLogger::getInstance().DestroyLogger();
 		return(EXIT_SUCCESS);
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		return(EXIT_FAILURE);
 	}
 }

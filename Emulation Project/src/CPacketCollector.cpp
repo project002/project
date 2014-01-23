@@ -16,8 +16,8 @@ CPacketCollector::CPacketCollector(unsigned int bufferSize):mBufferSize(bufferSi
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -30,8 +30,8 @@ CPacketCollector::~CPacketCollector()
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -48,7 +48,7 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		}
 		else
 		{
-			cout << "packet discarded" << endl;
+			SLogger::getInstance().Log("packet discarded");
 			if (pkt!=NULL)
 			{
 				delete (pkt);
@@ -58,8 +58,8 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		mMtx.unlock();
 		throw;
 	}
@@ -99,8 +99,8 @@ void CPacketCollector::AnalyzePacketForStatistics(Crafter::Packet * packet)
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 
@@ -120,8 +120,8 @@ Crafter::Packet * CPacketCollector::PopFront()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		mMtx.unlock();
 		throw;
 	}
@@ -151,8 +151,8 @@ void CPacketCollector::DropRandomPacket()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		mMtx.unlock();
 		throw;
 	}
@@ -174,8 +174,8 @@ void CPacketCollector::PrintPacket()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		mMtx.unlock();
 		throw;
 	}

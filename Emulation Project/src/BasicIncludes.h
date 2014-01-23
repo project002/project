@@ -9,12 +9,10 @@
  * Basic Streaming Inclusions
  */
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <stdlib.h>
 #include <string>
-
-#include "Color.h"
+#include "SLogger.h"
 using namespace std;
 
 /**

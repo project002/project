@@ -6,7 +6,6 @@
  */
 
 #include "CDHCPService.h"
-
 #define BROADCAST_MAC_ADDRESS "ff:ff:ff:ff:ff:ff"
 #define BROADCAST_IP_ADDRESS "255.255.255.255"
 #define EMPTY_IP_ADDRESS "0.0.0.0"
@@ -26,7 +25,8 @@ CDHCPService::CDHCPService(char* iFaceName,const uint8_t* subNetName):
 		table_sz = getIPTableSizeFromSubnet(mSubnetName);
 		fillupIPTable(table_sz);
 		CDHCPService::INIT_TABLE = false; //don't init in next service
-		cout << "ip table init complete" << endl;
+
+		SLogger::getInstance().Log("ip table init complete");
 	}
 	mHandshakeIP = DEF_IPv4;
 }
@@ -42,7 +42,9 @@ const char* CDHCPService::getIPAddr(string MAC)
 	string addr = CDHCPService::IP_TABLE.back();
 	CDHCPService::IP_TABLE.pop_back();
 	mLocal_Table.push_back(pair<string,string> (addr,MAC) );
-	cout << "last added ip address: " << mLocal_Table.back().first << " for MAC: " << mLocal_Table.back().second << endl;
+	stringstream ss;
+	ss<< "last added ip address: " << mLocal_Table.back().first << " for MAC: " << mLocal_Table.back().second ;
+	SLogger::getInstance().Log(ss.str().c_str());
 	return mLocal_Table.back().first.c_str();
 }
 
@@ -116,6 +118,7 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 {
 	word XID = 0;
 	string clientMAC("");
+	stringstream s;
 	try
 	{
 		DHCP* dhcp_packet = new DHCP();
@@ -123,7 +126,8 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 		XID = dhcp_packet->GetTransactionID();
 		clientMAC = dhcp_packet->GetClientMAC();
 		mHandshakeIP = getIPAddr(clientMAC); //allocate a IP address for the handshake
-		cout << "Started Handshake Offering " << mHandshakeIP << endl;
+		s<< "Started Handshake Offering " << mHandshakeIP;
+		SLogger::getInstance().Log(s.str().c_str());
 		if (dhcp_packet != NULL)
 		{
 			delete dhcp_packet;
@@ -138,14 +142,18 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 		{
 			case MT_RELEASE : handleRelease(sniff_packet);break;
 			case MT_REQUEST : handleRequest(sniff_packet);break;
-			default : cerr << "No Handler found for message type:" << (int) msg_type << endl;break;
+			default : s.clear();
+				s << "No Handler found for message type:" << (int) msg_type;
+				SLogger::getInstance().Log(s.str().c_str());
+				break;
 		}
 		return;
 
 	}
 	catch (CException & error)
 	{
-		cerr << "When Parsing DHCP Packet: " << error.what() << endl;
+		SLogger::getInstance().Log("Exception!");
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		releaseIPAddr(mHandshakeIP);
 		return;
 	}
@@ -165,7 +173,9 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 	}
 	else
 	{
-		cout << "[@] No response to DHCP offer with ip " << mHandshakeIP << endl;
+		s.clear();
+		s<<"[@] No response to DHCP offer with ip " << mHandshakeIP;
+		SLogger::getInstance().Log(s.str().c_str());
 		releaseIPAddr(mHandshakeIP);
 		CleanCrafter();
 	}
@@ -174,6 +184,7 @@ void CDHCPService::startDHCPhandshake(Packet* sniff_packet)
 
 void CDHCPService::handleRelease(Packet* release_packet)
 {
+	stringstream s;
 	try
 	{
 		DHCP* dhcp_packet = new DHCP();
@@ -187,17 +198,20 @@ void CDHCPService::handleRelease(Packet* release_packet)
 		if (it!=mLocal_Table.end())
 		{
 			releaseIPAddr(IP);
-			cout << "IP " << IP << " Released" << endl;
+			s<<"IP " << IP << " Released";
+			SLogger::getInstance().Log(s.str().c_str());
 		}
 		//else ignore
 	}
 	catch (CDHCPMsgTypeException &error)
 	{
-		cerr << "should not have been here:" << endl << __PRETTY_FUNCTION__ << endl;
+		SLogger::getInstance().Log("Exception!");
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 	}
 	catch (CException &error)
 	{
-		cerr << "should not have been here:" << endl << __PRETTY_FUNCTION__ << endl;
+		SLogger::getInstance().Log("Exception!");
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 	}
 }
 
@@ -206,6 +220,7 @@ void CDHCPService::handleRequest(Packet* request_packet)
 	word XID = 0;
 	string clientMAC("");
 	string iface(miFaceName);
+	stringstream s;
 	try
 	{
 		/* Received DHCP layer */
@@ -227,14 +242,16 @@ void CDHCPService::handleRequest(Packet* request_packet)
 			delete dhcp_rcv;
 			dhcp_rcv = NULL;
 		}
-		cout << "Handshake Finished With Setting " << mHandshakeIP << endl;
+		s<< "Handshake Finished With Setting " << mHandshakeIP;
+		SLogger::getInstance().Log(s.str().c_str());
 
 		mHandshakeIP = DEF_IPv4; //re-init the handshake ip
 
 	}
 	catch (CException & error)
 	{
-		cerr << "When handeling expected request packet: " << error.what() << endl;
+		SLogger::getInstance().Log("Exception!");
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		releaseIPAddr(mHandshakeIP);
 		return;
 	}
@@ -337,7 +354,8 @@ void CDHCPService::BuildDHCPPacket(word XID,string &clientMAC,Packet* DHCP_PACKE
 
 	catch (CException & error)
 	{
-		cerr << error.what() << endl;
+		SLogger::getInstance().Log("Exception!");
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		releaseIPAddr(mHandshakeIP);
 		return;
 	}

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="Default C++ source template" key="LastUsedSourceTemplate"/>
 	<item value="Default C++ header template" key="LastUsedHeaderTemplate"/>
 	<section name="completion_proposal_size">
+	</section>
+	<section name="PDOMSearchPage">
+		<item value="227191" key="searchFlags"/>
+		<item value="false" key="caseSensitive"/>
+		<list key="previousPatterns">
+			<item value="time"/>
+			<item value="cout"/>
+		</list>
+	</section>
+	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
+		<item value="1010" key="DIALOG_WIDTH"/>
+		<item value="32" key="DIALOG_Y_ORIGIN"/>
+		<item value="576" key="DIALOG_HEIGHT"/>
+		<item value="455" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
 	</section>

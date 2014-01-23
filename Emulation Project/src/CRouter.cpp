@@ -14,8 +14,8 @@ CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 
@@ -26,9 +26,10 @@ void CRouter::RequestTables()
 	{
 		list<CConnection const *>::iterator iter;
 		//iterate over all connections
+		stringstream s;
 		for(iter = mConnections.begin();iter!=mConnections.end();iter++)
 		{
-			cout << "Print Routing Table For " << (*iter)->GetMAC() << endl;
+			s <<"Print Routing Table For " << (*iter)->GetMAC() << endl;
 			//iterate over all ips in the table you got from the connection
 			vector< pair<string,string> >& tables=(*iter)->GetTable();
 			//print table
@@ -37,18 +38,19 @@ void CRouter::RequestTables()
 			for (;it!=tables.end();it++)
 			{
 
-				cout << "\t " << it->first << "|" << (*iter)->GetMAC() << "|" << it->second << endl;
+				s << "\t " << it->first << "|" << (*iter)->GetMAC() << "|" << it->second << endl;
 				mRoutingTable.insert(pair<string,pair<CConnection const*,string> >(
 						it->first,
 						pair<CConnection const*,string>((*iter),it->second)
 					));
 			}
+			SLogger::getInstance().Log(s.str().c_str());
 		}
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -63,8 +65,8 @@ void CRouter::Sniffer()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -72,8 +74,6 @@ void CRouter::Sniffer()
 
 bool CRouter::ProcessSendPacket(Packet* packet)
 {
-//	cout << "[#] before change" << endl;
-
 	map<string,pair< CConnection const*,string> >::iterator table_pos;
 	IP* ip_layer = packet->GetLayer<IP>();
 	Ethernet* eth_layer = packet->GetLayer<Ethernet>();
@@ -121,8 +121,8 @@ void CRouter::PacketHandler()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
@@ -133,7 +133,6 @@ void CRouter::HandleArp(Packet * pkt)
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	map<string,pair< CConnection const*,string> >::iterator con_pos;
 	ARP* arp_layer = pkt->GetLayer<ARP>();
-	//cout<<arp_layer->GetTargetIP()<<"\n";
 	con_pos = mRoutingTable.find(arp_layer->GetSenderIP());
 	pos = mRoutingTable.find(arp_layer->GetTargetIP());
 	if (pos != mRoutingTable.end() && con_pos != mRoutingTable.end())
@@ -143,7 +142,6 @@ void CRouter::HandleArp(Packet * pkt)
 		{
 			arp_layer->SetOperation(ARP::Reply);
 			eth_layer->SetDestinationMAC(arp_layer->GetSenderMAC());
-			//cout<<arp_layer->GetTargetIP()<<"\n";
 			arp_layer->SetTargetMAC(arp_layer->GetSenderMAC());
 			arp_layer->SetSenderMAC(con_pos->second.first->GetMAC());
 			arp_layer->SetTargetIP(arp_layer->GetSenderIP());
@@ -209,10 +207,15 @@ void CRouter::Sniff()
 	}
 	catch (CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
+}
+void CRouter::StopEmulation()
+{
+	mSniffingThread.interrupt();
+	mPacketsHandlingThread.interrupt();
 }
 CRouter::~CRouter()
 {
@@ -227,8 +230,8 @@ CRouter::~CRouter()
 	}
 	catch(CException & error)
 	{
-		std::cerr << error.what() << std::endl;
-		std::cerr << __PRETTY_FUNCTION__ << std::endl;
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
 }
