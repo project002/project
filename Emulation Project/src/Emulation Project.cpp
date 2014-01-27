@@ -8,6 +8,8 @@
 
 #include "CEmulation.h"
 #include "SLogger.h"
+#include "SBasicGUI.h"
+
 #define SETUP_XML_ARGUMENT_POSITION 1
 #define MINIMUM_NUMBER_OF_ARGUMENTS 2
 #define STATUS_FAILURE -1
@@ -24,6 +26,7 @@
 #define ENABLE_FIREWALL "ufw enable"
 #define STOP_ALL_INCOMING_PACKETS "ufw default deny incoming"
 #define STOP_ALL_OUTGOING_PACKETS "ufw default deny outgoing"
+#define REDIRECT_SYSTEM_FILE "SysCall.txt"
 #define SYSTEM_COMMANDS_TIME_TO_COMPLETE 0.5
 
 /**
@@ -52,6 +55,20 @@ void EmulationParametersValidator(int argc, char *argv[])
 	}
 }
 
+int runCmdRedirect(const char* cmd,bool append = true)
+{
+	char new_cmd[1024];
+	if (append)
+	{
+		sprintf(new_cmd,"%s >> %s 2>&1",cmd,REDIRECT_SYSTEM_FILE);
+	}
+	else
+	{
+		sprintf(new_cmd,"%s > %s  2>&1",cmd,REDIRECT_SYSTEM_FILE);
+	}
+	return system(new_cmd);
+}
+
 /**
  * Calling System to disabled the Network Manager service in order for the emulation
  * to determine IP's subnet masks and more.
@@ -63,7 +80,7 @@ void DisableNetworkManager()
 {
 	try
 	{
-		int status = system(STOP_NETWORK_MANAGER_COMMAND);
+		int status = runCmdRedirect(STOP_NETWORK_MANAGER_COMMAND,false);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_MSG_DISABLING_NETWORK_MANAGER);
@@ -71,7 +88,7 @@ void DisableNetworkManager()
 
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 
-		status = system(STOP_IP_FORWARDING);
+		status = runCmdRedirect(STOP_IP_FORWARDING);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_MSG_DISABLING_IP_FORWARDING);
@@ -79,21 +96,21 @@ void DisableNetworkManager()
 
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 
-		status = system(STOP_ICMP_RESPONSE);
+		status = runCmdRedirect(STOP_ICMP_RESPONSE);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_MSG_DISABLING_ICMP_RESPONSE);
 		}
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 
-		status = system(ENABLE_FIREWALL);
+		status = runCmdRedirect(ENABLE_FIREWALL);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_FW);
 		}
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 
-		status = system(STOP_ALL_INCOMING_PACKETS);
+		status = runCmdRedirect(STOP_ALL_INCOMING_PACKETS);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
@@ -101,7 +118,7 @@ void DisableNetworkManager()
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 
 
-		status = system(STOP_ALL_OUTGOING_PACKETS);
+		status = runCmdRedirect(STOP_ALL_OUTGOING_PACKETS);
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
@@ -120,12 +137,12 @@ void EnableNetworkManager()
 {
 	try
 	{
-		int status = system("fix_the_internets");
+		int status = runCmdRedirect("fix_the_internets"); //TODO: what the hell is this?? Extremely not portable!
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
 		}
-		status = system("ufw disable");
+		status = runCmdRedirect("ufw disable");
 		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
 		{
 			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
@@ -149,6 +166,7 @@ int main(int argc, char *argv[])
 {
 	try
 	{
+		SBasicGUI::getInstance().init();
 		SLogger::getInstance().InitLogger();
 		SLogger::getInstance().Log("Disabling Linux Networking");
 		DisableNetworkManager();
@@ -171,6 +189,7 @@ int main(int argc, char *argv[])
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		SLogger::getInstance().DestroyLogger();
 		return(EXIT_FAILURE);
 	}
 }

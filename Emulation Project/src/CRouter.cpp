@@ -105,6 +105,7 @@ void CRouter::PacketHandler()
 				IP* ip_layer = packet->GetLayer<IP>();
 				if (ip_layer != NULL)
 				{
+					SBasicGUI::getInstance().incData(SBasicGUI::IPPACKET);
 					HandleIPv4(packet);
 				}
 				else
@@ -112,6 +113,7 @@ void CRouter::PacketHandler()
 					ARP* arp_layer = packet->GetLayer<ARP>();
 					if (arp_layer != NULL) //answer arp requests
 					{
+						SBasicGUI::getInstance().incData(SBasicGUI::ARPPACKET);
 						HandleArp(packet);
 					}
 				}
@@ -178,6 +180,7 @@ void CRouter::HandleIPv4(Packet * pkt)
 				if (ProcessSendPacket (pkt))
 				{
 					Packet * newpkt= new Packet();
+					//TODO: remove this conditional, it's a card/cable problem
 					newpkt->PacketFromEthernet(pkt->GetRawPtr(),ETH_HLEN+(ip_layer->GetTotalLength()>1500?1500:ip_layer->GetTotalLength()));//TODO PLASTER
 					send_connection->SendPacket(newpkt);
 					delete newpkt;

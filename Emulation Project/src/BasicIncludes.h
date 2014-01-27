@@ -56,6 +56,10 @@ using namespace Crafter;
 
 #include "CUIPV4.h"
 
+/**
+ * Basic GUI singleton
+ */
+#include "SBasicGUI.h"
 
 
 #endif

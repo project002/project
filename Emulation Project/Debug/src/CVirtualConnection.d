@@ -1,6 +1,6 @@
 src/CVirtualConnection.d: ../src/CVirtualConnection.cpp \
  ../src/CVirtualConnection.h ../src/CConnection.h ../src/BasicIncludes.h \
- ../src/SLogger.h ../src/CException.h ../src/CUIPV4.h
+ ../src/SLogger.h ../src/CException.h ../src/CUIPV4.h ../src/SBasicGUI.h
 
 ../src/CVirtualConnection.h:
 
@@ -13,3 +13,5 @@ src/CVirtualConnection.d: ../src/CVirtualConnection.cpp \
 ../src/CException.h:
 
 ../src/CUIPV4.h:
+
+../src/SBasicGUI.h:

@@ -44,11 +44,13 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		if (mPackets.size()<mBufferSize)
 		{
 			mPackets.push_back(pkt);
+			SBasicGUI::getInstance().incData(SBasicGUI::PACKETPROCCES);
 			mMtx.unlock();
 		}
 		else
 		{
 			SLogger::getInstance().Log("packet discarded");
+			SBasicGUI::getInstance().incData(SBasicGUI::PACKETDROP);
 			if (pkt!=NULL)
 			{
 				delete (pkt);

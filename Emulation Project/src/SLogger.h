@@ -3,6 +3,7 @@
 #define SLOGGER_H_
 
 #include <fstream>
+#include <stdarg.h>
 #include <boost/timer.hpp>
 #include <boost/signals2/mutex.hpp>
 using std::ofstream;
@@ -34,6 +35,16 @@ public:
 		LoggerMTX.lock();
 		fd << timer.elapsed() << " : " << toLog << std::endl;
 		LoggerMTX.unlock();
+	}
+
+	void Logf(const char* format,...)
+	{
+		va_list args;
+		va_start(args,format);
+		char* str;
+		vsprintf(str,format,args);
+		va_end(args);
+		Log(str);
 	}
 private:
 	ofstream fd;

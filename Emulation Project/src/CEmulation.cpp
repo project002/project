@@ -175,6 +175,7 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			{
 				RouterCreate->SetBufferSize(BufferSize);
 			}
+			SBasicGUI::getInstance().msg("Created Router With Buffer Of %d Packets",BufferSize);
 			mRouters.push_back(RouterCreate);
 		}
 	}
