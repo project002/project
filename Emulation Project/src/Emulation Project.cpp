@@ -19,15 +19,18 @@
 #define ERROR_MSG_DISABLING_ICMP_RESPONSE "Can't disable the ICMP response"
 #define ERROR_DISABLING_PACKETS_TRAFFIC "Can't disable packets traffic using UFW deny commands"
 #define ERROR_FW "Can't Enable Firewall"
+#define ERROR_ETH_FEAURES "Can't turn off ethernet features"
 
 #define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
 #define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
 #define STOP_NETWORK_MANAGER_COMMAND "service network-manager stop"
+#define TURN_OFF_ETH_FEATURES "ethtool -K eth%d gso off tso off"
 #define ENABLE_FIREWALL "ufw enable"
 #define STOP_ALL_INCOMING_PACKETS "ufw default deny incoming"
 #define STOP_ALL_OUTGOING_PACKETS "ufw default deny outgoing"
 #define REDIRECT_SYSTEM_FILE "SysCall.txt"
 #define SYSTEM_COMMANDS_TIME_TO_COMPLETE 0.5
+#define ETH_CARD_NUM 2
 
 /**
  * Verifying that the Setup XML file was provided while lunching the
@@ -124,6 +127,19 @@ void DisableNetworkManager()
 			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
 		}
 		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+
+		char str[] = {0};
+		for (int i=0;i<ETH_CARD_NUM;++i)
+		{
+			sprintf(str,TURN_OFF_ETH_FEATURES,i);
+			status = runCmdRedirect(str);
+			if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+			{
+				throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
+			}
+			sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+		}
+
 	}
 	catch (CException & error)
 	{

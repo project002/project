@@ -3,18 +3,20 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="124" key="DIALOG_Y_ORIGIN"/>
-		<item value="512" key="DIALOG_HEIGHT"/>
 		<item value="1070" key="DIALOG_X_ORIGIN"/>
+		<item value="554" key="DIALOG_HEIGHT"/>
 		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="REDIRECT_SYSTEM_FILE" key="selection"/>
+		<item value="int" key="selection"/>
 		<list key="findhistory">
+			<item value="int"/>
+			<item value="thread"/>
 			<item value="REDIRECT_SYSTEM_CALL"/>
 			<item value="system"/>
 			<item value="Buffer"/>
@@ -22,6 +24,7 @@
 			<item value="GetPacket"/>
 		</list>
 		<list key="replacehistory">
+			<item value="int unsigned"/>
 			<item value="REDIRECT_SYSTEM_FILE"/>
 			<item value="runCmdRedirect"/>
 		</list>

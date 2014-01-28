@@ -1,0 +1,20 @@
+Stopping network connection manager: NetworkManager already stopped.
+0
+1
+Traceback (most recent call last):
+  File "/usr/sbin/ufw", line 102, in <module>
+    not ui.continue_under_ssh():
+  File "/usr/lib/python2.7/dist-packages/ufw/frontend.py", line 825, in continue_under_ssh
+    if self.backend.do_checks and ufw.util.under_ssh():
+  File "/usr/lib/python2.7/dist-packages/ufw/util.py", line 411, in under_ssh
+    return under_ssh(ppid)
+  File "/usr/lib/python2.7/dist-packages/ufw/util.py", line 411, in under_ssh
+    return under_ssh(ppid)
+  File "/usr/lib/python2.7/dist-packages/ufw/util.py", line 389, in under_ssh
+    raise ValueError(err_msg)
+ValueError: Couldn't find parent pid for '28862'
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+Default outgoing policy changed to 'deny'
+(be sure to update your rules accordingly)
+Cannot change tcp-segmentation-offload

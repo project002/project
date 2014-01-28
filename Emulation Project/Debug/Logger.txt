@@ -1,0 +1,179 @@
+0 : Disabling Linux Networking
+0 : Validating XML file is present
+0 : Building the emulation
+0 : name:	lo
+0 : name:	loname:	eth0
+0 : ip table init complete
+0 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0 : DHCP service started...
+0 : name:	loname:	eth0name:	eth1
+0 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0 : DHCP service started...
+0 : name:	loname:	eth0name:	eth1name:	lo
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	lo
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	loname:	eth0
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
+0 : Starting the emulation
+0 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+
+0 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+
+26.47 : last added ip address: 10.0.0.3 for MAC: 00:0a:e4:d4:8e:49
+26.47 : Started Handshake Offering 10.0.0.3
+26.83 : Handshake Finished With Setting 10.0.0.3
+29.99 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+
+29.99 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+48.77 : last added ip address: 10.0.0.4 for MAC: 00:24:81:22:a1:de
+48.77 : Started Handshake Offering 10.0.0.4
+49.15 : Handshake Finished With Setting 10.0.0.4
+55.39 : No Handler found for message type:8
+59.98 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+59.98 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+61.41 : No Handler found for message type:8
+66.18 : IP 10.0.0.4 Released
+74.69 : last added ip address: 10.0.0.4 for MAC: 00:24:81:22:a1:de
+74.69 : Started Handshake Offering 10.0.0.4
+74.86 : No Handler found for message type:8
+74.96 : Handshake Finished With Setting 10.0.0.4
+80.85 : No Handler found for message type:8
+81.4 : No Handler found for message type:8
+87.42 : No Handler found for message type:8
+89.98 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+89.98 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+119.97 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+119.97 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+149.96 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+149.96 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+179.96 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+179.96 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+209.95 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+209.95 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+239.94 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+239.94 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+269.93 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+269.93 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+273.95 : No Handler found for message type:8
+281.94 : No Handler found for message type:8
+299.93 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+299.93 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+329.8 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+329.8 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+359.46 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+
+359.46 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.4|00:02:b3:33:ca:d8|00:24:81:22:a1:de
+Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.3|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+
+382.36 : Emulation exiting
+382.51 : fatal error on receive from socket
+382.51 : virtual Crafter::Packet* CPhysicalConnection::GetPacket()
+382.51 : Emulation Terminated Socket Physical Socket Error
+382.51 : void CRouter::Sniff()
