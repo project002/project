@@ -15,17 +15,21 @@
 #define STATUS_FAILURE -1
 #define ERROR_MSG_XML_FILE_ARGUMENT_MISSING "Please enter a setup xml file name as first argument\n"
 #define ERROR_MSG_DISABLING_NETWORK_MANAGER "Can't disable the Network Manager"
+#define ERROR_MSG_ENABLING_NETWORK_MANAGER "Can't enable the Network Manager"
 #define ERROR_MSG_DISABLING_IP_FORWARDING "Can't disable the IP forwarding"
 #define ERROR_MSG_DISABLING_ICMP_RESPONSE "Can't disable the ICMP response"
 #define ERROR_DISABLING_PACKETS_TRAFFIC "Can't disable packets traffic using UFW deny commands"
 #define ERROR_FW "Can't Enable Firewall"
+#define ERROR_DISABLING_FW "Can't Disable Firwall"
 #define ERROR_ETH_FEAURES "Can't turn off ethernet features"
 
 #define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
 #define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
 #define STOP_NETWORK_MANAGER_COMMAND "service network-manager stop"
+#define START_NETWORK_MANAGER_COMMAND "service network-manager start"
 #define TURN_OFF_ETH_FEATURES "ethtool -K eth%d gso off tso off"
-#define ENABLE_FIREWALL "ufw enable"
+#define ENABLE_FIREWALL "ufw enable & "
+#define DISABLE_FIREWALL "ufw disable & "
 #define STOP_ALL_INCOMING_PACKETS "ufw default deny incoming"
 #define STOP_ALL_OUTGOING_PACKETS "ufw default deny outgoing"
 #define REDIRECT_SYSTEM_FILE "SysCall.txt"
@@ -58,8 +62,10 @@ void EmulationParametersValidator(int argc, char *argv[])
 	}
 }
 
-int runCmdRedirect(const char* cmd,bool append = true)
+int RunCmdRedirect(const char* cmd,bool append = true)
 {
+
+	sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
 	char new_cmd[1024];
 	if (append)
 	{
@@ -72,6 +78,22 @@ int runCmdRedirect(const char* cmd,bool append = true)
 	return system(new_cmd);
 }
 
+void HandleStatus(int status, string toPrint)
+{
+	try
+	{
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(toPrint);
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
 /**
  * Calling System to disabled the Network Manager service in order for the emulation
  * to determine IP's subnet masks and more.
@@ -83,62 +105,17 @@ void DisableNetworkManager()
 {
 	try
 	{
-		int status = runCmdRedirect(STOP_NETWORK_MANAGER_COMMAND,false);
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_MSG_DISABLING_NETWORK_MANAGER);
-		}
+		HandleStatus(RunCmdRedirect(STOP_NETWORK_MANAGER_COMMAND,false),ERROR_MSG_DISABLING_NETWORK_MANAGER);
 
-		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+		HandleStatus(RunCmdRedirect(STOP_IP_FORWARDING),ERROR_MSG_DISABLING_IP_FORWARDING);
 
-		status = runCmdRedirect(STOP_IP_FORWARDING);
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_MSG_DISABLING_IP_FORWARDING);
-		}
+		HandleStatus(RunCmdRedirect(STOP_ICMP_RESPONSE),ERROR_MSG_DISABLING_ICMP_RESPONSE);
 
-		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+		HandleStatus(RunCmdRedirect(ENABLE_FIREWALL),ERROR_FW);
 
-		status = runCmdRedirect(STOP_ICMP_RESPONSE);
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_MSG_DISABLING_ICMP_RESPONSE);
-		}
-		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+		HandleStatus(RunCmdRedirect(STOP_ALL_INCOMING_PACKETS),ERROR_DISABLING_PACKETS_TRAFFIC);
 
-		status = runCmdRedirect(ENABLE_FIREWALL);
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_FW);
-		}
-		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
-
-		status = runCmdRedirect(STOP_ALL_INCOMING_PACKETS);
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
-		}
-		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
-
-
-		status = runCmdRedirect(STOP_ALL_OUTGOING_PACKETS);
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
-		}
-		sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
-
-		char str[] = {0};
-		for (int i=0;i<ETH_CARD_NUM;++i)
-		{
-			sprintf(str,TURN_OFF_ETH_FEATURES,i);
-			status = runCmdRedirect(str);
-			if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-			{
-				throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
-			}
-			sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
-		}
+		HandleStatus(RunCmdRedirect(STOP_ALL_OUTGOING_PACKETS),ERROR_DISABLING_PACKETS_TRAFFIC);
 
 	}
 	catch (CException & error)
@@ -153,17 +130,8 @@ void EnableNetworkManager()
 {
 	try
 	{
-		int status = runCmdRedirect("fix_the_internets"); //TODO: what the hell is this?? Extremely not portable!
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
-		}
-		status = runCmdRedirect("ufw disable");
-		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
-		{
-			throw CException(ERROR_DISABLING_PACKETS_TRAFFIC);
-		}
-		sleep(3);
+		HandleStatus(RunCmdRedirect(START_NETWORK_MANAGER_COMMAND),ERROR_MSG_ENABLING_NETWORK_MANAGER);
+		HandleStatus(RunCmdRedirect(DISABLE_FIREWALL),ERROR_DISABLING_FW);
 	}
 	catch (CException & error)
 	{
@@ -206,6 +174,7 @@ int main(int argc, char *argv[])
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		SLogger::getInstance().DestroyLogger();
+		EnableNetworkManager();
 		return(EXIT_FAILURE);
 	}
 }

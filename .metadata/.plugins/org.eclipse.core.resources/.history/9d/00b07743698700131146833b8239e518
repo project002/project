@@ -1,0 +1,17 @@
+/*
+ * CEmulationGUI.h
+ *
+ * The interface for GUI objects
+ */
+
+#ifndef CEMULATIONGUI_H_
+#define CEMULATIONGUI_H_
+
+class CEmulationGUI
+{
+
+};
+
+
+
+#endif /* CEMULATIONGUI_H_ */

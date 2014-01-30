@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Emulation Project/src/CBasicGUI.h&apos; to &apos;SBasicGUI.h&apos;" description="Rename resource &apos;CBasicGUI.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/CBasicGUI.h" name="SBasicGUI.h" stamp="1390814156839" updateReferences="true"/>
+</session>

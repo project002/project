@@ -1,0 +1,20 @@
+/*
+ * CBasicGUI.cpp
+ *
+ *  Created on: Jan 26, 2014
+ *      Author: root
+ */
+
+#include "CBasicGUI.h"
+
+CBasicGUI::CBasicGUI(std::ostream* stream):mOut(stream)
+{
+	mOut << "check" std::endl;
+
+}
+
+CBasicGUI::~CBasicGUI()
+{
+	// TODO Auto-generated destructor stub
+}
+

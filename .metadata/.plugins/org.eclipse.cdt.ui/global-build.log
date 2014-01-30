@@ -14586,3 +14586,351 @@ Invoking: GCC C++ Linker
 g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
 Finished building target: Emulation Project
  
+14:13:34 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+14:14:07 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CConnection.d" -MT"src/CConnection.d" -o "src/CConnection.o" "../src/CConnection.cpp"
+Finished building: ../src/CConnection.cpp
+ 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building file: ../src/CEmulation.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
+../src/CEmulation.cpp: In member function ‘void CEmulation::XMLRoutersParser(pugi::xml_document&)’:
+../src/CEmulation.cpp:164:18: warning: unused variable ‘RouterNumber’ [-Wunused-variable]
+Finished building: ../src/CEmulation.cpp
+ 
+Building file: ../src/CException.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CException.d" -MT"src/CException.d" -o "src/CException.o" "../src/CException.cpp"
+Finished building: ../src/CException.cpp
+ 
+Building file: ../src/CPacketCollector.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
+Finished building: ../src/CPacketCollector.cpp
+ 
+Building file: ../src/CPhysicalConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CPhysicalConnection.d" -MT"src/CPhysicalConnection.d" -o "src/CPhysicalConnection.o" "../src/CPhysicalConnection.cpp"
+Finished building: ../src/CPhysicalConnection.cpp
+ 
+Building file: ../src/CPhysicalConnectionsHandler.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CPhysicalConnectionsHandler.d" -MT"src/CPhysicalConnectionsHandler.d" -o "src/CPhysicalConnectionsHandler.o" "../src/CPhysicalConnectionsHandler.cpp"
+Finished building: ../src/CPhysicalConnectionsHandler.cpp
+ 
+Building file: ../src/CRouter.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
+Finished building: ../src/CRouter.cpp
+ 
+Building file: ../src/CVirtualConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/CVirtualConnection.d" -MT"src/CVirtualConnection.d" -o "src/CVirtualConnection.o" "../src/CVirtualConnection.cpp"
+Finished building: ../src/CVirtualConnection.cpp
+ 
+Building file: ../src/Emulation Project.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/Emulation Project.d" -MT"src/Emulation\ Project.d" -o "src/Emulation Project.o" "../src/Emulation Project.cpp"
+Finished building: ../src/Emulation Project.cpp
+ 
+Building file: ../src/pugixml.cpp
+Invoking: GCC C++ Compiler
+g++ -O2 -g -Wall -c -fmessage-length=0 -lcrafter -lboost_thread -MMD -MP -MF"src/pugixml.d" -MT"src/pugixml.d" -o "src/pugixml.o" "../src/pugixml.cpp"
+Finished building: ../src/pugixml.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -lcrafter -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+14:19:12 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+14:19:15 **** Clean-only build of configuration Default for project Emulation Project ****
+make clean 
+rm -rf  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o  ./src/CConnection.d ./src/CDHCPService.d ./src/CEmulation.d ./src/CException.d ./src/CPacketCollector.d ./src/CPhysicalConnection.d ./src/CPhysicalConnectionsHandler.d ./src/CRouter.d ./src/CVirtualConnection.d ./src/Emulation\ Project.d ./src/pugixml.d  "Emulation Project"
+ 
+14:19:16 **** Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CConnection.d" -MT"src/CConnection.d" -o "src/CConnection.o" "../src/CConnection.cpp"
+Finished building: ../src/CConnection.cpp
+ 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building file: ../src/CEmulation.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
+../src/CEmulation.cpp: In member function ‘void CEmulation::XMLRoutersParser(pugi::xml_document&)’:
+../src/CEmulation.cpp:164:18: warning: unused variable ‘RouterNumber’ [-Wunused-variable]
+Finished building: ../src/CEmulation.cpp
+ 
+Building file: ../src/CException.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CException.d" -MT"src/CException.d" -o "src/CException.o" "../src/CException.cpp"
+Finished building: ../src/CException.cpp
+ 
+Building file: ../src/CPacketCollector.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
+Finished building: ../src/CPacketCollector.cpp
+ 
+Building file: ../src/CPhysicalConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnection.d" -MT"src/CPhysicalConnection.d" -o "src/CPhysicalConnection.o" "../src/CPhysicalConnection.cpp"
+Finished building: ../src/CPhysicalConnection.cpp
+ 
+Building file: ../src/CPhysicalConnectionsHandler.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnectionsHandler.d" -MT"src/CPhysicalConnectionsHandler.d" -o "src/CPhysicalConnectionsHandler.o" "../src/CPhysicalConnectionsHandler.cpp"
+Finished building: ../src/CPhysicalConnectionsHandler.cpp
+ 
+Building file: ../src/CRouter.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
+Finished building: ../src/CRouter.cpp
+ 
+Building file: ../src/CVirtualConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CVirtualConnection.d" -MT"src/CVirtualConnection.d" -o "src/CVirtualConnection.o" "../src/CVirtualConnection.cpp"
+Finished building: ../src/CVirtualConnection.cpp
+ 
+Building file: ../src/Emulation Project.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/Emulation Project.d" -MT"src/Emulation\ Project.d" -o "src/Emulation Project.o" "../src/Emulation Project.cpp"
+Finished building: ../src/Emulation Project.cpp
+ 
+Building file: ../src/pugixml.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/pugixml.d" -MT"src/pugixml.d" -o "src/pugixml.o" "../src/pugixml.cpp"
+Finished building: ../src/pugixml.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+14:24:29 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+14:36:21 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CRouter.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
+Finished building: ../src/CRouter.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+15:00:32 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/Emulation Project.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/Emulation Project.d" -MT"src/Emulation\ Project.d" -o "src/Emulation Project.o" "../src/Emulation Project.cpp"
+Finished building: ../src/Emulation Project.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+15:02:59 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+15:12:31 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/Emulation Project.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/Emulation Project.d" -MT"src/Emulation\ Project.d" -o "src/Emulation Project.o" "../src/Emulation Project.cpp"
+Finished building: ../src/Emulation Project.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+15:27:06 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CRouter.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
+Finished building: ../src/CRouter.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+15:31:05 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CEmulation.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
+../src/CEmulation.cpp: In member function ‘void CEmulation::XMLRoutersParser(pugi::xml_document&)’:
+../src/CEmulation.cpp:166:18: warning: unused variable ‘RouterNumber’ [-Wunused-variable]
+Finished building: ../src/CEmulation.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+15:31:29 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.
+15:31:32 **** Clean-only build of configuration Default for project Emulation Project ****
+make clean 
+rm -rf  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o  ./src/CConnection.d ./src/CDHCPService.d ./src/CEmulation.d ./src/CException.d ./src/CPacketCollector.d ./src/CPhysicalConnection.d ./src/CPhysicalConnectionsHandler.d ./src/CRouter.d ./src/CVirtualConnection.d ./src/Emulation\ Project.d ./src/pugixml.d  "Emulation Project"
+ 
+15:31:34 **** Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CConnection.d" -MT"src/CConnection.d" -o "src/CConnection.o" "../src/CConnection.cpp"
+Finished building: ../src/CConnection.cpp
+ 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building file: ../src/CEmulation.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
+../src/CEmulation.cpp: In member function ‘void CEmulation::XMLRoutersParser(pugi::xml_document&)’:
+../src/CEmulation.cpp:166:18: warning: unused variable ‘RouterNumber’ [-Wunused-variable]
+Finished building: ../src/CEmulation.cpp
+ 
+Building file: ../src/CException.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CException.d" -MT"src/CException.d" -o "src/CException.o" "../src/CException.cpp"
+Finished building: ../src/CException.cpp
+ 
+Building file: ../src/CPacketCollector.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
+Finished building: ../src/CPacketCollector.cpp
+ 
+Building file: ../src/CPhysicalConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnection.d" -MT"src/CPhysicalConnection.d" -o "src/CPhysicalConnection.o" "../src/CPhysicalConnection.cpp"
+Finished building: ../src/CPhysicalConnection.cpp
+ 
+Building file: ../src/CPhysicalConnectionsHandler.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnectionsHandler.d" -MT"src/CPhysicalConnectionsHandler.d" -o "src/CPhysicalConnectionsHandler.o" "../src/CPhysicalConnectionsHandler.cpp"
+Finished building: ../src/CPhysicalConnectionsHandler.cpp
+ 
+Building file: ../src/CRouter.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
+Finished building: ../src/CRouter.cpp
+ 
+Building file: ../src/CVirtualConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CVirtualConnection.d" -MT"src/CVirtualConnection.d" -o "src/CVirtualConnection.o" "../src/CVirtualConnection.cpp"
+Finished building: ../src/CVirtualConnection.cpp
+ 
+Building file: ../src/Emulation Project.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/Emulation Project.d" -MT"src/Emulation\ Project.d" -o "src/Emulation Project.o" "../src/Emulation Project.cpp"
+Finished building: ../src/Emulation Project.cpp
+ 
+Building file: ../src/pugixml.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/pugixml.d" -MT"src/pugixml.d" -o "src/pugixml.o" "../src/pugixml.cpp"
+Finished building: ../src/pugixml.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+15:34:06 **** Clean-only build of configuration Default for project Emulation Project ****
+make clean 
+rm -rf  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o  ./src/CConnection.d ./src/CDHCPService.d ./src/CEmulation.d ./src/CException.d ./src/CPacketCollector.d ./src/CPhysicalConnection.d ./src/CPhysicalConnectionsHandler.d ./src/CRouter.d ./src/CVirtualConnection.d ./src/Emulation\ Project.d ./src/pugixml.d  "Emulation Project"
+ 
+15:34:07 **** Build of configuration Default for project Emulation Project ****
+make all 
+Building file: ../src/CConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CConnection.d" -MT"src/CConnection.d" -o "src/CConnection.o" "../src/CConnection.cpp"
+Finished building: ../src/CConnection.cpp
+ 
+Building file: ../src/CDHCPService.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
+Finished building: ../src/CDHCPService.cpp
+ 
+Building file: ../src/CEmulation.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
+../src/CEmulation.cpp: In member function ‘void CEmulation::XMLRoutersParser(pugi::xml_document&)’:
+../src/CEmulation.cpp:166:18: warning: unused variable ‘RouterNumber’ [-Wunused-variable]
+Finished building: ../src/CEmulation.cpp
+ 
+Building file: ../src/CException.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CException.d" -MT"src/CException.d" -o "src/CException.o" "../src/CException.cpp"
+Finished building: ../src/CException.cpp
+ 
+Building file: ../src/CPacketCollector.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
+Finished building: ../src/CPacketCollector.cpp
+ 
+Building file: ../src/CPhysicalConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnection.d" -MT"src/CPhysicalConnection.d" -o "src/CPhysicalConnection.o" "../src/CPhysicalConnection.cpp"
+Finished building: ../src/CPhysicalConnection.cpp
+ 
+Building file: ../src/CPhysicalConnectionsHandler.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnectionsHandler.d" -MT"src/CPhysicalConnectionsHandler.d" -o "src/CPhysicalConnectionsHandler.o" "../src/CPhysicalConnectionsHandler.cpp"
+Finished building: ../src/CPhysicalConnectionsHandler.cpp
+ 
+Building file: ../src/CRouter.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
+Finished building: ../src/CRouter.cpp
+ 
+Building file: ../src/CVirtualConnection.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CVirtualConnection.d" -MT"src/CVirtualConnection.d" -o "src/CVirtualConnection.o" "../src/CVirtualConnection.cpp"
+Finished building: ../src/CVirtualConnection.cpp
+ 
+Building file: ../src/Emulation Project.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/Emulation Project.d" -MT"src/Emulation\ Project.d" -o "src/Emulation Project.o" "../src/Emulation Project.cpp"
+Finished building: ../src/Emulation Project.cpp
+ 
+Building file: ../src/pugixml.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/pugixml.d" -MT"src/pugixml.d" -o "src/pugixml.o" "../src/pugixml.cpp"
+Finished building: ../src/pugixml.cpp
+ 
+Building target: Emulation Project
+Invoking: GCC C++ Linker
+g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Project"  ./src/CConnection.o ./src/CDHCPService.o ./src/CEmulation.o ./src/CException.o ./src/CPacketCollector.o ./src/CPhysicalConnection.o ./src/CPhysicalConnectionsHandler.o ./src/CRouter.o ./src/CVirtualConnection.o ./src/Emulation\ Project.o ./src/pugixml.o   
+Finished building target: Emulation Project
+ 
+15:34:43 **** Incremental Build of configuration Default for project Emulation Project ****
+make all 
+make: Nothing to be done for `all'.

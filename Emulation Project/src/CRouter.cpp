@@ -179,11 +179,7 @@ void CRouter::HandleIPv4(Packet * pkt)
 			{
 				if (ProcessSendPacket (pkt))
 				{
-					Packet * newpkt= new Packet();
-					//TODO: remove this conditional, it's a card/cable problem
-					newpkt->PacketFromEthernet(pkt->GetRawPtr(),ETH_HLEN+(ip_layer->GetTotalLength()>1500?1500:ip_layer->GetTotalLength()));//TODO PLASTER
-					send_connection->SendPacket(newpkt);
-					delete newpkt;
+					send_connection->SendPacket(pkt); // Remove plaster"
 				}
 			}
 		}
@@ -200,6 +196,7 @@ void CRouter::Sniff()
 			for (;iter!=mConnections.end();iter++)
 			{
 				CConnection * connection = const_cast<CConnection*>(*iter);
+				boost::this_thread::interruption_point();
 				temp_packet= connection->GetPacket();
 				if (temp_packet != NULL)
 				{

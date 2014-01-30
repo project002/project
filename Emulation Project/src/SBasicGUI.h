@@ -48,6 +48,7 @@ public:
 	{
 		while(true)
 		{
+			boost::this_thread::interruption_point();
 			refresh();
 			clear();
 			int unsigned processed = get_data(PACKETPROCCES);
@@ -138,6 +139,7 @@ public:
 
 	virtual ~SBasicGUI()
 	{
+		gui_refresh.interrupt();
 		dataSet.clear();
 		messages.clear();
 		insertMTX.unlock();

@@ -1,0 +1,15 @@
+//#include "SBasicGUI.h"
+//
+//SBasicGUI* SBasicGUI::ref = NULL;
+//
+//static SBasicGUI* SBasicGUI::getInstance()
+//{
+//	if (ref == NULL)
+//	{
+//		ref = new SBasicGUI();
+//		return ref;
+//	}
+//	return ref;
+//}
+//
+//

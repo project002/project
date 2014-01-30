@@ -88,8 +88,10 @@ void CEmulation::TableSwapping()
 		while(true)
 		{
 			vector<CRouter *>::iterator iter;
+			boost::this_thread::interruption_point();
 			for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 			{
+				boost::this_thread::interruption_point();
 				(*iter)->RequestTables();
 			}
 			//Following lines are for the table swapping to take effect every X period
