@@ -20,6 +20,24 @@ CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL
 	}
 
 }
+
+void CRouter::AppendConnectionList(list<CVirtualConnection const *> &connectionList)
+{
+	try
+	{
+		for (list<CVirtualConnection const *>::iterator iter= connectionList.begin();
+				iter!=connectionList.end();iter++)
+		{
+			mConnections.push_back((*iter));
+		}
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
 void CRouter::RequestTables()
 {
 	try
@@ -190,9 +208,9 @@ void CRouter::Sniff()
 	Packet* temp_packet;
 	try
 	{
+		list< CConnection const *>::iterator iter = mConnections.begin();
 		while(true)
 		{
-			list< CConnection const *>::iterator iter = mConnections.begin();
 			for (;iter!=mConnections.end();iter++)
 			{
 				CConnection * connection = const_cast<CConnection*>(*iter);
@@ -200,6 +218,7 @@ void CRouter::Sniff()
 				temp_packet= connection->GetPacket();
 				if (temp_packet != NULL)
 				{
+					boost::this_thread::interruption_point();
 					mPacketCollector->PushBack(temp_packet);
 				}
 			}

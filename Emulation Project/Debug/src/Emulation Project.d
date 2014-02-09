@@ -5,7 +5,7 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp \
  ../src/CDHCPService.h ../src/CDHCPMsgTypeException.h \
  ../src/H_SNIFFER_FUNC.h ../src/CConnection.h ../src/CVirtualConnection.h \
  ../src/CPhysicalConnectionsHandler.h ../src/pugixml.hpp \
- ../src/pugiconfig.hpp ../src/CRouter.h
+ ../src/pugiconfig.hpp ../src/CRouter.h ../src/DInitializationDefs.h
 
 ../src/CEmulation.h:
 
@@ -40,3 +40,5 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp \
 ../src/pugiconfig.hpp:
 
 ../src/CRouter.h:
+
+../src/DInitializationDefs.h:

@@ -11,6 +11,7 @@
 #include "CConnection.h"
 #include "CUIPV4.h"
 #include "CPacketCollector.h"
+#include "CVirtualConnection.h"
 /**
  * Thread Related Inclusions
  */
@@ -25,6 +26,7 @@ public:
 	CRouter();
 	virtual ~CRouter();
 	void AddConnection(const CConnection * connection){mConnections.push_back(connection);}
+	void AppendConnectionList(list<CVirtualConnection const *> &connectionList);
 	void RequestTables();
 	void Sniffer();
 	void StopEmulation();

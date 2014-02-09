@@ -1,0 +1,37 @@
+/*
+ * DInitializationDefs.h
+ *
+ *  Created on: Feb 9, 2014
+ *      Author: root
+ */
+
+#ifndef DINITIALIZATIONDEFS_H_
+#define DINITIALIZATIONDEFS_H_
+
+#define SETUP_XML_ARGUMENT_POSITION 1
+#define MINIMUM_NUMBER_OF_ARGUMENTS 2
+#define STATUS_FAILURE -1
+#define ERROR_MSG_XML_FILE_ARGUMENT_MISSING "Please enter a setup xml file name as first argument\n"
+#define ERROR_MSG_DISABLING_NETWORK_MANAGER "Can't disable the Network Manager"
+#define ERROR_MSG_ENABLING_NETWORK_MANAGER "Can't enable the Network Manager"
+#define ERROR_MSG_DISABLING_IP_FORWARDING "Can't disable the IP forwarding"
+#define ERROR_MSG_DISABLING_ICMP_RESPONSE "Can't disable the ICMP response"
+#define ERROR_DISABLING_PACKETS_TRAFFIC "Can't disable packets traffic using UFW deny commands"
+#define ERROR_FW "Can't Enable Firewall"
+#define ERROR_DISABLING_FW "Can't Disable Firwall"
+#define ERROR_ETH_FEAURES "Can't turn off ethernet features"
+
+#define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
+#define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
+#define STOP_NETWORK_MANAGER_COMMAND "service network-manager stop"
+#define START_NETWORK_MANAGER_COMMAND "service network-manager start"
+#define TURN_OFF_ETH_FEATURES "ethtool -K eth%d gso off tso off"
+#define ENABLE_FIREWALL "ufw enable & "
+#define DISABLE_FIREWALL "ufw disable & "
+#define STOP_ALL_INCOMING_PACKETS "ufw default deny incoming"
+#define STOP_ALL_OUTGOING_PACKETS "ufw default deny outgoing"
+#define REDIRECT_SYSTEM_FILE "SysCall.txt"
+#define SYSTEM_COMMANDS_TIME_TO_COMPLETE 0.5
+
+
+#endif /* DINITIALIZATIONDEFS_H_ */

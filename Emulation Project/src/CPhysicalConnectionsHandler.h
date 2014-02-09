@@ -9,6 +9,7 @@
 #define CPHYSICALCONNECTIONSHANDLER_H_
 #include "BasicIncludes.h"
 #include "CPhysicalConnection.h"
+#include "CVirtualConnection.h"
 /**
  * The class handles the physical connections of the device,
  * including opening sockets, connecting, and closing.
@@ -19,10 +20,13 @@ public:
 	CPhysicalConnectionsHandler();
 	virtual ~CPhysicalConnectionsHandler();
 	void CreatePhyiscalConnections();
-	 CPhysicalConnection const * GetPhysicalConnectionByName(const char * InterfaceName) ;
+	void addVirtualConnection(CVirtualConnection * virtualConnection){mVirtualConnections.push_back(virtualConnection);}
+	list<CVirtualConnection const *> GetVirtualConnectionsVector(const unsigned int routerNumber);
+	CPhysicalConnection const * GetPhysicalConnectionByName(const char * InterfaceName) ;
 private: // Private Functions
 
 private: // Private Members
+	vector<CVirtualConnection *> mVirtualConnections;
 	vector<CPhysicalConnection *>  mPhysicalConnections;
 };
 

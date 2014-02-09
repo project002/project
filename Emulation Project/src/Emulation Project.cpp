@@ -9,32 +9,7 @@
 #include "CEmulation.h"
 #include "SLogger.h"
 #include "SBasicGUI.h"
-
-#define SETUP_XML_ARGUMENT_POSITION 1
-#define MINIMUM_NUMBER_OF_ARGUMENTS 2
-#define STATUS_FAILURE -1
-#define ERROR_MSG_XML_FILE_ARGUMENT_MISSING "Please enter a setup xml file name as first argument\n"
-#define ERROR_MSG_DISABLING_NETWORK_MANAGER "Can't disable the Network Manager"
-#define ERROR_MSG_ENABLING_NETWORK_MANAGER "Can't enable the Network Manager"
-#define ERROR_MSG_DISABLING_IP_FORWARDING "Can't disable the IP forwarding"
-#define ERROR_MSG_DISABLING_ICMP_RESPONSE "Can't disable the ICMP response"
-#define ERROR_DISABLING_PACKETS_TRAFFIC "Can't disable packets traffic using UFW deny commands"
-#define ERROR_FW "Can't Enable Firewall"
-#define ERROR_DISABLING_FW "Can't Disable Firwall"
-#define ERROR_ETH_FEAURES "Can't turn off ethernet features"
-
-#define STOP_ICMP_RESPONSE "/bin/echo \"1\" > /proc/sys/net/ipv4/icmp_echo_ignore_all"
-#define STOP_IP_FORWARDING "/bin/echo \"0\" > /proc/sys/net/ipv4/ip_forward"
-#define STOP_NETWORK_MANAGER_COMMAND "service network-manager stop"
-#define START_NETWORK_MANAGER_COMMAND "service network-manager start"
-#define TURN_OFF_ETH_FEATURES "ethtool -K eth%d gso off tso off"
-#define ENABLE_FIREWALL "ufw enable & "
-#define DISABLE_FIREWALL "ufw disable & "
-#define STOP_ALL_INCOMING_PACKETS "ufw default deny incoming"
-#define STOP_ALL_OUTGOING_PACKETS "ufw default deny outgoing"
-#define REDIRECT_SYSTEM_FILE "SysCall.txt"
-#define SYSTEM_COMMANDS_TIME_TO_COMPLETE 0.5
-#define ETH_CARD_NUM 2
+#include "DInitializationDefs.h"
 
 /**
  * Verifying that the Setup XML file was provided while lunching the
@@ -62,6 +37,14 @@ void EmulationParametersValidator(int argc, char *argv[])
 	}
 }
 
+/**
+ * Function receives the command to be executed and if it should be appended to
+ * the end of the system log file.
+ *
+ * @param cmd command to be executed
+ * @param append boolean if command should be appended to the system log file
+ * @return status of executed command
+ */
 int RunCmdRedirect(const char* cmd,bool append = true)
 {
 
@@ -78,6 +61,13 @@ int RunCmdRedirect(const char* cmd,bool append = true)
 	return system(new_cmd);
 }
 
+/**
+ * Function receives the status of the executed system command and the string
+ * that should be printed in case of a failure.
+ *
+ * @param status system command status code
+ * @param toPrint message to print on failure.
+ */
 void HandleStatus(int status, string toPrint)
 {
 	try
@@ -141,7 +131,9 @@ void EnableNetworkManager()
 	}
 }
 /**
- *
+ * The main function of the program that initializes the loggers
+ * and the operating system itself. Some preceding steps should be taken.
+ * for more information view the README file attached to raanan's gmail
  * @param argc number of arguments provided for the emulation
  * @param argv the arguments themselves
  * @return Failure value if at some point an exception was thrown

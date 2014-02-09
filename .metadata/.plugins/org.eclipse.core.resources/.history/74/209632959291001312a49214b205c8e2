@@ -1,0 +1,152 @@
+/*
+ * CPhysicalConnectionsHandler.cpp
+ *
+ *  Created on: Dec 10, 2013
+ *      Author: project
+ */
+
+#include "CPhysicalConnectionsHandler.h"
+#define STATUS_FAILURE -1
+#define ERROR_MSG_GETTING_DEVICE_LIST "Err: when retrieving devices list"
+
+/**
+ * Class C-tor - Nothing to do so cleaning the vector.
+ */
+CPhysicalConnectionsHandler::CPhysicalConnectionsHandler()
+{
+	try
+	{
+		mPhysicalConnections.clear();
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+	}
+}
+
+/**
+ * Class D-tor - releasing all allocated physical connection.
+ * All of them should be freed only here!
+ */
+CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
+{
+	try
+	{
+		vector<CPhysicalConnection * >::iterator it;
+		for (it = mPhysicalConnections.begin(); it!=mPhysicalConnections.end();it++)
+		{
+			if ((*it)!=NULL)
+			{
+				delete (*it);
+				(*it)=NULL;
+			}
+		}
+		vector<CVirtualConnection * >::iterator virtualIter;
+		for(virtualIter=mVirtualConnections.begin();virtualIter!=mVirtualConnections.end();virtualIter++)
+		{
+			delete (*virtualIter);
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+	}
+}
+
+/**
+ * Creating the physical functions
+ */
+void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
+{
+	try
+	{
+		stringstream s;
+		struct ifaddrs* list;
+		struct ifaddrs* node;
+		int ret = 0;
+
+		//get devices list
+		ret = getifaddrs(&list);
+		if (ret == STATUS_FAILURE) {throw CException(ERROR_MSG_GETTING_DEVICE_LIST);}
+		CPhysicalConnection * newConnection=NULL;
+
+		//iterate over list
+		int i = 0;
+		for (i=0,node = list; node != NULL; node = node->ifa_next,++i)
+		{
+			s << "name:\t" << node->ifa_name ;
+			SLogger::getInstance().Log(s.str().c_str());
+			if (node->ifa_addr != NULL && node->ifa_addr->sa_family == AF_PACKET && strcmp(node->ifa_name, "lo")  )
+			{
+				newConnection = new CPhysicalConnection(node);
+				mPhysicalConnections.push_back(newConnection);
+			}
+		}
+
+		//free the device list
+		freeifaddrs(list);
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+	}
+}
+
+/**
+ * Returning a physical connection pointer on demand, using its name to be added to the
+ * router using it.
+ *
+ * @param InterfaceName
+ * @return physical connection pointer
+ */
+ CPhysicalConnection const * CPhysicalConnectionsHandler::GetPhysicalConnectionByName(
+		const char * InterfaceName)
+{
+	try
+	{
+		vector<CPhysicalConnection *>::iterator it;
+		for (it = mPhysicalConnections.begin();it!=mPhysicalConnections.end();it++)
+		{
+			const char * PhysicalInterfaceName=(*it)->getInterfaceName();
+			if(!strcmp(PhysicalInterfaceName, InterfaceName))
+			{
+				return (*it);
+			}
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+
+	}
+	return NULL;
+}
+
+
+	list<CVirtualConnection const *>  CPhysicalConnectionsHandler::GetVirtualConnectionsVector(const unsigned int routerNumber)
+{
+	list<CVirtualConnection *> vectorToReturn;
+	try
+	{
+		vector<CVirtualConnection *>::iterator iter= mVirtualConnections.begin();
+		for (;iter!=mVirtualConnections.end();iter++)
+		{
+			if ((*iter)->IsInvolved(routerNumber))
+			{
+				vectorToReturn.push_back((*iter));
+			}
+		}
+		return vectorToReturn;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+
+	}
+	return vectorToReturn;
+}

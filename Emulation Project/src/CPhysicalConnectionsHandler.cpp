@@ -41,7 +41,11 @@ CPhysicalConnectionsHandler::~CPhysicalConnectionsHandler()
 				delete (*it);
 				(*it)=NULL;
 			}
-
+		}
+		vector<CVirtualConnection * >::iterator virtualIter;
+		for(virtualIter=mVirtualConnections.begin();virtualIter!=mVirtualConnections.end();virtualIter++)
+		{
+			delete (*virtualIter);
 		}
 	}
 	catch (CException & error)
@@ -123,3 +127,26 @@ void CPhysicalConnectionsHandler::CreatePhyiscalConnections()
 }
 
 
+list<CVirtualConnection const *>  CPhysicalConnectionsHandler::GetVirtualConnectionsVector(const unsigned int routerNumber)
+{
+	list<CVirtualConnection const *> listToReturn;
+	try
+	{
+		vector<CVirtualConnection *>::iterator iter= mVirtualConnections.begin();
+		for (;iter!=mVirtualConnections.end();iter++)
+		{
+			if ((*iter)->IsInvolved(routerNumber))
+			{
+				listToReturn.push_back((*iter));
+			}
+		}
+		return listToReturn;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+
+	}
+	return listToReturn;
+}

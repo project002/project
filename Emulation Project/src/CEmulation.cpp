@@ -6,9 +6,8 @@
  */
 
 #include "CEmulation.h"
+#include "DParserDefs.h"
 #define TABLE_SWAPPING_INTERVALS 15
-#define ERROR_MSG_XML_PARSER "Error parsing file, make sure a *valid* XML file is present in the Emulation base folder\n"
-#define ERROR_MSG_ADDING_PHYSICAL_CONNECTION_TO_ROUTER "Can't find wanted physical connection, make sure XML is provided with legitimate connection name"
 
 /**
  * Class C-tor - Initiating members
@@ -104,9 +103,45 @@ void CEmulation::TableSwapping()
 			boost::this_thread::sleep(
 					timer - boost::posix_time::microsec_clock::local_time());
 		}
-
 	}
 	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+/**
+ * Function adds physical connections to the router according to the XML children.
+ *
+ * @param router pointer to currently handles router
+ * @param iter a reference to the xml parser iterator
+ */
+void CEmulation::XMLAddPhysicalConnectionsToRouter(CRouter * router,pugi::xml_node & iter)
+{
+	try
+	{
+		// Get router physical connection by its name and add it to the router connections
+		for (pugi::xml_node physicalRouterIter = iter.child(
+		XML_LAYER_4_INDIVIDUAL_ROUTERS_PHYSICAL_CONNECTION); physicalRouterIter;
+				physicalRouterIter = physicalRouterIter.next_sibling(
+				XML_LAYER_4_INDIVIDUAL_ROUTERS_PHYSICAL_CONNECTION))
+		{
+			const char * PhysicalConnectionName = string(
+					physicalRouterIter.child_value()).c_str();
+			const CPhysicalConnection * connection =
+					mPhysicalConnectionsHandler->GetPhysicalConnectionByName(
+							PhysicalConnectionName);
+			if (connection == NULL)
+			{
+				throw(CException(
+				ERROR_MSG_ADDING_PHYSICAL_CONNECTION_TO_ROUTER));
+			}
+			router->AddConnection(connection);
+		}
+	}
+	catch (CException & error)
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
@@ -130,49 +165,20 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 	{
 
 		CRouter * RouterCreate = NULL;
-		pugi::xml_node Routers = doc.child("Network").child("Routers");
+		pugi::xml_node Routers = doc.child(XML_LAYER_1_NETWORK).child(XML_LAYER_2_ROUTERS);
 
-		for (pugi::xml_node iter = Routers.child("Router"); iter;
-				iter = iter.next_sibling("Router"))
+		for (pugi::xml_node currentRouter = Routers.child(XML_LAYER_3_INDIVIDUAL_ROUTERS); currentRouter;
+				currentRouter = currentRouter.next_sibling(XML_LAYER_3_INDIVIDUAL_ROUTERS))
 		{
 			RouterCreate = new CRouter();
 
-			// Get router physical connection by its name and add it to the router
-			// connections.
-			for (pugi::xml_node physicalRouterIter = iter.child(
-					"PhysicalConnection"); physicalRouterIter;
-					physicalRouterIter = physicalRouterIter.next_sibling(
-							"PhysicalConnection"))
-			{
-				const char * PhysicalConnectionName = string(
-						physicalRouterIter.child_value()).c_str();
-				const CPhysicalConnection * connection =
-						mPhysicalConnectionsHandler->GetPhysicalConnectionByName(
-								PhysicalConnectionName);
-				if (connection == NULL)
-				{
-					throw(CException(
-							ERROR_MSG_ADDING_PHYSICAL_CONNECTION_TO_ROUTER));
-				}
-				RouterCreate->AddConnection(connection);
-			}
+			XMLAddPhysicalConnectionsToRouter(RouterCreate,currentRouter);
 
-			//Get router virtual connections
-			for (pugi::xml_node virtualRouterIter = iter.child(
-					"VirtualConnections"); virtualRouterIter;
-					virtualRouterIter = virtualRouterIter.next_sibling(
-							"VirtualConnections"))
-			{
-				unsigned int RouterNumber = iter.attribute("Number").as_int();
-				//Virtual connections will be created in the virtual connection parser
-				//BEFORE the router parser is called.
-				//Once all the virtual connections are created, here it will be iterated over
-				//Them and whoever holds the current router number will be added to the router.
-				//RouterCreate->AddConnection(connection);
-			}
-
+			unsigned int RouterNumber = currentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
+			list<CVirtualConnection const *> virtualConnectionsVector=mPhysicalConnectionsHandler->GetVirtualConnectionsVector(RouterNumber);
+			RouterCreate->AppendConnectionList(virtualConnectionsVector);
 			//Get router buffer size default is defined in H file
-			unsigned int BufferSize = iter.attribute("BufferSize").as_int();
+			unsigned int BufferSize = currentRouter.attribute(XML_ROUTER_BUFFER_SIZE_ATTRIBUTE).as_int();
 			if (BufferSize != 0)
 			{
 				RouterCreate->SetBufferSize(BufferSize);
@@ -201,18 +207,22 @@ void CEmulation::XMLVirtualConnectionsParser(pugi::xml_document & doc)
 {
 	try
 	{
-		pugi::xml_node VirtualConnections = doc.child("Network").child("VirtualConnections");
+		pugi::xml_node VirtualConnections = doc.child(XML_LAYER_1_NETWORK).child(XML_LAYER_2_VIRTUAL_CONNECTIONS);
 
-		for (pugi::xml_node iter = VirtualConnections.child("VirtualConnections"); iter;
-				iter = iter.next_sibling("VirtualConnections"))
+		CVirtualConnection * virtualCreate;
+		for (pugi::xml_node iter = VirtualConnections.child(XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS); iter;
+				iter = iter.next_sibling(XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS))
 		{
-			for (pugi::xml_node physicalRouterIter = iter.child(
-					"VirtualConnection"); physicalRouterIter;
-					physicalRouterIter = physicalRouterIter.next_sibling(
-							"VirtualConnection"))
+			virtualCreate=new CVirtualConnection();
+			for (pugi::xml_node virtualConnectionIter = iter.child(
+					XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER); virtualConnectionIter;
+					virtualConnectionIter = virtualConnectionIter.next_sibling(
+							XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER))
 			{
-				;
+				unsigned int RouterNumber = virtualConnectionIter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
+				virtualCreate->AddInvolvedRouter(RouterNumber);
 			}
+			mPhysicalConnectionsHandler->addVirtualConnection(virtualCreate);
 		}
 	}
 	catch(CException & error)
@@ -233,7 +243,7 @@ void CEmulation::XMLRoutingTableParserAvailability(pugi::xml_document & doc)
 {
 	try
 	{
-		mStaticRoutingTable= doc.child("Network").child("StaticTable").attribute("isStatic").as_bool();
+		mStaticRoutingTable= doc.child(XML_LAYER_1_NETWORK).child(XML_LAYER_2_IS_STATIC_TABLE).attribute(XML_STATIC_LAYER_ATTRIBUTE).as_bool();
 		if(mStaticRoutingTable)
 		{
 			XMLParseRoutingTable(doc);
@@ -306,7 +316,6 @@ void CEmulation::XMLParser(char * SetupFile)
  * Starting the emulation itself after the initiation phases.
  * Each router starts sniffing and handling his own traffic.
  *
- * TODO: Remove the busy wait?
  */
 void CEmulation::StartEmulation()
 {

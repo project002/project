@@ -10,12 +10,19 @@
 
 #include "CConnection.h"
 
+#include <algorithm>
 class CVirtualConnection: public CConnection
 {
 public:
 	CVirtualConnection();
+	virtual  Crafter::Packet* GetPacket(){throw(CException("Missing implementation in virtual connection"));};
 	CUIPV4*& getGetwayAddress() {throw CException("missing implementation of get gateway in virtual connection");}
+	void AddInvolvedRouter(const unsigned int & routerNumber){mInvolvedRoutersByNumber.push_back(routerNumber);}
+	bool IsInvolved(const unsigned int &routerNumber){return std::find(mInvolvedRoutersByNumber.begin()
+			, mInvolvedRoutersByNumber.end(), routerNumber)!=mInvolvedRoutersByNumber.end();}
 	virtual ~CVirtualConnection();
+private:
+	vector<unsigned int> mInvolvedRoutersByNumber;
 };
 
 #endif /* CVIRTUALCONNECTION_H_ */

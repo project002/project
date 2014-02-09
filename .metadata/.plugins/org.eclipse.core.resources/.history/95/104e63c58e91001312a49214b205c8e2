@@ -1,0 +1,17 @@
+/*
+ * DParserDefs.h
+ *
+ *  Created on: Feb 9, 2014
+ *      Author: root
+ */
+
+#ifndef DPARSERDEFS_H_
+#define DPARSERDEFS_H_
+
+
+#define XML_LAYER_1_NETWORK "Network"
+#define XML_LAYER_2_ROUTERS "Routers"
+#define XML_LAYER_3_INDIVIDUAL_ROUTERS "Router"
+#define XML_LAYER_4_INDIVIDUAL_ROUTERS_PHYSICAL_CONNECTION "PhysicalConnection"
+
+#endif /* DPARSERDEFS_H_ */

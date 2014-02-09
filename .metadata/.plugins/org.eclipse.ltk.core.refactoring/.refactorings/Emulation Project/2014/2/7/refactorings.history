@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Emulation Project/src/DParserDefs&apos; to &apos;DParserDefs.h&apos;" description="Rename resource &apos;DParserDefs&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/DParserDefs" name="DParserDefs.h" stamp="1391949825336" updateReferences="true"/>
+</session>
