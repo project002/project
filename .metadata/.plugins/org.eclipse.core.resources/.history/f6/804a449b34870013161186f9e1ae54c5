@@ -1,4 +1,0 @@
-#include "SBasicGUI.h"
-
-SBasicGUI* SBasicGUI::ref = NULL
-
