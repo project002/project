@@ -56,7 +56,7 @@ void CRouter::RequestTables()
 		{
 			s <<"Print Routing Table For " << (*iter)->GetMAC() << endl;
 			//iterate over all ips in the table you got from the connection
-			vector< pair<string,string> >& tables=(*iter)->GetTable();
+			vector< pair<string,string> >& tables=const_cast<CConnection*>(*iter)->GetTable();
 			//print table
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)

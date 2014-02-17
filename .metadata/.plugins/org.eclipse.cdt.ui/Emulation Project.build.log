@@ -1,46 +1,6 @@
-18:47:58 **** Build of configuration Default for project Emulation Project ****
+19:00:01 **** Incremental Build of configuration Default for project Emulation Project ****
 make all 
-Building file: ../src/CConnection.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CConnection.d" -MT"src/CConnection.d" -o "src/CConnection.o" "../src/CConnection.cpp"
-Finished building: ../src/CConnection.cpp
- 
-Building file: ../src/CDHCPService.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CDHCPService.d" -MT"src/CDHCPService.d" -o "src/CDHCPService.o" "../src/CDHCPService.cpp"
-Finished building: ../src/CDHCPService.cpp
- 
-Building file: ../src/CEmulation.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
-Finished building: ../src/CEmulation.cpp
- 
-Building file: ../src/CException.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CException.d" -MT"src/CException.d" -o "src/CException.o" "../src/CException.cpp"
-Finished building: ../src/CException.cpp
- 
-Building file: ../src/CPacketCollector.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPacketCollector.d" -MT"src/CPacketCollector.d" -o "src/CPacketCollector.o" "../src/CPacketCollector.cpp"
-Finished building: ../src/CPacketCollector.cpp
- 
-Building file: ../src/CPhysicalConnection.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnection.d" -MT"src/CPhysicalConnection.d" -o "src/CPhysicalConnection.o" "../src/CPhysicalConnection.cpp"
-Finished building: ../src/CPhysicalConnection.cpp
- 
-Building file: ../src/CPhysicalConnectionsHandler.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CPhysicalConnectionsHandler.d" -MT"src/CPhysicalConnectionsHandler.d" -o "src/CPhysicalConnectionsHandler.o" "../src/CPhysicalConnectionsHandler.cpp"
-Finished building: ../src/CPhysicalConnectionsHandler.cpp
- 
-Building file: ../src/CRouter.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
-../src/CRouter.cpp: In member function ‘void CRouter::RequestTables()’:
-../src/CRouter.cpp:59:60: error: passing ‘const CConnection’ as ‘this’ argument of ‘virtual std::vector<std::pair<std::basic_string<char>, std::basic_string<char> > >& CConnection::GetTable()’ discards qualifiers [-fpermissive]
-make: *** [src/CRouter.o] Error 1
+make: Nothing to be done for `all'.
 
-18:48:16 Build Finished (took 18s.294ms)
+19:00:01 Build Finished (took 63ms)
 
