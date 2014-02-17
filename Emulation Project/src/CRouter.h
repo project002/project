@@ -40,6 +40,26 @@ public:
 		mBufferSize = bufferSize;
 	}
 
+	double GetDropRate() const
+	{
+		return mDropRate;
+	}
+
+	void SetDropRate(double dropRate)
+	{
+		mDropRate = dropRate;
+	}
+
+	unsigned int GetRouterNumber() const
+	{
+		return mRouterNumber;
+	}
+
+	void SetRouterNumber(unsigned int routerNumber)
+	{
+		mRouterNumber = routerNumber;
+	}
+
 private:
 	void HandleArp(Packet * pkt);
 	void HandleIPv4(Packet * pkt);
@@ -53,6 +73,8 @@ private:
 	boost::thread mSniffingThread;
 	boost::thread mPacketsHandlingThread;
 	CPacketCollector * mPacketCollector;
+	double mDropRate;
+	unsigned int mRouterNumber;
 };
 
 #endif /* CROUTER_H_ */

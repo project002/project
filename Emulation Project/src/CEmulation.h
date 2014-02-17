@@ -33,7 +33,7 @@ private: // Private Functions
 
 	void XMLParser(char * SetupFile);
 	void XMLRoutersParser(pugi::xml_document & doc);
-	void XMLAddPhysicalConnectionsToRouter(CRouter * router,pugi::xml_node & iter);
+	void XMLAddPhysicalConnectionsToRouter(CRouter * &router,pugi::xml_node & iter);
 	void XMLVirtualConnectionsParser(pugi::xml_document & doc);
 	void XMLRoutingTableParserAvailability(pugi::xml_document & doc);
 	void XMLParseRoutingTable(pugi::xml_document & doc);

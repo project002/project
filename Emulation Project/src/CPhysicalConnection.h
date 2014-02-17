@@ -26,9 +26,9 @@ public:
 
 	CPhysicalConnection(struct ifaddrs* device);
 	virtual ~CPhysicalConnection();
-	virtual vector< pair<string,string> >& GetTable()const;
-	virtual Crafter::Packet* GetPacket();
-	virtual bool SendPacket(Packet* packet) const;
+	virtual vector< pair<string,string> >& GetTable();
+	virtual Crafter::Packet* GetPacket( int fromPacketCollector=NO_CHOICE_OF_PACKET_COLLECTOR);
+	virtual bool SendPacket(Packet* packet,int routerNumber=NO_CHOICE_OF_PACKET_COLLECTOR);
 
 	const char* getInterfaceName() const{return mInterfaceName;}
 

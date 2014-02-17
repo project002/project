@@ -6,9 +6,9 @@
 0 : ip table init complete
 0 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
 0 : DHCP service started...
-0 : name:	loname:	eth0name:	eth1
-0 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
-0 : DHCP service started...
+0.01 : name:	loname:	eth0name:	eth1
+0.01 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.01 : DHCP service started...
 0.01 : name:	loname:	eth0name:	eth1name:	lo
 0.01 : name:	loname:	eth0name:	eth1name:	loname:	eth0
 0.01 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
@@ -23,6 +23,3 @@
 Print Routing Table For 00:24:81:21:b7:1c
 	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
 
-7.26 : Emulation exiting
-7.59 : Enabling Networking
-7.6 : Destroying Logger and exiting program

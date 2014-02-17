@@ -9,11 +9,11 @@
 #define CPACKETCOLLECTOR_H_
 #include "BasicIncludes.h"
 #include <boost/signals2/mutex.hpp>
-
+#define DEFAULT_BUFFER_SIZE_UNLIMITED 1024
 class CPacketCollector
 {
 public:
-	CPacketCollector(unsigned int bufferSize);
+	CPacketCollector(unsigned int bufferSize=DEFAULT_BUFFER_SIZE_UNLIMITED);
 	virtual ~CPacketCollector();
 	void PushBack(Crafter::Packet * pkt);
 	/**

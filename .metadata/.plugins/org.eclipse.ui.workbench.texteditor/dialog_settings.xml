@@ -3,26 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="124" key="DIALOG_Y_ORIGIN"/>
-		<item value="582" key="DIALOG_HEIGHT"/>
 		<item value="1070" key="DIALOG_X_ORIGIN"/>
+		<item value="610" key="DIALOG_HEIGHT"/>
 		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="GetTable" key="selection"/>
+		<item value="SendPack" key="selection"/>
 		<list key="findhistory">
-			<item value="gettable"/>
-			<item value="ethPacket"/>
-			<item value="ETH_CARD_NUM"/>
-			<item value="int"/>
-			<item value="thread"/>
-			<item value="REDIRECT_SYSTEM_CALL"/>
-			<item value="system"/>
-			<item value="Buffer"/>
+			<item value="sendpack"/>
+			<item value="getPac"/>
+			<item value="get"/>
+			<item value="getpacket"/>
+			<item value="pop"/>
+			<item value="drop"/>
+			<item value="delete"/>
+			<item value="GetPacket"/>
 		</list>
 		<list key="replacehistory">
 			<item value="int unsigned"/>

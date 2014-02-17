@@ -81,7 +81,7 @@ void CPhysicalConnection::startDHCPService()
 	//	mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
 }
 
-bool CPhysicalConnection::SendPacket(Packet* packet) const
+bool CPhysicalConnection::SendPacket(Packet* packet,int routerNumber)
 {
 	try
 	{
@@ -277,12 +277,12 @@ CPhysicalConnection::~CPhysicalConnection()
 	}
 }
 
-vector< pair<string,string> >& CPhysicalConnection::GetTable()const
+vector< pair<string,string> >& CPhysicalConnection::GetTable()
 {
 	return mDHCPsrv->getAllocatedIPs();
 }
 
-Crafter::Packet* CPhysicalConnection::GetPacket()
+Crafter::Packet* CPhysicalConnection::GetPacket( int fromPacketCollector)
 {
 	bool fail_cond_err = false;
 	bool fail_cond_empty = false;

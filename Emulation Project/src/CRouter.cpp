@@ -6,8 +6,9 @@
  */
 
 #include "CRouter.h"
-
-CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL)
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real_distribution.hpp>
+CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL),mDropRate(0),mRouterNumber(1024)
 {
 	try
 	{
@@ -25,10 +26,16 @@ void CRouter::AppendConnectionList(list<CVirtualConnection const *> &connectionL
 {
 	try
 	{
+		if (connectionList.empty())
+		{
+			return;
+		}
 		for (list<CVirtualConnection const *>::iterator iter= connectionList.begin();
 				iter!=connectionList.end();iter++)
 		{
 			mConnections.push_back((*iter));
+			CVirtualConnection * virtualRef=const_cast<CVirtualConnection*>((*iter));
+			virtualRef->AddRoutingTableReference(&mRoutingTable,mRouterNumber);
 		}
 	}
 	catch(CException & error)
@@ -51,7 +58,6 @@ void CRouter::RequestTables()
 			//iterate over all ips in the table you got from the connection
 			vector< pair<string,string> >& tables=(*iter)->GetTable();
 			//print table
-			vector< pair<string,string> >::iterator b = tables.begin();
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
@@ -171,7 +177,7 @@ void CRouter::HandleArp(Packet * pkt)
 
 			Packet * newpkt= new Packet();
 			newpkt->PacketFromEthernet(pkt->GetRawPtr(),42);
-			send_connection->SendPacket(newpkt);
+			send_connection->SendPacket(newpkt,GetRouterNumber());
 			delete newpkt;
 		}
 	}
@@ -186,7 +192,7 @@ void CRouter::HandleIPv4(Packet * pkt)
 	{
 		send_connection = (const_cast<CConnection*>(pos->second.first));
 		string dest_ip = send_connection->getGetwayAddress()->getIpStr();
-		if (!dest_ip.compare(pos->first)) //TODO: ignoring packets to the router - maybe we want to respond?
+		if (!dest_ip.compare(pos->first))
 		{;}
 		else
 		{
@@ -197,7 +203,7 @@ void CRouter::HandleIPv4(Packet * pkt)
 			{
 				if (ProcessSendPacket (pkt))
 				{
-					send_connection->SendPacket(pkt); // Remove plaster"
+					send_connection->SendPacket(pkt,GetRouterNumber()); // Remove plaster"
 				}
 			}
 		}
@@ -206,11 +212,14 @@ void CRouter::HandleIPv4(Packet * pkt)
 void CRouter::Sniff()
 {
 	Packet* temp_packet;
+	boost::random::uniform_real_distribution<> dropRate(0,100);
+	boost::random::mt19937 rng;
+	double randomizedDropRate;
 	try
 	{
-		list< CConnection const *>::iterator iter = mConnections.begin();
 		while(true)
 		{
+			list< CConnection const *>::iterator iter = mConnections.begin();
 			for (;iter!=mConnections.end();iter++)
 			{
 				CConnection * connection = const_cast<CConnection*>(*iter);
@@ -218,8 +227,16 @@ void CRouter::Sniff()
 				temp_packet= connection->GetPacket();
 				if (temp_packet != NULL)
 				{
+					randomizedDropRate= dropRate(rng);
 					boost::this_thread::interruption_point();
-					mPacketCollector->PushBack(temp_packet);
+					if (randomizedDropRate>=GetDropRate())
+					{
+						mPacketCollector->PushBack(temp_packet);
+					}
+					else
+					{
+						SBasicGUI::getInstance().incData(SBasicGUI::PACKETDROP);
+					}
 				}
 			}
 		}

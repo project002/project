@@ -15,12 +15,15 @@
 #define XML_LAYER_4_INDIVIDUAL_ROUTERS_PHYSICAL_CONNECTION "PhysicalConnection"
 
 #define XML_ROUTER_NUMBER_ATTRIBUTE "Number"
-#define XML_ROUTER_BUFFER_SIZE_ATTRIBUTE "Number"
+#define XML_ROUTER_BUFFER_SIZE_ATTRIBUTE "BufferSize"
+#define XML_ROUTER_DROP_RATE_ATTRIBUTE "DropRate"
 
+//#define XML_LAYER_1_NETWORK "Network" -Already defined just here for visual
 #define XML_LAYER_2_VIRTUAL_CONNECTIONS "VirtualConnections"
 #define XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS "VirtualConnection"
 #define XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER "Router"
 
+//#define XML_LAYER_1_NETWORK "Network" -Already defined just here for visual
 #define XML_LAYER_2_IS_STATIC_TABLE "StaticTable"
 #define XML_STATIC_LAYER_ATTRIBUTE "isStatic"
 

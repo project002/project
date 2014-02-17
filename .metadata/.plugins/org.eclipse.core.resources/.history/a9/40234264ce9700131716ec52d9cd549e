@@ -1,0 +1,64 @@
+/*
+ * CVirtualConnection.cpp
+ *
+ *  Created on: Dec 31, 2013
+ *      Author: root
+ */
+
+#include "CVirtualConnection.h"
+#define FIRST_ROUTER_PACKET_COLLECTOR 0
+#define SECOND_ROUTER_PACKET_COLLECTOR 1
+CVirtualConnection::CVirtualConnection()
+{
+	// TODO Auto-generated constructor stub
+
+}
+
+CVirtualConnection::~CVirtualConnection()
+{
+	// TODO Auto-generated destructor stub
+}
+
+Crafter::Packet* CVirtualConnection::GetPacket(unsigned int fromPacketCollector)
+{
+	try
+	{
+		if (fromPacketCollector==NO_CHOICE_OF_PACKET_COLLECTOR)
+		{
+			throw (CException("Virtual Connection : Need packet collector number to withdraw from!"))
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+bool CVirtualConnection::SendPacket(Packet* packet)
+{
+	try
+	{
+		Crafter::Packet * fromFirst;
+		fromFirst=mPacketCollectors[FIRST_ROUTER_PACKET_COLLECTOR].PopFront();
+		Crafter::Packet * fromSecond;
+		fromSecond=mPacketCollectors[SECOND_ROUTER_PACKET_COLLECTOR].PopFront();
+		if (fromFirst!=NULL)
+		{
+			mPacketCollectors[SECOND_ROUTER_PACKET_COLLECTOR].PushBack(fromFirst);
+		}
+		if (fromSecond!=NULL)
+		{
+			mPacketCollectors[FIRST_ROUTER_PACKET_COLLECTOR].PushBack(fromSecond);
+		}
+		return true;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+	return false;
+}

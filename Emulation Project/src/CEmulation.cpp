@@ -118,7 +118,7 @@ void CEmulation::TableSwapping()
  * @param router pointer to currently handles router
  * @param iter a reference to the xml parser iterator
  */
-void CEmulation::XMLAddPhysicalConnectionsToRouter(CRouter * router,pugi::xml_node & iter)
+void CEmulation::XMLAddPhysicalConnectionsToRouter(CRouter * &router,pugi::xml_node & iter)
 {
 	try
 	{
@@ -175,6 +175,7 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			XMLAddPhysicalConnectionsToRouter(RouterCreate,currentRouter);
 
 			unsigned int RouterNumber = currentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
+			RouterCreate->SetRouterNumber(RouterNumber);
 			list<CVirtualConnection const *> virtualConnectionsVector=mPhysicalConnectionsHandler->GetVirtualConnectionsVector(RouterNumber);
 			RouterCreate->AppendConnectionList(virtualConnectionsVector);
 			//Get router buffer size default is defined in H file
@@ -183,7 +184,13 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			{
 				RouterCreate->SetBufferSize(BufferSize);
 			}
+			double DropRate = currentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
+			if (DropRate != 0)
+			{
+				RouterCreate->SetDropRate(DropRate);
+			}
 			SBasicGUI::getInstance().msg("Created Router With Buffer Of %d Packets",BufferSize);
+			SBasicGUI::getInstance().msg("Drop Rate Set to %.1f%% ",DropRate);
 			mRouters.push_back(RouterCreate);
 		}
 	}
