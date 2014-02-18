@@ -2,175 +2,95 @@
 0 : Validating XML file is present
 0 : Building the emulation
 0 : name:	lo
-0 : name:	loname:	eth0
+0 : name:	loname:	eth1
 0 : ip table init complete
-0 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0 : last added ip address: 10.0.0.1 for MAC: 00:24:81:21:b7:1c
 0 : DHCP service started...
-0 : name:	loname:	eth0name:	eth1
-0 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0 : name:	loname:	eth1name:	eth0
+0 : last added ip address: 10.0.0.2 for MAC: 00:02:b3:33:ca:d8
 0 : DHCP service started...
-0 : name:	loname:	eth0name:	eth1name:	lo
-0 : name:	loname:	eth0name:	eth1name:	loname:	eth0
-0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
-0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	lo
-0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	loname:	eth0
-0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
+0 : name:	loname:	eth1name:	eth0name:	lo
+0 : name:	loname:	eth1name:	eth0name:	loname:	eth1
+0 : name:	loname:	eth1name:	eth0name:	loname:	eth1name:	eth0
+0 : name:	loname:	eth1name:	eth0name:	loname:	eth1name:	eth0name:	lo
+0 : name:	loname:	eth1name:	eth0name:	loname:	eth1name:	eth0name:	loname:	eth1
+0 : name:	loname:	eth1name:	eth0name:	loname:	eth1name:	eth0name:	loname:	eth1name:	eth0
 0 : Starting the emulation
 0 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+	 10.0.0.2|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
 
 0 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+	 10.0.0.2|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+Print Routing Table For 65:41:27:14:46:09
+	 10.0.0.2|65:41:27:14:46:09|65:41:27:14:46:09
 
-4.74 : last added ip address: 10.0.0.3 for MAC: 00:24:81:22:a0:b5
-4.74 : Started Handshake Offering 10.0.0.3
-5.07 : Handshake Finished With Setting 10.0.0.3
-17.32 : last added ip address: 10.0.0.4 for MAC: 00:0a:e4:d4:8e:49
-17.32 : Started Handshake Offering 10.0.0.4
-18.87 : Started Handshake Offering 10.0.0.4[@] No response to DHCP offer with ip 10.0.0.4
-24.11 : last added ip address: 10.0.0.4 for MAC: 00:0a:e4:d4:8e:49
-24.11 : Started Handshake Offering 10.0.0.4
-25.59 : Started Handshake Offering 10.0.0.4[@] No response to DHCP offer with ip 10.0.0.4
-30 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+0 : Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.1|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+
+0 : Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.1|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+Print Routing Table For 65:41:27:14:46:09
+	 10.0.0.1|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.2|65:41:27:14:46:09|65:41:27:14:46:09
+
+18.29 : last added ip address: 10.0.0.3 for MAC: 00:0a:e4:d4:8e:49
+18.29 : Started Handshake Offering 10.0.0.3
+20.99 : Started Handshake Offering 10.0.0.3[@] No response to DHCP offer with ip 10.0.0.3
+31.52 : last added ip address: 10.0.0.3 for MAC: 00:0a:e4:d4:8e:49
+31.52 : Started Handshake Offering 10.0.0.3
+34.13 : Started Handshake Offering 10.0.0.3[@] No response to DHCP offer with ip 10.0.0.3
+37.93 : last added ip address: 10.0.0.3 for MAC: 00:24:81:22:a0:b5
+37.93 : Started Handshake Offering 10.0.0.3
+38.26 : Handshake Finished With Setting 10.0.0.3
+59.12 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.2|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
 	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
 
-30 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+59.12 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.2|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
 	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+Print Routing Table For 65:41:27:14:46:09
+	 10.0.0.1|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.2|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.3|65:41:27:14:46:09|65:41:27:14:46:09
 
-40.9 : last added ip address: 10.0.0.4 for MAC: 00:0a:e4:d4:8e:49
-40.9 : Started Handshake Offering 10.0.0.4
-41.22 : Handshake Finished With Setting 10.0.0.4
-47.83 : No Handler found for message type:8
-55.84 : No Handler found for message type:8
-59.99 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+59.12 : Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.1|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+
+59.12 : Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.1|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+Print Routing Table For 65:41:27:14:46:09
+	 10.0.0.1|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.2|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.3|65:41:27:14:46:09|65:41:27:14:46:09
+
+63.78 : last added ip address: 10.0.0.4 for MAC: 00:0a:e4:d4:8e:49
+63.78 : Started Handshake Offering 10.0.0.4
+64.06 : Handshake Finished With Setting 10.0.0.4
+78.01 : No Handler found for message type:8
+89.93 : No Handler found for message type:8
+118.36 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.2|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
 	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
 
-59.99 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
+118.36 : Print Routing Table For 00:02:b3:33:ca:d8
+	 10.0.0.2|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
 	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+Print Routing Table For 65:41:27:14:46:09
+	 10.0.0.1|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.2|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.3|65:41:27:14:46:09|65:41:27:14:46:09
+
+118.36 : Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.1|00:24:81:21:b7:1c|00:24:81:21:b7:1c
 	 10.0.0.4|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
 
-89.96 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-
-89.96 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
+118.36 : Print Routing Table For 00:24:81:21:b7:1c
+	 10.0.0.1|00:24:81:21:b7:1c|00:24:81:21:b7:1c
 	 10.0.0.4|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
+Print Routing Table For 65:41:27:14:46:09
+	 10.0.0.1|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.2|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.3|65:41:27:14:46:09|65:41:27:14:46:09
+	 10.0.0.4|65:41:27:14:46:09|65:41:27:14:46:09
 
-119.86 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-
-119.86 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
-	 10.0.0.4|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
-
-149.01 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-
-149.01 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
-	 10.0.0.4|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
-
-178.2 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-
-178.2 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
-	 10.0.0.4|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
-
-207.41 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-
-207.41 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
-	 10.0.0.4|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
-
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-231.47 : packet discarded
-236.68 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-
-236.68 : Print Routing Table For 00:02:b3:33:ca:d8
-	 10.0.0.1|00:02:b3:33:ca:d8|00:02:b3:33:ca:d8
-	 10.0.0.3|00:02:b3:33:ca:d8|00:24:81:22:a0:b5
-Print Routing Table For 00:24:81:21:b7:1c
-	 10.0.0.2|00:24:81:21:b7:1c|00:24:81:21:b7:1c
-	 10.0.0.4|00:24:81:21:b7:1c|00:0a:e4:d4:8e:49
-
-259.69 : Emulation exiting
-259.99 : Enabling Networking
-260 : Destroying Logger and exiting program

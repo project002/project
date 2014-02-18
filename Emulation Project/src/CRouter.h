@@ -75,6 +75,8 @@ private:
 	CPacketCollector * mPacketCollector;
 	double mDropRate;
 	unsigned int mRouterNumber;
+
+	boost::signals2::mutex mMtx;
 };
 
 #endif /* CROUTER_H_ */

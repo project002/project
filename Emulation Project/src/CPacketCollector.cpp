@@ -45,7 +45,6 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		{
 			mPackets.push_back(pkt);
 			SBasicGUI::getInstance().incData(SBasicGUI::PACKETPROCCES);
-			mMtx.unlock();
 		}
 		else
 		{
@@ -57,15 +56,14 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 				pkt = NULL;
 			}
 		}
+		mMtx.unlock();
 	}
 	catch (CException & error)
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		mMtx.unlock();
 		throw;
 	}
-	mMtx.unlock();
 }
 void CPacketCollector::AnalyzePacketForStatistics(Crafter::Packet * packet)
 {
@@ -124,7 +122,6 @@ Crafter::Packet * CPacketCollector::PopFront()
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		mMtx.unlock();
 		throw;
 	}
 	mMtx.unlock();
@@ -149,13 +146,11 @@ void CPacketCollector::DropRandomPacket()
 			}
 			mPackets.erase(iter);
 		}
-		mMtx.unlock();
 	}
 	catch (CException & error)
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		mMtx.unlock();
 		throw;
 	}
 	mMtx.unlock();
@@ -178,7 +173,6 @@ void CPacketCollector::PrintPacket()
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		mMtx.unlock();
 		throw;
 	}
 	mMtx.unlock();

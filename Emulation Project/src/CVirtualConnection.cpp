@@ -8,14 +8,38 @@
 #include "CVirtualConnection.h"
 #define FIRST_ROUTER_PACKET_COLLECTOR 0
 #define SECOND_ROUTER_PACKET_COLLECTOR 1
-CVirtualConnection::CVirtualConnection()
+CVirtualConnection::CVirtualConnection():mUniqueIPForConnection(new CUIPV4("200.200.200.200"))
 {
-	// TODO Auto-generated constructor stub
-
+	try
+	{
+		stringstream ss;
+		for (int i = 0; i < 5; i++)
+		{
+			for (int k = 0; k < 2; k++)
+			{
+				int num = random() % 10;
+				ss << num;
+			}
+			ss << ":";
+		}
+		for (int k = 0; k < 2; k++)
+		{
+			int num = random() % 10;
+			ss << num;
+		}
+		mMacAddress = ss.str();
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
 }
 
 CVirtualConnection::~CVirtualConnection()
 {
+	delete mUniqueIPForConnection;
 	// TODO Auto-generated destructor stub
 }
 
@@ -49,6 +73,8 @@ void CVirtualConnection::AddRoutingTableReference(map<string,pair<CConnection co
 //TODO: get tables that will combine the mrouting tables. and return vector of pairs of strings
 vector<pair<string, string> >& CVirtualConnection::GetTable()
 {
+
+	mMtx.lock();
 	mRoutingToReturn.clear();
 	try
 	{
@@ -65,9 +91,10 @@ vector<pair<string, string> >& CVirtualConnection::GetTable()
 		set< string >::iterator iterSet=mCombinedRoutingTable.begin();
 		for (;iterSet!=mCombinedRoutingTable.end();iterSet++)
 		{
-			string t= "00:00:00:00:00:05";
-			mRoutingToReturn.push_back(pair<string,string>((*iterSet),t));
+			mRoutingToReturn.push_back(pair<string,string>((*iterSet),mMacAddress));
 		}
+
+		mMtx.unlock();
 		return mRoutingToReturn;
 
 	}
@@ -77,6 +104,7 @@ vector<pair<string, string> >& CVirtualConnection::GetTable()
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
+	mMtx.unlock();
 }
 
 Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
@@ -96,7 +124,10 @@ Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
 		}
 		unsigned int fromCollector = mRouterToPacketCollectorMap.at(
 				routerNumber);
-		return mPacketCollectors[fromCollector].PopFront();
+
+		Crafter::Packet * pkt =mPacketCollectors[fromCollector].PopFront();
+
+		return pkt;
 	}
 	catch (CException & error)
 	{
@@ -104,6 +135,7 @@ Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
+
 	return NULL;
 }
 
@@ -123,7 +155,11 @@ bool CVirtualConnection::SendPacket(Packet* packet,int routerNumber)
 			}
 			// send from router a to router b using xor on the packet collector related to the router
 			unsigned int toSend=mRouterToPacketCollectorMap.at(routerNumber) ^ 1;
-			mPacketCollectors[toSend].PushBack(packet);
+
+			Crafter::Packet * pkt=new Packet(*packet);
+
+			mPacketCollectors[toSend].PushBack(pkt);
+			//TODO copy packet to new packet and push it
 			return true;
 		}
 	}
@@ -131,19 +167,36 @@ bool CVirtualConnection::SendPacket(Packet* packet,int routerNumber)
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+
 		throw;
 	}
+
 	return false;
 }
 
 void CVirtualConnection::AddInvolvedRouter(const unsigned int & routerNumber)
 {
-	static unsigned int packetCollectorNum=0;
-	mInvolvedRoutersByNumber.push_back(routerNumber);
-	mRouterToPacketCollectorMap.insert(pair<unsigned int,unsigned int>(routerNumber,packetCollectorNum));
-	packetCollectorNum++;
-	if(packetCollectorNum>NUMBER_OF_CONNECTED_DEVICES)
+	try
 	{
-		throw(CException("Virtual connection holding more than 2 connections!"));
+		static unsigned int packetCollectorNum = 0;
+		mMtx.lock();
+		mInvolvedRoutersByNumber.push_back(routerNumber);
+		mRouterToPacketCollectorMap.insert(
+				pair<unsigned int, unsigned int>(routerNumber,
+						packetCollectorNum));
+		packetCollectorNum++;
+		mMtx.unlock();
+		if (packetCollectorNum > NUMBER_OF_CONNECTED_DEVICES)
+		{
+			throw(CException(
+					"Virtual connection holding more than 2 connections!"));
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		mMtx.unlock();
+		throw;
 	}
 }
