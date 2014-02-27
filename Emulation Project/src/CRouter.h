@@ -29,7 +29,10 @@ public:
 	void AppendConnectionList(list<CVirtualConnection const *> &connectionList);
 	void RequestTables();
 	void Sniffer();
+	void nonThreadedSniffer();
+	void nonThreadedInit();
 	void StopEmulation();
+
 	unsigned int GetBufferSize() const
 	{
 		return mBufferSize;
@@ -60,6 +63,27 @@ public:
 		mRouterNumber = routerNumber;
 	}
 
+	void setRouterThreaded(bool threaded) {mThreaded = threaded;}
+
+	/**
+	 * this method determines if the router is comprised out of
+	 * virtual connection only
+	 * Note: this method uses RTTI so use it in the init only
+	 * @return
+	 */
+	bool isVirtualRouter()
+	{
+		//check if all connection are virtual =>| this router is virtual
+		list<CConnection const *>::iterator it = mConnections.begin();
+		CVirtualConnection const * cvc;
+		for (;it!=mConnections.end();++it)
+		{
+
+			cvc = dynamic_cast<CVirtualConnection const *>(*it);
+			if (cvc == NULL) {return false;}
+		}
+		return true;
+	}
 private:
 	void HandleArp(Packet * pkt);
 	void HandleIPv4(Packet * pkt);
@@ -75,7 +99,7 @@ private:
 	CPacketCollector * mPacketCollector;
 	double mDropRate;
 	unsigned int mRouterNumber;
-
+	bool mThreaded; //determins if the router is threaded or not
 	boost::signals2::mutex mMtx;
 };
 

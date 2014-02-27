@@ -85,8 +85,8 @@ bool CPhysicalConnection::SendPacket(Packet* packet,int routerNumber)
 {
 	try
 	{
-		return packet->Send(mInterfaceName);
-
+		packet->Send(mInterfaceName);
+		return true;
 	}
 	catch (CException & error)
 	{
@@ -318,7 +318,7 @@ Crafter::Packet* CPhysicalConnection::GetPacket( int fromPacketCollector)
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
-		throw CException("Emulation Terminated Socket Physical Socket Error");
+		throw error;
 	}
 	return NULL;
 }

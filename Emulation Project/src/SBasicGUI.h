@@ -94,15 +94,13 @@ public:
 		insertMTX.lock();
 		std::pair<std::map<DATATYPE,int unsigned>::iterator,bool> ret;
 		ret = dataSet.insert(std::pair<DATATYPE,int unsigned>(type,value));
-		if (ret.second == false)
+		if (!ret.second)
 		{
 			dataSet.at(type) = value;
 			insertMTX.unlock();
-			refresh();
 			return true;
 		}
 		insertMTX.unlock();
-		refresh();
 		return ret.second;
 	}
 
@@ -151,11 +149,17 @@ private:
 	std::vector<std::string> messages;
 	boost::signals2::mutex insertMTX;
 	boost::signals2::mutex refreshMTX;
+	boost::signals2::mutex insertRouterMTX;
 	boost::thread gui_refresh;
 	double dropped_packets;
 
-	SBasicGUI():mOut(&std::cout),dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),dropped_packets(0) {}
-	SBasicGUI(const SBasicGUI &):mOut(&std::cout),dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),dropped_packets(0) {}
+	SBasicGUI():mOut(&std::cout),
+				dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
+				dropped_packets(0){}
+	SBasicGUI(const SBasicGUI &):mOut(&std::cout),
+								 dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
+								 dropped_packets(0){}
+
 	void operator=(SBasicGUI const &);
 
 	double calcLostPacketsPercent()

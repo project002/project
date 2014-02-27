@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
-		<item value="124" key="DIALOG_Y_ORIGIN"/>
-		<item value="1070" key="DIALOG_X_ORIGIN"/>
+		<item value="170" key="DIALOG_Y_ORIGIN"/>
 		<item value="610" key="DIALOG_HEIGHT"/>
+		<item value="1202" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="SendPack" key="selection"/>
+		<item value="mSniffingThread" key="selection"/>
 		<list key="findhistory">
+			<item value="mSniffingThread"/>
+			<item value="XML"/>
+			<item value="thread"/>
+			<item value="sendpa"/>
 			<item value="sendpack"/>
-			<item value="getPac"/>
-			<item value="get"/>
-			<item value="getpacket"/>
-			<item value="pop"/>
-			<item value="drop"/>
-			<item value="delete"/>
-			<item value="GetPacket"/>
+			<item value="s"/>
+			<item value="rules"/>
+			<item value="loggi"/>
 		</list>
 		<list key="replacehistory">
 			<item value="int unsigned"/>

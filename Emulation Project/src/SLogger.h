@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include <boost/timer.hpp>
 #include <boost/signals2/mutex.hpp>
+#include <crafter.h>
 using std::ofstream;
 
 class SLogger
@@ -41,11 +42,13 @@ public:
 	{
 		va_list args;
 		va_start(args,format);
-		char* str;
+		char str[256] = {0};
 		vsprintf(str,format,args);
 		va_end(args);
 		Log(str);
 	}
+
+
 private:
 	ofstream fd;
 	boost::timer timer;
@@ -53,6 +56,7 @@ private:
 	SLogger(){};
 	SLogger(SLogger const &){}
 	void operator=(SLogger const &);
+
 };
 
 

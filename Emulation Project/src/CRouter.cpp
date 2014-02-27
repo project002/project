@@ -9,7 +9,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_real_distribution.hpp>
 #include "CPhysicalConnection.h"
-CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL),mDropRate(0),mRouterNumber(1024)
+CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL),mDropRate(0),mRouterNumber(1024),mThreaded(true)
 {
 	try
 	{
@@ -97,6 +97,38 @@ void CRouter::Sniffer()
 	}
 }
 
+void CRouter::nonThreadedInit()
+{
+	try
+	{
+		mPacketCollector= new CPacketCollector(mBufferSize);
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void CRouter::nonThreadedSniffer()
+{
+	try
+	{
+		//mSniffingThread = boost::thread(&CRouter::Sniff, this);
+		//mPacketsHandlingThread = boost::thread(&CRouter::PacketHandler, this);
+		mThreaded = false;
+		Sniff();
+		PacketHandler();
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
 
 bool CRouter::ProcessSendPacket(Packet* packet)
 {
@@ -145,6 +177,7 @@ void CRouter::PacketHandler()
 				}
 				delete packet;
 			}
+			if (!mThreaded) {break;} //loop once when not threaded
 		}
 	}
 	catch (CException & error)
@@ -211,6 +244,9 @@ void CRouter::HandleIPv4(Packet * pkt)
 		}
 	}
 }
+
+
+
 void CRouter::Sniff()
 {
 	Packet* temp_packet;
@@ -241,6 +277,7 @@ void CRouter::Sniff()
 					}
 				}
 			}
+			if (!mThreaded) {break;} //loop once when not threaded
 		}
 	}
 	catch (CException & error)

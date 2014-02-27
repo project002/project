@@ -37,13 +37,19 @@ private: // Private Functions
 	void XMLVirtualConnectionsParser(pugi::xml_document & doc);
 	void XMLRoutingTableParserAvailability(pugi::xml_document & doc);
 	void XMLParseRoutingTable(pugi::xml_document & doc);
+	void XMLThreadedOptionParse(pugi::xml_document & doc);
+
+	void virtualRoutersSequence();
 
 	void TableSwapping();
 private: //Private Members
 	CPhysicalConnectionsHandler * mPhysicalConnectionsHandler;
 	vector<CRouter *> mRouters;
+	vector<CRouter *> mVirtualRouters; //used when not threaded
 	bool mStaticRoutingTable;
+	bool mThreaded;
 	boost::thread mTableSwappingThread;
+	boost::thread mRunVirtualRouters;
 };
 
 #endif /* CEMULATION_H_ */

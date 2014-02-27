@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Network FormatVersion="1">
+	<StaticTable isStatic="false"></StaticTable>
+    <Routers>
+        <Router Number="0" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        </Router>
+        <Router Number="1" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth1</PhysicalConnection>
+        </Router>
+    </Routers>
+    <VirtualConnections>
+    	<VirtualConnection>
+    		<Router Number="0"/>
+    		<Router Number="1"/>
+    	</VirtualConnection>
+    </VirtualConnections>
+</Network>
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8" standalone="no" ?> COMMENTTTTT -> This part works fine 
+<Network FormatVersion="1">
+	<StaticTable isStatic="false"></StaticTable>
+    <Routers>
+        <Router Number="0" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        	<PhysicalConnection>eth1</PhysicalConnection>
+        </Router>
+    </Routers>
+    <VirtualConnections>
+        
+    </VirtualConnections>
+</Network> -->

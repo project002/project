@@ -12,7 +12,10 @@
 /**
  * Class C-tor - Initiating members
  */
-CEmulation::CEmulation(): mPhysicalConnectionsHandler(new CPhysicalConnectionsHandler()),mStaticRoutingTable(false)
+CEmulation::CEmulation(): mPhysicalConnectionsHandler(new CPhysicalConnectionsHandler()),
+						  mVirtualRouters(vector<CRouter*>()),
+					      mStaticRoutingTable(false),
+					      mThreaded(true)
 {
 	try
 	{
@@ -36,8 +39,10 @@ CEmulation::~CEmulation()
 		//STARTing sniffer on all routers
 		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 		{
-			(*iter)->StopEmulation();
+			if (!(*iter)->isVirtualRouter()) {(*iter)->StopEmulation();}
 		}
+		if (!mThreaded) {mRunVirtualRouters.interrupt();}
+
 		if (mPhysicalConnectionsHandler != NULL)
 		{
 			delete mPhysicalConnectionsHandler;
@@ -73,6 +78,7 @@ void CEmulation::EmulationBuilder(char* SetupFile)
 		throw;
 	}
 }
+
 
 /**
  * An iterator goes through the Routers vector,
@@ -189,8 +195,7 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			{
 				RouterCreate->SetDropRate(DropRate);
 			}
-			SBasicGUI::getInstance().msg("Created Router With Buffer Of %d Packets",BufferSize);
-			SBasicGUI::getInstance().msg("Drop Rate Set to %.1f%% ",DropRate);
+			SBasicGUI::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
 			mRouters.push_back(RouterCreate);
 		}
 	}
@@ -288,6 +293,16 @@ void CEmulation::XMLParseRoutingTable(pugi::xml_document & doc)
 	}
 }
 
+void CEmulation::XMLThreadedOptionParse(pugi::xml_document & doc)
+{
+	pugi::xml_node root = doc.child(XML_LAYER_1_NETWORK);
+	mThreaded = root.attribute("Threaded").as_bool(true); //default to true
+	if (mThreaded)
+	{SBasicGUI::getInstance().msg("Emulation Running High-End Setting");}
+	else
+	{SBasicGUI::getInstance().msg("Emulation Running Low-End Setting");}
+}
+
 /**
  * Parsing the XML file provided.
  * -Loading the file == Checking its validity
@@ -307,6 +322,7 @@ void CEmulation::XMLParser(char * SetupFile)
 		{
 			throw(CException(ERROR_MSG_XML_PARSER));
 		}
+		XMLThreadedOptionParse(doc);
 		XMLVirtualConnectionsParser(doc);
 		XMLRoutersParser(doc);
 		XMLRoutingTableParserAvailability(doc);
@@ -332,7 +348,21 @@ void CEmulation::StartEmulation()
 		//STARTing sniffer on all routers
 		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 		{
-			(*iter)->Sniffer();
+			if (!mThreaded && (*iter)->isVirtualRouter())
+			{
+				mVirtualRouters.push_back(*iter);
+				(*iter)->nonThreadedInit();
+			}
+			else
+			{
+				(*iter)->Sniffer();
+			}
+		}
+		if (!mThreaded)
+		{
+			//if not threaded make the thread to run all the routers
+			SLogger::getInstance().Logf("Running Virtual Routers Thread With %d Routers",mVirtualRouters.size());
+			mRunVirtualRouters = boost::thread(&CEmulation::virtualRoutersSequence,this);
 		}
 		string command="init";
 		//TODO remove when done
@@ -355,3 +385,17 @@ void CEmulation::StartEmulation()
 	}
 }
 
+
+void CEmulation::virtualRoutersSequence()
+{
+	if (mThreaded) {return;}
+	vector<CRouter *>::iterator it;
+	while (true)
+	{
+		it = mVirtualRouters.begin();
+		for (;it!=mVirtualRouters.end();++it)
+		{
+			(*it)->nonThreadedSniffer();
+		}
+	}
+}

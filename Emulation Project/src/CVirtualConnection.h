@@ -38,6 +38,17 @@ private:
 	string mMacAddress;
 	CUIPV4 *mUniqueIPForConnection;
 	boost::signals2::mutex mMtx;
+	int getPacketIdentification(Packet* packet)
+	{
+		if (packet == NULL) {return -1;}
+		IP* ip = packet->GetLayer<IP>();
+		if (ip != NULL)
+		{
+			int temp = (uint32_t)ip->GetIdentification();
+			return temp;
+		}
+		return -1;
+	}
 };
 
 #endif /* CVIRTUALCONNECTION_H_ */

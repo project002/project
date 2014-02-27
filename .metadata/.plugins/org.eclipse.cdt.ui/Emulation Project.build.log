@@ -1,6 +1,6 @@
-15:14:10 **** Incremental Build of configuration Default for project Emulation Project ****
+16:10:39 **** Incremental Build of configuration Default for project Emulation Project ****
 make all 
 make: Nothing to be done for `all'.
 
-15:14:11 Build Finished (took 66ms)
+16:10:39 Build Finished (took 67ms)
 
