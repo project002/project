@@ -1,0 +1,226 @@
+/*
+ * CVirtualConnection.cpp
+ *
+ *  Created on: Dec 31, 2013
+ *      Author: root
+ */
+
+#include "CVirtualConnection.h"
+#define FIRST_ROUTER_PACKET_COLLECTOR 0
+#define SECOND_ROUTER_PACKET_COLLECTOR 1
+int unsigned CVirtualConnection::VC_INC = 0;
+
+CVirtualConnection::CVirtualConnection():mUniqueIPForConnection(new CUIPV4("200.200.200.200"))
+{
+	try
+	{
+		mMacAddress = makeRandomMACAddress();
+		VC_INC += 1;
+		id = VC_INC;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+CVirtualConnection::~CVirtualConnection()
+{
+	delete mUniqueIPForConnection;
+	// TODO Auto-generated destructor stub
+}
+
+string CVirtualConnection::makeSequentialMACAddress()
+{
+	int unsigned _id = id;
+	stringstream ss;
+	while (_id > 0)
+	{
+
+	}
+}
+
+string CVirtualConnection::makeRandomMACAddress()
+{
+	stringstream ss;
+	for (int i = 0; i < 5; i++)
+	{
+		for (int k = 0; k < 2; k++)
+		{
+			int num = random() % 10;
+			ss << num;
+		}
+		ss << ":";
+	}
+	for (int k = 0; k < 2; k++)
+	{
+		int num = random() % 10;
+		ss << num;
+	}
+	string mac = ss.str();
+	return mac;
+}
+
+void CVirtualConnection::AddRoutingTableReference(map<string,pair<CConnection const*,string> > * routTable, int routerNumber)
+{
+	try
+	{
+		if (routerNumber == NO_CHOICE_OF_PACKET_COLLECTOR)
+		{
+			throw(CException(
+					"Virtual Connection : Need packet collector number to withdraw from!"));
+		}
+		if (mRouterToPacketCollectorMap.find(routerNumber)
+				== mRouterToPacketCollectorMap.end())
+		{
+			throw(CException(
+					"Trying to get packet collector for invalid router"));
+		}
+		unsigned int tableOf = mRouterToPacketCollectorMap.at(
+						routerNumber);
+		mRoutingTable[tableOf]= routTable;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+//TODO: get tables that will combine the mrouting tables. and return vector of pairs of strings
+vector<pair<string, string> >& CVirtualConnection::GetTable()
+{
+
+	mMtx.lock();
+	mRoutingToReturn.clear();
+	try
+	{
+		map<string,pair<CConnection const*,string> >::iterator it=mRoutingTable[FIRST_ROUTER_PACKET_COLLECTOR]->begin();
+		for (;it!=mRoutingTable[FIRST_ROUTER_PACKET_COLLECTOR]->end();it++)
+		{
+			mCombinedRoutingTable.insert((*it).first);
+		}
+		it=mRoutingTable[SECOND_ROUTER_PACKET_COLLECTOR]->begin();
+		for (;it!=mRoutingTable[SECOND_ROUTER_PACKET_COLLECTOR]->end();it++)
+		{
+			mCombinedRoutingTable.insert((*it).first);
+		}
+		set< string >::iterator iterSet=mCombinedRoutingTable.begin();
+		for (;iterSet!=mCombinedRoutingTable.end();iterSet++)
+		{
+			mRoutingToReturn.push_back(pair<string,string>((*iterSet),mMacAddress));
+		}
+
+		mMtx.unlock();
+		return mRoutingToReturn;
+
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+	mMtx.unlock();
+}
+
+Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
+{
+	try
+	{
+		if (routerNumber == NO_CHOICE_OF_PACKET_COLLECTOR)
+		{
+			throw(CException(
+					"Virtual Connection : Need packet collector number to withdraw from!"));
+		}
+		if (mRouterToPacketCollectorMap.find(routerNumber)
+				== mRouterToPacketCollectorMap.end())
+		{
+			throw(CException(
+					"Trying to get packet collector for invalid router"));
+		}
+		unsigned int fromCollector = mRouterToPacketCollectorMap.at(
+				routerNumber);
+
+		Crafter::Packet * pkt =mPacketCollectors[fromCollector].PopFront();
+
+		int id = getPacketIdentification(pkt);
+		if (id != -1) {SLogger::getInstance().Logf("::OUT:: %d IP Packet OUT %d",routerNumber,id);}
+		return pkt;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+
+	return NULL;
+}
+
+bool CVirtualConnection::SendPacket(Packet* packet,int routerNumber)
+{
+	try
+	{
+		if (packet!=NULL)
+		{
+			if (routerNumber==NO_CHOICE_OF_PACKET_COLLECTOR)
+			{
+				throw (CException("Virtual Connection : Need packet collector number to withdraw from!"));
+			}
+			if (mRouterToPacketCollectorMap.find(routerNumber)==mRouterToPacketCollectorMap.end())
+			{
+				throw (CException("Trying to get packet collector for invalid router"));
+			}
+			// send from router a to router b using xor on the packet collector related to the router
+			unsigned int toSend=mRouterToPacketCollectorMap.at(routerNumber) ^ 1;
+
+			Crafter::Packet * pkt=new Packet(*packet);
+
+			int id = getPacketIdentification(pkt);
+			if (id != -1) {SLogger::getInstance().Logf("::IN:: %d IP Packet ID %d",routerNumber,id);}
+
+			mPacketCollectors[toSend].PushBack(pkt);
+			//TODO copy packet to new packet and push it
+			return false;
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+
+		throw;
+	}
+
+	return false;
+}
+
+void CVirtualConnection::AddInvolvedRouter(const unsigned int & routerNumber)
+{
+	try
+	{
+		int packetCollectorNum = mInvolvedRoutersByNumber.size();
+		mMtx.lock();
+		mInvolvedRoutersByNumber.push_back(routerNumber);
+		mRouterToPacketCollectorMap.insert(
+				pair<unsigned int, unsigned int>(routerNumber,
+						packetCollectorNum));
+		mMtx.unlock();
+		if (mInvolvedRoutersByNumber.size() > NUMBER_OF_CONNECTED_DEVICES)
+		{
+			throw(CException(
+					"Virtual connection holding more than 2 connections!"));
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		mMtx.unlock();
+		throw;
+	}
+}

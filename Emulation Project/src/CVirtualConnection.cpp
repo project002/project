@@ -8,26 +8,18 @@
 #include "CVirtualConnection.h"
 #define FIRST_ROUTER_PACKET_COLLECTOR 0
 #define SECOND_ROUTER_PACKET_COLLECTOR 1
+//Byte Max Value
+#define BM 255
+int unsigned CVirtualConnection::VC_INC = 0;
+
 CVirtualConnection::CVirtualConnection():mUniqueIPForConnection(new CUIPV4("200.200.200.200"))
 {
 	try
 	{
-		stringstream ss;
-		for (int i = 0; i < 5; i++)
-		{
-			for (int k = 0; k < 2; k++)
-			{
-				int num = random() % 10;
-				ss << num;
-			}
-			ss << ":";
-		}
-		for (int k = 0; k < 2; k++)
-		{
-			int num = random() % 10;
-			ss << num;
-		}
-		mMacAddress = ss.str();
+		VC_INC += 1;
+		id = VC_INC;
+		mMacAddress = makeSequentialMACAddress();
+		//mMacAddress = makeRandomMACAddress();
 	}
 	catch (CException & error)
 	{
@@ -41,6 +33,48 @@ CVirtualConnection::~CVirtualConnection()
 {
 	delete mUniqueIPForConnection;
 	// TODO Auto-generated destructor stub
+}
+
+string CVirtualConnection::makeSequentialMACAddress()
+{
+	int _id = (int)id; //probably won't go over INT_MAX
+	stringstream ss;
+	char temp[3] = {0};
+	for (int i=5*BM;i>=0;i-=BM)
+	{
+		if ((_id-i) > 0)
+		{
+			sprintf(temp,"%02X",((_id-i) > 255 ? 255 : (_id-i)));
+			ss << temp;
+		}
+		else
+		{ss << "00";}
+		if (i>0) {ss << ":";}
+		//_id -= 255;
+	}
+	string mac = ss.str();
+	return mac;
+}
+
+string CVirtualConnection::makeRandomMACAddress()
+{
+	stringstream ss;
+	for (int i = 0; i < 5; i++)
+	{
+		for (int k = 0; k < 2; k++)
+		{
+			int num = random() % 10;
+			ss << num;
+		}
+		ss << ":";
+	}
+	for (int k = 0; k < 2; k++)
+	{
+		int num = random() % 10;
+		ss << num;
+	}
+	string mac = ss.str();
+	return mac;
 }
 
 void CVirtualConnection::AddRoutingTableReference(map<string,pair<CConnection const*,string> > * routTable, int routerNumber)

@@ -37,7 +37,11 @@ private:
 	vector<pair<string, string> > mRoutingToReturn;
 	string mMacAddress;
 	CUIPV4 *mUniqueIPForConnection;
+	static int unsigned VC_INC; //increment for all virtual connection
+	int unsigned id; //the id of this virtual connection
 	boost::signals2::mutex mMtx;
+	string makeRandomMACAddress();
+	string makeSequentialMACAddress();
 	int getPacketIdentification(Packet* packet)
 	{
 		if (packet == NULL) {return -1;}
