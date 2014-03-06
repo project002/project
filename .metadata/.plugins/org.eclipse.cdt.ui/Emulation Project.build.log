@@ -1,9 +1,9 @@
-18:15:04 **** Incremental Build of configuration Default for project Emulation Project ****
+16:15:04 **** Incremental Build of configuration Default for project Emulation Project ****
 make all 
-Building file: ../src/CRouter.cpp
+Building file: ../src/CEmulation.cpp
 Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CRouter.d" -MT"src/CRouter.d" -o "src/CRouter.o" "../src/CRouter.cpp"
-Finished building: ../src/CRouter.cpp
+g++ -O0 -g3 -Wall -lcrafter -lboost_thread-mt -c -fmessage-length=0 -MMD -MP -MF"src/CEmulation.d" -MT"src/CEmulation.d" -o "src/CEmulation.o" "../src/CEmulation.cpp"
+Finished building: ../src/CEmulation.cpp
  
 Building target: Emulation Project
 Invoking: GCC C++ Linker
@@ -11,5 +11,5 @@ g++ -L/usr/include/boost -lcrafter -lpthread -lboost_thread -o "Emulation Projec
 Finished building target: Emulation Project
  
 
-18:15:08 Build Finished (took 3s.668ms)
+16:15:08 Build Finished (took 3s.820ms)
 

@@ -94,10 +94,17 @@ void CEmulation::TableSwapping()
 		{
 			vector<CRouter *>::iterator iter;
 			boost::this_thread::interruption_point();
-			for (iter=mRouters.begin();iter!=mRouters.end();iter++)
+			//swap table each time for all the connection available
+			//(for n routers there are n-1 connections) so the arp responses
+			//will occur after one table swap instead of n-1 swaps
+			for (int unsigned i=0;i<mRouters.size()-1;++i)
 			{
 				boost::this_thread::interruption_point();
-				(*iter)->RequestTables();
+				for (iter=mRouters.begin();iter!=mRouters.end();iter++)
+				{
+					boost::this_thread::interruption_point();
+					(*iter)->RequestTables();
+				}
 			}
 			//Following lines are for the table swapping to take effect every X period
 			//of time.

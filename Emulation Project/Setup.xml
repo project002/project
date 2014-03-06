@@ -13,6 +13,12 @@
         </Router>
         <Router Number="4" BufferSize="100" DropRate="0">
         </Router>
+        <Router Number="5" BufferSize="100" DropRate="0">
+        </Router>
+        <Router Number="6" BufferSize="100" DropRate="0">
+        </Router>
+        <Router Number="7" BufferSize="100" DropRate="0">
+        </Router>
     </Routers>
     <VirtualConnections>
     	<VirtualConnection>
@@ -29,6 +35,18 @@
     	</VirtualConnection>
     	<VirtualConnection>
     		<Router Number="4"/>
+    		<Router Number="5"/>
+    	</VirtualConnection>
+    	<VirtualConnection>
+    		<Router Number="5"/>
+    		<Router Number="6"/>
+    	</VirtualConnection>
+    	<VirtualConnection>
+    		<Router Number="6"/>
+    		<Router Number="7"/>
+    	</VirtualConnection>
+    	<VirtualConnection>
+    		<Router Number="7"/>
     		<Router Number="1"/>
     	</VirtualConnection>
     </VirtualConnections>
@@ -71,7 +89,8 @@
 
 <!-- works with 3 routers and virtual connections between 2 routers and the pure virtual one -->
 <!-- Threaded == false => 28ms avarge -->
-<!-- Network FormatVersion="1" Threaded="false">
+<!--
+<Network FormatVersion="1" Threaded="false">
 	<StaticTable isStatic="false"></StaticTable>
     <Routers>
         <Router Number="0" BufferSize="100" DropRate="0">
@@ -94,8 +113,8 @@
     		<Router Number="2"/>
     	</VirtualConnection>
     </VirtualConnections>
-</Network -->
-
+</Network>
+-->
 
 
 
