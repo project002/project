@@ -10,6 +10,8 @@
 #include "SLogger.h"
 #include "SBasicGUI.h"
 #include "DInitializationDefs.h"
+#include "CGUIGTK.h"
+#include <gtkmm/application.h>
 
 /**
  * Verifying that the Setup XML file was provided while lunching the
@@ -130,6 +132,7 @@ void EnableNetworkManager()
 		throw;
 	}
 }
+
 /**
  * The main function of the program that initializes the loggers
  * and the operating system itself. Some preceding steps should be taken.
@@ -142,6 +145,13 @@ int main(int argc, char *argv[])
 {
 	try
 	{
+
+		//if you uncomment this the gui window will stay open until the program closes
+//		int a_argc = 1;
+//		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(a_argc,argv,"org.NetworkEmulation");
+//		CGUIGTK window;
+//		app->run(window);
+
 		SBasicGUI::getInstance().init();
 		SLogger::getInstance().InitLogger();
 		SLogger::getInstance().Log("Disabling Linux Networking");

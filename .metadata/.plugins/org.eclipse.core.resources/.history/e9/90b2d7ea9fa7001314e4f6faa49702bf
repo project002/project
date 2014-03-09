@@ -1,0 +1,41 @@
+/*
+ * CGUIGTK.cpp
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#include "CGUIGTK.h"
+
+CGUI_GTK::CGUI_GTK()
+{
+	init_window();
+}
+
+void CGUI_GTK::event_register()
+{
+	g_signal_connect_swapped(G_OBJECT(window), "destroy",
+		 G_CALLBACK(gtk_main_quit), NULL);
+}
+
+void CGUI_GTK::init_window()
+{
+	GtkWidget* window;
+	gtk_init(NULL,NULL);
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	//the compiler is fine with this FUCK eclipse
+	gtk_window_set_title(GTK_WINDOW(window),"Bandwidth Variation Emulation");
+	gtk_window_set_default_size(GTK_WINDOW(window), 530, 350);
+	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+
+
+
+	gtk_widget_show(window);
+	gtk_main();
+}
+
+CGUI_GTK::~CGUI_GTK()
+{
+	// TODO Auto-generated destructor stub
+}
+

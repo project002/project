@@ -1,0 +1,23 @@
+/*
+ * CGUIGTK.h
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#ifndef CGUIGTK_H_
+#define CGUIGTK_H_
+#include <stdio.h>
+#include "GUI_INCLUDES.h"
+
+class CGUI_GTK
+{
+public:
+	CGUI_GTK();
+	virtual ~CGUI_GTK();
+private:
+	void init_window();
+	void event_register();
+};
+
+#endif /* CGUIGTK_H_ */

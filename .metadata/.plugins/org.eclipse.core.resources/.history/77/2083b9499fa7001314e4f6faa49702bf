@@ -1,0 +1,24 @@
+/*
+ * CGUIGTK.cpp
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#include "CGUIGTK.h"
+
+CGUI_GTK::CGUI_GTK()
+{
+
+}
+
+void CGUI_GTK::init_window()
+{
+
+}
+
+CGUI_GTK::~CGUI_GTK()
+{
+	// TODO Auto-generated destructor stub
+}
+

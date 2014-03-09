@@ -1,0 +1,186 @@
+//============================================================================
+// Name        : Emulation.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include "CEmulation.h"
+#include "SLogger.h"
+#include "SBasicGUI.h"
+#include "DInitializationDefs.h"
+#include "GUI_INCLUDES.h"
+/**
+ * Verifying that the Setup XML file was provided while lunching the
+ * emulation.
+ * If no file was provided an exception will be thrown and program will
+ * be terminated
+ *
+ * @param argc number of arguments provided for the emulation
+ * @param argv the arguments themselves
+ */
+void EmulationParametersValidator(int argc, char *argv[])
+{
+	try
+	{
+		if (argc<MINIMUM_NUMBER_OF_ARGUMENTS)
+		{
+			throw CException(ERROR_MSG_XML_FILE_ARGUMENT_MISSING);
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+/**
+ * Function receives the command to be executed and if it should be appended to
+ * the end of the system log file.
+ *
+ * @param cmd command to be executed
+ * @param append boolean if command should be appended to the system log file
+ * @return status of executed command
+ */
+int RunCmdRedirect(const char* cmd,bool append = true)
+{
+
+	sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+	char new_cmd[1024];
+	if (append)
+	{
+		sprintf(new_cmd,"%s >> %s 2>&1",cmd,REDIRECT_SYSTEM_FILE);
+	}
+	else
+	{
+		sprintf(new_cmd,"%s > %s  2>&1",cmd,REDIRECT_SYSTEM_FILE);
+	}
+	return system(new_cmd);
+}
+
+/**
+ * Function receives the status of the executed system command and the string
+ * that should be printed in case of a failure.
+ *
+ * @param status system command status code
+ * @param toPrint message to print on failure.
+ */
+void HandleStatus(int status, string toPrint)
+{
+	try
+	{
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(toPrint);
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+/**
+ * Calling System to disabled the Network Manager service in order for the emulation
+ * to determine IP's subnet masks and more.
+ *
+ * If the Manager couldn't be stopped an exception will be throw
+ * and the emulation will be terminated.
+ */
+void DisableNetworkManager()
+{
+	try
+	{
+		HandleStatus(RunCmdRedirect(STOP_NETWORK_MANAGER_COMMAND,false),ERROR_MSG_DISABLING_NETWORK_MANAGER);
+
+		HandleStatus(RunCmdRedirect(STOP_IP_FORWARDING),ERROR_MSG_DISABLING_IP_FORWARDING);
+
+		HandleStatus(RunCmdRedirect(STOP_ICMP_RESPONSE),ERROR_MSG_DISABLING_ICMP_RESPONSE);
+
+		HandleStatus(RunCmdRedirect(ENABLE_FIREWALL),ERROR_FW);
+
+		HandleStatus(RunCmdRedirect(STOP_ALL_INCOMING_PACKETS),ERROR_DISABLING_PACKETS_TRAFFIC);
+
+		HandleStatus(RunCmdRedirect(STOP_ALL_OUTGOING_PACKETS),ERROR_DISABLING_PACKETS_TRAFFIC);
+
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void EnableNetworkManager()
+{
+	try
+	{
+		HandleStatus(RunCmdRedirect(START_NETWORK_MANAGER_COMMAND),ERROR_MSG_ENABLING_NETWORK_MANAGER);
+		HandleStatus(RunCmdRedirect(DISABLE_FIREWALL),ERROR_DISABLING_FW);
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void startGuiChain()
+{
+	GtkWidget* window;
+	gtk_init(NULL,NULL);
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	//the compiler is fine with this FUCK eclipse
+	gtk_window_set_title(GTK_WINDOW(window),"Bandwidth Variation Emulation");
+
+	gtk_widget_show(window);
+	gtk_main();
+}
+/**
+ * The main function of the program that initializes the loggers
+ * and the operating system itself. Some preceding steps should be taken.
+ * for more information view the README file attached to raanan's gmail
+ * @param argc number of arguments provided for the emulation
+ * @param argv the arguments themselves
+ * @return Failure value if at some point an exception was thrown
+ */
+int main(int argc, char *argv[])
+{
+	try
+	{
+		startGuiChain();
+		SBasicGUI::getInstance().init();
+		SLogger::getInstance().InitLogger();
+		SLogger::getInstance().Log("Disabling Linux Networking");
+		DisableNetworkManager();
+		SLogger::getInstance().Log("Validating XML file is present");
+ 		EmulationParametersValidator(argc,argv);
+ 		CEmulation * Emulator= new CEmulation();
+ 		SLogger::getInstance().Log("Building the emulation");
+ 		Emulator->EmulationBuilder(argv[SETUP_XML_ARGUMENT_POSITION]);
+ 		SLogger::getInstance().Log("Starting the emulation");
+ 		Emulator->StartEmulation();
+ 		SLogger::getInstance().Log("Emulation exiting");
+		delete Emulator;
+		SLogger::getInstance().Log("Enabling Networking");
+		EnableNetworkManager();
+		SLogger::getInstance().Log("Destroying Logger and exiting program");
+		SLogger::getInstance().DestroyLogger();
+		return(EXIT_SUCCESS);
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		SLogger::getInstance().DestroyLogger();
+		EnableNetworkManager();
+		return(EXIT_FAILURE);
+	}
+}
+

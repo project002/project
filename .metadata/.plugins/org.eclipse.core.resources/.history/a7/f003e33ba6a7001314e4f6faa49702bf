@@ -1,0 +1,35 @@
+/*
+ * CGUIGTK.cpp
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#include "CGUIGTK.h"
+
+CGUI_GTK::CGUI_GTK()
+{
+	init_window();
+}
+
+void CGUI_GTK::event_register()
+{
+}
+
+void CGUI_GTK::init_window()
+{
+	Glib::RefPtr<Gtk::Application> app =
+	    Gtk::Application::create(argc, argv,
+	      "org.gtkmm.examples.base");
+
+	Gtk::Window window;
+	  window.set_default_size(200, 200);
+
+	app->run(window);
+}
+
+CGUI_GTK::~CGUI_GTK()
+{
+	// TODO Auto-generated destructor stub
+}
+

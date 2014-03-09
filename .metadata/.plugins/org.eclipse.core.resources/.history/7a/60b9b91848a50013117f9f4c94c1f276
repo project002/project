@@ -1,0 +1,17 @@
+/*
+ * GUI_INCLUDES.h
+ *
+ *  Created on: Mar 6, 2014
+ *      Author: root
+ */
+
+#ifndef GUI_INCLUDES_H_
+#define GUI_INCLUDES_H_
+
+#include <gtk/gdk/gdk.h>
+#include <gtk/gtk/gtk.h>
+#include <glib/glib.h>
+
+
+
+#endif /* GUI_INCLUDES_H_ */

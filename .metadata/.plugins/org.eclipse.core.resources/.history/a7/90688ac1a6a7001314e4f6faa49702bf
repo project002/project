@@ -1,0 +1,27 @@
+/*
+ * CGUIGTK.h
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#ifndef CGUIGTK_H_
+#define CGUIGTK_H_
+#include <stdio.h>
+#include <gtkmm/button.h>
+#include <gtkmm/window.h>
+
+class CGUI_GTK : public Gtk::Window
+{
+public:
+	CGUI_GTK();
+	virtual ~CGUI_GTK();
+protected:
+	//single handlers
+	void on_button_click();
+
+	//members
+	Gtk::Button mButton;
+};
+
+#endif /* CGUIGTK_H_ */
