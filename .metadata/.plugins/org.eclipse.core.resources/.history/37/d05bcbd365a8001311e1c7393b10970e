@@ -1,0 +1,33 @@
+/*
+ * CGUIGTK.h
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#ifndef CGUIGTK_H_
+#define CGUIGTK_H_
+#include <iostream>
+#include <gtkmm.h>
+#include <gtkmm/dialog.h>
+#include <gtkmm/menubar.h>
+#include <gtkmm/window.h>
+#include <gtkmm/box.h>
+
+class CGUIGTK : public Gtk::Window
+{
+public:
+	CGUIGTK();
+	virtual ~CGUIGTK();
+protected:
+	//single handlers
+	void file_browser();
+	void createMenuBar();
+	//members
+	Gtk::Box* mPackingBox;
+	Gtk::MenuBar* mMenuBar;
+private:
+	std::string mImportXML;
+};
+
+#endif /* CGUIGTK_H_ */

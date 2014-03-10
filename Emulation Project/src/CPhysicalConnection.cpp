@@ -300,7 +300,8 @@ Crafter::Packet* CPhysicalConnection::GetPacket( int fromPacketCollector)
 		{
 			delete ethPacket;
 			ethPacket=NULL;
-			throw CException("fatal error on receive from socket");
+			//throw CException("fatal error on receive from socket");
+			throw CSocketNotReadyException();
 		}
 
 		if (fail_cond_empty)

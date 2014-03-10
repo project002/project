@@ -1,0 +1,20 @@
+/*
+ * EmulationWrapper.cpp
+ *
+ *  Created on: Mar 10, 2014
+ *      Author: root
+ */
+
+#include "EmulationWrapper.h"
+
+EmulationWrapper::EmulationWrapper()
+{
+	// TODO Auto-generated constructor stub
+
+}
+
+EmulationWrapper::~EmulationWrapper()
+{
+	// TODO Auto-generated destructor stub
+}
+

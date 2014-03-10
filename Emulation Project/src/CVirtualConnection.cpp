@@ -104,7 +104,6 @@ void CVirtualConnection::AddRoutingTableReference(map<string,pair<CConnection co
 	}
 }
 
-//TODO: get tables that will combine the mrouting tables. and return vector of pairs of strings
 vector<pair<string, string> >& CVirtualConnection::GetTable()
 {
 

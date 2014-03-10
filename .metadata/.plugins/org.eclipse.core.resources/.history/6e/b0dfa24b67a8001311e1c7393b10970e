@@ -1,0 +1,19 @@
+/*
+ * EmulationWrapper.cpp
+ *
+ *  Created on: Mar 10, 2014
+ *      Author: root
+ */
+
+#include "EmulationWrapper.h"
+
+EmulationWrapper::EmulationWrapper(std::string XMLProp) :mXMLProperties(XMLProp)
+{
+
+}
+
+EmulationWrapper::~EmulationWrapper()
+{
+	// TODO Auto-generated destructor stub
+}
+

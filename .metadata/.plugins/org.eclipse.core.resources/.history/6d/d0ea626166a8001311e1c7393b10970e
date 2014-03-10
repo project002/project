@@ -1,0 +1,18 @@
+/*
+ * EmulationWrapper.h
+ *
+ *  Created on: Mar 10, 2014
+ *      Author: root
+ */
+
+#ifndef EMULATIONWRAPPER_H_
+#define EMULATIONWRAPPER_H_
+
+class EmulationWrapper
+{
+public:
+	EmulationWrapper();
+	virtual ~EmulationWrapper();
+};
+
+#endif /* EMULATIONWRAPPER_H_ */

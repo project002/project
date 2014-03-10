@@ -9,10 +9,12 @@
 #define CGUIGTK_H_
 #include <iostream>
 #include <gtkmm.h>
-#include <gtkmm/actiongroup.h>
-#include <gtkmm/uimanager.h>
+#include <gtkmm/dialog.h>
+#include <gtkmm/menubar.h>
 #include <gtkmm/window.h>
 #include <gtkmm/box.h>
+#include "EmulationWrapper.h"
+#include "CSocketNotReadyException.h"
 
 class CGUIGTK : public Gtk::Window
 {
@@ -21,13 +23,19 @@ public:
 	virtual ~CGUIGTK();
 protected:
 	//single handlers
-	void file_browser();
-
+	void open_file_browser();
+	void run_emulation();
+	void stop_emulation();
+	void createMenuBar();
 	//members
-	Gtk::Box mPackingBox;
-	Gtk::Button btn;
-	Glib::RefPtr<Gtk::ActionGroup> mActionGroup;
-	Glib::RefPtr<Gtk::UIManager> mUIManager;
+	Gtk::Box* mPackingBox;
+	Gtk::MenuBar* mMenuBar;
+	Gtk::Button* mStopButton;
+	Gtk::Label mInst;
+private:
+	std::string mImportXMLPath;
+	EmulationWrapper* mEmulation;
+
 };
 
 #endif /* CGUIGTK_H_ */

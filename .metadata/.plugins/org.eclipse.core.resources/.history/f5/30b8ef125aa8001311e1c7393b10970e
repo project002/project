@@ -1,0 +1,36 @@
+/*
+ * CGUIGTK.cpp
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#include "CGUIGTK.h"
+
+CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),mMenuBar(Gtk::manage(new Gtk::MenuBar()))
+{
+	set_border_width(10);
+	set_default_size(530,320);
+	set_title("Bandwidth Variance Emulation");
+
+	mPackingBox.set_orientation(Gtk::ORIENTATION_VERTICAL);
+	createMenuBar();
+
+
+}
+
+void CGUIGTK::createMenuBar()
+{
+
+}
+
+void CGUIGTK::file_browser()
+{
+	std::cout << "open file browser" << std::endl;
+}
+
+CGUIGTK::~CGUIGTK()
+{
+	// TODO Auto-generated destructor stub
+}
+

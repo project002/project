@@ -5,4 +5,3 @@ Default incoming policy changed to 'deny'
 (be sure to update your rules accordingly)
 Default outgoing policy changed to 'deny'
 (be sure to update your rules accordingly)
-Starting network connection manager: NetworkManager.

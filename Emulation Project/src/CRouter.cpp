@@ -116,8 +116,6 @@ void CRouter::nonThreadedSniffer()
 {
 	try
 	{
-		//mSniffingThread = boost::thread(&CRouter::Sniff, this);
-		//mPacketsHandlingThread = boost::thread(&CRouter::PacketHandler, this);
 		mThreaded = false;
 		Sniff();
 		PacketHandler();

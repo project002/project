@@ -1,0 +1,46 @@
+/*
+ * EmulationWrapper.h
+ *
+ *  Created on: Mar 10, 2014
+ *      Author: root
+ */
+
+#ifndef EMULATIONWRAPPER_H_
+#define EMULATIONWRAPPER_H_
+#include "CEmulation.h"
+#include "SLogger.h"
+#include "SBasicGUI.h"
+#include "DInitializationDefs.h"
+
+class EmulationWrapper
+{
+public:
+	/**
+	 * @param XMLProp the path to the xml file containing the emulation properties
+	 */
+	EmulationWrapper(std::string XMLProp);
+	virtual ~EmulationWrapper();
+private:
+	std::string mXMLProperties;
+
+	/**
+	 * Function receives the command to be executed and if it should be appended to
+	 * the end of the system log file.
+	 *
+	 * @param cmd command to be executed
+	 * @param append boolean if command should be appended to the system log file
+	 * @return status of executed command
+	 */
+	int RunCmdRedirect(const char* cmd,bool append = true);
+
+	/**
+	 * Function receives the status of the executed system command and the string
+	 * that should be printed in case of a failure.
+	 *
+	 * @param status system command status code
+	 * @param toPrint message to print on failure.
+	 */
+	void HandleStatus(int status, string toPrint)
+};
+
+#endif /* EMULATIONWRAPPER_H_ */

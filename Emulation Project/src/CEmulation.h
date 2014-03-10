@@ -27,11 +27,12 @@ public: // Public Functions
 	CEmulation();
 	virtual ~CEmulation();
 	void StartEmulation();
-	void EmulationBuilder(char* SetupFile);
+	void StopEmulation();
+	void EmulationBuilder(const char* SetupFile);
 
 private: // Private Functions
-
-	void XMLParser(char * SetupFile);
+	bool mRunning;
+	void XMLParser(const char * SetupFile);
 	void XMLRoutersParser(pugi::xml_document & doc);
 	void XMLAddPhysicalConnectionsToRouter(CRouter * &router,pugi::xml_node & iter);
 	void XMLVirtualConnectionsParser(pugi::xml_document & doc);

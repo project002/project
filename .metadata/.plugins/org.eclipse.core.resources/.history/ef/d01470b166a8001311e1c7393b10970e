@@ -1,0 +1,27 @@
+/*
+ * EmulationWrapper.h
+ *
+ *  Created on: Mar 10, 2014
+ *      Author: root
+ */
+
+#ifndef EMULATIONWRAPPER_H_
+#define EMULATIONWRAPPER_H_
+#include "CEmulation.h"
+#include "SLogger.h"
+#include "SBasicGUI.h"
+#include "DInitializationDefs.h"
+
+class EmulationWrapper
+{
+public:
+	/**
+	 * @param XMLProp the path to the xml file containing the emualtion properties
+	 */
+	EmulationWrapper(std::string XMLProp);
+	virtual ~EmulationWrapper();
+private:
+	std::string mXMLProperties;
+};
+
+#endif /* EMULATIONWRAPPER_H_ */

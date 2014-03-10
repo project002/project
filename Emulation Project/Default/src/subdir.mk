@@ -13,8 +13,10 @@ CPP_SRCS += \
 ../src/CPhysicalConnection.cpp \
 ../src/CPhysicalConnectionsHandler.cpp \
 ../src/CRouter.cpp \
+../src/CSocketNotReadyException.cpp \
 ../src/CVirtualConnection.cpp \
 ../src/Emulation\ Project.cpp \
+../src/EmulationWrapper.cpp \
 ../src/pugixml.cpp 
 
 OBJS += \
@@ -27,8 +29,10 @@ OBJS += \
 ./src/CPhysicalConnection.o \
 ./src/CPhysicalConnectionsHandler.o \
 ./src/CRouter.o \
+./src/CSocketNotReadyException.o \
 ./src/CVirtualConnection.o \
 ./src/Emulation\ Project.o \
+./src/EmulationWrapper.o \
 ./src/pugixml.o 
 
 CPP_DEPS += \
@@ -41,8 +45,10 @@ CPP_DEPS += \
 ./src/CPhysicalConnection.d \
 ./src/CPhysicalConnectionsHandler.d \
 ./src/CRouter.d \
+./src/CSocketNotReadyException.d \
 ./src/CVirtualConnection.d \
 ./src/Emulation\ Project.d \
+./src/EmulationWrapper.d \
 ./src/pugixml.d 
 
 

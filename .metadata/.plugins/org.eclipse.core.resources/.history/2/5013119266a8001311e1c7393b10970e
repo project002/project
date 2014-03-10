@@ -1,0 +1,24 @@
+/*
+ * EmulationWrapper.h
+ *
+ *  Created on: Mar 10, 2014
+ *      Author: root
+ */
+
+#ifndef EMULATIONWRAPPER_H_
+#define EMULATIONWRAPPER_H_
+#include "CEmulation.h"
+#include "SLogger.h"
+#include "SBasicGUI.h"
+#include "DInitializationDefs.h"
+
+class EmulationWrapper
+{
+public:
+	EmulationWrapper(std::string XmlProp);
+	virtual ~EmulationWrapper();
+private:
+	std::string mXMLProperties;
+};
+
+#endif /* EMULATIONWRAPPER_H_ */

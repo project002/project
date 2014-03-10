@@ -1,0 +1,58 @@
+/*
+ * EmulationWrapper.cpp
+ *
+ *  Created on: Mar 10, 2014
+ *      Author: root
+ */
+
+#include "EmulationWrapper.h"
+
+EmulationWrapper::EmulationWrapper(std::string XMLProp) :mXMLProperties(XMLProp)
+{
+
+}
+
+EmulationWrapper::~EmulationWrapper()
+{
+	// TODO Auto-generated destructor stub
+}
+
+int EmulationWrapper::RunCmdRedirect(const char* cmd, bool append)
+{
+	sleep(SYSTEM_COMMANDS_TIME_TO_COMPLETE);
+	char new_cmd[1024];
+	if (append)
+	{
+		sprintf(new_cmd,"%s >> %s 2>&1",cmd,REDIRECT_SYSTEM_FILE);
+	}
+	else
+	{
+		sprintf(new_cmd,"%s > %s  2>&1",cmd,REDIRECT_SYSTEM_FILE);
+	}
+	return system(new_cmd);
+}
+
+void EmulationWrapper::HandleStatus(int status, string toPrint)
+{
+	try
+	{
+		if (status == STATUS_FAILURE || WEXITSTATUS(status) == STATUS_FAILURE)
+		{
+			throw CException(toPrint);
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void EmulationWrapper::DisableNetworkManager()
+{
+}
+
+void EmulationWrapper::EnableNetworkManager()
+{
+}

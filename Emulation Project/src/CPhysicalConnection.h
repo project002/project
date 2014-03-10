@@ -13,6 +13,7 @@
 #include "CDHCPService.h"
 #include "H_SNIFFER_FUNC.h"
 #include "CConnection.h"
+#include "CSocketNotReadyException.h"
 
 #define MAX_NUMBER_OF_COMPUTERS_ON_NET 32
 
