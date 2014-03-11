@@ -980,7 +980,8 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp ../src/CGUIGTK.h \
  ../src/H_SNIFFER_FUNC.h ../src/CConnection.h \
  ../src/CSocketNotReadyException.h ../src/CVirtualConnection.h \
  ../src/CPhysicalConnectionsHandler.h ../src/pugixml.hpp \
- ../src/pugiconfig.hpp ../src/CRouter.h ../src/DInitializationDefs.h
+ ../src/pugiconfig.hpp ../src/CRouter.h ../src/DInitializationDefs.h \
+ ../src/CXMLBuilder.h ../src/SXMLStructs.h
 
 ../src/CGUIGTK.h:
 
@@ -3063,3 +3064,7 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp ../src/CGUIGTK.h \
 ../src/CRouter.h:
 
 ../src/DInitializationDefs.h:
+
+../src/CXMLBuilder.h:
+
+../src/SXMLStructs.h:

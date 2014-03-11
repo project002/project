@@ -11,6 +11,9 @@
 #include <gtkmm/application.h>
 #include "CSocketNotReadyException.h"
 
+//TODO: here for testing purposes. remove when done
+#include "CXMLBuilder.h"
+
 /**
  * The main function of the program that initializes the loggers
  * and the operating system itself. Some preceding steps should be taken.
@@ -21,6 +24,36 @@
  */
 int main(int argc, char *argv[])
 {
+//	//TODO: remove after testing
+//
+//	CXMLBuilder builder;
+//	RouterInformation rt;
+//	rt.sBufferSize=100;
+//	rt.sDropRate=0;
+//	rt.sRouterNumber=0;
+//	builder.AddRouter(rt);
+//	builder.AddPhysicalConnection("test1");
+//	//should fail
+//	rt.sBufferSize=150;
+//	builder.AddRouter(rt);
+//	builder.AddPhysicalConnection("test2");
+//
+//	builder.AddPhysicalConnection("test1");
+//	//should work
+//	rt.sBufferSize=250;
+//	rt.sRouterNumber=2;
+//	builder.AddRouter(rt);
+//
+//	builder.AddPhysicalConnection("test3");
+//	builder.SetCurrentRouter(0);
+//	builder.AddPhysicalConnection("test3");
+//	rt.sRouterNumber=0;
+//	rt.sBufferSize=350;
+//	builder.EditCurrentRouterInformation(rt);
+//
+//	builder.Finalize();
+//	return(EXIT_SUCCESS);
+
 	try
 	{
 

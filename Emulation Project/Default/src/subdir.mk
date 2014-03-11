@@ -15,6 +15,7 @@ CPP_SRCS += \
 ../src/CRouter.cpp \
 ../src/CSocketNotReadyException.cpp \
 ../src/CVirtualConnection.cpp \
+../src/CXMLBuilder.cpp \
 ../src/Emulation\ Project.cpp \
 ../src/EmulationWrapper.cpp \
 ../src/pugixml.cpp 
@@ -31,6 +32,7 @@ OBJS += \
 ./src/CRouter.o \
 ./src/CSocketNotReadyException.o \
 ./src/CVirtualConnection.o \
+./src/CXMLBuilder.o \
 ./src/Emulation\ Project.o \
 ./src/EmulationWrapper.o \
 ./src/pugixml.o 
@@ -47,6 +49,7 @@ CPP_DEPS += \
 ./src/CRouter.d \
 ./src/CSocketNotReadyException.d \
 ./src/CVirtualConnection.d \
+./src/CXMLBuilder.d \
 ./src/Emulation\ Project.d \
 ./src/EmulationWrapper.d \
 ./src/pugixml.d 

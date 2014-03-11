@@ -1,0 +1,10 @@
+<Network FormatVersion="1" Threaded="true">
+	<Routers />
+	<VirtualConnections />
+</Network>
+<Network FormatVersion="1" Threaded="true">
+	<Routers>
+		<Router Number="0" BufferSize="100" DropRate="0" />
+	</Routers>
+	<VirtualConnections />
+</Network>
