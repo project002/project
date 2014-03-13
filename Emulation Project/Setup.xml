@@ -1,5 +1,23 @@
 <Network FormatVersion="1" Threaded="false">
 	<StaticTable isStatic="false"></StaticTable>
+	<Routers>
+	 	<Router Number="0" BufferSize="100" DropRate="0">
+			<PhysicalConnection>eth0</PhysicalConnection>
+		</Router>
+		<Router Number="4" BufferSize="100" DropRate="0">
+		</Router>
+		<VirtualConnection>
+			<Router>0</Router>
+			<Router>4</Router>
+		</VirtualConnection>
+	</Routers>
+	<VirtualConnections>
+
+	</VirtualConnections>
+</Network>
+<!--
+<Network FormatVersion="1" Threaded="false">
+	<StaticTable isStatic="false"></StaticTable>
     <Routers>
         <Router Number="0" BufferSize="100" DropRate="0">
         	<PhysicalConnection>eth0</PhysicalConnection>
@@ -51,7 +69,7 @@
     	</VirtualConnection>
     </VirtualConnections>
 </Network>
-
+-->
 <!-- works with 4 routers and virtual connections between 3 routers and the 2 pure virtual routers -->
 <!-- Threaded == false => 37ms avarge -->
 <!--?xml version="1.0" encoding="UTF-8" standalone="no" ?>

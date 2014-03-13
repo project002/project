@@ -24,7 +24,7 @@
 int main(int argc, char *argv[])
 {
 //	//TODO: remove after testing
-//
+
 //	CXMLBuilder builder;
 //	RouterInformation rt;
 //	rt.sBufferSize=100;
@@ -48,6 +48,11 @@ int main(int argc, char *argv[])
 //	builder.AddPhysicalConnection("test3");
 //	rt.sRouterNumber=0;
 //	rt.sBufferSize=350;
+//	builder.AddVirtualConnection(0,2);
+//	builder.AddVirtualConnection(0,2);
+//	builder.AddVirtualConnection(2,0);
+//	builder.AddVirtualConnection(2,2);
+//	builder.AddVirtualConnection(1,1);
 //	builder.EditCurrentRouterInformation(rt);
 //
 //	builder.Finalize();

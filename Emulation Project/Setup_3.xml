@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Network FormatVersion="1" Threaded="true">
+	<Routers>
+		<Router Number="0" BufferSize="350" DropRate="0">
+			<PhysicalConnection>test1</PhysicalConnection>
+			<PhysicalConnection>test2</PhysicalConnection>
+			<PhysicalConnection>test3</PhysicalConnection>
+		</Router>
+		<Router Number="2" BufferSize="250" DropRate="0">
+			<PhysicalConnection>test3</PhysicalConnection>
+		</Router>
+	</Routers>
+	<VirtualConnections>
+		<VirtualConnection>
+			<Router>0</Router>
+			<Router>2</Router>
+		</VirtualConnection>
+	</VirtualConnections>
+</Network>

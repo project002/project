@@ -240,7 +240,7 @@ bool CXMLBuilder::AddPhysicalConnection(string pcName)
 }
 
 /**
- * Function checks if the interface name provided is not already entered
+ * Function checks if the interface name provided is not already entered in current router
  * @param pcName
  * @return false if interface name is already present
  */
@@ -494,7 +494,7 @@ bool CXMLBuilder::AddVirtualConnection(unsigned int firstRouter,
 	try
 	{
 		if (firstRouter == secondRouter || IsRouterNumberFree(firstRouter)
-				|| IsRouterNumberFree(secondRouter))
+				|| IsRouterNumberFree(secondRouter) || IsVirtualConnectionExist(firstRouter,secondRouter))
 		{
 			return false;
 		}
@@ -523,6 +523,54 @@ bool CXMLBuilder::AddVirtualConnection(unsigned int firstRouter,
 	}
 }
 
+bool CXMLBuilder::IsVirtualConnectionExist(unsigned int firstRouter,
+		unsigned int secondRouter)
+{
+	try
+	{
+		stringstream s1;
+		stringstream s2;
+		s1<<firstRouter;
+		s2<<secondRouter;
+		bool first=false;
+		bool second=false;
+		for (pugi::xml_node currentVirtualCon = mVirtualConnectionsNode.child(
+		XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS); currentVirtualCon;
+				currentVirtualCon = currentVirtualCon.next_sibling(
+				XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS))
+		{
+			for (pugi::xml_node currentVirtualVal = currentVirtualCon.child(
+			XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER);
+					currentVirtualVal;
+					currentVirtualVal = currentVirtualVal.next_sibling(
+					XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER))
+			{
+				if(!s1.str().compare(currentVirtualVal.child_value()))
+				{
+					first=true;
+				}
+				if(!s2.str().compare(currentVirtualVal.child_value()))
+				{
+					second=true;
+				}
+			}
+			if (first && second)
+			{
+				return true;
+			}
+			first=false;
+			second=false;
+		}
+		return false;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
 bool CXMLBuilder::RemoveVirtualConnection(unsigned int firstRouter,
 		unsigned int secondRouter)
 {
@@ -530,26 +578,46 @@ bool CXMLBuilder::RemoveVirtualConnection(unsigned int firstRouter,
 	{
 		bool first=false;
 		bool second=false;
+		stringstream s1;
+		stringstream s2;
+		s1<<firstRouter;
+		s2<<secondRouter;
 		for (pugi::xml_node currentVirtualCon = mVirtualConnectionsNode.child(
 		XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS); currentVirtualCon;
 				currentVirtualCon = currentVirtualCon.next_sibling(
 						XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS))
 		{
-			for (pugi::xml_node currentRouterVal =
-					currentVirtualCon.child(
-							XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER);
-					currentRouterVal;
-					currentRouterVal = currentRouterVal.next_sibling(
-							XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER))
+			for (pugi::xml_node currentVirtualCon =
+					mVirtualConnectionsNode.child(
+					XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS);
+					currentVirtualCon;
+					currentVirtualCon = currentVirtualCon.next_sibling(
+					XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS))
 			{
-				//TODO: insert to booleans true if both router numbers present.
+				for (pugi::xml_node currentVirtualVal = currentVirtualCon.child(
+				XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER);
+						currentVirtualVal;
+						currentVirtualVal =
+								currentVirtualVal.next_sibling(
+										XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER))
+				{
+					if (!s1.str().compare(currentVirtualVal.value()))
+					{
+						first = true;
+					}
+					if (!s2.str().compare(currentVirtualVal.value()))
+					{
+						second = true;
+					}
+				}
+				if (first && second)
+				{
+					mVirtualConnectionsNode.remove_child(currentVirtualCon);
+					break;
+				}
+				first=false;
+				second=false;
 			}
-			if(first && second)
-			{
-				mVirtualConnectionsNode.remove_child(currentVirtualCon);
-			}
-			bool first=false;
-			bool second=false;
 		}
 		return true;
 	}

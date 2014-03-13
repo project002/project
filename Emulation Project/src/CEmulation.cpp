@@ -40,7 +40,9 @@ CEmulation::~CEmulation()
 		//STARTing sniffer on all routers
 		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 		{
-			if (!(*iter)->isVirtualRouter()) {(*iter)->StopEmulation();}
+			//FIXME TODO: should this be the condition?
+			//if (!(*iter)->isVirtualRouter()) {(*iter)->StopEmulation();}
+			if (mThreaded) {(*iter)->StopEmulation();}
 		}
 		if (!mThreaded) {mRunVirtualRouters.interrupt();}
 
@@ -217,9 +219,6 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 
 /**
  * Parsing the virtual connections:
- * TODO TBD: What will be included in each connection
- *			 Defining who is connected to the virtual connection,
- *			 whether its a router or a virual computer which will be provided with an IP
  *
  * @param doc Setup XML tree
  */

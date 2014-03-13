@@ -28,6 +28,7 @@ public:
 	bool RemoveVirtualConnection(unsigned int firstRouter,unsigned int secondRouter);
 	void Finalize();
 private:
+	bool IsVirtualConnectionExist(unsigned int firstRouter,unsigned int secondRouter);
 	void GenerateNextFileName();
 	bool CheckRouterCorrectness(RouterInformation routerInfo);
 	bool CheckPhysicalConnectionCorrectness(string pcName);
