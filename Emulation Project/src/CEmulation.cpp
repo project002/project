@@ -373,7 +373,6 @@ void CEmulation::StartEmulation()
 			mRunVirtualRouters = boost::thread(&CEmulation::virtualRoutersSequence,this);
 		}
 		mRunning = true;
-		//TODO remove when done
 		while(mRunning)
 		{
 			//keep busy
@@ -389,7 +388,7 @@ void CEmulation::StartEmulation()
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		throw;
+		throw error;
 	}
 }
 
@@ -405,6 +404,7 @@ void CEmulation::virtualRoutersSequence()
 	vector<CRouter *>::iterator it;
 	while (true)
 	{
+		boost::this_thread::interruption_point();
 		it = mVirtualRouters.begin();
 		for (;it!=mVirtualRouters.end();++it)
 		{

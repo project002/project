@@ -24,17 +24,23 @@ public:
 protected:
 	//single handlers
 	void open_file_browser();
+	void start_emulation_quick();
 	void run_emulation();
 	void stop_emulation();
-	void createMenuBar();
+	void create_menu_bar();
+	void start_emulation_thread();
+
 	//members
 	Gtk::Box* mPackingBox;
 	Gtk::MenuBar* mMenuBar;
 	Gtk::Button* mStopButton;
+	Gtk::Button* mQuickStartButton;
 	Gtk::Label mInst;
 private:
 	std::string mImportXMLPath;
 	EmulationWrapper* mEmulation;
+	bool mEmulationRunning;
+	Glib::Thread* EmulationThread;
 
 };
 

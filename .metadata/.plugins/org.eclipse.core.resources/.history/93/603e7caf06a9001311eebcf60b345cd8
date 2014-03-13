@@ -1,0 +1,23 @@
+/*
+ * CXMLBuilder.h
+ *
+ *  Created on: Mar 11, 2014
+ *      Author: root
+ */
+
+#ifndef CXMLBUILDER_H_
+#define CXMLBUILDER_H_
+#define DEFAULT_FILE_NAME_LENGTH 10
+#include "BasicIncludes.h"
+class CXMLBuilder
+{
+public:
+	CXMLBuilder();
+	CXMLBuilder(string fileName);
+	virtual ~CXMLBuilder();
+private:
+	string GenerateRandomFileName(size_t length=DEFAULT_FILE_NAME_LENGTH);
+	string GenerateNextFileName();
+};
+
+#endif /* CXMLBUILDER_H_ */

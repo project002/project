@@ -3,11 +3,14 @@
 	<section name="">
 		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
 	</section>
+	<section name="">
+		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
+	</section>
 	<section name="DialogBounds_SearchDialog">
 		<item value="656" key="DIALOG_WIDTH"/>
 		<item value="32" key="DIALOG_Y_ORIGIN"/>
-		<item value="548" key="DIALOG_HEIGHT"/>
 		<item value="632" key="DIALOG_X_ORIGIN"/>
+		<item value="545" key="DIALOG_HEIGHT"/>
 		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="Search">
@@ -26,14 +29,14 @@
 			<item value="org.eclipse.egit.ui.commitSearchPage"/>
 		</list>
 	</section>
-	<section name="org.eclipse.search.text.FileSearchResultPage">
-		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
-	</section>
-	<section name="SearchDialog">
-		<item value="org.eclipse.cdt.ui.pdomSearchPage" key="PREVIOUS_PAGE"/>
-	</section>
 	<section name="org.eclipse.cdt.ui.pdomSearchViewPage">
 		<item value="true" key="showEnclosingDefinitions"/>
+	</section>
+	<section name="SearchDialog">
+		<item value="org.eclipse.search.internal.ui.text.TextSearchPage" key="PREVIOUS_PAGE"/>
+	</section>
+	<section name="org.eclipse.search.text.FileSearchResultPage">
+		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
 	</section>
 	<section name="TextSearchPage">
 		<item value="false" key="CASE_SENSITIVE"/>
@@ -43,7 +46,7 @@
 		<item value="12" key="HISTORY_SIZE"/>
 		<section name="HISTORY11">
 			<item value="false" key="isRegExSearch"/>
-			<item value="std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; std::endl;" key="textPattern"/>
+			<item value="//SLogger:://LogRegular(" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -58,7 +61,7 @@
 		</section>
 		<section name="HISTORY10">
 			<item value="false" key="isRegExSearch"/>
-			<item value="cerr" key="textPattern"/>
+			<item value="LogRegular" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -70,7 +73,7 @@
 		</section>
 		<section name="HISTORY9">
 			<item value="false" key="isRegExSearch"/>
-			<item value="SLogger" key="textPattern"/>
+			<item value="Log" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -82,7 +85,7 @@
 		</section>
 		<section name="HISTORY8">
 			<item value="false" key="isRegExSearch"/>
-			<item value="//SLogger:://LogRegular(" key="textPattern"/>
+			<item value="socket" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -94,7 +97,7 @@
 		</section>
 		<section name="HISTORY5">
 			<item value="false" key="isRegExSearch"/>
-			<item value="socket" key="textPattern"/>
+			<item value="zzzzzzzzz" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -106,7 +109,7 @@
 		</section>
 		<section name="HISTORY4">
 			<item value="false" key="isRegExSearch"/>
-			<item value="delete" key="textPattern"/>
+			<item value="tttt" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -118,7 +121,7 @@
 		</section>
 		<section name="HISTORY7">
 			<item value="false" key="isRegExSearch"/>
-			<item value="LogRegular" key="textPattern"/>
+			<item value="delete" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -130,7 +133,7 @@
 		</section>
 		<section name="HISTORY6">
 			<item value="false" key="isRegExSearch"/>
-			<item value="Log" key="textPattern"/>
+			<item value="packet pop" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -142,9 +145,9 @@
 		</section>
 		<section name="HISTORY2">
 			<item value="false" key="isRegExSearch"/>
-			<item value="zzzzzzzzz" key="textPattern"/>
+			<item value="StopEmulation" key="textPattern"/>
 			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
+			<item value="false" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
 				<item value="*.cpp"/>
@@ -153,18 +156,6 @@
 			</list>
 		</section>
 		<section name="HISTORY3">
-			<item value="false" key="isRegExSearch"/>
-			<item value="packet pop" key="textPattern"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
-			<item value="false" key="isWholeWord"/>
-			<list key="fileNamePatterns">
-				<item value="*.cpp"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY0">
 			<item value="false" key="isRegExSearch"/>
 			<item value="socket physical socket" key="textPattern"/>
 			<item value="0" key="scope"/>
@@ -176,9 +167,9 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY1">
+		<section name="HISTORY0">
 			<item value="false" key="isRegExSearch"/>
-			<item value="tttt" key="textPattern"/>
+			<item value="fatal error on receive from socket" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -188,9 +179,18 @@
 			<list key="workingSets">
 			</list>
 		</section>
-	</section>
-	<section name="SearchDialog.ScopePart">
-		<item value="0" key="scope"/>
+		<section name="HISTORY1">
+			<item value="false" key="isRegExSearch"/>
+			<item value="boost" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="false" key="ignoreCase"/>
+			<item value="false" key="isWholeWord"/>
+			<list key="fileNamePatterns">
+				<item value="*.cpp"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
 	</section>
 	<section name="ReplaceDialog2">
 		<list key="replace_with">
@@ -201,5 +201,8 @@
 			<item value="LogRegular(__PRETTY_FUNCTION__);"/>
 			<item value="LogRegular(error.what());"/>
 		</list>
+	</section>
+	<section name="SearchDialog.ScopePart">
+		<item value="0" key="scope"/>
 	</section>
 </section>

@@ -1,0 +1,120 @@
+/*
+ * CXMLBuilder.cpp
+ *
+ *  Created on: Mar 11, 2014
+ *      Author: root
+ */
+
+#include "CXMLBuilder.h"
+#include <fstream>
+#include <boost/filesystem.hpp>
+#include "DParserDefs.h"
+#define DEFAULT_THREADED_EMULATION "true"
+#define DEFAULT_FORMAT_VERSION 1
+CXMLBuilder::CXMLBuilder():mCurrentFileName("")
+{
+	try
+	{
+		GenerateNextFileName();
+		BuildDefaultXMLInformation();
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+CXMLBuilder::CXMLBuilder(string fileName):mCurrentFileName(fileName)
+{
+	try
+	{
+		BuildDefaultXMLInformation();
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+CXMLBuilder::~CXMLBuilder()
+{
+	try
+	{
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void CXMLBuilder::GenerateNextFileName()
+{
+	try
+	{
+		unsigned int fileNumber=0;
+		while(true)
+		{
+			stringstream ss;
+			ss.clear();
+			ss<<"Setup_"<<fileNumber<<".xml";
+		    boost::filesystem::path myfile(ss.str().c_str());
+		    if( !boost::filesystem::exists(myfile) )
+		    {
+		        mCurrentFileName=ss.str();
+		        break;
+		    }
+		}
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+
+void CXMLBuilder::BuildDefaultXMLInformation()
+{
+	try
+	{
+		AddXMLHeader();
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void CXMLBuilder::AddXMLHeader()
+{
+	try
+	{
+		 pugi::xml_node networkNode = doc.append_child(XML_LAYER_1_NETWORK);
+		 networkNode.append_attribute(FORMAT_VERSION)=DEFAULT_FORMAT_VERSION;
+		 networkNode.append_attribute(THREADED_EMULATION)=DEFAULT_THREADED_EMULATION;
+
+		 pugi::xml_node routersNode = networkNode.append_child(XML_LAYER_2_ROUTERS);
+		 pugi::xml_node virtualConnectionsNode = networkNode.append_child(XML_LAYER_2_VIRTUAL_CONNECTIONS);
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+/*
+ * Add Router:
+ * Network->Routers->Append_Child
+ *
+ * Edit Router(number):
+ * Network->Routers->Iterate_Until_Found->Change_Values
+ *
+ * */

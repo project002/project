@@ -1,0 +1,90 @@
+/*
+ * CXMLBuilder.cpp
+ *
+ *  Created on: Mar 11, 2014
+ *      Author: root
+ */
+
+#include "CXMLBuilder.h"
+#include <fstream>
+
+CXMLBuilder::CXMLBuilder():mCurrentFileName("")
+{
+	try
+	{
+
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+CXMLBuilder::CXMLBuilder(string fileName):mCurrentFileName("")
+{
+	try
+	{
+
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+CXMLBuilder::~CXMLBuilder()
+{
+	try
+	{
+
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+string CXMLBuilder::GenerateRandomFileName(size_t length)
+{
+	try
+	{
+
+
+    auto randchar = []() -> char
+    {
+        const char charset[] =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+        const size_t max_index = (sizeof(charset) - 1);
+        return charset[ rand() % max_index ];
+    };
+    string str(length,0);
+    generate_n( str.begin(), length, randchar );
+    return str;
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+string GenerateNextFileName()
+{
+	try
+	{
+
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}

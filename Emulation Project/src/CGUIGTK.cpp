@@ -10,8 +10,10 @@
 CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 					mMenuBar(Gtk::manage(new Gtk::MenuBar())),
 					mStopButton(Gtk::manage(new Gtk::Button())),
+					mQuickStartButton(Gtk::manage(new Gtk::Button())),
 					mImportXMLPath(""),
-					mEmulation(NULL)
+					mEmulation(NULL),
+					mEmulationRunning(false)
 {
 	set_border_width(10);
 	set_default_size(530,320);
@@ -19,9 +21,15 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 
 	mPackingBox->set_orientation(Gtk::ORIENTATION_VERTICAL);
 	add(*mPackingBox);
-	createMenuBar();
+	create_menu_bar();
 
-	mInst.set_label("chosse file->import to select the xml file\n and file->run to run\n so far we need to make the emulation run in a \n different thread so i can be able to stop it\n now it is possible via eclipse or terminal\n You know... the shitty way");
+	//quick start button
+	mQuickStartButton->set_label("Quick Start");
+	mQuickStartButton->signal_clicked().connect(sigc::mem_fun(*this,&CGUIGTK::start_emulation_quick));
+	mPackingBox->pack_start(*mQuickStartButton,Gtk::PACK_SHRINK);
+
+	//documentation label
+	mInst.set_label("added quick start ^\n fixed the broken socket on start\n emulation stop still doesn't work\n as far as i can see the emulation loop is not exiting");
 	mPackingBox->pack_start(mInst,Gtk::PACK_SHRINK);
 
 	//make stop button
@@ -33,7 +41,7 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 	mPackingBox->show_all();
 }
 
-void CGUIGTK::createMenuBar()
+void CGUIGTK::create_menu_bar()
 {
 	mPackingBox->pack_start(*mMenuBar,Gtk::PACK_SHRINK,0);
 
@@ -49,8 +57,14 @@ void CGUIGTK::createMenuBar()
 	file_sub_menu->append(*import_file);
 	Gtk::MenuItem *run_emu = Gtk::manage(new Gtk::MenuItem("Run", true));
 	//register run emulation action
-	run_emu->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::run_emulation));
+	run_emu->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::start_emulation_thread));
 	file_sub_menu->append(*run_emu);
+}
+
+void CGUIGTK::start_emulation_quick()
+{
+	open_file_browser();
+	start_emulation_thread();
 }
 
 void CGUIGTK::open_file_browser()
@@ -98,34 +112,38 @@ void CGUIGTK::stop_emulation()
 {
 	if (mEmulation!=NULL)
 	{
+		mEmulationRunning = false;
 		mEmulation->StopEmulation();
 	}
 }
 
-void CGUIGTK::run_emulation()
+void CGUIGTK::start_emulation_thread()
 {
-	try
-	{
-		if (mEmulation==NULL)
+	mEmulationRunning = true;
+	EmulationThread = Glib::Thread::create(sigc::mem_fun(*this,&CGUIGTK::run_emulation),false);
+}
+
+void CGUIGTK::run_emulation() //runs in a seperate thread
+{
+	//while (mEmulationRunning)
+	//{
+		mInst.set_label("Run Started");
+		try
 		{
-			mEmulation = new EmulationWrapper(mImportXMLPath);
-			mEmulation->RunEmulation();
+			if (mEmulation==NULL)
+			{
+				mEmulation = new EmulationWrapper(mImportXMLPath);
+				mEmulation->RunEmulation();
+				mInst.set_label("Run Ended");
+			}
 		}
-	}
-//	catch(CSocketNotReadyException & error)
-//	{
-//		//when the emulation existing it also throws this exception
-////		cout << "trying again" << endl;
-////		if (mEmulation==NULL) //try again
-////		{
-////			mEmulation = new EmulationWrapper(mImportXMLPath);
-////			mEmulation->RunEmulation();
-////		}
-//	}
-	catch(CException & error)
-	{
-		throw CException("Emulation Failed");
-	}
+		catch(CException & error)
+		{
+			mEmulationRunning = false;
+			mInst.set_label("Exception On Run");
+			//throw CException("Emulation Failed");
+		}
+	//}
 }
 
 CGUIGTK::~CGUIGTK()

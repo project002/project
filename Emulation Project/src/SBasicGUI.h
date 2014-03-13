@@ -44,6 +44,16 @@ public:
 		system("clear");
 	}
 
+	void destroy()
+	{
+		gui_refresh.interrupt();
+		clear();
+		dataSet.clear();
+		messages.clear();
+		insertMTX.unlock();
+		refreshMTX.unlock();
+	}
+
 	void output()
 	{
 		while(true)

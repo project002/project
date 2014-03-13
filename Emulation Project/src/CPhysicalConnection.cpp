@@ -314,6 +314,12 @@ Crafter::Packet* CPhysicalConnection::GetPacket( int fromPacketCollector)
 
 		return ethPacket;
 	}
+	catch (CSocketNotReadyException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		return NULL;
+	}
 	catch (CException & error)
 	{
 		SLogger::getInstance().Log(error.what());

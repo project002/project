@@ -1,0 +1,20 @@
+/*
+ * CXMLBuilder.cpp
+ *
+ *  Created on: Mar 11, 2014
+ *      Author: root
+ */
+
+#include "CXMLBuilder.h"
+
+CXMLBuilder::CXMLBuilder()
+{
+	// TODO Auto-generated constructor stub
+
+}
+
+CXMLBuilder::~CXMLBuilder()
+{
+	// TODO Auto-generated destructor stub
+}
+

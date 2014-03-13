@@ -115,8 +115,11 @@ void EmulationWrapper::StopEmulation()
 	delete Emulator;
 	SLogger::getInstance().Log("Enabling Networking");
 	EnableNetworkManager();
+	SLogger::getInstance().Log("Destroying Controller Thread");
+	SBasicGUI::getInstance().destroy();
 	SLogger::getInstance().Log("Destroying Logger and exiting program");
 	SLogger::getInstance().DestroyLogger();
+
 }
 
 void EmulationWrapper::RunEmulation()
@@ -135,13 +138,6 @@ void EmulationWrapper::RunEmulation()
 		SLogger::getInstance().Log("Starting the emulation");
 		Emulator->StartEmulation();
 	}
-	catch (CSocketNotReadyException & error)
-	{
-		if (Emulator!=NULL) {delete Emulator;}
-		SLogger::getInstance().Log(error.what());
-		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		throw CSocketNotReadyException();
-	}
 	catch (CException & error)
 	{
 		if (Emulator!=NULL) {delete Emulator;}
@@ -149,6 +145,6 @@ void EmulationWrapper::RunEmulation()
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		SLogger::getInstance().DestroyLogger();
 		EnableNetworkManager();
-		throw CException(error.what());
+		throw error;
 	}
 }

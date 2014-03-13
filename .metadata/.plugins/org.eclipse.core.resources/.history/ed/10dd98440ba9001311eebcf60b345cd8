@@ -1,0 +1,106 @@
+/*
+ * CXMLBuilder.cpp
+ *
+ *  Created on: Mar 11, 2014
+ *      Author: root
+ */
+
+#include "CXMLBuilder.h"
+#include <fstream>
+#include <boost/filesystem.hpp>
+#include "DParserDefs.h"
+CXMLBuilder::CXMLBuilder():mCurrentFileName("")
+{
+	try
+	{
+		GenerateNextFileName();
+		BuildDefaultXMLInformation();
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+CXMLBuilder::CXMLBuilder(string fileName):mCurrentFileName(fileName)
+{
+	try
+	{
+		BuildDefaultXMLInformation();
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+CXMLBuilder::~CXMLBuilder()
+{
+	try
+	{
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void CXMLBuilder::GenerateNextFileName()
+{
+	try
+	{
+		unsigned int fileNumber=0;
+		while(true)
+		{
+			stringstream ss;
+			ss.clear();
+			ss<<"Setup_"<<fileNumber<<".xml";
+		    boost::filesystem::path myfile(ss.str().c_str());
+		    if( !boost::filesystem::exists(myfile) )
+		    {
+		        mCurrentFileName=ss.str();
+		        break;
+		    }
+		}
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+
+void CXMLBuilder::BuildDefaultXMLInformation()
+{
+	try
+	{
+		AddXMLHeader();
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
+void CXMLBuilder::AddXMLHeader()
+{
+	try
+	{
+		 pugi::xml_node node = doc.append_child();
+		 node.set_name("Network");
+	}
+	catch(CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}

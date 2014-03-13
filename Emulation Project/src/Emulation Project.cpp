@@ -9,7 +9,6 @@
 //#include "EmulationWrapper.h"
 #include "CGUIGTK.h"
 #include <gtkmm/application.h>
-#include "CSocketNotReadyException.h"
 
 //TODO: here for testing purposes. remove when done
 #include "CXMLBuilder.h"
@@ -57,7 +56,6 @@ int main(int argc, char *argv[])
 	try
 	{
 
-		//if you uncomment this the gui window will stay open until the program closes
 		int a_argc = 1;
 		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(a_argc,argv,"org.NetworkEmulation");
 		CGUIGTK window;

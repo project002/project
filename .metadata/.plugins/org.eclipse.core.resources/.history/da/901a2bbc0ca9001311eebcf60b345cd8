@@ -1,0 +1,27 @@
+/*
+ * CXMLBuilder.h
+ *
+ *  Created on: Mar 11, 2014
+ *      Author: root
+ */
+
+#ifndef CXMLBUILDER_H_
+#define CXMLBUILDER_H_
+#define DEFAULT_FILE_NAME_LENGTH 10
+#include "BasicIncludes.h"
+#include "pugixml.hpp"
+class CXMLBuilder
+{
+public:
+	CXMLBuilder();
+	CXMLBuilder(string fileName);
+	virtual ~CXMLBuilder();
+private:
+	void GenerateNextFileName();
+	void BuildDefaultXMLInformation();
+	void AddXMLHeader();
+	pugi::xml_document doc;
+	string mCurrentFileName;
+};
+
+#endif /* CXMLBUILDER_H_ */
