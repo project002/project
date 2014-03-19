@@ -10,6 +10,7 @@
 #include <map>
 #include <vector>
 #include <boost/thread.hpp>
+#include <gtkmm.h>
 
 #define REFRESH_RATE 1
 
@@ -28,9 +29,18 @@ public:
 
 	void init()
 	{
+		clear();
 		messages.push_back("Basic GUI Started");
 		gui_refresh = boost::thread(&SBasicGUI::output,this);
 	}
+
+//	std::string get_data()
+//	{
+//		refreshMTX.lock();
+//		std::string temp = mOut;
+//		refreshMTX.unlock();
+//		return temp;
+//	}
 
 	void refresh()
 	{
@@ -41,6 +51,7 @@ public:
 
 	void clear()
 	{
+		mOut="";
 		system("clear");
 	}
 
@@ -66,26 +77,30 @@ public:
 			int unsigned ip_packets = get_data(IPPACKET);
 			int unsigned arp_packets = get_data(ARPPACKET);
 			int unsigned dhcp_packets = get_data(DHCPPACKET);
+			stringstream output;
 
 
-			(*mOut) << "Packets Processed: " << processed << endl;
-			(*mOut) << "Packets Dropped: " << dropped << endl;
-			(*mOut) << "Lost Percentage: " << dropped_packets << "%" << endl;
+			output << "Packets Processed: " << processed << endl;
+			output << "Packets Dropped: " << dropped << endl;
+			output << "Lost Percentage: " << dropped_packets << "%" << endl;
 			//packet types:
-			(*mOut) << "Packets Types" << endl;
-			(*mOut) << "[$]IP Packets : " << ip_packets << endl;
-			(*mOut) << "[$]ARP Packets: " << arp_packets << endl;
-			(*mOut) << "[$]DHCP Packets: " << dhcp_packets << endl;
+			output << "Packets Types" << endl;
+			output << "[$]IP Packets : " << ip_packets << endl;
+			output << "[$]ARP Packets: " << arp_packets << endl;
+			output << "[$]DHCP Packets: " << dhcp_packets << endl;
 
 			//print out messages:
-			(*mOut) << "Messages" << endl;
+			output << "Messages" << endl;
 
 			std::vector<std::string>::iterator it = messages.begin();
 			for (;it!=messages.end();++it)
 			{
-				(*mOut) << "[#]" << (*it) << endl;
+				output << "[#]" << (*it) << endl;
 			}
 
+			mOut = output.str();
+			cout << mOut << endl;
+			//wait until the gui refresh is done
 
 			//make the thread sleep for x time
 			boost::posix_time::time_duration interval(
@@ -154,7 +169,7 @@ public:
 		refreshMTX.unlock();
 	}
 private:
-	std::ostream* mOut;
+	std::string mOut;
 	std::map<SBasicGUI::DATATYPE,int unsigned> dataSet;
 	std::vector<std::string> messages;
 	boost::signals2::mutex insertMTX;
@@ -163,11 +178,9 @@ private:
 	boost::thread gui_refresh;
 	double dropped_packets;
 
-	SBasicGUI():mOut(&std::cout),
-				dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
+	SBasicGUI():dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
 				dropped_packets(0){}
-	SBasicGUI(const SBasicGUI &):mOut(&std::cout),
-								 dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
+	SBasicGUI(const SBasicGUI &):dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
 								 dropped_packets(0){}
 
 	void operator=(SBasicGUI const &);

@@ -13,6 +13,8 @@
 #include <gtkmm/menubar.h>
 #include <gtkmm/window.h>
 #include <gtkmm/box.h>
+#include <gtkmm/scrolledwindow.h>
+#include <gtkmm/textview.h>
 #include "EmulationWrapper.h"
 #include "CSocketNotReadyException.h"
 
@@ -28,6 +30,7 @@ protected:
 	void run_emulation();
 	void stop_emulation();
 	void create_menu_bar();
+	void create_textview();
 	void start_emulation_thread();
 
 	//members
@@ -35,6 +38,9 @@ protected:
 	Gtk::MenuBar* mMenuBar;
 	Gtk::Button* mStopButton;
 	Gtk::Button* mQuickStartButton;
+	Gtk::ScrolledWindow* mTextScrollView;
+	Gtk::TextView* mStatusText;
+	Glib::RefPtr<Gtk::TextBuffer> mStatusTextBuffer;
 	Gtk::Label mInst;
 private:
 	std::string mImportXMLPath;

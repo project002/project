@@ -51,6 +51,7 @@ private: //Private Members
 	bool mThreaded;
 	boost::thread mTableSwappingThread;
 	boost::thread mRunVirtualRouters;
+	boost::signals2::mutex runningUpdMTX;
 };
 
 #endif /* CEMULATION_H_ */

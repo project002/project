@@ -1,0 +1,158 @@
+<Network FormatVersion="1" Threaded="true">
+	<StaticTable isStatic="false"></StaticTable>
+    <Routers>
+        <Router Number="0" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        </Router>
+        <Router Number="1" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth1</PhysicalConnection>
+        </Router>
+       	<Router Number="2" BufferSize="100" DropRate="0">
+        </Router>
+    </Routers>
+    <VirtualConnections>
+    	<VirtualConnection>
+    		<Router Number="0"/>
+    		<Router Number="2"/>
+    	</VirtualConnection>
+       	<VirtualConnection>
+    		<Router Number="2"/>
+    		<Router Number="1"/>
+    	</VirtualConnection>
+    </VirtualConnections>
+</Network>
+<!--
+<Network FormatVersion="1" Threaded="false">
+	<StaticTable isStatic="false"></StaticTable>
+	<Routers>
+	 	<Router Number="0" BufferSize="100" DropRate="0">
+			<PhysicalConnection>eth0</PhysicalConnection>
+		</Router>
+		<Router Number="4" BufferSize="100" DropRate="0">
+		</Router>
+		<VirtualConnection>
+			<Router>0</Router>
+			<Router>4</Router>
+		</VirtualConnection>
+	</Routers>
+	<VirtualConnections>
+
+	</VirtualConnections>
+</Network>
+-->
+<!-- works with 4 routers and virtual connections between 3 routers and the 2 pure virtual routers -->
+<!-- Threaded == false => 37ms avarge -->
+<!--?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Network FormatVersion="1" Threaded="false">
+	<StaticTable isStatic="false"></StaticTable>
+    <Routers>
+        <Router Number="0" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        </Router>
+        <Router Number="1" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth1</PhysicalConnection>
+        </Router>
+       	<Router Number="2" BufferSize="100" DropRate="0">
+        </Router>
+        <Router Number="3" BufferSize="100" DropRate="0">
+        </Router>
+    </Routers>
+    <VirtualConnections>
+    	<VirtualConnection>
+    		<Router Number="0"/>
+    		<Router Number="2"/>
+    	</VirtualConnection>
+    	<VirtualConnection>
+    		<Router Number="2"/>
+    		<Router Number="3"/>
+    	</VirtualConnection>
+    	<VirtualConnection>
+    		<Router Number="3"/>
+    		<Router Number="1"/>
+    	</VirtualConnection>
+    </VirtualConnections>
+</Network-->
+
+
+
+<!-- works with 3 routers and virtual connections between 2 routers and the pure virtual one -->
+<!-- Threaded == false => 28ms avarge -->
+<!--
+<Network FormatVersion="1" Threaded="false">
+	<StaticTable isStatic="false"></StaticTable>
+    <Routers>
+        <Router Number="0" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        </Router>
+        <Router Number="1" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth1</PhysicalConnection>
+        </Router>
+       	<Router Number="2" BufferSize="100" DropRate="0">
+       		 no physical connections CANT DOC INSIDE DOC IN XML REMO
+        </Router>
+    </Routers>
+    <VirtualConnections>
+    	<VirtualConnection>
+    		<Router Number="0"/>
+    		<Router Number="2"/>
+    	</VirtualConnection>
+    	<VirtualConnection>
+    		<Router Number="1"/>
+    		<Router Number="2"/>
+    	</VirtualConnection>
+    </VirtualConnections>
+</Network>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- works WITH virtual connection... as you can see routers 0-1 are connected -->
+<!--?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Network FormatVersion="1">
+	<StaticTable isStatic="false"></StaticTable>
+    <Routers>
+        <Router Number="0" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        </Router>
+        <Router Number="1" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth1</PhysicalConnection>
+        </Router>
+        <Router Number="2" BufferSize="100" DropRate="0">
+        </Router>
+    </Routers>
+    <VirtualConnections>
+    	<VirtualConnection>
+    		<Router Number="0"/>
+    		<Router Number="1"/>
+    	</VirtualConnection>
+    </VirtualConnections>
+</Network -->
+
+<!-- works without virtual connections -->
+<!--<?xml version="1.0" encoding="UTF-8" standalone="no" ?> COMMENTTTTT -> This part works fine 
+<Network FormatVersion="1">
+	<StaticTable isStatic="false"></StaticTable>
+    <Routers>
+        <Router Number="0" BufferSize="100" DropRate="0">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        	<PhysicalConnection>eth1</PhysicalConnection>
+        </Router>
+    </Routers>
+    <VirtualConnections>
+        
+    </VirtualConnections>
+</Network> -->
+
+

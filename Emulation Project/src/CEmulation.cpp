@@ -37,13 +37,12 @@ CEmulation::~CEmulation()
 	try
 	{
 		vector<CRouter *>::iterator iter;
-		//STARTing sniffer on all routers
 		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 		{
-			//FIXME TODO: should this be the condition?
-			//if (!(*iter)->isVirtualRouter()) {(*iter)->StopEmulation();}
-			if (mThreaded) {(*iter)->StopEmulation();}
+			//if the router is threaded stopRmulation => interrupt thr threads
+			if (!(*iter)->isVirtualRouter()) {(*iter)->StopEmulation();}
 		}
+		//this will kill all the other nonThreaded routers
 		if (!mThreaded) {mRunVirtualRouters.interrupt();}
 
 		if (mPhysicalConnectionsHandler != NULL)
@@ -93,7 +92,7 @@ void CEmulation::TableSwapping()
 {
 	try
 	{
-		while(true)
+		while(mRunning)
 		{
 			vector<CRouter *>::iterator iter;
 			boost::this_thread::interruption_point();
@@ -372,9 +371,12 @@ void CEmulation::StartEmulation()
 			mRunVirtualRouters = boost::thread(&CEmulation::virtualRoutersSequence,this);
 		}
 		mRunning = true;
-		while(mRunning)
+		while(true)
 		{
 			//keep busy
+			runningUpdMTX.lock();
+			if (!mRunning) {break;}
+			runningUpdMTX.unlock();
 		}
 
 		if(!mStaticRoutingTable)
@@ -393,7 +395,9 @@ void CEmulation::StartEmulation()
 
 void CEmulation::StopEmulation()
 {
+	runningUpdMTX.lock();
 	mRunning = false;
+	runningUpdMTX.unlock();
 }
 
 
@@ -401,7 +405,7 @@ void CEmulation::virtualRoutersSequence()
 {
 	if (mThreaded) {return;}
 	vector<CRouter *>::iterator it;
-	while (true)
+	while (mRunning)
 	{
 		boost::this_thread::interruption_point();
 		it = mVirtualRouters.begin();

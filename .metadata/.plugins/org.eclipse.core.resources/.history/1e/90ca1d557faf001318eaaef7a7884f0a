@@ -1,0 +1,195 @@
+/*
+ * CBasicGUI.h
+ * offer basic gui for the emulation
+ * using the terminal as the platform
+ */
+
+#ifndef CBASICGUI_H_
+#define CBASICGUI_H_
+#include <iostream>
+#include <map>
+#include <vector>
+#include <boost/thread.hpp>
+#include <gtkmm.h>
+
+#define REFRESH_RATE 1
+
+class SBasicGUI
+{
+public:
+	static enum DATATYPE {
+		PACKETPROCCES,PACKETDROP,IPPACKET,DHCPPACKET,ARPPACKET
+	} dataType;
+
+	static SBasicGUI &getInstance()
+	{
+		static SBasicGUI ref;
+		return ref;
+	}
+
+	void init(Glib::RefPtr<Gtk::TextBuffer> outputBuff)
+	{
+		mOut = outputBuff;
+		messages.push_back("Basic GUI Started");
+		gui_refresh = boost::thread(&SBasicGUI::output,this);
+	}
+
+	void refresh()
+	{
+		refreshMTX.lock();
+		dropped_packets = calcLostPacketsPercent();
+		refreshMTX.unlock();
+	}
+
+	void clear()
+	{
+		mOut->set_text("");
+	}
+
+	void destroy()
+	{
+		gui_refresh.interrupt();
+		clear();
+		dataSet.clear();
+		messages.clear();
+		insertMTX.unlock();
+		refreshMTX.unlock();
+	}
+
+	void output()
+	{
+		while(true)
+		{
+			boost::this_thread::interruption_point();
+			refresh();
+			clear();
+			int unsigned processed = get_data(PACKETPROCCES);
+			int unsigned dropped = get_data(PACKETDROP);
+			int unsigned ip_packets = get_data(IPPACKET);
+			int unsigned arp_packets = get_data(ARPPACKET);
+			int unsigned dhcp_packets = get_data(DHCPPACKET);
+			Glib::ustring output = "";
+
+			(*mOut) << "Packets Processed: " << processed << endl;
+			(*mOut) << "Packets Dropped: " << dropped << endl;
+			(*mOut) << "Lost Percentage: " << dropped_packets << "%" << endl;
+			//packet types:
+			(*mOut) << "Packets Types" << endl;
+			(*mOut) << "[$]IP Packets : " << ip_packets << endl;
+			(*mOut) << "[$]ARP Packets: " << arp_packets << endl;
+			(*mOut) << "[$]DHCP Packets: " << dhcp_packets << endl;
+
+			//print out messages:
+			(*mOut) << "Messages" << endl;
+
+			std::vector<std::string>::iterator it = messages.begin();
+			for (;it!=messages.end();++it)
+			{
+				(*mOut) << "[#]" << (*it) << endl;
+			}
+
+
+			//make the thread sleep for x time
+			boost::posix_time::time_duration interval(
+					boost::posix_time::seconds(REFRESH_RATE));
+			boost::posix_time::ptime timer =
+					boost::posix_time::microsec_clock::local_time() + interval;
+
+			boost::this_thread::sleep(
+					timer - boost::posix_time::microsec_clock::local_time());
+		}
+
+	}
+
+	bool insertData(DATATYPE type,int unsigned value)
+	{
+		insertMTX.lock();
+		std::pair<std::map<DATATYPE,int unsigned>::iterator,bool> ret;
+		ret = dataSet.insert(std::pair<DATATYPE,int unsigned>(type,value));
+		if (!ret.second)
+		{
+			dataSet.at(type) = value;
+			insertMTX.unlock();
+			return true;
+		}
+		insertMTX.unlock();
+		return ret.second;
+	}
+
+	void incData(DATATYPE type)
+	{
+		insertMTX.lock();
+		try
+		{
+			dataSet.at(type) += 1;
+			insertMTX.unlock();
+		}
+		catch (const std::out_of_range & c)
+		{
+			insertMTX.unlock();
+			insertData(type,1); //if not found add it
+		}
+
+	}
+
+	void msg(std::string str)
+	{
+		messages.push_back(str);
+	}
+
+	void msg(const char* format,...)
+	{
+		va_list args;
+		va_start(args,format);
+		char str[256] = {0};
+		vsprintf(str,format,args);
+		va_end(args);
+		messages.push_back(std::string(str));
+	}
+
+	virtual ~SBasicGUI()
+	{
+		gui_refresh.interrupt();
+		dataSet.clear();
+		messages.clear();
+		insertMTX.unlock();
+		refreshMTX.unlock();
+	}
+private:
+	Glib::RefPtr<Gtk::TextBuffer> mOut;
+	std::map<SBasicGUI::DATATYPE,int unsigned> dataSet;
+	std::vector<std::string> messages;
+	boost::signals2::mutex insertMTX;
+	boost::signals2::mutex refreshMTX;
+	boost::signals2::mutex insertRouterMTX;
+	boost::thread gui_refresh;
+	double dropped_packets;
+
+	SBasicGUI():dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
+				dropped_packets(0){}
+	SBasicGUI(const SBasicGUI &):dataSet(std::map<SBasicGUI::DATATYPE,int unsigned>()),
+								 dropped_packets(0){}
+
+	void operator=(SBasicGUI const &);
+
+	double calcLostPacketsPercent()
+	{
+		int unsigned processed = get_data(PACKETPROCCES);
+		int unsigned dropped = get_data(PACKETDROP);
+
+		int unsigned packets = processed+dropped;
+		if (packets == 0) {return 0;}
+		double dropped_percentage = (100.0/packets)*dropped;
+		return dropped_percentage;
+	}
+
+	int unsigned get_data(DATATYPE type)
+	{
+		int unsigned data = 0;
+		try {data = dataSet.at(type);}
+		catch(const std::out_of_range & e) {}
+		return data;
+	}
+};
+
+#endif /* CBASICGUI_H_ */

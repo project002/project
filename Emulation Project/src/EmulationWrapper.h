@@ -12,7 +12,6 @@
 #include "SBasicGUI.h"
 #include "DInitializationDefs.h"
 #include "CSocketNotReadyException.h"
-
 class EmulationWrapper
 {
 public:

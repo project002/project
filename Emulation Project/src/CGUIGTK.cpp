@@ -16,7 +16,7 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 					mEmulationRunning(false)
 {
 	set_border_width(10);
-	set_default_size(530,320);
+	set_default_size(530,520);
 	set_title("Bandwidth Variance Emulation");
 
 	mPackingBox->set_orientation(Gtk::ORIENTATION_VERTICAL);
@@ -29,8 +29,11 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 	mPackingBox->pack_start(*mQuickStartButton,Gtk::PACK_SHRINK);
 
 	//documentation label
-	mInst.set_label("added quick start ^\n fixed the broken socket on start\n emulation stop still doesn't work\n as far as i can see the emulation loop is not exiting");
+	mInst.set_label("Emulation Status");
 	mPackingBox->pack_start(mInst,Gtk::PACK_SHRINK);
+
+	//text view
+	create_textview();
 
 	//make stop button
 	mStopButton->set_label("Stop Emulation");
@@ -59,6 +62,19 @@ void CGUIGTK::create_menu_bar()
 	//register run emulation action
 	run_emu->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::start_emulation_thread));
 	file_sub_menu->append(*run_emu);
+}
+
+void CGUIGTK::create_textview()
+{
+	mTextScrollView = Gtk::manage(new Gtk::ScrolledWindow());
+	mStatusText = Gtk::manage(new Gtk::TextView());
+	mStatusTextBuffer = Gtk::TextBuffer::create();
+	mStatusText->set_buffer(mStatusTextBuffer);
+	mStatusText->set_editable(false);
+//	mTextScrollView->set_policy(Gtk::POLICY_NEVER,Gtk::POLICY_AUTOMATIC);
+	mTextScrollView->set_policy(Gtk::POLICY_NEVER,Gtk::POLICY_NEVER);
+	mTextScrollView->add(*mStatusText);
+	mPackingBox->pack_start(*mTextScrollView,Gtk::PACK_EXPAND_WIDGET);
 }
 
 void CGUIGTK::start_emulation_quick()
@@ -114,6 +130,8 @@ void CGUIGTK::stop_emulation()
 	{
 		mEmulationRunning = false;
 		mEmulation->StopEmulation();
+		delete mEmulation;
+		mEmulation = NULL;
 	}
 }
 
@@ -122,6 +140,7 @@ void CGUIGTK::start_emulation_thread()
 	mEmulationRunning = true;
 	EmulationThread = Glib::Thread::create(sigc::mem_fun(*this,&CGUIGTK::run_emulation),false);
 }
+
 
 void CGUIGTK::run_emulation() //runs in a seperate thread
 {
@@ -150,8 +169,8 @@ CGUIGTK::~CGUIGTK()
 {
 	// TODO Auto-generated destructor stub
 	delete mMenuBar;
-	delete mPackingBox;
 	delete mStopButton;
+	delete mPackingBox;
 	if (mEmulation!=NULL) {delete mEmulation;}
 
 }
