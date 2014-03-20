@@ -14,7 +14,7 @@
 #include "CPhysicalConnectionsHandler.h"
 #include "pugixml.hpp"
 #include "CRouter.h"
-#include "SBasicGUI.h"
+#include "SDataController.h"
 /**
  * Thread Related Inclusions
  */

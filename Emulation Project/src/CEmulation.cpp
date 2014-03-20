@@ -204,7 +204,7 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			{
 				RouterCreate->SetDropRate(DropRate);
 			}
-			SBasicGUI::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
+			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
 			mRouters.push_back(RouterCreate);
 		}
 	}
@@ -304,9 +304,9 @@ void CEmulation::XMLThreadedOptionParse(pugi::xml_document & doc)
 	pugi::xml_node root = doc.child(XML_LAYER_1_NETWORK);
 	mThreaded = root.attribute("Threaded").as_bool(true); //default to true
 	if (mThreaded)
-	{SBasicGUI::getInstance().msg("Emulation Running High-End Setting");}
+	{SDataController::getInstance().msg("Emulation Running High-End Setting");}
 	else
-	{SBasicGUI::getInstance().msg("Emulation Running Low-End Setting");}
+	{SDataController::getInstance().msg("Emulation Running Low-End Setting");}
 }
 
 /**

@@ -116,7 +116,7 @@ void EmulationWrapper::StopEmulation()
 	SLogger::getInstance().Log("Enabling Networking");
 	EnableNetworkManager();
 	SLogger::getInstance().Log("Destroying Controller Thread");
-	SBasicGUI::getInstance().destroy();
+	SDataController::getInstance().destroy();
 	SLogger::getInstance().Log("Destroying Logger and exiting program");
 	SLogger::getInstance().DestroyLogger();
 
@@ -126,7 +126,8 @@ void EmulationWrapper::RunEmulation()
 {
 	try
 	{
-		SBasicGUI::getInstance().init();
+//		SDataController::getInstance().init(output);
+		SDataController::getInstance().init();
 		SLogger::getInstance().InitLogger();
 		SLogger::getInstance().Log("Disabling Linux Networking");
 		DisableNetworkManager();

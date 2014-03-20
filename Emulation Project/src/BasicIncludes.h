@@ -59,7 +59,7 @@ using namespace Crafter;
 /**
  * Basic GUI singleton
  */
-#include "SBasicGUI.h"
+#include "SDataController.h"
 
 
 #endif

@@ -17,12 +17,14 @@
 #include <gtkmm/textview.h>
 #include "EmulationWrapper.h"
 #include "CSocketNotReadyException.h"
+#include "CEmuStatWidget.h"
 
 class CGUIGTK : public Gtk::Window
 {
 public:
 	CGUIGTK();
 	virtual ~CGUIGTK();
+
 protected:
 	//single handlers
 	void open_file_browser();
@@ -33,6 +35,8 @@ protected:
 	void create_textview();
 	void start_emulation_thread();
 
+	void loop();
+
 	//members
 	Gtk::Box* mPackingBox;
 	Gtk::MenuBar* mMenuBar;
@@ -42,6 +46,7 @@ protected:
 	Gtk::TextView* mStatusText;
 	Glib::RefPtr<Gtk::TextBuffer> mStatusTextBuffer;
 	Gtk::Label mInst;
+	CEmuStatWidget* mStateWidget;
 private:
 	std::string mImportXMLPath;
 	EmulationWrapper* mEmulation;

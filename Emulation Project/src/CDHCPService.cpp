@@ -111,7 +111,7 @@ int CDHCPService::getIPTableSizeFromSubnet(const uint8_t* subnet)
 
 void CDHCPService::start(Packet* packet)
 {
-	SBasicGUI::getInstance().incData(SBasicGUI::DHCPPACKET);
+	SDataController::getInstance().incData(SDataController::DHCPPACKET);
 	startDHCPhandshake(packet);
 }
 
@@ -248,7 +248,7 @@ void CDHCPService::handleRequest(Packet* request_packet)
 		SLogger::getInstance().Log(s.str().c_str());
 		s.str(std::string());
 		s << "IP "<< mHandshakeIP << " assigned to " <<  clientMAC;
-		SBasicGUI::getInstance().msg(s.str());
+		SDataController::getInstance().msg(s.str());
 
 		mHandshakeIP = DEF_IPv4; //re-init the handshake ip
 

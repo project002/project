@@ -61,8 +61,7 @@ int main(int argc, char *argv[])
 	try
 	{
 
-		int a_argc = 1;
-		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(a_argc,argv,"org.NetworkEmulation");
+		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc,argv,"org.NetworkEmulation");
 		CGUIGTK window;
 		app->run(window);
 

@@ -1,0 +1,38 @@
+/*
+ * CEmuStatWidget.h
+ *
+ *  Created on: Mar 20, 2014
+ *      Author: root
+ */
+
+#ifndef CEMUSTATWIDGET_H_
+#define CEMUSTATWIDGET_H_
+
+#include <gtkmm.h>
+#include <gtkmm/widget.h>
+#include <gtkmm/frame.h>
+#include "SDataController.h"
+
+class CEmuStatWidget: public Gtk::Widget
+{
+public:
+	CEmuStatWidget();
+	void loop();
+	virtual ~CEmuStatWidget();
+private:
+	Gtk::Frame mStatusFrame;
+	Gtk::Label* mlblPacketsProccesed;
+	Gtk::Label* mlblPacketsDropped;
+	Gtk::Label* mlblLostPercent;
+
+	Gtk::Frame mTypeFrame;
+	Gtk::Label* mlblIPPacketsCount;
+	Gtk::Label* mlblARPPacketsCount;
+	Gtk::Label* mlblDHCPPacketsCount;
+
+	Gtk::Frame mMessagesFrame;
+	Gtk::TextView* mtvMessages;
+	Gtk::TextBuffer* mtvMessagesBuffer;
+};
+
+#endif /* CEMUSTATWIDGET_H_ */

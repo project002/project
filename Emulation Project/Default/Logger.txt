@@ -1,19 +1,2 @@
 0 : Disabling Linux Networking
-0 : Validating XML file is present
-0 : Building the emulation
-0.01 : name:	lo
-0.01 : name:	loname:	eth0
-0.01 : ip table init complete
-0.01 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
-0.01 : DHCP service started...
-0.01 : name:	loname:	eth0name:	eth1
-0.01 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
-0.01 : DHCP service started...
-0.01 : name:	loname:	eth0name:	eth1name:	lo
-0.01 : name:	loname:	eth0name:	eth1name:	loname:	eth0
-0.01 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
-0.01 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	lo
-0.01 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	loname:	eth1
-0.01 : Starting the emulation
-0.03 : Running Virtual Routers Thread With 1 Routers
-27.67 : No Handler found for message type:8
+3.7 : Validating XML file is present

@@ -1,7 +1,14 @@
 src/EmulationWrapper.d: ../src/EmulationWrapper.cpp \
  ../src/EmulationWrapper.h ../src/CEmulation.h ../src/BasicIncludes.h \
- ../src/SLogger.h ../src/CException.h ../src/CUIPV4.h ../src/SBasicGUI.h \
- /usr/include/gtkmm-3.0/gtkmm.h /usr/include/glibmm-2.4/glibmm.h \
+ ../src/SLogger.h ../src/CException.h ../src/CUIPV4.h \
+ ../src/SDataController.h ../src/CPhysicalConnection.h \
+ ../src/CPacketCollector.h ../src/CDHCPService.h \
+ ../src/CDHCPMsgTypeException.h ../src/H_SNIFFER_FUNC.h \
+ ../src/CConnection.h ../src/CSocketNotReadyException.h \
+ ../src/CVirtualConnection.h ../src/CPhysicalConnectionsHandler.h \
+ ../src/pugixml.hpp ../src/pugiconfig.hpp ../src/CRouter.h \
+ ../src/DInitializationDefs.h /usr/include/gtkmm-3.0/gtkmm.h \
+ /usr/include/glibmm-2.4/glibmm.h \
  /usr/lib/i386-linux-gnu/glibmm-2.4/include/glibmmconfig.h \
  /usr/include/glibmm-2.4/glibmm/thread.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
@@ -974,13 +981,7 @@ src/EmulationWrapper.d: ../src/EmulationWrapper.cpp \
  /usr/include/gtkmm-3.0/gtkmm/treerowreference.h \
  /usr/include/gtkmm-3.0/gtkmm/treestore.h \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
- /usr/include/gtkmm-3.0/gtkmm/viewport.h ../src/CPhysicalConnection.h \
- ../src/CPacketCollector.h ../src/CDHCPService.h \
- ../src/CDHCPMsgTypeException.h ../src/H_SNIFFER_FUNC.h \
- ../src/CConnection.h ../src/CSocketNotReadyException.h \
- ../src/CVirtualConnection.h ../src/CPhysicalConnectionsHandler.h \
- ../src/pugixml.hpp ../src/pugiconfig.hpp ../src/CRouter.h \
- ../src/DInitializationDefs.h
+ /usr/include/gtkmm-3.0/gtkmm/viewport.h
 
 ../src/EmulationWrapper.h:
 
@@ -994,7 +995,33 @@ src/EmulationWrapper.d: ../src/EmulationWrapper.cpp \
 
 ../src/CUIPV4.h:
 
-../src/SBasicGUI.h:
+../src/SDataController.h:
+
+../src/CPhysicalConnection.h:
+
+../src/CPacketCollector.h:
+
+../src/CDHCPService.h:
+
+../src/CDHCPMsgTypeException.h:
+
+../src/H_SNIFFER_FUNC.h:
+
+../src/CConnection.h:
+
+../src/CSocketNotReadyException.h:
+
+../src/CVirtualConnection.h:
+
+../src/CPhysicalConnectionsHandler.h:
+
+../src/pugixml.hpp:
+
+../src/pugiconfig.hpp:
+
+../src/CRouter.h:
+
+../src/DInitializationDefs.h:
 
 /usr/include/gtkmm-3.0/gtkmm.h:
 
@@ -3035,29 +3062,3 @@ src/EmulationWrapper.d: ../src/EmulationWrapper.cpp \
 /usr/include/gtkmm-3.0/gtkmm/uimanager.h:
 
 /usr/include/gtkmm-3.0/gtkmm/viewport.h:
-
-../src/CPhysicalConnection.h:
-
-../src/CPacketCollector.h:
-
-../src/CDHCPService.h:
-
-../src/CDHCPMsgTypeException.h:
-
-../src/H_SNIFFER_FUNC.h:
-
-../src/CConnection.h:
-
-../src/CSocketNotReadyException.h:
-
-../src/CVirtualConnection.h:
-
-../src/CPhysicalConnectionsHandler.h:
-
-../src/pugixml.hpp:
-
-../src/pugiconfig.hpp:
-
-../src/CRouter.h:
-
-../src/DInitializationDefs.h:

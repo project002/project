@@ -9,9 +9,10 @@
 #define EMULATIONWRAPPER_H_
 #include "CEmulation.h"
 #include "SLogger.h"
-#include "SBasicGUI.h"
+#include "SDataController.h"
 #include "DInitializationDefs.h"
 #include "CSocketNotReadyException.h"
+#include <gtkmm.h>
 class EmulationWrapper
 {
 public:

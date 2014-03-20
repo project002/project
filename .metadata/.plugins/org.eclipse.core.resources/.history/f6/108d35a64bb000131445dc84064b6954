@@ -1,0 +1,39 @@
+/*
+ * CEmuStatWidget.cpp
+ *
+ *  Created on: Mar 20, 2014
+ *      Author: root
+ */
+
+#include "CEmuStatWidget.h"
+
+CEmuStatWidget::CEmuStatWidget(Gtk::Box* MainPack)
+{
+
+	MainPack->pack_start(mGrid,true,true,10);
+
+	mlblPacketsStatus = Gtk::manage(new Gtk::Label());
+	mlblPacketsStatus->set_text("Packets Processed:\nPackets Dropped:\nLostPercentage:");
+	mStatusFrame.add(*mlblPacketsStatus);
+	mStatusFrame.set_label("Packets Status:");
+	mStatusFrame.set_shadow_type(Gtk::SHADOW_ETCHED_OUT);
+
+	mGrid.add(mStatusFrame);
+
+	mlblPacketsTypes = Gtk::manage(new Gtk::Label());
+	mlblPacketsTypes->set_text("IP Packets:\nARP Packets:\nDHCP PAckets:");
+	mTypeFrame.add(*mlblPacketsTypes);
+	mGrid.add(mTypeFrame);
+
+}
+
+void CEmuStatWidget::loop()
+{
+	//nothing for now
+}
+
+CEmuStatWidget::~CEmuStatWidget()
+{
+	// TODO Auto-generated destructor stub
+}
+

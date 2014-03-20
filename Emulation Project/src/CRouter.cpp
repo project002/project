@@ -162,7 +162,7 @@ void CRouter::PacketHandler()
 				IP* ip_layer = packet->GetLayer<IP>();
 				if (ip_layer != NULL)
 				{
-					SBasicGUI::getInstance().incData(SBasicGUI::IPPACKET);
+					SDataController::getInstance().incData(SDataController::IPPACKET);
 					HandleIPv4(packet);
 				}
 				else
@@ -170,7 +170,7 @@ void CRouter::PacketHandler()
 					ARP* arp_layer = packet->GetLayer<ARP>();
 					if (arp_layer != NULL) //answer arp requests
 					{
-						SBasicGUI::getInstance().incData(SBasicGUI::ARPPACKET);
+						SDataController::getInstance().incData(SDataController::ARPPACKET);
 						HandleArp(packet);
 					}
 				}
@@ -272,7 +272,7 @@ void CRouter::Sniff()
 					}
 					else
 					{
-						SBasicGUI::getInstance().incData(SBasicGUI::PACKETDROP);
+						SDataController::getInstance().incData(SDataController::PACKETDROP);
 					}
 				}
 			}

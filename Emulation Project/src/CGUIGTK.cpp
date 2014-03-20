@@ -33,7 +33,8 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 	mPackingBox->pack_start(mInst,Gtk::PACK_SHRINK);
 
 	//text view
-	create_textview();
+	//create_textview();
+	mStateWidget = new CEmuStatWidget(mPackingBox);
 
 	//make stop button
 	mStopButton->set_label("Stop Emulation");
@@ -139,6 +140,7 @@ void CGUIGTK::start_emulation_thread()
 {
 	mEmulationRunning = true;
 	EmulationThread = Glib::Thread::create(sigc::mem_fun(*this,&CGUIGTK::run_emulation),false);
+	loop();
 }
 
 
@@ -165,12 +167,23 @@ void CGUIGTK::run_emulation() //runs in a seperate thread
 	//}
 }
 
+void CGUIGTK::loop()
+{
+	//stringstream s;
+	while (mEmulationRunning)
+	{
+		while(Gtk::Main::events_pending()) {Gtk::Main::iteration();}
+
+		mStateWidget->loop();
+	}
+}
+
 CGUIGTK::~CGUIGTK()
 {
-	// TODO Auto-generated destructor stub
 	delete mMenuBar;
 	delete mStopButton;
 	delete mPackingBox;
+	delete mStateWidget;
 	if (mEmulation!=NULL) {delete mEmulation;}
 
 }

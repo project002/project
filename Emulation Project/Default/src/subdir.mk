@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../src/CConnection.cpp \
 ../src/CDHCPService.cpp \
+../src/CEmuStatWidget.cpp \
 ../src/CEmulation.cpp \
 ../src/CException.cpp \
 ../src/CGUIGTK.cpp \
@@ -23,6 +24,7 @@ CPP_SRCS += \
 OBJS += \
 ./src/CConnection.o \
 ./src/CDHCPService.o \
+./src/CEmuStatWidget.o \
 ./src/CEmulation.o \
 ./src/CException.o \
 ./src/CGUIGTK.o \
@@ -40,6 +42,7 @@ OBJS += \
 CPP_DEPS += \
 ./src/CConnection.d \
 ./src/CDHCPService.d \
+./src/CEmuStatWidget.d \
 ./src/CEmulation.d \
 ./src/CException.d \
 ./src/CGUIGTK.d \

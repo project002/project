@@ -1,0 +1,25 @@
+/*
+ * CEmuStatWidget.cpp
+ *
+ *  Created on: Mar 20, 2014
+ *      Author: root
+ */
+
+#include "CEmuStatWidget.h"
+
+CEmuStatWidget::CEmuStatWidget(Gtk::Box* MainPack)
+{
+
+	MainPack->pack_start(mBox,true,true,10);
+
+	mlblPacketsProccesed = Gtk::manage(new Gtk::Label());
+	mlblPacketsProccesed->set_text("Packets Proccessed: 0");
+	mStatusFrame.add(*mlblPacketsProccesed);
+
+}
+
+CEmuStatWidget::~CEmuStatWidget()
+{
+	// TODO Auto-generated destructor stub
+}
+

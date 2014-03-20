@@ -1,0 +1,21 @@
+/*
+ * CEmuStatWidget.cpp
+ *
+ *  Created on: Mar 20, 2014
+ *      Author: root
+ */
+
+#include "CEmuStatWidget.h"
+
+CEmuStatWidget::CEmuStatWidget(Gtk::Box* MainPack)
+{
+
+
+
+}
+
+CEmuStatWidget::~CEmuStatWidget()
+{
+	// TODO Auto-generated destructor stub
+}
+
