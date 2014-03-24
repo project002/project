@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/CDHCPService.cpp \
 ../src/CEmuStatWidget.cpp \
 ../src/CEmulation.cpp \
+../src/CEmulationDrawing.cpp \
 ../src/CException.cpp \
 ../src/CGUIGTK.cpp \
 ../src/CPacketCollector.cpp \
@@ -26,6 +27,7 @@ OBJS += \
 ./src/CDHCPService.o \
 ./src/CEmuStatWidget.o \
 ./src/CEmulation.o \
+./src/CEmulationDrawing.o \
 ./src/CException.o \
 ./src/CGUIGTK.o \
 ./src/CPacketCollector.o \
@@ -44,6 +46,7 @@ CPP_DEPS += \
 ./src/CDHCPService.d \
 ./src/CEmuStatWidget.d \
 ./src/CEmulation.d \
+./src/CEmulationDrawing.d \
 ./src/CException.d \
 ./src/CGUIGTK.d \
 ./src/CPacketCollector.d \

@@ -19,7 +19,7 @@
 class CEmuStatWidget
 {
 public:
-	CEmuStatWidget(Gtk::Box* MainPack);
+	CEmuStatWidget(Gtk::Container* MainPack);
 	void loop();
 	virtual ~CEmuStatWidget();
 private:
@@ -32,9 +32,7 @@ private:
 	Gtk::Label* mlblPacketsTypes;
 
 	Gtk::Frame mMessagesFrame;
-	Gtk::ScrolledWindow* mtvContainer;
-	Gtk::TextView* mtvMessages;
-	Glib::RefPtr<Gtk::TextBuffer> mtvMessagesBuffer;
+	Gtk::Label* mtvMessages;
 };
 
 #endif /* CEMUSTATWIDGET_H_ */

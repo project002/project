@@ -1,20 +1,23 @@
 0 : Disabling Linux Networking
-0.24 : Validating XML file is present
-0.24 : Building the emulation
-0.24 : name:	lo
-0.24 : name:	loname:	eth0
-0.26 : ip table init complete
-0.26 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
-0.27 : DHCP service started...
-0.31 : name:	loname:	eth0name:	eth1
-0.34 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
-0.34 : DHCP service started...
-0.35 : name:	loname:	eth0name:	eth1name:	lo
-0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1
-0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
-0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
-0.35 : Starting the emulation
-0.35 : Running Virtual Routers Thread With 1 Routers
-0.35 : std::exception
-0.35 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
-124.93 : No Handler found for message type:8
+0.21 : Validating XML file is present
+0.21 : Building the emulation
+0.21 : name:	lo
+0.21 : name:	loname:	eth0
+0.21 : ip table init complete
+0.21 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0.23 : DHCP service started...
+0.27 : name:	loname:	eth0name:	eth1
+0.31 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.31 : DHCP service started...
+0.37 : name:	loname:	eth0name:	eth1name:	lo
+0.37 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.37 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.37 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+0.37 : Starting the emulation
+0.37 : Running Virtual Routers Thread With 1 Routers
+0.37 : std::exception
+0.37 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+7.16 : Emulation exiting
+7.61 : Enabling Networking
+7.63 : Destroying Controller Thread
+7.63 : Destroying Logger and exiting program

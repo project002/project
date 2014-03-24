@@ -7,12 +7,14 @@
 
 #include "CEmuStatWidget.h"
 
-CEmuStatWidget::CEmuStatWidget(Gtk::Box* MainPack)
+CEmuStatWidget::CEmuStatWidget(Gtk::Container* MainPack)
 {
 
-	MainPack->pack_start(mGrid,true,true,10);
+	MainPack->add(mGrid);//,true,true,10);
 	mGrid.set_row_spacing(20);
 	mGrid.set_column_spacing(20);
+	mGrid.set_row_homogeneous(true);
+	mGrid.set_column_homogeneous(true);
 	mlblPacketsStatus = Gtk::manage(new Gtk::Label());
 	mlblPacketsStatus->set_text("Packets Processed:\nPackets Dropped:\nLostPercentage:");
 	mStatusFrame.add(*mlblPacketsStatus);
@@ -27,16 +29,10 @@ CEmuStatWidget::CEmuStatWidget(Gtk::Box* MainPack)
 	mTypeFrame.add(*mlblPacketsTypes);
 	mGrid.add(mTypeFrame);
 
-	mtvContainer = Gtk::manage(new Gtk::ScrolledWindow());
-	mtvMessages = Gtk::manage(new Gtk::TextView());
-	mtvMessagesBuffer = Gtk::TextBuffer::create();
-	mtvMessages->set_buffer(mtvMessagesBuffer);
-	mtvMessages->set_editable(false);
-	mtvContainer->set_policy(Gtk::POLICY_NEVER,Gtk::POLICY_AUTOMATIC);
-	mtvContainer->add(*mtvMessages);
+	mtvMessages = Gtk::manage(new Gtk::Label());
 	mMessagesFrame.set_label("Messages:");
 	mMessagesFrame.set_shadow_type(Gtk::SHADOW_IN);
-	mMessagesFrame.add(*mtvContainer);
+	mMessagesFrame.add(*mtvMessages);
 	mGrid.attach_next_to(mMessagesFrame, mStatusFrame, Gtk::POS_BOTTOM, 2, 1);
 }
 
@@ -58,11 +54,14 @@ void CEmuStatWidget::loop()
 	mlblPacketsTypes->set_text(ss1.str());
 
 	std::string messages = SDataController::getInstance().get_messages();
-	//mtvMessagesBuffer->set_text(messages);
+	mtvMessages->set_text(messages);
 }
 
 CEmuStatWidget::~CEmuStatWidget()
 {
 	// TODO Auto-generated destructor stub
+	delete mlblPacketsStatus;
+	delete mlblPacketsTypes;
+	delete mtvMessages;
 }
 

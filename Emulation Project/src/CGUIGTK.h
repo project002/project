@@ -18,6 +18,7 @@
 #include "EmulationWrapper.h"
 #include "CSocketNotReadyException.h"
 #include "CEmuStatWidget.h"
+#include "CEmulationDrawing.h"
 
 class CGUIGTK : public Gtk::Window
 {
@@ -32,21 +33,21 @@ protected:
 	void run_emulation();
 	void stop_emulation();
 	void create_menu_bar();
-	void create_textview();
 	void start_emulation_thread();
 
 	void loop();
 
 	//members
+	Gtk::Grid mGrid;
 	Gtk::Box* mPackingBox;
 	Gtk::MenuBar* mMenuBar;
 	Gtk::Button* mStopButton;
 	Gtk::Button* mQuickStartButton;
-	Gtk::ScrolledWindow* mTextScrollView;
-	Gtk::TextView* mStatusText;
-	Glib::RefPtr<Gtk::TextBuffer> mStatusTextBuffer;
 	Gtk::Label mInst;
 	CEmuStatWidget* mStateWidget;
+	Gtk::Frame mStateWidgetCon;
+	//emulation painting
+	CEmulationDrawing *mDrawing;
 private:
 	std::string mImportXMLPath;
 	EmulationWrapper* mEmulation;

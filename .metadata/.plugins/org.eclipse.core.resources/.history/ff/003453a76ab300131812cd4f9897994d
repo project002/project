@@ -1,0 +1,20 @@
+/*
+ * CEmulationDrawing.cpp
+ *
+ *  Created on: Mar 24, 2014
+ *      Author: root
+ */
+
+#include "CEmulationDrawing.h"
+
+CEmulationDrawing::CEmulationDrawing()
+{
+	// TODO Auto-generated constructor stub
+
+}
+
+CEmulationDrawing::~CEmulationDrawing()
+{
+	// TODO Auto-generated destructor stub
+}
+

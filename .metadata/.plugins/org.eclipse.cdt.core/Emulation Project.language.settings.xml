@@ -804,6 +804,56 @@
 						<entry kind="libraryFile" name="libgobject-2.0.a"/>
 						<entry kind="libraryFile" name="libglib-2.0.a"/>
 					</resource>
+					<resource project-relative-path="src/CEmulationDrawing.cpp">
+						<entry kind="includePath" name="/usr/include/gtkmm-3.0"/>
+						<entry kind="includePath" name="/usr/lib/i386-linux-gnu/gtkmm-3.0/include"/>
+						<entry kind="includePath" name="/usr/include/giomm-2.4"/>
+						<entry kind="includePath" name="/usr/lib/i386-linux-gnu/giomm-2.4/include"/>
+						<entry kind="includePath" name="/usr/include/gtk-3.0"/>
+						<entry kind="includePath" name="/usr/include/gdk-pixbuf-2.0"/>
+						<entry kind="includePath" name="/usr/include/gtk-3.0/unix-print"/>
+						<entry kind="includePath" name="/usr/include/gdkmm-3.0"/>
+						<entry kind="includePath" name="/usr/lib/i386-linux-gnu/gdkmm-3.0/include"/>
+						<entry kind="includePath" name="/usr/include/atk-1.0"/>
+						<entry kind="includePath" name="/usr/include/glibmm-2.4"/>
+						<entry kind="includePath" name="/usr/lib/i386-linux-gnu/glibmm-2.4/include"/>
+						<entry kind="includePath" name="/usr/include/glib-2.0"/>
+						<entry kind="includePath" name="/usr/lib/i386-linux-gnu/glib-2.0/include"/>
+						<entry kind="includePath" name="/usr/include/sigc++-2.0"/>
+						<entry kind="includePath" name="/usr/lib/i386-linux-gnu/sigc++-2.0/include"/>
+						<entry kind="includePath" name="/usr/include/pango-1.0"/>
+						<entry kind="includePath" name="/usr/include/cairo"/>
+						<entry kind="includePath" name="/usr/include/pixman-1"/>
+						<entry kind="includePath" name="/usr/include/freetype2"/>
+						<entry kind="includePath" name="/usr/include/libpng12"/>
+						<entry kind="includePath" name="/usr/include/gio-unix-2.0"/>
+						<entry kind="includePath" name="/usr/include/atkmm-1.6"/>
+						<entry kind="includePath" name="/usr/include/pangomm-1.4"/>
+						<entry kind="includePath" name="/usr/lib/pangomm-1.4/include"/>
+						<entry kind="includePath" name="/usr/include/cairomm-1.0"/>
+						<entry kind="includePath" name="/usr/lib/cairomm-1.0/include"/>
+						<entry kind="libraryFile" name="libcrafter.a"/>
+						<entry kind="libraryFile" name="libboost_thread.a"/>
+						<entry kind="libraryFile" name="libgtkmm-3.0.a"/>
+						<entry kind="libraryFile" name="libatkmm-1.6.a"/>
+						<entry kind="libraryFile" name="libgdkmm-3.0.a"/>
+						<entry kind="libraryFile" name="libgiomm-2.4.a"/>
+						<entry kind="libraryFile" name="libpangomm-1.4.a"/>
+						<entry kind="libraryFile" name="libgtk-3.a"/>
+						<entry kind="libraryFile" name="libglibmm-2.4.a"/>
+						<entry kind="libraryFile" name="libcairomm-1.0.a"/>
+						<entry kind="libraryFile" name="libgdk-3.a"/>
+						<entry kind="libraryFile" name="libatk-1.0.a"/>
+						<entry kind="libraryFile" name="libgio-2.0.a"/>
+						<entry kind="libraryFile" name="libpangocairo-1.0.a"/>
+						<entry kind="libraryFile" name="libgdk_pixbuf-2.0.a"/>
+						<entry kind="libraryFile" name="libcairo-gobject.a"/>
+						<entry kind="libraryFile" name="libpango-1.0.a"/>
+						<entry kind="libraryFile" name="libcairo.a"/>
+						<entry kind="libraryFile" name="libsigc-2.0.a"/>
+						<entry kind="libraryFile" name="libgobject-2.0.a"/>
+						<entry kind="libraryFile" name="libglib-2.0.a"/>
+					</resource>
 				</language>
 			</provider>
 		</extension>

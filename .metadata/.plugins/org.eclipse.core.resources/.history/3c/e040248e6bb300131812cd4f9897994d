@@ -1,0 +1,45 @@
+/*
+ * CEmulationDrawing.cpp
+ *
+ *  Created on: Mar 24, 2014
+ *      Author: root
+ */
+
+#include "CEmulationDrawing.h"
+#include <cairomm/context.h>
+#include <gdkmm/general.h> // set_source_pixbuf()
+#include <glibmm/fileutils.h>
+#include <iostream>
+
+CEmulationDrawing::CEmulationDrawing()
+{
+	// TODO Auto-generated constructor stub
+	try
+	  {
+		// The fractal image has been created by the XaoS program.
+		// http://xaos.sourceforge.net
+		mImage = Gdk::Pixbuf::create_from_file("text.png");
+	  }
+	  catch(const Glib::FileError& ex)
+	  {
+		std::cerr << "FileError: " << ex.what() << std::endl;
+	  }
+	  catch(const Gdk::PixbufError& ex)
+	  {
+		std::cerr << "PixbufError: " << ex.what() << std::endl;
+	  }
+
+	  // Show at least a quarter of the image.
+	  if (m_image)
+		set_size_request(m_image->get_width()/2, m_image->get_height()/2);
+}
+
+CEmulationDrawing::~CEmulationDrawing()
+{
+	// TODO Auto-generated destructor stub
+}
+
+bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+{
+
+}
