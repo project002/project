@@ -1,0 +1,138 @@
+/*
+ * CXMLBasicParser.h
+ *
+ *  Created on: Apr 8, 2014
+ *      Author: root
+ */
+
+#ifndef CXMLBASICPARSER_H_
+#define CXMLBASICPARSER_H_
+
+
+#include "BasicIncludes.h"
+#include "pugixml.hpp"
+#include "SXMLStructs.h"
+#include "DParserDefs.h"
+#include <map>
+#define ERROR_MSG_XML_PARSER "Error parsing file, make sure a *valid* XML file is present in the Emulation base folder\n"
+
+class CXMLBasicParser
+{
+public:
+	CXMLBasicParser(){}
+	void ParseXML(string fileName)
+	{
+		OpenFile(fileName);
+		ParseIntoMembers();
+	}
+	unsigned int GetNumberOfRouters()const{return mRoutersInformation.size();}
+	vector<RouterInformation> GetRoutersInformation()const{return mRoutersInformation;}
+	multimap<unsigned int,unsigned int> GetConnections()const{return mConnectionsBetweenRouters;}
+private:
+	pugi::xml_document doc;
+	multimap<unsigned int,unsigned int> mConnectionsBetweenRouters;
+	vector<RouterInformation> mRoutersInformation;
+
+	void OpenFile(string fileName)
+	{
+		pugi::xml_parse_result result = doc.load_file(fileName.c_str());
+		if (!result)
+		{
+			throw(CException(ERROR_MSG_XML_PARSER));
+		};
+	}
+
+	void ParseIntoMembers()
+	{
+		ParseRoutersInformation();
+		ParseVirtualConnections();
+	}
+
+	void ParseRoutersInformation()
+	{
+		pugi::xml_node Routers = doc.child(XML_LAYER_1_NETWORK).child(
+				XML_LAYER_2_ROUTERS);
+
+		for (pugi::xml_node currentRouter = Routers.child(
+				XML_LAYER_3_INDIVIDUAL_ROUTERS); currentRouter; currentRouter =
+				currentRouter.next_sibling(XML_LAYER_3_INDIVIDUAL_ROUTERS))
+		{
+			RouterInformation sRouterInfo;
+
+			sRouterInfo.sRouterNumber = currentRouter.attribute(
+					XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
+
+			sRouterInfo.sBufferSize = currentRouter.attribute(
+					XML_ROUTER_BUFFER_SIZE_ATTRIBUTE).as_int();
+
+			sRouterInfo.sDropRate=currentRouter.attribute(
+					XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
+
+			sRouterInfo.sUsedBufferSize = currentRouter.attribute(
+					XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
+
+			mRoutersInformation.push_back(sRouterInfo);
+		}
+	}
+
+	void ParseVirtualConnections()
+	{
+		pugi::xml_node VirtualConnections =
+				doc.child(XML_LAYER_1_NETWORK).child(
+						XML_LAYER_2_VIRTUAL_CONNECTIONS);
+
+		for (pugi::xml_node iter = VirtualConnections.child(
+				XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS); iter;
+				iter = iter.next_sibling(
+						XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS))
+		{
+
+			pugi::xml_node virtualConnectionIter = iter.child(
+						XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER);
+			unsigned int first = virtualConnectionIter.attribute(
+					XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
+			virtualConnectionIter = virtualConnectionIter.next_sibling(
+								XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER);
+			unsigned int second = virtualConnectionIter.attribute(
+					XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
+
+			mConnectionsBetweenRouters[first]=second;
+		}
+	}
+};
+
+/*
+ * pugi::xml_node Routers = doc.child(XML_LAYER_1_NETWORK).child(XML_LAYER_2_ROUTERS);
+
+		for (pugi::xml_node currentRouter = Routers.child(XML_LAYER_3_INDIVIDUAL_ROUTERS); currentRouter;
+				currentRouter = currentRouter.next_sibling(XML_LAYER_3_INDIVIDUAL_ROUTERS))
+		{
+			RouterCreate = new CRouter();
+
+			XMLAddPhysicalConnectionsToRouter(RouterCreate,currentRouter);
+
+			unsigned int RouterNumber = currentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
+			RouterCreate->SetRouterNumber(RouterNumber);
+			list<CVirtualConnection const *> virtualConnectionsVector=mPhysicalConnectionsHandler->GetVirtualConnectionsVector(RouterNumber);
+			RouterCreate->AppendConnectionList(virtualConnectionsVector);
+			//Get router buffer size default is defined in H file
+			unsigned int BufferSize = currentRouter.attribute(XML_ROUTER_BUFFER_SIZE_ATTRIBUTE).as_int();
+			if (BufferSize != 0)
+			{
+				RouterCreate->SetBufferSize(BufferSize);
+			}
+			double DropRate = currentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
+			if (DropRate != 0)
+			{
+				RouterCreate->SetDropRate(DropRate);
+			}
+			unsigned int BufferUsedSize = currentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
+			if(BufferUsedSize!=0)
+			{
+				RouterCreate->AddPacketsToBuffer(BufferUsedSize);
+			}
+			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
+			mRouters.push_back(RouterCreate);
+		}
+ */
+#endif /* CXMLBASICPARSER_H_ */

@@ -36,6 +36,69 @@ CPacketCollector::~CPacketCollector()
 	}
 }
 
+/**
+ * Adding number of fake packets to packet collector
+ * FIXME: TODO:if the program crash it probably means that delete packet isnt deleting the layers allocated in this function
+ * or in case the layers arent dynamic it means that they should be otherwise they are deleted here and gone forever.
+ * @param numberOfPackets
+ */
+void CPacketCollector::AddRandomPackets(unsigned int numberOfPackets)
+{
+	try
+	{
+		mMtx.lock();
+		for (unsigned int i = 0; i < numberOfPackets; i++)
+		{
+
+			Crafter::Packet * fakePacket=new Packet();
+
+			/* Create an IP header */
+			IP ip_header;
+			/* Set the Source and Destination IP address */
+			ip_header.SetSourceIP("0.0.0.0");
+			ip_header.SetDestinationIP("0.0.0.0");
+
+			/* Create an TCP - SYN header */
+			TCP tcp_header;
+			tcp_header.SetSrcPort(0);
+			tcp_header.SetDstPort(0);
+			tcp_header.SetSeqNumber(0);
+			tcp_header.SetFlags(0);
+
+			RawLayer payload ("ArbitraryPayload");
+
+			fakePacket->PushLayer(ip_header);
+			fakePacket->PushLayer(tcp_header);
+			fakePacket->PushLayer(payload);
+
+			if (mPackets.size() < mBufferSize)
+			{
+				mPackets.push_back(fakePacket);
+				SDataController::getInstance().incData(
+						SDataController::PACKETPROCCES);
+			}
+			else
+			{
+				SLogger::getInstance().Log("packet discarded");
+				SDataController::getInstance().incData(
+						SDataController::PACKETDROP);
+				if (fakePacket != NULL)
+				{
+					delete (fakePacket);
+					fakePacket = NULL;
+				}
+			}
+		}
+		mMtx.unlock();
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
 void CPacketCollector::PushBack(Crafter::Packet * pkt)
 {
 	try

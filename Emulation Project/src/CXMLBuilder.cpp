@@ -200,6 +200,8 @@ bool CXMLBuilder::AddRouter(RouterInformation routerInfo)
 				routerInfo.sBufferSize;
 		mCurrentRouter.append_attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE) =
 				routerInfo.sDropRate;
+		mCurrentRouter.append_attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE) =
+				routerInfo.sUsedBufferSize;
 		return true;
 	}
 	catch (CException & error)
@@ -439,6 +441,7 @@ RouterInformation CXMLBuilder::GetCurrentRouterInformation()
 		rtInfo.sRouterNumber = mCurrentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
 		rtInfo.sBufferSize = mCurrentRouter.attribute(XML_ROUTER_BUFFER_SIZE_ATTRIBUTE).as_int();
 		rtInfo.sDropRate = mCurrentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_int();
+		rtInfo.sUsedBufferSize = mCurrentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
 
 		return rtInfo;
 	}
@@ -472,6 +475,8 @@ bool CXMLBuilder::EditCurrentRouterInformation(RouterInformation routerInfo)
 					routerInfo.sBufferSize;
 			mCurrentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE) =
 					routerInfo.sDropRate;
+			mCurrentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE) =
+					routerInfo.sUsedBufferSize;
 			return true;
 		}
 		else

@@ -14,6 +14,7 @@ struct RouterInformation
 	unsigned int sRouterNumber;
 	unsigned int sBufferSize;
 	unsigned int sDropRate;
+	unsigned int sUsedBufferSize;
 };
 
 

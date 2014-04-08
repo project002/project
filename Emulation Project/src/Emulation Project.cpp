@@ -23,44 +23,8 @@
  */
 int main(int argc, char *argv[])
 {
-//	//TODO: remove after testing
-
-//	CXMLBuilder builder;
-//	RouterInformation rt;
-//	rt.sBufferSize=100;
-//	rt.sDropRate=0;
-//	rt.sRouterNumber=0;
-//	builder.AddRouter(rt);
-//	builder.AddPhysicalConnection("test1");
-//	//should fail
-//	rt.sBufferSize=150;
-//	builder.AddRouter(rt);
-//	builder.AddPhysicalConnection("test2");
-//
-//	builder.AddPhysicalConnection("test1");
-//	//should work
-//	rt.sBufferSize=250;
-//	rt.sRouterNumber=2;
-//	builder.AddRouter(rt);
-//
-//	builder.AddPhysicalConnection("test3");
-//	builder.SetCurrentRouter(0);
-//	builder.AddPhysicalConnection("test3");
-//	rt.sRouterNumber=0;
-//	rt.sBufferSize=350;
-//	builder.AddVirtualConnection(0,2);
-//	builder.AddVirtualConnection(0,2);
-//	builder.AddVirtualConnection(2,0);
-//	builder.AddVirtualConnection(2,2);
-//	builder.AddVirtualConnection(1,1);
-//	builder.EditCurrentRouterInformation(rt);
-//
-//	builder.Finalize();
-//	return(EXIT_SUCCESS);
-
 	try
 	{
-
 		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc,argv,"org.NetworkEmulation");
 		CGUIGTK window;
 		app->run(window);

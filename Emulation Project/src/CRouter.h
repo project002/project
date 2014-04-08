@@ -63,6 +63,11 @@ public:
 		mRouterNumber = routerNumber;
 	}
 
+	void AddPacketsToBuffer(unsigned int numberOfPackets=0)
+	{
+		mPacketCollector->AddRandomPackets(numberOfPackets);
+	}
+
 	void setRouterThreaded(bool threaded) {mThreaded = threaded;}
 
 	/**

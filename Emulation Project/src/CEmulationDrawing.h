@@ -17,11 +17,16 @@ class CEmulationDrawing : public Gtk::DrawingArea
 public:
 	CEmulationDrawing();
 	virtual ~CEmulationDrawing();
+private:
+	void insertNewImage(Glib::ustring imageName,Glib::ustring imagePath);
+	void loadImagesSrouces();
 protected:
 	//Override default signal handler:
 	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 
-	Glib::RefPtr<Gdk::Pixbuf> mImage;
+	std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > mImgBuffers;
+	//map iterator for the drawing process
+	std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> >::iterator mImageBufferDItr;
 };
 
 #endif /* CEMULATIONDRAWING_H_ */

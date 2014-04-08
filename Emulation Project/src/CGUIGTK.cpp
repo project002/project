@@ -144,25 +144,61 @@ void CGUIGTK::start_emulation_thread()
 
 void CGUIGTK::run_emulation() //runs in a seperate thread
 {
-	//while (mEmulationRunning)
-	//{
-		mInst.set_label("Run Started");
-		try
+	//cml parser tests
+	CXMLBasicParser prs;
+	prs.ParseXML(mImportXMLPath);
+	std::cout << prs.GetNumberOfRouters() << std::endl;
+	vector<RouterInformation> rInfo= prs.GetRoutersInformation();
+	vector<RouterInformation>::iterator it = rInfo.begin();
+	std::cout << "Buffer Information:" << std::endl;
+	for (;it!=rInfo.end();++it)
+	{
+		std::cout << "\tID:" << (*it).sRouterNumber << std::endl;
+		std::cout << "\tDropRate:" << (*it).sDropRate << std::endl;
+		std::cout << "\tBufferSize:" << (*it).sBufferSize << std::endl;
+		std::cout << "\tUsedBufferSize:" << (*it).sUsedBufferSize << std::endl;
+	}
+
+	std::multimap<unsigned int,unsigned int> vcons = prs.GetVirtualConnections();
+	std::multimap<unsigned int,unsigned int>::iterator vit= vcons.begin();
+	std::cout << "Virtual Connections:" << std::endl;
+	for (;vit!=vcons.end();++vit)
+	{
+		std::cout << "\tFrom: " << vit->first  << " To: " << vit->second << std::endl;
+	}
+
+	std::multimap<unsigned int,std::string> pcons = prs.GetPhysicalConnections();
+	std::multimap<unsigned int,std::string>::iterator pit= pcons.begin();
+	std::cout << "Physical Connections:" << std::endl;
+	for (;pit!=pcons.end();++pit)
+	{
+		std::cout << "\tFrom: " << pit->first  << " To: " << pit->second << std::endl;
+	}
+
+	std::cout << "Connections Number:" << std::endl;
+	for (int i=0;i<prs.GetNumberOfRouters();++i)
+	{
+		std::cout << "\tID: " << i  << " Count: " << prs.GetNumberOfConnectionPerRouter(i) << std::endl;
+	}
+
+
+	///test end
+	mInst.set_label("Run Started");
+	try
+	{
+		if (mEmulation==NULL)
 		{
-			if (mEmulation==NULL)
-			{
-				mEmulation = new EmulationWrapper(mImportXMLPath);
-				mEmulation->RunEmulation();
-				mInst.set_label("Run Ended");
-			}
+			mEmulation = new EmulationWrapper(mImportXMLPath);
+			mEmulation->RunEmulation();
+			mInst.set_label("Run Ended");
 		}
-		catch(CException & error)
-		{
-			mEmulationRunning = false;
-			mInst.set_label("Exception On Run");
-			//throw CException("Emulation Failed");
-		}
-	//}
+	}
+	catch(CException & error)
+	{
+		mEmulationRunning = false;
+		mInst.set_label("Exception On Run");
+		//throw CException("Emulation Failed");
+	}
 }
 
 void CGUIGTK::loop()

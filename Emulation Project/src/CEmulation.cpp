@@ -204,6 +204,11 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			{
 				RouterCreate->SetDropRate(DropRate);
 			}
+			unsigned int BufferUsedSize = currentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
+			if(BufferUsedSize!=0)
+			{
+				RouterCreate->AddPacketsToBuffer(BufferUsedSize);
+			}
 			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
 			mRouters.push_back(RouterCreate);
 		}

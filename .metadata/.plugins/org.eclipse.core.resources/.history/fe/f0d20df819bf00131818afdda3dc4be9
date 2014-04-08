@@ -1,0 +1,71 @@
+/*
+ * CEmulationDrawing.cpp
+ *
+ *  Created on: Mar 24, 2014
+ *      Author: root
+ */
+
+#include "CEmulationDrawing.h"
+#include <cairomm/context.h>
+#include <gdkmm/general.h> // set_source_pixbuf()
+#include <glibmm/fileutils.h>
+#include <iostream>
+
+CEmulationDrawing::CEmulationDrawing() : mImgBuffers(std::map<Glib::ustring,Glib::RefPtr<Gdk::Pixbuf>>())
+{
+	loadImagesSrouces();
+}
+
+void CEmulationDrawing::insertNewImage(Glib::ustring imageName,Glib::ustring imagePath)
+{
+	std::pair<Glib::ustring,Glib::RefPtr<Gdk::Pixbuf>> newImg;
+	newImg.first = imageName;
+	try
+	{
+		newImg.second = Gdk::Pixbuf::create_from_file(imagePath);
+	}
+	catch(const Glib::FileError& ex)
+	{
+		std::cerr << "Image File Missing: " << ex.what() << std::endl;
+		throw CException("Missing Image File");
+		return;
+	}
+	catch(const Gdk::PixbufError& ex)
+	{
+		std::cerr << "PixbufError: " << ex.what() << std::endl;
+		throw CException("Unable To Load an Image");
+		return;
+	}
+	mImgBuffers.insert(newImg);
+}
+
+void CEmulationDrawing::loadImagesSrouces()
+{
+	//insert router image
+	insertNewImage("RouterImage","test.png");
+}
+
+CEmulationDrawing::~CEmulationDrawing()
+{
+
+}
+
+bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+{
+	if (!mImage)
+	    return false;
+
+	  Gtk::Allocation allocation = get_allocation();
+	  const int width = allocation.get_width();
+	  const int height = allocation.get_height();
+
+	  // Draw the image in the middle of the drawing area, or (if the image is
+	  // larger than the drawing area) draw the middle part of the image.
+	  Gdk::Cairo::set_source_pixbuf(cr, mImage,
+		(width - mImage->get_width())/2, (height - mImage->get_height())/2);
+	  cr->paint();
+//	  Gdk::Cairo::set_source_pixbuf(cr, mImage,
+//	 		(width - mImage->get_width()), (height - mImage->get_height()));
+//	  cr->paint();
+	  return true;
+}

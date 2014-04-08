@@ -21,6 +21,7 @@ public:
 	 */
 	Crafter::Packet * PopFront();
 	void DropRandomPacket();
+	void AddRandomPackets(unsigned int numberOfPackets);
 private:
 	void AnalyzePacketForStatistics(Crafter::Packet * packet);
 	void PrintPacket();

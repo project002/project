@@ -19,6 +19,8 @@
 #include "CSocketNotReadyException.h"
 #include "CEmuStatWidget.h"
 #include "CEmulationDrawing.h"
+#include "SXMLStructs.h"
+#include "CXMLBasicParser.h"
 
 class CGUIGTK : public Gtk::Window
 {

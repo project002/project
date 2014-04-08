@@ -10,26 +10,41 @@
 #include <gdkmm/general.h> // set_source_pixbuf()
 #include <glibmm/fileutils.h>
 #include <iostream>
+#include "CException.h"
 
-CEmulationDrawing::CEmulationDrawing()
+CEmulationDrawing::CEmulationDrawing() : mImgBuffers(std::map<Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> >())
 {
-	// TODO Auto-generated constructor stub
-	try
-	  {
-		mImage = Gdk::Pixbuf::create_from_file("test.png");
-	  }
-	  catch(const Glib::FileError& ex)
-	  {
-		std::cerr << "FileError: " << ex.what() << std::endl;
-	  }
-	  catch(const Gdk::PixbufError& ex)
-	  {
-		std::cerr << "PixbufError: " << ex.what() << std::endl;
-	  }
+	loadImagesSrouces();
+}
 
-	  // Show at least a quarter of the image.
-	  if (mImage)
-		set_size_request(mImage->get_width()/2, mImage->get_height()/2);
+void CEmulationDrawing::insertNewImage(Glib::ustring imageName,Glib::ustring imagePath)
+{
+	std::pair<Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > newImg;
+	newImg.first = imageName;
+	try
+	{
+		newImg.second = Gdk::Pixbuf::create_from_file(imagePath);
+	}
+	catch(const Glib::FileError& ex)
+	{
+		std::cerr << "Image File Missing: " << ex.what() << std::endl;
+		throw CException("Missing Image File");
+		return;
+	}
+	catch(const Gdk::PixbufError& ex)
+	{
+		std::cerr << "PixbufError: " << ex.what() << std::endl;
+		throw CException("Unable To Load an Image");
+		return;
+	}
+	mImgBuffers.insert(newImg);
+}
+
+void CEmulationDrawing::loadImagesSrouces()
+{
+	//insert router image
+	insertNewImage("RouterImage","test.png");
+	insertNewImage("Some","test2.png");
 }
 
 CEmulationDrawing::~CEmulationDrawing()
@@ -39,18 +54,33 @@ CEmulationDrawing::~CEmulationDrawing()
 
 bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
-	if (!mImage)
-	    return false;
+	if (mImgBuffers.empty()) {return false;}
 
-	  Gtk::Allocation allocation = get_allocation();
-	  const int width = allocation.get_width();
-	  const int height = allocation.get_height();
+	//get the available draw area
+	Gtk::Allocation allocation = get_allocation();
+	const int width = allocation.get_width();
+	const int height = allocation.get_height();
 
-	  // Draw the image in the middle of the drawing area, or (if the image is
-	  // larger than the drawing area) draw the middle part of the image.
-	  Gdk::Cairo::set_source_pixbuf(cr, mImage,
-		(width - mImage->get_width())/2, (height - mImage->get_height())/2);
-	  cr->paint();
+	//draw all images
+//	mImageBufferDItr = mImgBuffers.begin();
+//	for (;mImageBufferDItr!=mImgBuffers.end();++mImageBufferDItr)
+//	{
+//		Gdk::Cairo::set_source_pixbuf(cr, mImageBufferDItr->second,
+//			(width - mImageBufferDItr->second->get_width())/2,
+//			(height - mImageBufferDItr->second->get_height())/2);
+//
+//		cr->paint();
+//	}
 
-	  return true;
+
+//	Gdk::Cairo::set_source_pixbuf(cr, mImgBuffers.at("routerImage").second,
+//				(width -  mImgBuffers.at("routerImage")->second->get_width())/2,
+//				(height -  mImgBuffers.at("routerImage")->second->get_height())/2);
+
+	cr->paint();
+
+	return true;
 }
+
+
+

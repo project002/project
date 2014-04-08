@@ -1,0 +1,36 @@
+/*
+ * CXMLBasicParser.h
+ *
+ *  Created on: Apr 8, 2014
+ *      Author: root
+ */
+
+#ifndef CXMLBASICPARSER_H_
+#define CXMLBASICPARSER_H_
+
+
+#include "BasicIncludes.h"
+#include "pugixml.hpp"
+#include "SXMLStructs.h"
+
+#define ERROR_MSG_XML_PARSER "Error parsing file, make sure a *valid* XML file is present in the Emulation base folder\n"
+
+class CXMLBasicParser
+{
+public:
+	CXMLBasicParser(string fileName)
+	{
+		pugi::xml_document doc;
+		pugi::xml_parse_result result = doc.load_file(fileName.c_str());
+		if (!result)
+		{
+			throw(CException(ERROR_MSG_XML_PARSER));
+		};
+	}
+
+private:
+
+};
+
+
+#endif /* CXMLBASICPARSER_H_ */
