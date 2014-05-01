@@ -981,7 +981,8 @@ src/CGUIGTK.d: ../src/CGUIGTK.cpp ../src/CGUIGTK.h \
  ../src/CSocketNotReadyException.h ../src/CVirtualConnection.h \
  ../src/CPhysicalConnectionsHandler.h ../src/pugixml.hpp \
  ../src/pugiconfig.hpp ../src/CRouter.h ../src/DInitializationDefs.h \
- ../src/CEmuStatWidget.h ../src/CEmulationDrawing.h
+ ../src/CEmuStatWidget.h ../src/CEmulationDrawing.h \
+ ../src/CXMLBasicParser.h ../src/SXMLStructs.h ../src/DParserDefs.h
 
 ../src/CGUIGTK.h:
 
@@ -3068,3 +3069,9 @@ src/CGUIGTK.d: ../src/CGUIGTK.cpp ../src/CGUIGTK.h \
 ../src/CEmuStatWidget.h:
 
 ../src/CEmulationDrawing.h:
+
+../src/CXMLBasicParser.h:
+
+../src/SXMLStructs.h:
+
+../src/DParserDefs.h:

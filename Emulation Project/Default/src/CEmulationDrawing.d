@@ -973,7 +973,10 @@ src/CEmulationDrawing.d: ../src/CEmulationDrawing.cpp \
  /usr/include/gtkmm-3.0/gtkmm/treerowreference.h \
  /usr/include/gtkmm-3.0/gtkmm/treestore.h \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
- /usr/include/gtkmm-3.0/gtkmm/viewport.h ../src/CException.h
+ /usr/include/gtkmm-3.0/gtkmm/viewport.h ../src/CXMLBasicParser.h \
+ ../src/BasicIncludes.h ../src/SLogger.h ../src/CException.h \
+ ../src/CUIPV4.h ../src/SDataController.h ../src/pugixml.hpp \
+ ../src/pugiconfig.hpp ../src/SXMLStructs.h ../src/DParserDefs.h
 
 ../src/CEmulationDrawing.h:
 
@@ -3017,4 +3020,22 @@ src/CEmulationDrawing.d: ../src/CEmulationDrawing.cpp \
 
 /usr/include/gtkmm-3.0/gtkmm/viewport.h:
 
+../src/CXMLBasicParser.h:
+
+../src/BasicIncludes.h:
+
+../src/SLogger.h:
+
 ../src/CException.h:
+
+../src/CUIPV4.h:
+
+../src/SDataController.h:
+
+../src/pugixml.hpp:
+
+../src/pugiconfig.hpp:
+
+../src/SXMLStructs.h:
+
+../src/DParserDefs.h:

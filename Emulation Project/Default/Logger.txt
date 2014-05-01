@@ -1,2 +1,27 @@
 0 : Disabling Linux Networking
-3.7 : Validating XML file is present
+0.39 : Validating XML file is present
+0.39 : Building the emulation
+0.39 : name:	lo
+0.39 : name:	loname:	eth0
+0.41 : ip table init complete
+0.41 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0.43 : DHCP service started...
+0.49 : name:	loname:	eth0name:	eth1
+0.5 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.5 : DHCP service started...
+0.54 : name:	loname:	eth0name:	eth1name:	lo
+0.54 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.54 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.55 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+0.55 : Starting the emulation
+0.55 : Running Virtual Routers Thread With 1 Routers
+0.58 : std::exception
+0.58 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+9.8 : last added ip address: 10.0.0.3 for MAC: 3c:8a:b0:f9:d1:40
+9.8 : Started Handshake Offering 10.0.0.3
+12.18 : Started Handshake Offering 10.0.0.3[@] No response to DHCP offer with ip 10.0.0.3
+12.18 : Handshake Finished With Setting 10.0.0.3
+20.12 : Emulation exiting
+20.62 : Enabling Networking
+20.64 : Destroying Controller Thread
+20.64 : Destroying Logger and exiting program

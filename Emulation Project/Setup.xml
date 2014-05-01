@@ -1,13 +1,13 @@
 <Network FormatVersion="1" Threaded="false">
 	<StaticTable isStatic="false"></StaticTable>
     <Routers>
-        <Router Number="0" BufferSize="100" DropRate="0">
-        	<PhysicalConnection>eth0</PhysicalConnection>
-        </Router>
-        <Router Number="1" BufferSize="100" DropRate="0">
+        <Router Number="3" BufferSize="100" DropRate="1">
         	<PhysicalConnection>eth1</PhysicalConnection>
         </Router>
-       	<Router Number="2" BufferSize="100" DropRate="0">
+        <Router Number="1" BufferSize="100" DropRate="2">
+        	<PhysicalConnection>eth0</PhysicalConnection>
+        </Router>
+       	<Router Number="2" BufferSize="100" DropRate="3">
         </Router>
     </Routers>
     <VirtualConnections>

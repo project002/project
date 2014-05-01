@@ -981,8 +981,9 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp ../src/CGUIGTK.h \
  ../src/CSocketNotReadyException.h ../src/CVirtualConnection.h \
  ../src/CPhysicalConnectionsHandler.h ../src/pugixml.hpp \
  ../src/pugiconfig.hpp ../src/CRouter.h ../src/DInitializationDefs.h \
- ../src/CEmuStatWidget.h ../src/CEmulationDrawing.h ../src/CXMLBuilder.h \
- ../src/SXMLStructs.h
+ ../src/CEmuStatWidget.h ../src/CEmulationDrawing.h \
+ ../src/CXMLBasicParser.h ../src/SXMLStructs.h ../src/DParserDefs.h \
+ ../src/CXMLBuilder.h
 
 ../src/CGUIGTK.h:
 
@@ -3070,6 +3071,10 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp ../src/CGUIGTK.h \
 
 ../src/CEmulationDrawing.h:
 
-../src/CXMLBuilder.h:
+../src/CXMLBasicParser.h:
 
 ../src/SXMLStructs.h:
+
+../src/DParserDefs.h:
+
+../src/CXMLBuilder.h:

@@ -31,7 +31,18 @@ public:
 	multimap<unsigned int,string> GetPhysicalConnections()const{return mPhysicalConnections;}
 	unsigned int GetNumberOfConnectionPerRouter(unsigned int routerNumber)
 	{
-		return mConnectionsBetweenRouters.count(routerNumber) + mPhysicalConnections.count(routerNumber);
+		int vConCount = getVirtualConnectioCount(routerNumber);
+		return vConCount + mPhysicalConnections.count(routerNumber);
+	}
+	bool routerExists(unsigned int routerNumber)
+	{
+		vector<RouterInformation>::iterator it = mRoutersInformation.begin();
+		for (;it!=mRoutersInformation.end();++it) {if ((*it).sRouterNumber == routerNumber) {return true;}}
+		return false;
+	}
+	bool isPhysicalRouter(unsigned int routerNumber)
+	{
+		return (mPhysicalConnections.count(routerNumber) != 0);
 	}
 private:
 	pugi::xml_document doc;
@@ -64,12 +75,12 @@ private:
 				physicalRouterIter = physicalRouterIter.next_sibling(
 				XML_LAYER_4_INDIVIDUAL_ROUTERS_PHYSICAL_CONNECTION))
 		{
-			unsigned int routerNumber = physicalRouterIter.attribute(
+			unsigned int routerNumber = iter.attribute(
 								XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
 
 			string PhysicalConnectionName = string(
 					physicalRouterIter.child_value());
-			mPhysicalConnections[routerNumber]=PhysicalConnectionName;
+			mPhysicalConnections.insert(pair<unsigned int,string>(routerNumber,PhysicalConnectionName));
 		}
 	}
 
@@ -121,8 +132,23 @@ private:
 			unsigned int second = virtualConnectionIter.attribute(
 					XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
 
-			mConnectionsBetweenRouters[first]=second;
+			mConnectionsBetweenRouters.insert(pair<unsigned int,unsigned int>(first,second));
 		}
+	}
+
+	int getVirtualConnectioCount(unsigned int routerNumber)
+	{
+		int fromRouter = mConnectionsBetweenRouters.count(routerNumber);
+		int toRouter = 0;
+		multimap<unsigned int,unsigned int>::iterator it = mConnectionsBetweenRouters.begin();
+		for (; it!=mConnectionsBetweenRouters.end();++it)
+		{
+			if ((*it).first == routerNumber) {continue;}
+			if ((*it).second == routerNumber &&
+			    routerExists((*it).first))
+			{++toRouter;}
+		}
+		return fromRouter+toRouter;
 	}
 };
 
