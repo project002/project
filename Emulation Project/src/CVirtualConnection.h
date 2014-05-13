@@ -27,6 +27,7 @@ public:
 	virtual ~CVirtualConnection();
 	void AddRoutingTableReference(map<string,pair<CConnection const*,string> > * routTable, int routerNumber);
 	virtual vector<pair<string, string> >& GetTable() ;
+	bool isPhysical(){return false;}
 private:
 	vector<unsigned int> mInvolvedRoutersByNumber;
 	CPacketCollector mPacketCollectors[NUMBER_OF_CONNECTED_DEVICES];

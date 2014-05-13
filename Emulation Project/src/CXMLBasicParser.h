@@ -107,6 +107,9 @@ private:
 			sRouterInfo.sUsedBufferSize = currentRouter.attribute(
 					XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
 
+			sRouterInfo.sFillage = currentRouter.attribute(
+					XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
+
 			mRoutersInformation.push_back(sRouterInfo);
 		}
 	}

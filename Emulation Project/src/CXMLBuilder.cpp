@@ -12,6 +12,7 @@
 #define DEFAULT_THREADED_EMULATION "true"
 #define DEFAULT_FORMAT_VERSION 1
 #define MAXIMUM_DROP_RATE_IN_PERCENTAGE 7
+#define MAXIMUM_FILLAGE_IN_PERCENTAGE 100
 #define MINIMAL_BUFFER_SIZE_IN_PACKETS 0
 
 CXMLBuilder::CXMLBuilder():mNoCurrentRouterChosen(true),mCurrentFileName("")
@@ -202,6 +203,8 @@ bool CXMLBuilder::AddRouter(RouterInformation routerInfo)
 				routerInfo.sDropRate;
 		mCurrentRouter.append_attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE) =
 				routerInfo.sUsedBufferSize;
+		mCurrentRouter.append_attribute(XML_ROUTER_FILLAGE_ATTRIBUTE) =
+				routerInfo.sFillage;
 		return true;
 	}
 	catch (CException & error)
@@ -285,6 +288,10 @@ bool CXMLBuilder::CheckRouterCorrectness(RouterInformation routerInfo)
 			return false;
 		}
 		if (routerInfo.sDropRate>MAXIMUM_DROP_RATE_IN_PERCENTAGE)
+		{
+			return false;
+		}
+		if (routerInfo.sFillage>MAXIMUM_FILLAGE_IN_PERCENTAGE)
 		{
 			return false;
 		}
@@ -436,12 +443,12 @@ RouterInformation CXMLBuilder::GetCurrentRouterInformation()
 	try
 	{
 		RouterInformation rtInfo;
-		rtInfo.sBufferSize=0;rtInfo.sDropRate=0;rtInfo.sRouterNumber=0;
 
 		rtInfo.sRouterNumber = mCurrentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
 		rtInfo.sBufferSize = mCurrentRouter.attribute(XML_ROUTER_BUFFER_SIZE_ATTRIBUTE).as_int();
-		rtInfo.sDropRate = mCurrentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_int();
+		rtInfo.sDropRate = mCurrentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
 		rtInfo.sUsedBufferSize = mCurrentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
+		rtInfo.sFillage = mCurrentRouter.attribute(XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
 
 		return rtInfo;
 	}
@@ -464,6 +471,10 @@ bool CXMLBuilder::EditCurrentRouterInformation(RouterInformation routerInfo)
 		{
 			return false;
 		}
+		if (routerInfo.sFillage>MAXIMUM_FILLAGE_IN_PERCENTAGE)
+		{
+			return false;
+		}
 		if( routerInfo.sRouterNumber == mCurrentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_uint() ||
 				IsRouterNumberFree(routerInfo.sRouterNumber))
 		{
@@ -477,6 +488,8 @@ bool CXMLBuilder::EditCurrentRouterInformation(RouterInformation routerInfo)
 					routerInfo.sDropRate;
 			mCurrentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE) =
 					routerInfo.sUsedBufferSize;
+			mCurrentRouter.attribute(XML_ROUTER_FILLAGE_ATTRIBUTE) =
+					routerInfo.sFillage;
 			return true;
 		}
 		else

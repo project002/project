@@ -21,6 +21,7 @@ public:
 	virtual bool SendPacket(Packet* packet,int routerNumber=NO_CHOICE_OF_PACKET_COLLECTOR){throw(CException("Implement sendPacket in connections"));}
 	virtual string GetMAC()const{throw(CException("Implement GetMAC in connections"));};
 	virtual ~CConnection();
+	virtual bool isPhysical()=0;
 protected:
 	int mSocket;
 	//TODO: hold table of "connections" to computers by IP

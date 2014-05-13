@@ -176,9 +176,10 @@ bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 		{
 			cr->move_to(base_pos[0],base_pos[1]);
 			cr->line_to(percent2pixel((*tps_it).first,width),percent2pixel((*tps_it).second,height));
-			std::cout << (*tps_it).first << " :: " << (*tps_it).second << std::endl;
+//			std::cout << "move to: " << base_pos[0] << "," << base_pos[1] << std::endl;
+//			std::cout << "line to:" << percent2pixel((*tps_it).first,width) << " , " << percent2pixel((*tps_it).second,height) << std::endl;
+//			cr->close_path();
 		}
-
 		cr->stroke();
 
 		//paint router image

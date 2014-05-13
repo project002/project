@@ -38,6 +38,7 @@ public:
 	void setGetwayAddress( CUIPV4*& getwayAddress){mGetwayAddress = getwayAddress;}
 
 	virtual string GetMAC()const;
+	bool isPhysical(){return true;}
 
 private:
 	/**

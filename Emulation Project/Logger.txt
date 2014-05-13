@@ -1,23 +1,421 @@
 0 : Disabling Linux Networking
-0.22 : Validating XML file is present
-0.22 : Building the emulation
-0.22 : name:	lo
-0.22 : name:	loname:	eth0
-0.24 : ip table init complete
-0.24 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
-0.25 : DHCP service started...
-0.32 : name:	loname:	eth0name:	eth1
-0.34 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
-0.34 : DHCP service started...
-0.38 : name:	loname:	eth0name:	eth1name:	lo
-0.38 : name:	loname:	eth0name:	eth1name:	loname:	eth1
-0.38 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
-0.38 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
-0.38 : Starting the emulation
-0.38 : Running Virtual Routers Thread With 1 Routers
-0.38 : std::exception
-0.38 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
-9.23 : Emulation exiting
-9.64 : Enabling Networking
-9.66 : Destroying Controller Thread
-9.66 : Destroying Logger and exiting program
+0.3 : Validating XML file is present
+0.3 : Building the emulation
+0.3 : name:	lo
+0.3 : name:	loname:	eth0
+0.31 : ip table init complete
+0.31 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0.33 : DHCP service started...
+0.39 : name:	loname:	eth0name:	eth1
+0.41 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.41 : DHCP service started...
+0.44 : name:	loname:	eth0name:	eth1name:	lo
+0.44 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.44 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.44 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+Router: 3 Buffer Size: 100 DropRate: 1% Buffer Initial Usage: 0 Fillage: 0%
+Router: 1 Buffer Size: 100 DropRate: 2% Buffer Initial Usage: 0 Fillage: 0%
+Router: 2 Buffer Size: 100 DropRate: 3% Buffer Initial Usage: 15 Fillage: 50%
+0.44 : Starting the emulation
+0.44 : Running Virtual Routers Thread With 1 Routers
+0.45 : std::exception
+0.45 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+Packet ID: 0 Router Number: 3 Insert Time: 0.5 Exit Time 0.5 
+Packet ID: 0 Router Number: 3 Insert Time: 0.68 Exit Time 0.69 
+Packet ID: 0 Router Number: 3 Insert Time: 1.25 Exit Time 1.25 
+Packet ID: 4477 Router Number: 3 Insert Time: 1.4 Exit Time 1.43 
+Packet ID: 0 Router Number: 3 Insert Time: 1.43 Exit Time 1.43 
+Packet ID: 16488 Router Number: 3 Insert Time: 1.56 Exit Time 1.6 
+Packet ID: 0 Router Number: 3 Insert Time: 2.09 Exit Time 2.09 
+Packet ID: 2091 Router Number: 3 Insert Time: 2.73 Exit Time 2.73 
+Packet ID: 2092 Router Number: 3 Insert Time: 2.73 Exit Time 2.73 
+Packet ID: 0 Router Number: 3 Insert Time: 2.89 Exit Time 2.9 
+Packet ID: 0 Router Number: 3 Insert Time: 3.06 Exit Time 3.07 
+Packet ID: 60592 Router Number: 3 Insert Time: 3.26 Exit Time 3.3 
+Packet ID: 2914 Router Number: 3 Insert Time: 3.28 Exit Time 3.3 
+Packet ID: 0 Router Number: 3 Insert Time: 3.53 Exit Time 3.56 
+Packet ID: 766 Router Number: 3 Insert Time: 3.6 Exit Time 3.64 
+Packet ID: 2095 Router Number: 3 Insert Time: 3.72 Exit Time 3.77 
+Packet ID: 4480 Router Number: 3 Insert Time: 3.81 Exit Time 3.86 
+Packet ID: 767 Router Number: 3 Insert Time: 3.88 Exit Time 3.9 
+Packet ID: 54336 Router Number: 3 Insert Time: 3.89 Exit Time 3.9 
+Packet ID: 0 Router Number: 3 Insert Time: 3.92 Exit Time 3.94 
+Packet ID: 42689 Router Number: 3 Insert Time: 4.43 Exit Time 4.46 
+5.24 : No Handler found for message type:8
+Packet ID: 1154 Router Number: 3 Insert Time: 5.29 Exit Time 5.29 
+Packet ID: 21134 Router Number: 3 Insert Time: 5.35 Exit Time 5.35 
+Packet ID: 0 Router Number: 3 Insert Time: 5.65 Exit Time 5.73 
+Packet ID: 1155 Router Number: 3 Insert Time: 5.65 Exit Time 5.73 
+Packet ID: 30378 Router Number: 3 Insert Time: 5.8 Exit Time 5.81 
+Packet ID: 340 Router Number: 3 Insert Time: 5.8 Exit Time 5.81 
+Packet ID: 341 Router Number: 3 Insert Time: 6.16 Exit Time 6.21 
+Packet ID: 2110 Router Number: 3 Insert Time: 6.16 Exit Time 6.21 
+Packet ID: 2111 Router Number: 3 Insert Time: 6.16 Exit Time 6.21 
+Packet ID: 60859 Router Number: 3 Insert Time: 6.18 Exit Time 6.21 
+Packet ID: 342 Router Number: 3 Insert Time: 6.37 Exit Time 6.37 
+Packet ID: 1156 Router Number: 3 Insert Time: 6.37 Exit Time 6.37 
+Packet ID: 343 Router Number: 3 Insert Time: 6.81 Exit Time 6.84 
+Packet ID: 0 Router Number: 3 Insert Time: 7.79 Exit Time 7.79 
+Packet ID: 0 Router Number: 3 Insert Time: 8.54 Exit Time 8.54 
+Packet ID: 344 Router Number: 3 Insert Time: 8.87 Exit Time 8.87 
+Packet ID: 1157 Router Number: 3 Insert Time: 8.87 Exit Time 8.87 
+Packet ID: 16653 Router Number: 3 Insert Time: 9.28 Exit Time 9.28 
+Packet ID: 345 Router Number: 3 Insert Time: 9.29 Exit Time 9.32 
+Packet ID: 52150 Router Number: 3 Insert Time: 9.45 Exit Time 9.48 
+Packet ID: 2122 Router Number: 3 Insert Time: 9.53 Exit Time 9.58 
+Packet ID: 2123 Router Number: 3 Insert Time: 9.53 Exit Time 9.58 
+Packet ID: 0 Router Number: 3 Insert Time: 10.7 Exit Time 10.73 
+11.01 : No Handler found for message type:8
+Packet ID: 346 Router Number: 3 Insert Time: 11.02 Exit Time 11.06 
+Packet ID: 348 Router Number: 3 Insert Time: 11.05 Exit Time 11.06 
+Packet ID: 2130 Router Number: 3 Insert Time: 11.15 Exit Time 11.16 
+Packet ID: 349 Router Number: 3 Insert Time: 11.35 Exit Time 11.4 
+Packet ID: 1158 Router Number: 3 Insert Time: 11.38 Exit Time 11.4 
+Packet ID: 350 Router Number: 3 Insert Time: 11.44 Exit Time 11.48 
+Packet ID: 351 Router Number: 3 Insert Time: 11.91 Exit Time 11.94 
+Packet ID: 352 Router Number: 3 Insert Time: 12.11 Exit Time 12.2 
+Packet ID: 2134 Router Number: 3 Insert Time: 13 Exit Time 13.05 
+Packet ID: 2135 Router Number: 3 Insert Time: 13 Exit Time 13.05 
+Packet ID: 0 Router Number: 3 Insert Time: 13.09 Exit Time 13.13 
+Packet ID: 358 Router Number: 3 Insert Time: 13.92 Exit Time 13.94 
+Packet ID: 359 Router Number: 3 Insert Time: 14.46 Exit Time 14.5 
+Packet ID: 360 Router Number: 3 Insert Time: 14.66 Exit Time 14.67 
+Packet ID: 0 Router Number: 3 Insert Time: 14.84 Exit Time 14.86 
+Packet ID: 32027 Router Number: 3 Insert Time: 14.85 Exit Time 14.86 
+Packet ID: 1254 Router Number: 3 Insert Time: 14.86 Exit Time 14.86 
+Packet ID: 18705 Router Number: 3 Insert Time: 14.98 Exit Time 15.02 
+Packet ID: 29342 Router Number: 3 Insert Time: 14.98 Exit Time 15.02 
+Packet ID: 8254 Router Number: 3 Insert Time: 14.99 Exit Time 15.02 
+Packet ID: 16497 Router Number: 3 Insert Time: 15.07 Exit Time 15.1 
+Packet ID: 29567 Router Number: 3 Insert Time: 15.07 Exit Time 15.1 
+Packet ID: 12697 Router Number: 3 Insert Time: 15.07 Exit Time 15.1 
+Packet ID: 13743 Router Number: 3 Insert Time: 15.18 Exit Time 15.21 
+Packet ID: 24084 Router Number: 3 Insert Time: 15.18 Exit Time 15.21 
+Packet ID: 149 Router Number: 3 Insert Time: 15.18 Exit Time 15.21 
+Packet ID: 5960 Router Number: 3 Insert Time: 15.18 Exit Time 15.21 
+Packet ID: 0 Router Number: 3 Insert Time: 15.18 Exit Time 15.21 
+Packet ID: 7911 Router Number: 3 Insert Time: 15.18 Exit Time 15.21 
+Packet ID: 29880 Router Number: 3 Insert Time: 15.18 Exit Time 15.21 
+Packet ID: 2308 Router Number: 3 Insert Time: 15.2 Exit Time 15.21 
+Packet ID: 233 Router Number: 3 Insert Time: 15.2 Exit Time 15.21 
+Packet ID: 0 Router Number: 3 Insert Time: 15.21 Exit Time 15.21 
+Packet ID: 29356 Router Number: 3 Insert Time: 15.25 Exit Time 15.3 
+Packet ID: 29688 Router Number: 3 Insert Time: 15.25 Exit Time 15.3 
+Packet ID: 10882 Router Number: 3 Insert Time: 15.25 Exit Time 15.3 
+Packet ID: 15936 Router Number: 3 Insert Time: 15.26 Exit Time 15.3 
+Packet ID: 12130 Router Number: 3 Insert Time: 15.27 Exit Time 15.3 
+Packet ID: 9984 Router Number: 3 Insert Time: 15.34 Exit Time 15.38 
+Packet ID: 2916 Router Number: 3 Insert Time: 15.34 Exit Time 15.38 
+Packet ID: 948 Router Number: 3 Insert Time: 15.46 Exit Time 15.49 
+Packet ID: 1165 Router Number: 3 Insert Time: 15.46 Exit Time 15.49 
+Packet ID: 7970 Router Number: 3 Insert Time: 15.47 Exit Time 15.49 
+Packet ID: 25707 Router Number: 3 Insert Time: 15.5 Exit Time 15.53 
+Packet ID: 1703 Router Number: 3 Insert Time: 15.5 Exit Time 15.53 
+Packet ID: 2143 Router Number: 3 Insert Time: 15.69 Exit Time 15.77 
+Packet ID: 19049 Router Number: 3 Insert Time: 15.69 Exit Time 15.77 
+Packet ID: 5669 Router Number: 3 Insert Time: 15.69 Exit Time 15.77 
+Packet ID: 8298 Router Number: 3 Insert Time: 15.71 Exit Time 15.77 
+Packet ID: 4101 Router Number: 3 Insert Time: 15.78 Exit Time 15.79 
+Packet ID: 4485 Router Number: 3 Insert Time: 15.85 Exit Time 15.93 
+Packet ID: 10944 Router Number: 3 Insert Time: 15.85 Exit Time 15.93 
+Packet ID: 14669 Router Number: 3 Insert Time: 16.02 Exit Time 16.05 
+Packet ID: 11437 Router Number: 3 Insert Time: 16.02 Exit Time 16.05 
+Packet ID: 19333 Router Number: 3 Insert Time: 16.02 Exit Time 16.05 
+Packet ID: 22101 Router Number: 3 Insert Time: 16.02 Exit Time 16.05 
+Packet ID: 31223 Router Number: 3 Insert Time: 16.04 Exit Time 16.05 
+Packet ID: 4367 Router Number: 3 Insert Time: 16.05 Exit Time 16.05 
+Packet ID: 31665 Router Number: 3 Insert Time: 16.05 Exit Time 16.05 
+Packet ID: 27670 Router Number: 3 Insert Time: 16.08 Exit Time 16.12 
+Packet ID: 6262 Router Number: 3 Insert Time: 16.21 Exit Time 16.29 
+Packet ID: 25248 Router Number: 3 Insert Time: 16.21 Exit Time 16.29 
+Packet ID: 37807 Router Number: 3 Insert Time: 16.21 Exit Time 16.29 
+Packet ID: 2597 Router Number: 3 Insert Time: 16.21 Exit Time 16.29 
+Packet ID: 16466 Router Number: 3 Insert Time: 16.21 Exit Time 16.29 
+Packet ID: 17227 Router Number: 3 Insert Time: 16.32 Exit Time 16.37 
+Packet ID: 29143 Router Number: 3 Insert Time: 16.32 Exit Time 16.37 
+Packet ID: 1307 Router Number: 3 Insert Time: 16.32 Exit Time 16.37 
+Packet ID: 22459 Router Number: 3 Insert Time: 16.34 Exit Time 16.37 
+Packet ID: 35227 Router Number: 3 Insert Time: 16.42 Exit Time 16.46 
+Packet ID: 2146 Router Number: 3 Insert Time: 16.42 Exit Time 16.46 
+Packet ID: 2147 Router Number: 3 Insert Time: 16.42 Exit Time 16.46 
+Packet ID: 13477 Router Number: 3 Insert Time: 16.42 Exit Time 16.46 
+Packet ID: 15811 Router Number: 3 Insert Time: 16.45 Exit Time 16.46 
+Packet ID: 59041 Router Number: 3 Insert Time: 16.49 Exit Time 16.54 
+Packet ID: 16538 Router Number: 3 Insert Time: 16.49 Exit Time 16.54 
+Packet ID: 32028 Router Number: 3 Insert Time: 16.5 Exit Time 16.54 
+Packet ID: 1255 Router Number: 3 Insert Time: 16.52 Exit Time 16.54 
+Packet ID: 18706 Router Number: 3 Insert Time: 16.6 Exit Time 16.61 
+Packet ID: 2148 Router Number: 3 Insert Time: 16.6 Exit Time 16.61 
+Packet ID: 29344 Router Number: 3 Insert Time: 16.7 Exit Time 16.7 
+Packet ID: 8259 Router Number: 3 Insert Time: 16.7 Exit Time 16.7 
+Packet ID: 16498 Router Number: 3 Insert Time: 16.71 Exit Time 16.71 
+Packet ID: 12699 Router Number: 3 Insert Time: 16.72 Exit Time 16.72 
+Packet ID: 29569 Router Number: 3 Insert Time: 16.72 Exit Time 16.72 
+Packet ID: 13744 Router Number: 3 Insert Time: 16.77 Exit Time 16.81 
+Packet ID: 24085 Router Number: 3 Insert Time: 16.79 Exit Time 16.81 
+Packet ID: 12457 Router Number: 3 Insert Time: 16.8 Exit Time 16.81 
+Packet ID: 150 Router Number: 3 Insert Time: 16.81 Exit Time 16.81 
+Packet ID: 5961 Router Number: 3 Insert Time: 16.82 Exit Time 16.82 
+Packet ID: 361 Router Number: 3 Insert Time: 17 Exit Time 17 
+Packet ID: 2182 Router Number: 3 Insert Time: 17 Exit Time 17 
+Packet ID: 362 Router Number: 3 Insert Time: 17.22 Exit Time 17.27 
+Packet ID: 363 Router Number: 3 Insert Time: 19.56 Exit Time 19.56 
+Packet ID: 2157 Router Number: 3 Insert Time: 19.84 Exit Time 19.88 
+Packet ID: 2158 Router Number: 3 Insert Time: 19.84 Exit Time 19.88 
+Packet ID: 55975 Router Number: 3 Insert Time: 19.89 Exit Time 19.89 
+Packet ID: 2159 Router Number: 3 Insert Time: 19.89 Exit Time 19.89 
+Packet ID: 29570 Router Number: 3 Insert Time: 20.87 Exit Time 20.91 
+Packet ID: 364 Router Number: 3 Insert Time: 22.11 Exit Time 22.16 
+Packet ID: 2172 Router Number: 3 Insert Time: 23.26 Exit Time 23.27 
+Packet ID: 2173 Router Number: 3 Insert Time: 23.26 Exit Time 23.27 
+Packet ID: 29571 Router Number: 3 Insert Time: 23.37 Exit Time 23.37 
+Packet ID: 0 Router Number: 3 Insert Time: 24.11 Exit Time 24.15 
+Packet ID: 365 Router Number: 3 Insert Time: 24.59 Exit Time 24.63 
+Packet ID: 29572 Router Number: 3 Insert Time: 25.82 Exit Time 25.86 
+Packet ID: 2183 Router Number: 3 Insert Time: 26.3 Exit Time 26.32 
+Packet ID: 2186 Router Number: 3 Insert Time: 26.55 Exit Time 26.56 
+Packet ID: 2187 Router Number: 3 Insert Time: 26.55 Exit Time 26.56 
+Packet ID: 366 Router Number: 3 Insert Time: 27.1 Exit Time 27.11 
+Packet ID: 0 Router Number: 3 Insert Time: 28.6 Exit Time 28.61 
+Packet ID: 44661 Router Number: 3 Insert Time: 29.37 Exit Time 29.37 
+Packet ID: 2399 Router Number: 3 Insert Time: 29.41 Exit Time 29.45 
+Packet ID: 58298 Router Number: 3 Insert Time: 29.41 Exit Time 29.45 
+Packet ID: 367 Router Number: 3 Insert Time: 29.59 Exit Time 29.6 
+Packet ID: 2197 Router Number: 3 Insert Time: 29.89 Exit Time 29.89 
+Packet ID: 2198 Router Number: 3 Insert Time: 29.89 Exit Time 29.89 
+Packet ID: 2183 Router Number: 3 Insert Time: 30.32 Exit Time 30.32 
+Packet ID: 2200 Router Number: 3 Insert Time: 30.87 Exit Time 30.89 
+Packet ID: 0 Router Number: 3 Insert Time: 31.35 Exit Time 31.4 
+Packet ID: 0 Router Number: 3 Insert Time: 31.48 Exit Time 31.48 
+Packet ID: 376 Router Number: 3 Insert Time: 32.05 Exit Time 32.07 
+Packet ID: 489 Router Number: 3 Insert Time: 32.83 Exit Time 32.83 
+Packet ID: 6923 Router Number: 3 Insert Time: 32.83 Exit Time 32.83 
+Packet ID: 23192 Router Number: 3 Insert Time: 33.1 Exit Time 33.11 
+Packet ID: 2207 Router Number: 3 Insert Time: 33.27 Exit Time 33.31 
+Packet ID: 2208 Router Number: 3 Insert Time: 33.27 Exit Time 33.31 
+Packet ID: 31021 Router Number: 3 Insert Time: 33.46 Exit Time 33.47 
+Packet ID: 6924 Router Number: 3 Insert Time: 34.18 Exit Time 34.19 
+Packet ID: 432 Router Number: 3 Insert Time: 34.65 Exit Time 34.65 
+Packet ID: 3492 Router Number: 3 Insert Time: 35.25 Exit Time 35.25 
+Packet ID: 493 Router Number: 3 Insert Time: 35.26 Exit Time 35.26 
+Packet ID: 0 Router Number: 3 Insert Time: 36.25 Exit Time 36.28 
+Packet ID: 2215 Router Number: 3 Insert Time: 36.57 Exit Time 36.57 
+Packet ID: 2216 Router Number: 3 Insert Time: 36.57 Exit Time 36.57 
+Packet ID: 54473 Router Number: 3 Insert Time: 36.63 Exit Time 36.63 
+Packet ID: 2217 Router Number: 3 Insert Time: 36.96 Exit Time 37 
+Packet ID: 445 Router Number: 3 Insert Time: 37.12 Exit Time 37.12 
+Packet ID: 2916 Router Number: 3 Insert Time: 37.69 Exit Time 37.69 
+Packet ID: 495 Router Number: 3 Insert Time: 37.8 Exit Time 37.8 
+Packet ID: 452 Router Number: 3 Insert Time: 39.2 Exit Time 39.21 
+Packet ID: 454 Router Number: 3 Insert Time: 39.59 Exit Time 39.6 
+Packet ID: 455 Router Number: 3 Insert Time: 39.7 Exit Time 39.72 
+Packet ID: 2231 Router Number: 3 Insert Time: 40.04 Exit Time 40.04 
+Packet ID: 2232 Router Number: 3 Insert Time: 40.04 Exit Time 40.04 
+Packet ID: 63167 Router Number: 3 Insert Time: 40.23 Exit Time 40.24 
+40.7 : No Handler found for message type:8
+Packet ID: 31285 Router Number: 3 Insert Time: 40.7 Exit Time 40.71 
+Packet ID: 590 Router Number: 3 Insert Time: 40.71 Exit Time 40.72 
+Packet ID: 31287 Router Number: 3 Insert Time: 40.74 Exit Time 40.75 
+Packet ID: 31286 Router Number: 3 Insert Time: 40.74 Exit Time 40.75 
+Packet ID: 0 Router Number: 3 Insert Time: 41.78 Exit Time 41.78 
+Packet ID: 1243 Router Number: 3 Insert Time: 42.21 Exit Time 42.3 
+Packet ID: 457 Router Number: 3 Insert Time: 42.28 Exit Time 42.3 
+Packet ID: 2240 Router Number: 3 Insert Time: 42.38 Exit Time 42.46 
+Packet ID: 63296 Router Number: 3 Insert Time: 42.81 Exit Time 42.85 
+Packet ID: 28112 Router Number: 3 Insert Time: 43.08 Exit Time 43.12 
+Packet ID: 31291 Router Number: 3 Insert Time: 43.32 Exit Time 43.36 
+Packet ID: 31292 Router Number: 3 Insert Time: 43.33 Exit Time 43.36 
+Packet ID: 2247 Router Number: 3 Insert Time: 43.57 Exit Time 43.57 
+Packet ID: 2248 Router Number: 3 Insert Time: 43.57 Exit Time 43.57 
+Packet ID: 459 Router Number: 3 Insert Time: 44.9 Exit Time 44.94 
+Packet ID: 460 Router Number: 3 Insert Time: 45.3 Exit Time 45.33 
+Packet ID: 63413 Router Number: 3 Insert Time: 45.33 Exit Time 45.33 
+Packet ID: 31293 Router Number: 3 Insert Time: 45.82 Exit Time 45.85 
+Packet ID: 31294 Router Number: 3 Insert Time: 45.82 Exit Time 45.86 
+Packet ID: 461 Router Number: 3 Insert Time: 45.97 Exit Time 46.01 
+Packet ID: 19054 Router Number: 3 Insert Time: 46.35 Exit Time 46.38 
+Packet ID: 14853 Router Number: 3 Insert Time: 46.72 Exit Time 46.77 
+Packet ID: 2256 Router Number: 3 Insert Time: 46.91 Exit Time 46.92 
+Packet ID: 2257 Router Number: 3 Insert Time: 46.91 Exit Time 46.92 
+Packet ID: 2258 Router Number: 3 Insert Time: 47.44 Exit Time 47.47 
+Packet ID: 0 Router Number: 3 Insert Time: 48.04 Exit Time 48.09 
+Packet ID: 32041 Router Number: 3 Insert Time: 48.04 Exit Time 48.09 
+Packet ID: 1269 Router Number: 3 Insert Time: 48.04 Exit Time 48.09 
+Packet ID: 18709 Router Number: 3 Insert Time: 48.06 Exit Time 48.09 
+Packet ID: 29355 Router Number: 3 Insert Time: 48.14 Exit Time 48.16 
+Packet ID: 8357 Router Number: 3 Insert Time: 48.15 Exit Time 48.16 
+Packet ID: 0 Router Number: 3 Insert Time: 48.2 Exit Time 48.23 
+Packet ID: 16517 Router Number: 3 Insert Time: 48.2 Exit Time 48.23 
+Packet ID: 12785 Router Number: 3 Insert Time: 48.2 Exit Time 48.23 
+Packet ID: 29576 Router Number: 3 Insert Time: 48.2 Exit Time 48.23 
+Packet ID: 13745 Router Number: 3 Insert Time: 48.27 Exit Time 48.31 
+Packet ID: 24090 Router Number: 3 Insert Time: 48.27 Exit Time 48.31 
+Packet ID: 12458 Router Number: 3 Insert Time: 48.28 Exit Time 48.31 
+Packet ID: 151 Router Number: 3 Insert Time: 48.28 Exit Time 48.31 
+Packet ID: 5962 Router Number: 3 Insert Time: 48.29 Exit Time 48.31 
+Packet ID: 31296 Router Number: 3 Insert Time: 48.3 Exit Time 48.31 
+Packet ID: 31295 Router Number: 3 Insert Time: 48.3 Exit Time 48.31 
+Packet ID: 0 Router Number: 3 Insert Time: 48.35 Exit Time 48.38 
+Packet ID: 29895 Router Number: 3 Insert Time: 48.35 Exit Time 48.38 
+Packet ID: 2327 Router Number: 3 Insert Time: 48.35 Exit Time 48.38 
+Packet ID: 254 Router Number: 3 Insert Time: 48.35 Exit Time 48.38 
+Packet ID: 29357 Router Number: 3 Insert Time: 48.35 Exit Time 48.38 
+Packet ID: 29703 Router Number: 3 Insert Time: 48.35 Exit Time 48.38 
+Packet ID: 10883 Router Number: 3 Insert Time: 48.36 Exit Time 48.38 
+Packet ID: 15938 Router Number: 3 Insert Time: 48.41 Exit Time 48.45 
+Packet ID: 12131 Router Number: 3 Insert Time: 48.41 Exit Time 48.45 
+Packet ID: 492 Router Number: 3 Insert Time: 48.41 Exit Time 48.45 
+Packet ID: 2917 Router Number: 3 Insert Time: 48.49 Exit Time 48.53 
+Packet ID: 1244 Router Number: 3 Insert Time: 48.57 Exit Time 48.6 
+Packet ID: 949 Router Number: 3 Insert Time: 48.57 Exit Time 48.6 
+Packet ID: 7999 Router Number: 3 Insert Time: 48.58 Exit Time 48.6 
+Packet ID: 25724 Router Number: 3 Insert Time: 48.65 Exit Time 48.68 
+Packet ID: 1789 Router Number: 3 Insert Time: 48.65 Exit Time 48.68 
+Packet ID: 2264 Router Number: 3 Insert Time: 48.71 Exit Time 48.76 
+Packet ID: 19063 Router Number: 3 Insert Time: 48.71 Exit Time 48.76 
+Packet ID: 36173 Router Number: 3 Insert Time: 48.73 Exit Time 48.76 
+Packet ID: 5802 Router Number: 3 Insert Time: 48.75 Exit Time 48.76 
+Packet ID: 7912 Router Number: 3 Insert Time: 48.75 Exit Time 48.76 
+Packet ID: 19064 Router Number: 3 Insert Time: 48.75 Exit Time 48.76 
+Packet ID: 8304 Router Number: 3 Insert Time: 48.81 Exit Time 48.85 
+Packet ID: 4105 Router Number: 3 Insert Time: 48.9 Exit Time 48.93 
+Packet ID: 4499 Router Number: 3 Insert Time: 48.9 Exit Time 48.93 
+Packet ID: 10966 Router Number: 3 Insert Time: 48.9 Exit Time 48.93 
+Packet ID: 14670 Router Number: 3 Insert Time: 48.99 Exit Time 49.02 
+Packet ID: 11458 Router Number: 3 Insert Time: 49.06 Exit Time 49.08 
+Packet ID: 19372 Router Number: 3 Insert Time: 49.07 Exit Time 49.08 
+Packet ID: 22141 Router Number: 3 Insert Time: 49.13 Exit Time 49.17 
+Packet ID: 31297 Router Number: 3 Insert Time: 49.13 Exit Time 49.17 
+Packet ID: 4380 Router Number: 3 Insert Time: 49.13 Exit Time 49.17 
+Packet ID: 31666 Router Number: 3 Insert Time: 49.13 Exit Time 49.17 
+Packet ID: 27684 Router Number: 3 Insert Time: 49.17 Exit Time 49.17 
+Packet ID: 6280 Router Number: 3 Insert Time: 49.22 Exit Time 49.22 
+Packet ID: 25249 Router Number: 3 Insert Time: 49.22 Exit Time 49.22 
+Packet ID: 2598 Router Number: 3 Insert Time: 49.3 Exit Time 49.31 
+Packet ID: 16467 Router Number: 3 Insert Time: 49.3 Exit Time 49.31 
+Packet ID: 17233 Router Number: 3 Insert Time: 49.35 Exit Time 49.36 
+Packet ID: 29144 Router Number: 3 Insert Time: 49.46 Exit Time 49.48 
+Packet ID: 1323 Router Number: 3 Insert Time: 49.46 Exit Time 49.48 
+Packet ID: 22460 Router Number: 3 Insert Time: 49.46 Exit Time 49.48 
+Packet ID: 13493 Router Number: 3 Insert Time: 49.54 Exit Time 49.55 
+Packet ID: 15815 Router Number: 3 Insert Time: 49.55 Exit Time 49.55 
+Packet ID: 16539 Router Number: 3 Insert Time: 49.56 Exit Time 49.58 
+Packet ID: 32042 Router Number: 3 Insert Time: 49.61 Exit Time 49.66 
+Packet ID: 1272 Router Number: 3 Insert Time: 49.61 Exit Time 49.66 
+Packet ID: 18710 Router Number: 3 Insert Time: 49.67 Exit Time 49.67 
+Packet ID: 29358 Router Number: 3 Insert Time: 49.79 Exit Time 49.79 
+Packet ID: 8358 Router Number: 3 Insert Time: 49.79 Exit Time 49.79 
+Packet ID: 16518 Router Number: 3 Insert Time: 49.81 Exit Time 49.82 
+Packet ID: 12786 Router Number: 3 Insert Time: 49.82 Exit Time 49.82 
+Packet ID: 29577 Router Number: 3 Insert Time: 49.82 Exit Time 49.82 
+Packet ID: 13746 Router Number: 3 Insert Time: 49.9 Exit Time 49.9 
+Packet ID: 24091 Router Number: 3 Insert Time: 49.9 Exit Time 49.9 
+Packet ID: 12459 Router Number: 3 Insert Time: 49.9 Exit Time 49.9 
+Packet ID: 152 Router Number: 3 Insert Time: 49.9 Exit Time 49.9 
+Packet ID: 5963 Router Number: 3 Insert Time: 49.92 Exit Time 49.95 
+Packet ID: 29897 Router Number: 3 Insert Time: 49.94 Exit Time 49.95 
+Packet ID: 59043 Router Number: 3 Insert Time: 50.18 Exit Time 50.19 
+Packet ID: 2267 Router Number: 3 Insert Time: 50.18 Exit Time 50.19 
+Packet ID: 2268 Router Number: 3 Insert Time: 50.18 Exit Time 50.19 
+Packet ID: 0 Router Number: 3 Insert Time: 50.48 Exit Time 50.48 
+Packet ID: 31299 Router Number: 3 Insert Time: 50.78 Exit Time 50.78 
+Packet ID: 31300 Router Number: 3 Insert Time: 50.78 Exit Time 50.78 
+Packet ID: 493 Router Number: 3 Insert Time: 50.92 Exit Time 50.94 
+Packet ID: 19065 Router Number: 3 Insert Time: 51.26 Exit Time 51.29 
+Packet ID: 11951 Router Number: 3 Insert Time: 51.76 Exit Time 51.77 
+Packet ID: 1245 Router Number: 3 Insert Time: 52.24 Exit Time 52.24 
+Packet ID: 2273 Router Number: 3 Insert Time: 52.5 Exit Time 52.5 
+Packet ID: 31302 Router Number: 3 Insert Time: 53.27 Exit Time 53.28 
+Packet ID: 31303 Router Number: 3 Insert Time: 53.27 Exit Time 53.28 
+Packet ID: 22470 Router Number: 3 Insert Time: 53.52 Exit Time 53.52 
+Packet ID: 2278 Router Number: 3 Insert Time: 53.61 Exit Time 53.67 
+Packet ID: 2279 Router Number: 3 Insert Time: 53.61 Exit Time 53.67 
+Packet ID: 3436 Router Number: 3 Insert Time: 55.05 Exit Time 55.08 
+Packet ID: 16875 Router Number: 3 Insert Time: 55.96 Exit Time 55.96 
+Packet ID: 2281 Router Number: 3 Insert Time: 56.45 Exit Time 56.47 
+Packet ID: 10172 Router Number: 3 Insert Time: 56.85 Exit Time 56.85 
+Packet ID: 40520 Router Number: 3 Insert Time: 56.88 Exit Time 56.89 
+Packet ID: 2284 Router Number: 3 Insert Time: 57.04 Exit Time 57.04 
+Packet ID: 2285 Router Number: 3 Insert Time: 57.04 Exit Time 57.04 
+Packet ID: 14833 Router Number: 3 Insert Time: 57.04 Exit Time 57.04 
+Packet ID: 31320 Router Number: 3 Insert Time: 57.73 Exit Time 57.82 
+Packet ID: 31321 Router Number: 3 Insert Time: 57.73 Exit Time 57.82 
+Packet ID: 3437 Router Number: 3 Insert Time: 58.36 Exit Time 58.38 
+Packet ID: 33966 Router Number: 3 Insert Time: 58.38 Exit Time 58.41 
+Packet ID: 2299 Router Number: 3 Insert Time: 59.08 Exit Time 59.11 
+Packet ID: 3438 Router Number: 3 Insert Time: 60.04 Exit Time 60.09 
+Packet ID: 40219 Router Number: 3 Insert Time: 60.04 Exit Time 60.09 
+Packet ID: 27847 Router Number: 3 Insert Time: 60.17 Exit Time 60.21 
+Packet ID: 31322 Router Number: 3 Insert Time: 60.25 Exit Time 60.27 
+Packet ID: 31323 Router Number: 3 Insert Time: 60.25 Exit Time 60.27 
+Packet ID: 2302 Router Number: 3 Insert Time: 60.41 Exit Time 60.44 
+Packet ID: 2303 Router Number: 3 Insert Time: 60.41 Exit Time 60.44 
+Packet ID: 64118 Router Number: 3 Insert Time: 60.59 Exit Time 60.61 
+Packet ID: 56687 Router Number: 3 Insert Time: 61.37 Exit Time 61.37 
+Packet ID: 3439 Router Number: 3 Insert Time: 61.72 Exit Time 61.73 
+Packet ID: 1246 Router Number: 3 Insert Time: 62.25 Exit Time 62.29 
+Packet ID: 31324 Router Number: 3 Insert Time: 62.71 Exit Time 62.73 
+Packet ID: 31325 Router Number: 3 Insert Time: 62.73 Exit Time 62.73 
+Packet ID: 21941 Router Number: 3 Insert Time: 63.53 Exit Time 63.53 
+Packet ID: 2318 Router Number: 3 Insert Time: 63.77 Exit Time 63.77 
+Packet ID: 2319 Router Number: 3 Insert Time: 63.77 Exit Time 63.77 
+Packet ID: 10027 Router Number: 3 Insert Time: 64.29 Exit Time 64.29 
+Packet ID: 0 Router Number: 3 Insert Time: 64.73 Exit Time 64.73 
+Packet ID: 0 Router Number: 3 Insert Time: 64.79 Exit Time 64.81 
+Packet ID: 50393 Router Number: 3 Insert Time: 64.84 Exit Time 64.85 
+Packet ID: 2323 Router Number: 3 Insert Time: 64.89 Exit Time 64.94 
+Packet ID: 31326 Router Number: 3 Insert Time: 65.3 Exit Time 65.33 
+Packet ID: 31327 Router Number: 3 Insert Time: 65.3 Exit Time 65.33 
+Packet ID: 16928 Router Number: 3 Insert Time: 66.35 Exit Time 66.35 
+Packet ID: 22471 Router Number: 3 Insert Time: 66.74 Exit Time 66.74 
+Packet ID: 2334 Router Number: 3 Insert Time: 67.07 Exit Time 67.07 
+Packet ID: 2335 Router Number: 3 Insert Time: 67.07 Exit Time 67.07 
+Packet ID: 31330 Router Number: 3 Insert Time: 67.71 Exit Time 67.74 
+Packet ID: 31331 Router Number: 3 Insert Time: 67.71 Exit Time 67.74 
+Packet ID: 55659 Router Number: 3 Insert Time: 67.71 Exit Time 67.74 
+Packet ID: 60180 Router Number: 3 Insert Time: 67.74 Exit Time 67.74 
+Packet ID: 33134 Router Number: 3 Insert Time: 68.06 Exit Time 68.06 
+Packet ID: 31561 Router Number: 3 Insert Time: 68.41 Exit Time 68.43 
+Packet ID: 29917 Router Number: 3 Insert Time: 68.42 Exit Time 68.43 
+Packet ID: 45990 Router Number: 3 Insert Time: 68.5 Exit Time 68.53 
+Packet ID: 60557 Router Number: 3 Insert Time: 68.5 Exit Time 68.53 
+Packet ID: 40576 Router Number: 3 Insert Time: 68.52 Exit Time 68.53 
+Packet ID: 39817 Router Number: 3 Insert Time: 68.56 Exit Time 68.59 
+Packet ID: 27490 Router Number: 3 Insert Time: 68.6 Exit Time 68.63 
+Packet ID: 39838 Router Number: 3 Insert Time: 68.61 Exit Time 68.63 
+Packet ID: 49110 Router Number: 3 Insert Time: 69.24 Exit Time 69.26 
+Packet ID: 35139 Router Number: 3 Insert Time: 69.29 Exit Time 69.32 
+Packet ID: 23100 Router Number: 3 Insert Time: 69.32 Exit Time 69.34 
+Packet ID: 51293 Router Number: 3 Insert Time: 69.35 Exit Time 69.36 
+Packet ID: 42188 Router Number: 3 Insert Time: 69.36 Exit Time 69.38 
+Packet ID: 11952 Router Number: 3 Insert Time: 69.37 Exit Time 69.38 
+Packet ID: 643 Router Number: 3 Insert Time: 69.37 Exit Time 69.38 
+Packet ID: 644 Router Number: 3 Insert Time: 69.37 Exit Time 69.38 
+Packet ID: 56716 Router Number: 3 Insert Time: 69.4 Exit Time 69.43 
+Packet ID: 4531 Router Number: 3 Insert Time: 69.41 Exit Time 69.43 
+Packet ID: 50283 Router Number: 3 Insert Time: 69.41 Exit Time 69.43 
+Packet ID: 12612 Router Number: 3 Insert Time: 69.43 Exit Time 69.43 
+Packet ID: 0 Router Number: 3 Insert Time: 69.58 Exit Time 69.6 
+Packet ID: 36456 Router Number: 3 Insert Time: 69.96 Exit Time 69.97 
+Packet ID: 31332 Router Number: 3 Insert Time: 70.19 Exit Time 70.19 
+Packet ID: 31333 Router Number: 3 Insert Time: 70.19 Exit Time 70.19 
+Packet ID: 2348 Router Number: 3 Insert Time: 70.47 Exit Time 70.49 
+Packet ID: 2349 Router Number: 3 Insert Time: 70.47 Exit Time 70.49 
+Packet ID: 36033 Router Number: 3 Insert Time: 70.72 Exit Time 70.74 
+Packet ID: 47755 Router Number: 3 Insert Time: 70.89 Exit Time 70.9 
+Packet ID: 33967 Router Number: 3 Insert Time: 71.69 Exit Time 71.69 
+Packet ID: 11953 Router Number: 3 Insert Time: 71.81 Exit Time 71.81 
+Packet ID: 1250 Router Number: 3 Insert Time: 72.14 Exit Time 72.18 
+Packet ID: 2354 Router Number: 3 Insert Time: 72.46 Exit Time 72.5 
+Packet ID: 40220 Router Number: 3 Insert Time: 73.29 Exit Time 73.32 
+Packet ID: 27854 Router Number: 3 Insert Time: 73.38 Exit Time 73.42 
+Packet ID: 47756 Router Number: 3 Insert Time: 73.49 Exit Time 73.49 
+Packet ID: 2357 Router Number: 3 Insert Time: 73.85 Exit Time 73.89 
+Packet ID: 2358 Router Number: 3 Insert Time: 73.85 Exit Time 73.89 
+Packet ID: 11954 Router Number: 3 Insert Time: 74.33 Exit Time 74.35 
+Packet ID: 56739 Router Number: 3 Insert Time: 74.57 Exit Time 74.6 
+Packet ID: 0 Router Number: 3 Insert Time: 74.89 Exit Time 74.92 
+75.13 : Emulation exiting
+75.69 : Enabling Networking
+75.71 : Destroying Controller Thread
+75.71 : Destroying Logger and exiting program

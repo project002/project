@@ -74,6 +74,7 @@ void CPacketCollector::AddRandomPackets(unsigned int numberOfPackets)
 			if (mPackets.size() < mBufferSize)
 			{
 				mPackets.push_back(fakePacket);
+				mPacketsReceiveTime.push_back(SLogger::getInstance().GetLoggerElapsedTime());
 				SDataController::getInstance().incData(
 						SDataController::PACKETPROCCES);
 			}
@@ -107,6 +108,7 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		if (mPackets.size()<mBufferSize)
 		{
 			mPackets.push_back(pkt);
+			mPacketsReceiveTime.push_back(SLogger::getInstance().GetLoggerElapsedTime());
 			SDataController::getInstance().incData(SDataController::PACKETPROCCES);
 		}
 		else
@@ -168,7 +170,7 @@ void CPacketCollector::AnalyzePacketForStatistics(Crafter::Packet * packet)
 	}
 
 }
-Crafter::Packet * CPacketCollector::PopFront()
+Crafter::Packet * CPacketCollector::PopFront(double & popTime)
 {
 	try
 	{
@@ -177,6 +179,13 @@ Crafter::Packet * CPacketCollector::PopFront()
 		{
 			Crafter::Packet * toret = mPackets.front();
 			mPackets.pop_front();
+			if (mPacketsReceiveTime.empty())
+			{
+				//no match between packets insterted and timers inserted
+				throw (CException("Bad Packets-Timers relation"));
+			}
+			popTime=mPacketsReceiveTime.front();
+			mPacketsReceiveTime.pop_front();
 			mMtx.unlock();
 			return toret; //syndrom
 		}
@@ -191,7 +200,33 @@ Crafter::Packet * CPacketCollector::PopFront()
 	return NULL;
 
 }
-
+/**
+ * according to the router properties, its fillage can change
+ * The current fillage is calculated and the different in the percentage is calculated
+ * as number of packets to be added to the buffer.
+ *
+ *
+ * @param Fillage whats the current wanted fillage.
+ */
+void CPacketCollector::FixBufferFillage(double Fillage)
+{
+	try
+	{
+		mMtx.lock();
+		double fillPercentage =(double(mPackets.size())/mBufferSize*(100.0));
+		if (fillPercentage < Fillage)
+		{
+			AddRandomPackets((Fillage-fillPercentage)*mBufferSize);
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+	mMtx.unlock();
+}
 void CPacketCollector::DropRandomPacket()
 {
 	try

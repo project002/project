@@ -1,0 +1,158 @@
+/*
+ * CEmulationDrawing.cpp
+ *
+ *  Created on: Mar 24, 2014
+ *      Author: root
+ */
+
+#include "CEmulationDrawing.h"
+#include <cairomm/context.h>
+#include <gdkmm/general.h> // set_source_pixbuf()
+#include <glibmm/fileutils.h>
+#include <iostream>
+#include "CException.h"
+
+CEmulationDrawing::CEmulationDrawing() :
+	mXMLPath(),
+	mElementsPos(new std::map<unsigned int,pair<int,int> >()),
+	mImgBuffers(std::map<Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> >())
+{
+	loadImagesSrouces();
+}
+
+void CEmulationDrawing::insertNewImage(Glib::ustring imageName,Glib::ustring imagePath)
+{
+	std::pair<Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > newImg;
+	newImg.first = imageName;
+	try
+	{
+		newImg.second = Gdk::Pixbuf::create_from_file(imagePath);
+	}
+	catch(const Glib::FileError& ex)
+	{
+		std::cerr << "Image File Missing: " << ex.what() << std::endl;
+		throw CException("Missing Image File");
+		return;
+	}
+	catch(const Gdk::PixbufError& ex)
+	{
+		std::cerr << "PixbufError: " << ex.what() << std::endl;
+		throw CException("Unable To Load an Image");
+		return;
+	}
+	mImgBuffers.insert(newImg);
+}
+
+void CEmulationDrawing::loadImagesSrouces()
+{
+	//insert router image
+	insertNewImage("RouterImage","test.png");
+	insertNewImage("Some","test2.png");
+}
+
+CEmulationDrawing::~CEmulationDrawing()
+{
+	delete mElementsPos;
+}
+
+void CEmulationDrawing::resetDrawing(string xml_path)
+{
+	mXMLPath = xml_path;
+	mXMLprs.ParseXML(mXMLPath);
+	//clear info vectors or what not
+	mElementsPos->clear();
+	initial_positions();
+}
+
+void CEmulationDrawing::initial_positions()
+{
+	if (mXMLPath.length()==0) {return;}
+	vector<RouterInformation> routers = mXMLprs.GetRoutersInformation();
+	multimap<unsigned int,string> phCon = mXMLprs.GetPhysicalConnections();
+	int x_percent=0;
+	int y_percent=50;
+	int percent_inc =
+	std::pair<int,int> pos;
+	vector<RouterInformation>::iterator it = routers.begin();
+
+	for (;it!=routers.end();++it)
+	{
+		unsigned int id = (*it).sRouterNumber;
+		//is source element
+		if (phCon.count(id) != 0)
+		{
+			pos = next_source_pos();
+		}
+		else
+		{
+			pos = std::pair<int,int>();
+		}
+		std::pair<int,int> d = std::pair<int,int>(x,y);
+		mElementsPos->insert(std::pair< unsigned int,std::pair<int,int> >(id,d));
+		x+=140;
+		y+=140;
+	}
+}
+
+void CEmulationDrawing::draw_connections()
+{
+
+}
+
+std::pair<int, int> CEmulationDrawing::next_source_pos()
+{
+	static int i=0;
+	static int r=4;
+	int source_pos[][2] = {{1,50},{99,50},{50,1},{95,1}}; //matrix of source positions in precent
+	if (i>=r) {i=0;}
+	std::pair<int,int> ret = std::pair<int,int>(source_pos[i][0],source_pos[i][1]);
+	i++;
+	return ret;
+}
+
+bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+{
+	if (mImgBuffers.empty()) {return false;}
+
+	//get the available draw area
+	Gtk::Allocation allocation = get_allocation();
+	const int width = allocation.get_width();
+	const int height = allocation.get_height();
+
+	//draw elements by positions
+	std::map<unsigned int,pair<int,int> >::iterator it = mElementsPos->begin();
+	for (;it!=mElementsPos->end();++it)
+	{
+
+		Gdk::Cairo::set_source_pixbuf(cr,
+				mImgBuffers.at("RouterImage"),
+				it->second.first,
+				it->second.second);
+
+		cr->paint();
+	}
+
+
+	//draw all images
+//	mImageBufferDItr = mImgBuffers.begin();
+//	for (;mImageBufferDItr!=mImgBuffers.end();++mImageBufferDItr)
+//	{
+//		Gdk::Cairo::set_source_pixbuf(cr, mImageBufferDItr->second,
+//			(width - mImageBufferDItr->second->get_width())/2,
+//			(height - mImageBufferDItr->second->get_height())/2);
+//
+//		cr->paint();
+//	}
+
+
+//	Gdk::Cairo::set_source_pixbuf(cr, mImgBuffers.at("routerImage").second,
+//				(width -  mImgBuffers.at("routerImage")->second->get_width())/2,
+//				(height -  mImgBuffers.at("routerImage")->second->get_height())/2);
+
+	cr->paint();
+
+	return true;
+}
+
+
+

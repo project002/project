@@ -10,7 +10,7 @@
 #include <boost/random/uniform_real_distribution.hpp>
 #include "CPhysicalConnection.h"
 
-CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL),mDropRate(0),mRouterNumber(1024),mThreaded(true)
+CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL),mDropRate(0),mRouterNumber(1024),mThreaded(true),mFillage(0),mInitialBufferUse(0)
 {
 	try
 	{
@@ -87,6 +87,7 @@ void CRouter::Sniffer()
 	try
 	{
 		mPacketCollector= new CPacketCollector(mBufferSize);
+		AddPacketsToBuffer(mInitialBufferUse);
 		mSniffingThread = boost::thread(&CRouter::Sniff, this);
 		mPacketsHandlingThread = boost::thread(&CRouter::PacketHandler, this);
 	}
@@ -152,18 +153,20 @@ void CRouter::PacketHandler()
 	Packet* packet;
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	map<string,pair< CConnection const*,string> >::iterator con_pos;
+	double popTime=0;
 	try
 	{
 		while (true)
 		{
-			packet = mPacketCollector->PopFront();
+			mPacketCollector->FixBufferFillage(mFillage);
+			packet = mPacketCollector->PopFront(popTime);
 			if(packet!=NULL)
 			{
 				IP* ip_layer = packet->GetLayer<IP>();
 				if (ip_layer != NULL)
 				{
 					SDataController::getInstance().incData(SDataController::IPPACKET);
-					HandleIPv4(packet);
+					HandleIPv4(packet,popTime);
 				}
 				else
 				{
@@ -216,7 +219,7 @@ void CRouter::HandleArp(Packet * pkt)
 		}
 	}
 }
-void CRouter::HandleIPv4(Packet * pkt)
+void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 {
 	CConnection* send_connection;
 	map<string,pair< CConnection const*,string> >::iterator pos;
@@ -227,7 +230,7 @@ void CRouter::HandleIPv4(Packet * pkt)
 		send_connection = (const_cast<CConnection*>(pos->second.first));
 		string dest_ip = send_connection->getGetwayAddress()->getIpStr();
 		if (!dest_ip.compare(pos->first))
-		{;}
+		{SLogger::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,true);}
 		else
 		{
 			Ethernet* eth_layer = pkt->GetLayer<Ethernet>();
@@ -238,9 +241,21 @@ void CRouter::HandleIPv4(Packet * pkt)
 				if (ProcessSendPacket (pkt))
 				{
 					send_connection->SendPacket(pkt,GetRouterNumber());
+					if(send_connection->isPhysical())
+					{
+						SLogger::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,true);
+					}
+					else
+					{
+						SLogger::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,false);
+					}
 				}
 			}
 		}
+	}
+	else
+	{
+		SLogger::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,true);
 	}
 }
 

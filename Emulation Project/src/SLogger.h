@@ -7,6 +7,8 @@
 #include <boost/timer.hpp>
 #include <boost/signals2/mutex.hpp>
 #include <crafter.h>
+#include <map>
+#include <set>
 using std::ofstream;
 
 class SLogger
@@ -38,6 +40,44 @@ public:
 		LoggerMTX.unlock();
 	}
 
+	/**
+	 *
+	 * @param packetID
+	 * @param routerNumber
+	 * @param hasExitedEmulation
+	 */
+	void LogPacket(long long int packetID,unsigned int routerNumber,double insertTime, bool hasExitedEmulation=false)
+	{
+		LoggerMTX.lock();
+		double timeElapsed=timer.elapsed();
+		PacketLogger[packetID].insert(std::pair<double,unsigned int>(timeElapsed,routerNumber));
+		if (hasExitedEmulation)
+		{
+			fd<<"Packet ID: "<< packetID<< " ";
+			std::set< std::pair<double,unsigned int> >::iterator it;
+			for (it = PacketLogger[packetID].begin();it!= PacketLogger[packetID].end(); it++)
+			{
+				fd<<"Router Number: "<< (*it).second<< " Insert Time: "<< insertTime <<" Exit Time "<< (*it).first<<" ";
+			}
+			fd<<std::endl;
+			PacketLogger.erase(packetID);
+		}
+		LoggerMTX.unlock();
+	}
+	void LogRouter(unsigned int RouterNumber, unsigned int BufferSize, double DropRate, unsigned int BufferUsedSize, double Fillage)
+	{
+		LoggerMTX.lock();
+		fd<<"Router: "<< RouterNumber<< " Buffer Size: " <<BufferSize << " DropRate: " << DropRate<< "% Buffer Initial Usage: " << BufferUsedSize<< " Fillage: " <<Fillage<< "%" ;
+		fd<<std::endl;
+		LoggerMTX.unlock();
+	}
+	double GetLoggerElapsedTime()
+	{
+		LoggerMTX.lock();
+		double timeElapsed=timer.elapsed();
+		LoggerMTX.unlock();
+		return timeElapsed;
+	}
 	void Logf(const char* format,...)
 	{
 		va_list args;
@@ -56,6 +96,8 @@ private:
 	SLogger(){};
 	SLogger(SLogger const &){}
 	void operator=(SLogger const &);
+	//logger for analysis - < <packet id> - set<time> >
+	std::map<long long int,std::set< std::pair<double,unsigned int> > > PacketLogger;
 
 };
 

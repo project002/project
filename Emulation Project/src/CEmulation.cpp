@@ -207,8 +207,17 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			unsigned int BufferUsedSize = currentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
 			if(BufferUsedSize!=0)
 			{
-				RouterCreate->AddPacketsToBuffer(BufferUsedSize);
+				RouterCreate->SetInitialBufferUse(BufferUsedSize);
 			}
+			double Fillage = currentRouter.attribute(XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
+			if (Fillage > 0 && Fillage<=BufferSize)
+			{
+				RouterCreate->SetFillage(Fillage);
+			}
+
+			SLogger::getInstance().LogRouter(RouterNumber,BufferSize,DropRate,BufferUsedSize,Fillage);
+
+			//TODO: add to gui the init buffer size and fillage rate(in percent)
 			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
 			mRouters.push_back(RouterCreate);
 		}

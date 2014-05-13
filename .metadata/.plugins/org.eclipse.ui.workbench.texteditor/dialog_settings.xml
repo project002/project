@@ -3,28 +3,29 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="170" key="DIALOG_Y_ORIGIN"/>
+		<item value="652" key="DIALOG_HEIGHT"/>
 		<item value="1202" key="DIALOG_X_ORIGIN"/>
-		<item value="624" key="DIALOG_HEIGHT"/>
 		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="output" key="selection"/>
+		<item value="mPacketCollector" key="selection"/>
 		<list key="findhistory">
-			<item value="output"/>
-			<item value="nonThre"/>
-			<item value="StopEmulation"/>
-			<item value="mSniffingThread"/>
-			<item value="XML"/>
-			<item value="thread"/>
-			<item value="sendpa"/>
-			<item value="sendpack"/>
+			<item value="mPacketCollector"/>
+			<item value="router"/>
+			<item value="pop"/>
+			<item value="push"/>
+			<item value="move"/>
+			<item value="draw"/>
+			<item value="&gt;&gt;"/>
+			<item value="routerinfo"/>
 		</list>
 		<list key="replacehistory">
+			<item value="&gt; &gt;"/>
 			<item value="outputSS"/>
 			<item value="int unsigned"/>
 			<item value="REDIRECT_SYSTEM_FILE"/>

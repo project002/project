@@ -144,6 +144,7 @@ Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
 {
 	try
 	{
+		double popTime;
 		if (routerNumber == NO_CHOICE_OF_PACKET_COLLECTOR)
 		{
 			throw(CException(
@@ -158,7 +159,7 @@ Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
 		unsigned int fromCollector = mRouterToPacketCollectorMap.at(
 				routerNumber);
 
-		Crafter::Packet * pkt =mPacketCollectors[fromCollector].PopFront();
+		Crafter::Packet * pkt =mPacketCollectors[fromCollector].PopFront(popTime);
 
 		int id = getPacketIdentification(pkt);
 		if (id != -1) {SLogger::getInstance().Logf("::OUT:: %d IP Packet OUT %d",routerNumber,id);}

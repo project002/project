@@ -11,10 +11,19 @@
 
 struct RouterInformation
 {
+	RouterInformation()
+	{
+		sRouterNumber=0;
+		sBufferSize=1024;
+		sDropRate=0;
+		sUsedBufferSize=0;
+		sFillage=0;
+	}
 	unsigned int sRouterNumber;
 	unsigned int sBufferSize;
-	unsigned int sDropRate;
+	double sDropRate;
 	unsigned int sUsedBufferSize;
+	double sFillage;
 };
 
 

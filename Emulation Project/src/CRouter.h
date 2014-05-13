@@ -89,9 +89,30 @@ public:
 		}
 		return true;
 	}
+
+	double GetFillage() const
+	{
+		return mFillage;
+	}
+
+	void SetFillage(double fillage)
+	{
+		mFillage = fillage;
+	}
+
+	unsigned int GetInitialBufferUse() const
+	{
+		return mInitialBufferUse;
+	}
+
+	void SetInitialBufferUse(unsigned int initialBufferUse)
+	{
+		mInitialBufferUse = initialBufferUse;
+	}
+
 private:
 	void HandleArp(Packet * pkt);
-	void HandleIPv4(Packet * pkt);
+	void HandleIPv4(Packet * pkt,const double popTime);
 	void Sniff();
 	void PacketHandler();
 	bool ProcessSendPacket(Packet* packet);
@@ -106,6 +127,8 @@ private:
 	unsigned int mRouterNumber;
 	bool mThreaded; //determins if the router is threaded or not
 	boost::signals2::mutex mMtx;
+	double mFillage;
+	unsigned int mInitialBufferUse;
 };
 
 #endif /* CROUTER_H_ */

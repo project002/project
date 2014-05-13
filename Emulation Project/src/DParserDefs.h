@@ -18,6 +18,7 @@
 #define XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE "BufferSizeUsed"
 #define XML_ROUTER_BUFFER_SIZE_ATTRIBUTE "BufferSize"
 #define XML_ROUTER_DROP_RATE_ATTRIBUTE "DropRate"
+#define XML_ROUTER_FILLAGE_ATTRIBUTE "Fillage"
 
 //#define XML_LAYER_1_NETWORK "Network" -Already defined just here for visual
 #define XML_LAYER_2_VIRTUAL_CONNECTIONS "VirtualConnections"

@@ -19,13 +19,15 @@ public:
 	/**
 	 * @return if empty NULL is returned
 	 */
-	Crafter::Packet * PopFront();
+	Crafter::Packet * PopFront(double & popTime);
+	void FixBufferFillage(double Fillage);
 	void DropRandomPacket();
 	void AddRandomPackets(unsigned int numberOfPackets);
 private:
 	void AnalyzePacketForStatistics(Crafter::Packet * packet);
 	void PrintPacket();
 	list<Crafter::Packet * > mPackets;
+	list<double> mPacketsReceiveTime;
 	unsigned int mBufferSize;
 	static map<string,unsigned long long int> mPacketsStatistics;
 
