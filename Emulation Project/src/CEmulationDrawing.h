@@ -13,6 +13,10 @@
 #include <gdkmm/pixbuf.h>
 #include "CXMLBasicParser.h"
 
+typedef std::pair< std::pair<int,int>,std::pair<int,int> > LineP;
+typedef std::map< unsigned int,std::pair<int,int> > ElementMap;
+typedef std::multimap< unsigned int, LineP > LinesMap;
+typedef std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > ImageBuffers;
 class CEmulationDrawing : public Gtk::DrawingArea
 {
 public:
@@ -25,9 +29,12 @@ private:
 	//setup xml parser
 	CXMLBasicParser mXMLprs;
 	//positions of the objects key:element id value : position (x,y)
-	std::map< unsigned int,std::pair<int,int> >* mElementsPos;
+	ElementMap* mElementsPos;
+	//positions of the lines key:element id value : positions (x1,y1),(x2,y2)
+	LinesMap* mLinesPos;
 	void insertNewImage(Glib::ustring imageName,Glib::ustring imagePath);
 	void loadImagesSrouces();
+	int physical_routers_count();
 	void initial_positions(); //setup the initial positions of the object in the emulation (in percentage)
 
 	vector< std::pair<int,int> > get_connected_routers(int id);
@@ -45,9 +52,9 @@ protected:
 	//Override default signal handler:
 	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 
-	std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > mImgBuffers;
+	ImageBuffers mImgBuffers;
 	//map iterator for the drawing process
-	std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> >::iterator mImageBufferDItr;
+	ImageBuffers::iterator mImageBufferDItr;
 };
 
 #endif /* CEMULATIONDRAWING_H_ */

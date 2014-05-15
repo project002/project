@@ -15,8 +15,9 @@
 #define CNVS_PAD 20
 CEmulationDrawing::CEmulationDrawing() :
 	mXMLPath(),
-	mElementsPos(new std::map<unsigned int,pair<int,int> >()),
-	mImgBuffers(std::map<Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> >())
+	mElementsPos(new ElementMap()),
+	mLinesPos(new LinesMap()),
+	mImgBuffers(ImageBuffers())
 {
 	loadImagesSrouces();
 }
@@ -54,6 +55,7 @@ void CEmulationDrawing::loadImagesSrouces()
 CEmulationDrawing::~CEmulationDrawing()
 {
 	delete mElementsPos;
+	delete mLinesPos;
 }
 
 void CEmulationDrawing::resetDrawing(string xml_path)
@@ -65,6 +67,15 @@ void CEmulationDrawing::resetDrawing(string xml_path)
 	initial_positions();
 }
 
+int CEmulationDrawing::physical_routers_count()
+{
+	vector<RouterInformation> routers = mXMLprs.GetRoutersInformation();
+	int count = 0;
+	vector<RouterInformation>::iterator it = routers.begin();
+	for (;it!=routers.end();++it) {if (mXMLprs.isPhysicalRouter((*it).sRouterNumber)) {++count;}}
+	return count;
+}
+
 void CEmulationDrawing::initial_positions()
 {
 	if (mXMLPath.length()==0) {return;}
@@ -72,10 +83,13 @@ void CEmulationDrawing::initial_positions()
 	multimap<unsigned int,string> phCon = mXMLprs.GetPhysicalConnections();
 	int x_percent=CNVS_PAD;
 	int y_percent=50;
-	int percent_inc = (100-(CNVS_PAD*2))/((routers.size()+1)-phCon.size());
+	//TODO: this works for only two physical routers which are both on either side of the screen
+	int pRoutersNum = physical_routers_count();
+	int percent_inc = (100-(CNVS_PAD*2))/((routers.size()+1)-pRoutersNum);
 	std::pair<int,int> pos;
+	LineP line_pos;
 	vector<RouterInformation>::iterator it = routers.begin();
-
+	//router & physical connections positions
 	for (;it!=routers.end();++it)
 	{
 		unsigned int id = (*it).sRouterNumber;
@@ -83,6 +97,9 @@ void CEmulationDrawing::initial_positions()
 		if (mXMLprs.isPhysicalRouter(id))
 		{
 			pos = next_source_router_pos();
+			//insert lines for physical routers
+			line_pos = LineP(pos,next_source_con_pos());
+			mLinesPos->insert(std::pair< unsigned int,LineP >(id,line_pos));
 		}
 		else
 		{
@@ -91,6 +108,29 @@ void CEmulationDrawing::initial_positions()
 		}
 		mElementsPos->insert(std::pair< unsigned int,std::pair<int,int> >(id,pos));
 	}
+
+	//virtual connection positions
+	ElementMap::iterator eit = mElementsPos->begin();
+	vector< pair<int,int> > positions;
+	for(;eit!=mElementsPos->end();++eit)
+	{
+		positions = get_connected_routers(eit->first);
+		vector< pair<int,int> >::iterator pit = positions.begin();
+		for(;pit!=positions.end();++pit)
+		{
+			line_pos = LineP(eit->second,(*pit));
+			mLinesPos->insert(std::pair< unsigned int,LineP >(eit->first,line_pos));
+		}
+	}
+//	///printout
+//	LinesMap::iterator lit = mLinesPos->begin();
+//	for (;lit!=mLinesPos->end();++lit)
+//	{
+//		cout << "id: " << lit->first;
+//		cout << "p1: " << lit->second.first.first << ":" << lit->second.first.second << "  ";
+//		cout << "p2: " << lit->second.second.first << ":" << lit->second.second.second << endl;
+//	}
+
 }
 
 
@@ -124,15 +164,18 @@ int CEmulationDrawing::percent2pixel(int percent, int pixel_value)
 
 vector<std::pair<int, int> > CEmulationDrawing::get_connected_routers(int id)
 {
+	//typedef to the rescue!
+	typedef multimap<unsigned int,unsigned int> VirCons;
+
 	vector<std::pair<int, int> > ret = vector<std::pair<int, int> >();
 
 	if (mXMLPath.length()==0) {return ret;}
-	multimap<unsigned int,unsigned int> vCons = mXMLprs.GetVirtualConnections();
-	//can it be any longer?
-	std::pair<multimap<unsigned int,unsigned int>::iterator,multimap<unsigned int,unsigned int>::iterator> range = vCons.equal_range(id);
+	VirCons vCons = mXMLprs.GetVirtualConnections();
+	//can it be any longer? nope. saved by typedef!
+	std::pair<VirCons::iterator,VirCons::iterator> range = vCons.equal_range(id);
 	if (range.first == vCons.end()) {return ret;}
 
-	multimap<unsigned int,unsigned int>::iterator it = range.first;
+	VirCons::iterator it = range.first;
 	for (;it!=range.second;++it)
 	{
 		ret.push_back((mElementsPos->at(it->second)));
@@ -144,72 +187,54 @@ vector<std::pair<int, int> > CEmulationDrawing::get_connected_routers(int id)
 bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
 	if (mImgBuffers.empty()) {return false;}
-
 	//get the available draw area
 	Gtk::Allocation allocation = get_allocation();
 	const int width = allocation.get_width();
 	const int height = allocation.get_height();
+	int base_pos[] = {0,0};
+	int target_pos[] = {0,0};
 
-	std::vector< std::pair<int,int> > tps = std::vector< std::pair<int,int> >(); //temp target pos
-	std::vector< std::pair<int,int> >::iterator tps_it;
-	std::vector< std::pair<int,int> > temp;
+	//draw connections by positions
+	cr->set_line_width(4.0);
+	LinesMap::iterator lit = mLinesPos->begin();
+	for (;lit!=mLinesPos->end();++lit)
+	{
+		if (mXMLprs.isPhysicalRouter(lit->first))
+		{
+			cr->set_source_rgb(1,0,0);
+		}
+		else
+		{
+			cr->set_source_rgb(0,0,0);
+		}
+
+		base_pos[0] = percent2pixel(lit->second.first.first,width);
+		base_pos[1] = percent2pixel(lit->second.first.second,height);
+
+		target_pos[0] = percent2pixel(lit->second.second.first,width);
+		target_pos[1] = percent2pixel(lit->second.second.second,height);
+
+		cr->move_to(base_pos[0],base_pos[1]);
+		cr->line_to(target_pos[0],target_pos[1]);
+		cr->stroke();
+	}
+
 	//draw elements by positions
-	std::map<unsigned int,pair<int,int> >::iterator it = mElementsPos->begin();
-	cr->set_source_rgb(0,0,0);
-	cr->set_line_width(1.0);
+	ElementMap::iterator it = mElementsPos->begin();
 	for (;it!=mElementsPos->end();++it)
 	{
 		string src_name = mXMLprs.isPhysicalRouter(it->first) ? "RouterImageSource" : "RouterImage";
-		int base_pos[] = {percent2pixel(it->second.first,width) - mImgBuffers.at(src_name)->get_width()/2,
-						  percent2pixel(it->second.second,height) - mImgBuffers.at(src_name)->get_height()/2};
-
-		if (mXMLprs.isPhysicalRouter(it->first))
-		{
-			tps.push_back(next_source_con_pos());
-		}
-
-		temp = get_connected_routers(it->first);
-		tps.insert(tps.end(),temp.begin(),temp.end());
-
-		//paint lines
-		for (tps_it = tps.begin();tps_it!=tps.end();++tps_it)
-		{
-			cr->move_to(base_pos[0],base_pos[1]);
-			cr->line_to(percent2pixel((*tps_it).first,width),percent2pixel((*tps_it).second,height));
-//			std::cout << "move to: " << base_pos[0] << "," << base_pos[1] << std::endl;
-//			std::cout << "line to:" << percent2pixel((*tps_it).first,width) << " , " << percent2pixel((*tps_it).second,height) << std::endl;
-//			cr->close_path();
-		}
-		cr->stroke();
+		base_pos[0] = percent2pixel(it->second.first,width);
+		base_pos[1] = percent2pixel(it->second.second,height);
 
 		//paint router image
 		Gdk::Cairo::set_source_pixbuf(cr,
 				mImgBuffers.at(src_name),
-				base_pos[0],
-				base_pos[1]);
-
+				base_pos[0] - mImgBuffers.at(src_name)->get_width()/2,
+				base_pos[1] - mImgBuffers.at(src_name)->get_height()/2);
 		cr->paint();
-		tps.clear();
 	}
 
-
-	//draw all images
-//	mImageBufferDItr = mImgBuffers.begin();
-//	for (;mImageBufferDItr!=mImgBuffers.end();++mImageBufferDItr)
-//	{
-//		Gdk::Cairo::set_source_pixbuf(cr, mImageBufferDItr->second,
-//			(width - mImageBufferDItr->second->get_width())/2,
-//			(height - mImageBufferDItr->second->get_height())/2);
-//
-//		cr->paint();
-//	}
-
-
-//	Gdk::Cairo::set_source_pixbuf(cr, mImgBuffers.at("routerImage").second,
-//				(width -  mImgBuffers.at("routerImage")->second->get_width())/2,
-//				(height -  mImgBuffers.at("routerImage")->second->get_height())/2);
-
-	cr->paint();
 
 	return true;
 }

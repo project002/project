@@ -1,0 +1,96 @@
+/*
+ * CEmulationDrawing.h
+ *
+ *  Created on: Mar 24, 2014
+ *      Author: root
+ */
+
+#ifndef CEMULATIONDRAWING_H_
+#define CEMULATIONDRAWING_H_
+
+#include <gtkmm.h>
+#include <gtkmm/drawingarea.h>
+#include <gdkmm/pixbuf.h>
+#include "CXMLBasicParser.h"
+
+class CEmulationDrawing : public Gtk::DrawingArea
+{
+public:
+	CEmulationDrawing();
+	void resetDrawing(string xml_path);
+	virtual ~CEmulationDrawing();
+private:
+	//setup xml path
+	string mXMLPath;
+	//setup xml parser
+	CXMLBasicParser mXMLprs;
+	//positions of the objects key:element id value : position (x,y)
+	std::map< unsigned int,std::pair<int,int> >* mElementsPos;
+	//positions of the lines key:element id value : position (x,y)
+	std::map< unsigned int,std::pair<int,int> >* mLinesPos;
+	void insertNewImage(Glib::ustring imageName,Glib::ustring imagePath);
+	void loadImagesSrouces();
+	void initial_positions(); //setup the initial positions of the object in the emulation (in percentage)
+
+	vector< std::pair<int,int> > get_connected_routers(int id);
+	std::pair<int,int> next_source_router_pos();
+	std::pair<int,int> next_source_con_pos();
+	/**
+	 * returns the pixel value of the given percent and
+	 * maximum (100%) pixel value
+	 * @param percent the percent form the whole (100%)
+	 * @param pixel_value the number which represent the real number of the whole (100%)
+	 * @return the pixel value which is "percent" of "pixel_value"
+	 */
+	int percent2pixel(int percent,int pixel_value);
+protected:
+	//Override default signal handler:
+	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+
+	std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > mImgBuffers;
+	//map iterator for the drawing process
+	std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> >::iterator mImageBufferDItr;
+};
+
+#endif /* CEMULATIONDRAWING_H_ */
+
+
+/*
+//cml parser tests
+CXMLBasicParser prs;
+prs.ParseXML(mImportXMLPath);
+std::cout << prs.GetNumberOfRouters() << std::endl;
+vector<RouterInformation> rInfo= prs.GetRoutersInformation();
+vector<RouterInformation>::iterator it = rInfo.begin();
+std::cout << "Buffer Information:" << std::endl;
+for (;it!=rInfo.end();++it)
+{
+	std::cout << "\tID:" << (*it).sRouterNumber << std::endl;
+	std::cout << "\tDropRate:" << (*it).sDropRate << std::endl;
+	std::cout << "\tBufferSize:" << (*it).sBufferSize << std::endl;
+	std::cout << "\tUsedBufferSize:" << (*it).sUsedBufferSize << std::endl;
+}
+
+std::multimap<unsigned int,unsigned int> vcons = prs.GetVirtualConnections();
+std::multimap<unsigned int,unsigned int>::iterator vit= vcons.begin();
+std::cout << "Virtual Connections:" << std::endl;
+for (;vit!=vcons.end();++vit)
+{
+	std::cout << "\tFrom: " << vit->first  << " To: " << vit->second << std::endl;
+}
+
+std::multimap<unsigned int,std::string> pcons = prs.GetPhysicalConnections();
+std::multimap<unsigned int,std::string>::iterator pit= pcons.begin();
+std::cout << "Physical Connections:" << std::endl;
+for (;pit!=pcons.end();++pit)
+{
+	std::cout << "\tFrom: " << pit->first  << " To: " << pit->second << std::endl;
+}
+
+std::cout << "Connections Number:" << std::endl;
+for (it = rInfo.begin();it!=rInfo.end();++it)
+{
+	std::cout << "\tID: " << (*it).sRouterNumber  << " Count: " << prs.GetNumberOfConnectionPerRouter((*it).sRouterNumber) << std::endl;
+}
+
+///test end*/

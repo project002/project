@@ -1,7 +1,6 @@
-Stopping network connection manager: NetworkManager.
+Stopping network connection manager: NetworkManager already stopped.
 0
 1
 Default incoming policy changed to 'deny'
 (be sure to update your rules accordingly)
 ERROR: Could not load logging rules
-Starting network connection manager: NetworkManager.

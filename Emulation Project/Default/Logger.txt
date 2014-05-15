@@ -1,27 +1,171 @@
 0 : Disabling Linux Networking
-0.39 : Validating XML file is present
-0.39 : Building the emulation
-0.39 : name:	lo
-0.39 : name:	loname:	eth0
-0.41 : ip table init complete
-0.41 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
-0.43 : DHCP service started...
-0.49 : name:	loname:	eth0name:	eth1
-0.5 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
-0.5 : DHCP service started...
-0.54 : name:	loname:	eth0name:	eth1name:	lo
-0.54 : name:	loname:	eth0name:	eth1name:	loname:	eth1
-0.54 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
-0.55 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
-0.55 : Starting the emulation
-0.55 : Running Virtual Routers Thread With 1 Routers
-0.58 : std::exception
-0.58 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
-9.8 : last added ip address: 10.0.0.3 for MAC: 3c:8a:b0:f9:d1:40
-9.8 : Started Handshake Offering 10.0.0.3
-12.18 : Started Handshake Offering 10.0.0.3[@] No response to DHCP offer with ip 10.0.0.3
-12.18 : Handshake Finished With Setting 10.0.0.3
-20.12 : Emulation exiting
-20.62 : Enabling Networking
-20.64 : Destroying Controller Thread
-20.64 : Destroying Logger and exiting program
+0.21 : Validating XML file is present
+0.21 : Building the emulation
+0.21 : name:	lo
+0.21 : name:	loname:	eth0
+0.21 : ip table init complete
+0.21 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0.22 : DHCP service started...
+0.28 : name:	loname:	eth0name:	eth1
+0.3 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.3 : DHCP service started...
+0.35 : name:	loname:	eth0name:	eth1name:	lo
+0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+Router: 0 Buffer Size: 100 DropRate: 0% Buffer Initial Usage: 0 Fillage: 0%
+Router: 1 Buffer Size: 100 DropRate: 0% Buffer Initial Usage: 0 Fillage: 0%
+Router: 2 Buffer Size: 100 DropRate: 0% Buffer Initial Usage: 0 Fillage: 0%
+Router: 3 Buffer Size: 100 DropRate: 0% Buffer Initial Usage: 0 Fillage: 0%
+0.35 : Starting the emulation
+0.35 : std::exception
+0.35 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+0.35 : Running Virtual Routers Thread With 2 Routers
+Packet ID: 0 Router Number: 1 Insert Time: 0.35 Exit Time 0.36 
+Packet ID: 0 Router Number: 1 Insert Time: 0.53 Exit Time 0.57 
+Packet ID: 57321 Router Number: 1 Insert Time: 0.7 Exit Time 0.76 
+Packet ID: 0 Router Number: 1 Insert Time: 1.13 Exit Time 1.14 
+Packet ID: 1 Router Number: 1 Insert Time: 1.25 Exit Time 1.29 
+Packet ID: 5295 Router Number: 1 Insert Time: 1.25 Exit Time 1.29 
+Packet ID: 0 Router Number: 1 Insert Time: 1.37 Exit Time 1.38 
+Packet ID: 0 Router Number: 1 Insert Time: 2.06 Exit Time 2.1 
+Packet ID: 0 Router Number: 1 Insert Time: 2.85 Exit Time 2.89 
+Packet ID: 44549 Router Number: 1 Insert Time: 3.41 Exit Time 3.42 
+Packet ID: 35099 Router Number: 1 Insert Time: 3.41 Exit Time 3.42 
+Packet ID: 1703 Router Number: 1 Insert Time: 3.45 Exit Time 3.46 
+Packet ID: 0 Router Number: 1 Insert Time: 3.52 Exit Time 3.52 
+Packet ID: 0 Router Number: 1 Insert Time: 3.92 Exit Time 3.97 
+Packet ID: 25379 Router Number: 1 Insert Time: 4.15 Exit Time 4.21 
+Packet ID: 25380 Router Number: 1 Insert Time: 4.15 Exit Time 4.21 
+Packet ID: 0 Router Number: 1 Insert Time: 5.53 Exit Time 5.59 
+7.02 : No Handler found for message type:8
+Packet ID: 47579 Router Number: 1 Insert Time: 7.03 Exit Time 7.04 
+Packet ID: 0 Router Number: 1 Insert Time: 7.68 Exit Time 7.68 
+Packet ID: 6177 Router Number: 1 Insert Time: 7.75 Exit Time 7.75 
+Packet ID: 0 Router Number: 1 Insert Time: 9.5 Exit Time 9.5 
+Packet ID: 15989 Router Number: 1 Insert Time: 9.51 Exit Time 9.55 
+Packet ID: 18339 Router Number: 1 Insert Time: 9.54 Exit Time 9.55 
+Packet ID: 1499 Router Number: 1 Insert Time: 9.63 Exit Time 9.63 
+Packet ID: 3620 Router Number: 1 Insert Time: 9.63 Exit Time 9.63 
+Packet ID: 22618 Router Number: 1 Insert Time: 9.63 Exit Time 9.63 
+Packet ID: 17393 Router Number: 1 Insert Time: 9.66 Exit Time 9.68 
+Packet ID: 10776 Router Number: 1 Insert Time: 9.67 Exit Time 9.68 
+Packet ID: 17554 Router Number: 1 Insert Time: 9.72 Exit Time 9.73 
+Packet ID: 3229 Router Number: 1 Insert Time: 9.72 Exit Time 9.73 
+Packet ID: 14694 Router Number: 1 Insert Time: 9.79 Exit Time 9.81 
+Packet ID: 18820 Router Number: 1 Insert Time: 9.83 Exit Time 9.83 
+Packet ID: 28088 Router Number: 1 Insert Time: 9.85 Exit Time 9.87 
+Packet ID: 14461 Router Number: 1 Insert Time: 9.87 Exit Time 9.87 
+Packet ID: 14930 Router Number: 1 Insert Time: 9.87 Exit Time 9.87 
+Packet ID: 18268 Router Number: 1 Insert Time: 10 Exit Time 10.01 
+Packet ID: 16363 Router Number: 1 Insert Time: 10.01 Exit Time 10.01 
+Packet ID: 16905 Router Number: 1 Insert Time: 10.04 Exit Time 10.1 
+Packet ID: 9417 Router Number: 1 Insert Time: 10.04 Exit Time 10.1 
+Packet ID: 22000 Router Number: 1 Insert Time: 10.04 Exit Time 10.1 
+Packet ID: 26851 Router Number: 1 Insert Time: 10.04 Exit Time 10.1 
+Packet ID: 10029 Router Number: 1 Insert Time: 10.05 Exit Time 10.1 
+Packet ID: 7387 Router Number: 1 Insert Time: 10.05 Exit Time 10.1 
+Packet ID: 22214 Router Number: 1 Insert Time: 10.07 Exit Time 10.1 
+Packet ID: 5964 Router Number: 1 Insert Time: 10.07 Exit Time 10.1 
+Packet ID: 0 Router Number: 1 Insert Time: 10.12 Exit Time 10.15 
+Packet ID: 8165 Router Number: 1 Insert Time: 10.37 Exit Time 10.39 
+Packet ID: 9742 Router Number: 1 Insert Time: 10.46 Exit Time 10.49 
+Packet ID: 15732 Router Number: 1 Insert Time: 10.53 Exit Time 10.57 
+Packet ID: 19966 Router Number: 1 Insert Time: 10.56 Exit Time 10.57 
+Packet ID: 11630 Router Number: 1 Insert Time: 10.61 Exit Time 10.64 
+Packet ID: 3423 Router Number: 1 Insert Time: 10.63 Exit Time 10.64 
+Packet ID: 0 Router Number: 1 Insert Time: 10.63 Exit Time 10.64 
+Packet ID: 881 Router Number: 1 Insert Time: 10.64 Exit Time 10.64 
+Packet ID: 18439 Router Number: 1 Insert Time: 10.64 Exit Time 10.64 
+Packet ID: 28709 Router Number: 1 Insert Time: 10.73 Exit Time 10.75 
+Packet ID: 9901 Router Number: 1 Insert Time: 10.73 Exit Time 10.75 
+Packet ID: 13639 Router Number: 1 Insert Time: 10.73 Exit Time 10.75 
+Packet ID: 14269 Router Number: 1 Insert Time: 10.74 Exit Time 10.75 
+Packet ID: 22124 Router Number: 1 Insert Time: 10.79 Exit Time 10.84 
+Packet ID: 31731 Router Number: 1 Insert Time: 10.79 Exit Time 10.84 
+Packet ID: 14620 Router Number: 1 Insert Time: 10.82 Exit Time 10.84 
+Packet ID: 6489 Router Number: 1 Insert Time: 10.82 Exit Time 10.84 
+Packet ID: 5163 Router Number: 1 Insert Time: 10.89 Exit Time 10.93 
+Packet ID: 9431 Router Number: 1 Insert Time: 10.89 Exit Time 10.93 
+Packet ID: 11174 Router Number: 1 Insert Time: 10.89 Exit Time 10.93 
+Packet ID: 27689 Router Number: 1 Insert Time: 10.9 Exit Time 10.93 
+Packet ID: 6124 Router Number: 1 Insert Time: 10.97 Exit Time 11.01 
+Packet ID: 198 Router Number: 1 Insert Time: 10.97 Exit Time 11.01 
+Packet ID: 24362 Router Number: 1 Insert Time: 10.99 Exit Time 11.01 
+Packet ID: 28449 Router Number: 1 Insert Time: 11.05 Exit Time 11.09 
+Packet ID: 0 Router Number: 1 Insert Time: 13.07 Exit Time 13.1 
+Packet ID: 51064 Router Number: 1 Insert Time: 13.61 Exit Time 13.66 
+Packet ID: 57322 Router Number: 1 Insert Time: 14.29 Exit Time 14.3 
+Packet ID: 25381 Router Number: 1 Insert Time: 14.33 Exit Time 14.4 
+Packet ID: 25382 Router Number: 1 Insert Time: 14.33 Exit Time 14.4 
+Packet ID: 0 Router Number: 1 Insert Time: 15.23 Exit Time 15.27 
+Packet ID: 11881 Router Number: 1 Insert Time: 15.34 Exit Time 15.39 
+Packet ID: 44550 Router Number: 1 Insert Time: 16.97 Exit Time 16.99 
+Packet ID: 35100 Router Number: 1 Insert Time: 16.97 Exit Time 16.99 
+Packet ID: 0 Router Number: 1 Insert Time: 16.98 Exit Time 16.99 
+Packet ID: 0 Router Number: 1 Insert Time: 23.33 Exit Time 23.35 
+Packet ID: 0 Router Number: 1 Insert Time: 24.19 Exit Time 24.19 
+Packet ID: 0 Router Number: 1 Insert Time: 24.77 Exit Time 24.77 
+Packet ID: 18340 Router Number: 1 Insert Time: 24.78 Exit Time 24.78 
+Packet ID: 15990 Router Number: 1 Insert Time: 24.86 Exit Time 24.86 
+Packet ID: 1500 Router Number: 1 Insert Time: 24.86 Exit Time 24.86 
+Packet ID: 3623 Router Number: 1 Insert Time: 24.87 Exit Time 24.87 
+Packet ID: 10777 Router Number: 1 Insert Time: 24.91 Exit Time 24.94 
+Packet ID: 17557 Router Number: 1 Insert Time: 24.99 Exit Time 25.02 
+Packet ID: 17419 Router Number: 1 Insert Time: 24.99 Exit Time 25.02 
+Packet ID: 3333 Router Number: 1 Insert Time: 24.99 Exit Time 25.04 
+Packet ID: 14695 Router Number: 1 Insert Time: 25.04 Exit Time 25.04 
+Packet ID: 28094 Router Number: 1 Insert Time: 25.11 Exit Time 25.14 
+Packet ID: 14463 Router Number: 1 Insert Time: 25.12 Exit Time 25.14 
+Packet ID: 18821 Router Number: 1 Insert Time: 25.13 Exit Time 25.14 
+Packet ID: 14931 Router Number: 1 Insert Time: 25.18 Exit Time 25.2 
+Packet ID: 16906 Router Number: 1 Insert Time: 25.26 Exit Time 25.28 
+Packet ID: 18269 Router Number: 1 Insert Time: 25.26 Exit Time 25.28 
+Packet ID: 16364 Router Number: 1 Insert Time: 25.27 Exit Time 25.28 
+Packet ID: 26852 Router Number: 1 Insert Time: 25.27 Exit Time 25.28 
+Packet ID: 9424 Router Number: 1 Insert Time: 25.35 Exit Time 25.37 
+Packet ID: 7521 Router Number: 1 Insert Time: 25.35 Exit Time 25.37 
+Packet ID: 22001 Router Number: 1 Insert Time: 25.35 Exit Time 25.37 
+Packet ID: 22216 Router Number: 1 Insert Time: 25.35 Exit Time 25.37 
+Packet ID: 10030 Router Number: 1 Insert Time: 25.35 Exit Time 25.37 
+Packet ID: 5966 Router Number: 1 Insert Time: 25.35 Exit Time 25.37 
+Packet ID: 5050 Router Number: 1 Insert Time: 25.35 Exit Time 25.37 
+Packet ID: 0 Router Number: 1 Insert Time: 25.5 Exit Time 25.53 
+Packet ID: 8166 Router Number: 1 Insert Time: 25.66 Exit Time 25.71 
+Packet ID: 9743 Router Number: 1 Insert Time: 25.75 Exit Time 25.78 
+Packet ID: 15733 Router Number: 1 Insert Time: 25.84 Exit Time 25.87 
+Packet ID: 19967 Router Number: 1 Insert Time: 25.84 Exit Time 25.87 
+Packet ID: 2850 Router Number: 1 Insert Time: 25.85 Exit Time 25.87 
+Packet ID: 11631 Router Number: 1 Insert Time: 25.86 Exit Time 25.87 
+Packet ID: 18451 Router Number: 1 Insert Time: 25.89 Exit Time 25.94 
+Packet ID: 882 Router Number: 1 Insert Time: 25.89 Exit Time 25.94 
+Packet ID: 3424 Router Number: 1 Insert Time: 25.93 Exit Time 25.94 
+Packet ID: 28710 Router Number: 1 Insert Time: 25.93 Exit Time 25.94 
+Packet ID: 9912 Router Number: 1 Insert Time: 26.02 Exit Time 26.07 
+Packet ID: 13646 Router Number: 1 Insert Time: 26.02 Exit Time 26.07 
+Packet ID: 22125 Router Number: 1 Insert Time: 26.02 Exit Time 26.07 
+Packet ID: 31735 Router Number: 1 Insert Time: 26.02 Exit Time 26.07 
+Packet ID: 14621 Router Number: 1 Insert Time: 26.04 Exit Time 26.07 
+Packet ID: 14271 Router Number: 1 Insert Time: 26.11 Exit Time 26.13 
+Packet ID: 6490 Router Number: 1 Insert Time: 26.11 Exit Time 26.13 
+Packet ID: 9435 Router Number: 1 Insert Time: 26.11 Exit Time 26.13 
+Packet ID: 5164 Router Number: 1 Insert Time: 26.14 Exit Time 26.17 
+Packet ID: 11175 Router Number: 1 Insert Time: 26.16 Exit Time 26.17 
+Packet ID: 27692 Router Number: 1 Insert Time: 26.22 Exit Time 26.26 
+Packet ID: 6125 Router Number: 1 Insert Time: 26.22 Exit Time 26.26 
+Packet ID: 203 Router Number: 1 Insert Time: 26.22 Exit Time 26.26 
+Packet ID: 24363 Router Number: 1 Insert Time: 26.24 Exit Time 26.26 
+Packet ID: 28450 Router Number: 1 Insert Time: 26.3 Exit Time 26.38 
+Packet ID: 34160 Router Number: 1 Insert Time: 26.49 Exit Time 26.53 
+Packet ID: 0 Router Number: 1 Insert Time: 26.69 Exit Time 26.71 
+Packet ID: 0 Router Number: 1 Insert Time: 27.12 Exit Time 27.14 
+Packet ID: 2039 Router Number: 1 Insert Time: 28.37 Exit Time 28.38 
+Packet ID: 621 Router Number: 1 Insert Time: 29.36 Exit Time 29.36 
+Packet ID: 57393 Router Number: 1 Insert Time: 30.7 Exit Time 30.72 
+Packet ID: 15842 Router Number: 1 Insert Time: 31.17 Exit Time 31.18 
+Packet ID: 56112 Router Number: 1 Insert Time: 34.4 Exit Time 34.41 
+Packet ID: 24217 Router Number: 1 Insert Time: 37.15 Exit Time 37.2 
+39.19 : Emulation exiting
+39.26 : Enabling Networking
+39.29 : Destroying Controller Thread
+39.29 : Destroying Logger and exiting program
