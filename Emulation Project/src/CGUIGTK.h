@@ -15,6 +15,7 @@
 #include <gtkmm/box.h>
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/textview.h>
+#include <gtkmm/messagedialog.h>
 #include "EmulationWrapper.h"
 #include "CSocketNotReadyException.h"
 #include "CEmuStatWidget.h"
@@ -36,7 +37,7 @@ protected:
 	void stop_emulation();
 	void create_menu_bar();
 	void start_emulation_thread();
-
+	void quit_program();
 	void loop();
 
 	//members
@@ -55,6 +56,8 @@ private:
 	EmulationWrapper* mEmulation;
 	bool mEmulationRunning;
 	Glib::Thread* EmulationThread;
+protected:
+	virtual bool on_delete_event (GdkEventAny*event);
 
 };
 

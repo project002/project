@@ -39,8 +39,11 @@ CEmulation::~CEmulation()
 		vector<CRouter *>::iterator iter;
 		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 		{
-			//if the router is threaded stopRmulation => interrupt thr threads
-			if (!(*iter)->isVirtualRouter()) {(*iter)->StopEmulation();}
+			//if the router is threaded stopEmulation => interrupt the threads
+			if (!(*iter)->isVirtualRouter() && !mThreaded) {(*iter)->StopEmulation();}
+			//if all the routers are threaded (mThreaded) stop them all!
+			else {(*iter)->StopEmulation();}
+
 		}
 		//this will kill all the other nonThreaded routers
 		if (!mThreaded) {mRunVirtualRouters.interrupt();}
@@ -94,12 +97,13 @@ void CEmulation::TableSwapping()
 	{
 		while(mRunning)
 		{
+
 			vector<CRouter *>::iterator iter;
 			boost::this_thread::interruption_point();
 			//swap table each time for all the connection available
 			//(for n routers there are n-1 connections) so the arp responses
 			//will occur after one table swap instead of n-1 swaps
-			for (int unsigned i=0;i<mRouters.size()-1;++i)
+			for (int unsigned i=0;i<mRouters.size();++i)
 			{
 				boost::this_thread::interruption_point();
 				for (iter=mRouters.begin();iter!=mRouters.end();iter++)
@@ -215,7 +219,7 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 				RouterCreate->SetFillage(Fillage);
 			}
 
-			SLogger::getInstance().LogRouter(RouterNumber,BufferSize,DropRate,BufferUsedSize,Fillage);
+			SReport::getInstance().LogRouter(RouterNumber,BufferSize,DropRate,BufferUsedSize,Fillage);
 
 			//TODO: add to gui the init buffer size and fillage rate(in percent)
 			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
@@ -365,6 +369,7 @@ void CEmulation::StartEmulation()
 	try
 	{
 		vector<CRouter *>::iterator iter;
+		mRunning = true;
 		//STARTing sniffer on all routers
 		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 		{
@@ -384,7 +389,7 @@ void CEmulation::StartEmulation()
 			SLogger::getInstance().Logf("Running Virtual Routers Thread With %d Routers",mVirtualRouters.size());
 			mRunVirtualRouters = boost::thread(&CEmulation::virtualRoutersSequence,this);
 		}
-		mRunning = true;
+
 		while(true)
 		{
 			//keep busy

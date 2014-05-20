@@ -129,6 +129,7 @@ void EmulationWrapper::RunEmulation()
 //		SDataController::getInstance().init(output);
 		SDataController::getInstance().init();
 		SLogger::getInstance().InitLogger();
+		SReport::getInstance().InitReport();
 		SLogger::getInstance().Log("Disabling Linux Networking");
 		DisableNetworkManager();
 		SLogger::getInstance().Log("Validating XML file is present");

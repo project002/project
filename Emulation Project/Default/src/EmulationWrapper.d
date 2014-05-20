@@ -1,6 +1,6 @@
 src/EmulationWrapper.d: ../src/EmulationWrapper.cpp \
  ../src/EmulationWrapper.h ../src/CEmulation.h ../src/BasicIncludes.h \
- ../src/SLogger.h ../src/CException.h ../src/CUIPV4.h \
+ ../src/SLogger.h ../src/SReport.h ../src/CException.h ../src/CUIPV4.h \
  ../src/SDataController.h ../src/CPhysicalConnection.h \
  ../src/CPacketCollector.h ../src/CDHCPService.h \
  ../src/CDHCPMsgTypeException.h ../src/H_SNIFFER_FUNC.h \
@@ -990,6 +990,8 @@ src/EmulationWrapper.d: ../src/EmulationWrapper.cpp \
 ../src/BasicIncludes.h:
 
 ../src/SLogger.h:
+
+../src/SReport.h:
 
 ../src/CException.h:
 

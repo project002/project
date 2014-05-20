@@ -160,8 +160,15 @@ void CGUIGTK::run_emulation() //runs in a seperate thread
 	{
 		mEmulationRunning = false;
 		mInst.set_label("Exception On Run");
+		cout << error.what() << endl;
 		//throw CException("Emulation Failed");
 	}
+}
+
+void CGUIGTK::quit_program()
+{
+	stop_emulation();
+	hide(); //hide the main menu application quit
 }
 
 void CGUIGTK::loop()
@@ -181,7 +188,25 @@ CGUIGTK::~CGUIGTK()
 	delete mStopButton;
 	delete mPackingBox;
 	delete mStateWidget;
-	if (mEmulation!=NULL) {delete mEmulation;}
+	if (mEmulation!=NULL)
+	{
+		delete mEmulation;
+		mEmulation = NULL;
+	}
 
 }
 
+bool CGUIGTK::on_delete_event(GdkEventAny* event)
+{
+	if (mEmulation==NULL) {return false;}
+
+	Gtk::MessageDialog dialog(*this, "Unexpected Exit",false, Gtk::MESSAGE_QUESTION,Gtk::BUTTONS_OK_CANCEL);
+	dialog.set_secondary_text("Emulation is still running are you sure you want to exit?");
+    int result = dialog.run();
+	if (result == Gtk::RESPONSE_OK)
+	{
+		stop_emulation();
+		return false;
+	}
+	return true;
+}

@@ -1,7 +1,7 @@
 src/CEmuStatWidget.d: ../src/CEmuStatWidget.cpp ../src/CEmuStatWidget.h \
- ../src/BasicIncludes.h ../src/SLogger.h ../src/CException.h \
- ../src/CUIPV4.h ../src/SDataController.h /usr/include/gtkmm-3.0/gtkmm.h \
- /usr/include/glibmm-2.4/glibmm.h \
+ ../src/BasicIncludes.h ../src/SLogger.h ../src/SReport.h \
+ ../src/CException.h ../src/CUIPV4.h ../src/SDataController.h \
+ /usr/include/gtkmm-3.0/gtkmm.h /usr/include/glibmm-2.4/glibmm.h \
  /usr/lib/i386-linux-gnu/glibmm-2.4/include/glibmmconfig.h \
  /usr/include/glibmm-2.4/glibmm/thread.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
@@ -981,6 +981,8 @@ src/CEmuStatWidget.d: ../src/CEmuStatWidget.cpp ../src/CEmuStatWidget.h \
 ../src/BasicIncludes.h:
 
 ../src/SLogger.h:
+
+../src/SReport.h:
 
 ../src/CException.h:
 

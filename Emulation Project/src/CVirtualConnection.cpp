@@ -161,8 +161,6 @@ Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
 
 		Crafter::Packet * pkt =mPacketCollectors[fromCollector].PopFront(popTime);
 
-		int id = getPacketIdentification(pkt);
-		if (id != -1) {SLogger::getInstance().Logf("::OUT:: %d IP Packet OUT %d",routerNumber,id);}
 		return pkt;
 	}
 	catch (CException & error)

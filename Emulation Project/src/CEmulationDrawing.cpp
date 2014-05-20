@@ -19,6 +19,7 @@ CEmulationDrawing::CEmulationDrawing() :
 	mLinesPos(new LinesMap()),
 	mImgBuffers(ImageBuffers())
 {
+	this->add_events(Gdk::BUTTON_PRESS_MASK); //yeah!
 	loadImagesSrouces();
 }
 
@@ -131,6 +132,12 @@ void CEmulationDrawing::initial_positions()
 //		cout << "p2: " << lit->second.second.first << ":" << lit->second.second.second << endl;
 //	}
 
+}
+
+bool CEmulationDrawing::on_event(GdkEvent* event)
+{
+	cout << "event" << endl;
+	return true;
 }
 
 

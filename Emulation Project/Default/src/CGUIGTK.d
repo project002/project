@@ -974,15 +974,16 @@ src/CGUIGTK.d: ../src/CGUIGTK.cpp ../src/CGUIGTK.h \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h ../src/EmulationWrapper.h \
  ../src/CEmulation.h ../src/BasicIncludes.h ../src/SLogger.h \
- ../src/CException.h ../src/CUIPV4.h ../src/SDataController.h \
- ../src/CPhysicalConnection.h ../src/CPacketCollector.h \
- ../src/CDHCPService.h ../src/CDHCPMsgTypeException.h \
- ../src/H_SNIFFER_FUNC.h ../src/CConnection.h \
- ../src/CSocketNotReadyException.h ../src/CVirtualConnection.h \
- ../src/CPhysicalConnectionsHandler.h ../src/pugixml.hpp \
- ../src/pugiconfig.hpp ../src/CRouter.h ../src/DInitializationDefs.h \
- ../src/CEmuStatWidget.h ../src/CEmulationDrawing.h \
- ../src/CXMLBasicParser.h ../src/SXMLStructs.h ../src/DParserDefs.h
+ ../src/SReport.h ../src/CException.h ../src/CUIPV4.h \
+ ../src/SDataController.h ../src/CPhysicalConnection.h \
+ ../src/CPacketCollector.h ../src/CDHCPService.h \
+ ../src/CDHCPMsgTypeException.h ../src/H_SNIFFER_FUNC.h \
+ ../src/CConnection.h ../src/CSocketNotReadyException.h \
+ ../src/CVirtualConnection.h ../src/CPhysicalConnectionsHandler.h \
+ ../src/pugixml.hpp ../src/pugiconfig.hpp ../src/CRouter.h \
+ ../src/DInitializationDefs.h ../src/CEmuStatWidget.h \
+ ../src/CEmulationDrawing.h ../src/CXMLBasicParser.h ../src/SXMLStructs.h \
+ ../src/DParserDefs.h
 
 ../src/CGUIGTK.h:
 
@@ -3033,6 +3034,8 @@ src/CGUIGTK.d: ../src/CGUIGTK.cpp ../src/CGUIGTK.h \
 ../src/BasicIncludes.h:
 
 ../src/SLogger.h:
+
+../src/SReport.h:
 
 ../src/CException.h:
 

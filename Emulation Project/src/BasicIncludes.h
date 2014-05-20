@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string>
 #include "SLogger.h"
+#include "SReport.h"
 using namespace std;
 
 /**

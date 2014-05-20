@@ -51,7 +51,7 @@ private:
 protected:
 	//Override default signal handler:
 	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
-
+	virtual bool on_event(GdkEvent* event);
 	ImageBuffers mImgBuffers;
 	//map iterator for the drawing process
 	ImageBuffers::iterator mImageBufferDItr;
