@@ -126,7 +126,6 @@ void EmulationWrapper::RunEmulation()
 {
 	try
 	{
-//		SDataController::getInstance().init(output);
 		SDataController::getInstance().init();
 		SLogger::getInstance().InitLogger();
 		SReport::getInstance().InitReport();
@@ -146,6 +145,7 @@ void EmulationWrapper::RunEmulation()
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		SLogger::getInstance().DestroyLogger();
+		SReport::getInstance().DestroyReport();
 		EnableNetworkManager();
 		throw error;
 	}

@@ -1,30 +1,22 @@
 0 : Disabling Linux Networking
-0.64 : Validating XML file is present
-0.64 : Building the emulation
-0.64 : name:	lo
-0.64 : name:	loname:	eth0
-0.66 : ip table init complete
-0.66 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
-0.68 : DHCP service started...
-0.72 : name:	loname:	eth0name:	eth1
-0.75 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
-0.91 : DHCP service started...
-1 : name:	loname:	eth0name:	eth1name:	lo
-1 : name:	loname:	eth0name:	eth1name:	loname:	lo
-1 : Starting the emulation
-1.01 : std::exception
-1.01 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
-1.01 : std::exception
-1.01 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
-37.33 : last added ip address: 10.0.0.3 for MAC: 00:0a:e4:d4:8e:49
-37.33 : Started Handshake Offering 10.0.0.3
-37.93 : Handshake Finished With Setting 10.0.0.3
-54.24 : No Handler found for message type:8
-57.06 : last added ip address: 10.0.0.4 for MAC: 00:24:81:22:a0:b5
-57.06 : Started Handshake Offering 10.0.0.4
-57.44 : Handshake Finished With Setting 10.0.0.4
-63.99 : No Handler found for message type:8
-890.99 : Emulation exiting
-890.99 : Enabling Networking
-891 : Destroying Controller Thread
-891 : Destroying Logger and exiting program
+0.19 : Validating XML file is present
+0.19 : Building the emulation
+0.2 : name:	lo
+0.2 : name:	loname:	eth0
+0.2 : last added ip address: 10.0.0.2 for MAC: 00:02:b3:33:ca:d8
+0.2 : DHCP service started...
+0.23 : name:	loname:	eth0name:	eth1
+0.27 : last added ip address: 10.0.0.1 for MAC: 00:24:81:21:b7:1c
+0.27 : DHCP service started...
+0.31 : name:	loname:	eth0name:	eth1name:	lo
+0.31 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.31 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.31 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+0.31 : Starting the emulation
+0.31 : std::exception
+0.31 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+0.35 : Running Virtual Routers Thread With 1 Routers
+9.7 : Emulation exiting
+9.7 : Enabling Networking
+9.7 : Destroying Controller Thread
+9.7 : Destroying Logger and exiting program

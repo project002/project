@@ -49,6 +49,9 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 	mStateWidget = new CEmuStatWidget(&mStateWidgetCon);
 	mGrid.attach(mStateWidgetCon,0,2,2,1);
 
+	//window resize event to set the max window width/height
+	//signal_realize().connect(sigc::mem_fun(*this,&CGUIGTK::on_realize));
+
 	//drawing the emulation
 	mDrawing = new CEmulationDrawing();
 	mGrid.attach(*mDrawing,2,0,4,4);
@@ -145,6 +148,7 @@ void CGUIGTK::start_emulation_thread()
 void CGUIGTK::run_emulation() //runs in a seperate thread
 {
 
+	mInst.override_color (Gdk::RGBA("black"), Gtk::STATE_FLAG_NORMAL);
 	mInst.set_label("Run Started");
 	try
 	{
@@ -159,17 +163,16 @@ void CGUIGTK::run_emulation() //runs in a seperate thread
 	catch(CException & error)
 	{
 		mEmulationRunning = false;
-		mInst.set_label("Exception On Run");
-		cout << error.what() << endl;
+		delete mEmulation;
+		mEmulation = NULL;
+		stringstream ss;
+		ss << "Exception On Run:\n" << error.what();
+		mInst.override_color (Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
+		mInst.set_label(ss.str());
 		//throw CException("Emulation Failed");
 	}
 }
 
-void CGUIGTK::quit_program()
-{
-	stop_emulation();
-	hide(); //hide the main menu application quit
-}
 
 void CGUIGTK::loop()
 {
@@ -210,3 +213,11 @@ bool CGUIGTK::on_delete_event(GdkEventAny* event)
 	}
 	return true;
 }
+
+//void CGUIGTK::on_realize()
+//{
+////	Gdk::Geometry geometry;
+////	geometry.max_height = 800;
+////	geometry.max_width = 600;
+////	set_geometry_hints((*this).gobj(), geometry, Gdk::HINT_MAX_SIZE);
+//}

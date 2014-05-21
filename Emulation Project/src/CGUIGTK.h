@@ -37,7 +37,6 @@ protected:
 	void stop_emulation();
 	void create_menu_bar();
 	void start_emulation_thread();
-	void quit_program();
 	void loop();
 
 	//members
@@ -58,6 +57,7 @@ private:
 	Glib::Thread* EmulationThread;
 protected:
 	virtual bool on_delete_event (GdkEventAny*event);
+	//virtual void on_realize();
 
 };
 

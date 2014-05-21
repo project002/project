@@ -27,7 +27,7 @@ private:
 	//setup xml path
 	string mXMLPath;
 	//setup xml parser
-	CXMLBasicParser mXMLprs;
+	CXMLBasicParser* mXMLprs;
 	//positions of the objects key:element id value : position (x,y)
 	ElementMap* mElementsPos;
 	//positions of the lines key:element id value : positions (x1,y1),(x2,y2)
@@ -36,10 +36,20 @@ private:
 	void loadImagesSrouces();
 	int physical_routers_count();
 	void initial_positions(); //setup the initial positions of the object in the emulation (in percentage)
+	//indicate drag event start
+	bool mStartDrag;
+	std::pair<int,int>* mDragRef;
+	int canvasW;
+	int canvasH;
+	std::pair<int,int> noPos;
 
 	vector< std::pair<int,int> > get_connected_routers(int id);
-	std::pair<int,int> next_source_router_pos();
-	std::pair<int,int> next_source_con_pos();
+	/**
+	 * @param reset to reset the next position counter
+	 * @return the next position of a source router, if reset = true return value is meaningless
+	 */
+	std::pair<int,int> next_source_router_pos(bool reset = false);
+	std::pair<int,int> next_source_con_pos(bool reset = false);
 	/**
 	 * returns the pixel value of the given percent and
 	 * maximum (100%) pixel value
@@ -48,10 +58,24 @@ private:
 	 * @return the pixel value which is "percent" of "pixel_value"
 	 */
 	int percent2pixel(int percent,int pixel_value);
+	int pixel2percent(int pixel,int pixel_value);
+
+	/**
+	 * get a reference id of the element being
+	 * clicked on
+	 * @param px - the position of the x pointer in percent
+	 * @param py - the position of the y pointer in percent
+	 * @return
+	 */
+	int get_clicked_element(int px,int py);
+
+	void quickNdirty_lines_update();
 protected:
 	//Override default signal handler:
 	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
-	virtual bool on_event(GdkEvent* event);
+	virtual bool on_button_press_event (GdkEventButton* event);
+	virtual bool on_button_release_event (GdkEventButton* event);
+	virtual bool on_motion_notify_event(GdkEventMotion* event);
 	ImageBuffers mImgBuffers;
 	//map iterator for the drawing process
 	ImageBuffers::iterator mImageBufferDItr;
