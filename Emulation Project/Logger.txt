@@ -3,21 +3,21 @@
 0.22 : Building the emulation
 0.22 : name:	lo
 0.22 : name:	loname:	eth0
-0.24 : ip table init complete
-0.24 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
-0.26 : DHCP service started...
-0.31 : name:	loname:	eth0name:	eth1
-0.37 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
-0.37 : DHCP service started...
-0.42 : name:	loname:	eth0name:	eth1name:	lo
-0.42 : name:	loname:	eth0name:	eth1name:	loname:	eth1
-0.42 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
-0.42 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
-0.42 : Starting the emulation
-0.42 : Running Virtual Routers Thread With 1 Routers
-0.44 : std::exception
-0.44 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
-73.7 : Emulation exiting
-73.7 : Enabling Networking
-73.7 : Destroying Controller Thread
-73.7 : Destroying Logger and exiting program
+0.23 : ip table init complete
+0.23 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0.24 : DHCP service started...
+0.27 : name:	loname:	eth0name:	eth1
+0.29 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.29 : DHCP service started...
+0.35 : name:	loname:	eth0name:	eth1name:	lo
+0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.35 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+0.35 : Starting the emulation
+0.35 : Running Virtual Routers Thread With 1 Routers
+0.39 : std::exception
+0.39 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+24.93 : Emulation exiting
+24.93 : Enabling Networking
+24.93 : Destroying Controller Thread
+24.93 : Destroying Logger and exiting program

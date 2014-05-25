@@ -54,6 +54,7 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 
 	//drawing the emulation
 	mDrawing = new CEmulationDrawing();
+	mDrawing->signal_button_release_event().connect(sigc::mem_fun(*this,&CGUIGTK::router_prop));
 	mGrid.attach(*mDrawing,2,0,4,4);
 
 	mPackingBox->show_all();
@@ -82,7 +83,8 @@ void CGUIGTK::create_menu_bar()
 void CGUIGTK::start_emulation_quick()
 {
 	open_file_browser();
-	start_emulation_thread();
+	if (mImportXMLPath.length() > 0)
+	{start_emulation_thread();}
 }
 
 void CGUIGTK::open_file_browser()
@@ -134,6 +136,7 @@ void CGUIGTK::stop_emulation()
 		mEmulation->StopEmulation();
 		delete mEmulation;
 		mEmulation = NULL;
+		mImportXMLPath = "";
 	}
 }
 
@@ -197,6 +200,12 @@ CGUIGTK::~CGUIGTK()
 		mEmulation = NULL;
 	}
 
+}
+
+bool CGUIGTK::router_prop(GdkEventButton* event)
+{
+	cout << "show router properties that can be changed " << event->button << endl;
+	return true;
 }
 
 bool CGUIGTK::on_delete_event(GdkEventAny* event)

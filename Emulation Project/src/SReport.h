@@ -21,22 +21,32 @@ public:
 	}
 	void InitReport()
 	{
-		fd.open("Report.txt", std::fstream::out | std::fstream::trunc);
+		fd.open("Report.html", std::fstream::out | std::fstream::trunc);
 		if (!fd.is_open())
 		{
 			std::cout << "Can't open log file for write.\n";
 			exit (EXIT_FAILURE);
 		}
 		timer.restart();
+		rawLog("<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><table>");
 	}
 	void DestroyReport()
 	{
+		rawLog("</table></body></html>");
 		fd.close();
 	}
+
+	void rawLog(const char * toLog)
+	{
+		ReportMTX.lock();
+		fd << toLog << std::endl;
+		ReportMTX.unlock();
+	}
+
 	void Log(const char * toLog)
 	{
 		ReportMTX.lock();
-		fd << timer.elapsed() << " : " << toLog << std::endl;
+		fd << "<tr><td>" << timer.elapsed() << "</td><td>" << toLog << "</td></tr>";
 		ReportMTX.unlock();
 	}
 
@@ -55,11 +65,11 @@ public:
 			PacketReport[packetID].insert(std::pair<double,unsigned int>(timeElapsed,routerNumber));
 			if (hasExitedEmulation)
 			{
-				fd<<"Packet ID: "<< packetID<< " ";
+				fd << "<tr><td>" << "Packet ID: "<< "</td><td>"<< packetID<< "</td><td>";
 				std::set< std::pair<double,unsigned int> >::iterator it;
 				for (it = PacketReport[packetID].begin();it!= PacketReport[packetID].end(); it++)
 				{
-					fd<<"Router Number: "<< (*it).second<< " Insert Time: "<< insertTime <<" Exit Time "<< (*it).first<<" ";
+					fd<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td></tr>";
 				}
 				fd<<std::endl;
 				PacketReport.erase(packetID);
@@ -70,7 +80,7 @@ public:
 	void LogRouter(unsigned int RouterNumber, unsigned int BufferSize, double DropRate, unsigned int BufferUsedSize, double Fillage)
 	{
 		ReportMTX.lock();
-		fd<<"Router: "<< RouterNumber<< " Buffer Size: " <<BufferSize << " DropRate: " << DropRate<< "% Buffer Initial Usage: " << BufferUsedSize<< " Fillage: " <<Fillage<< "%" ;
+		fd<< "<tr><td colspan='2'>" <<"Router: "<< "</td><td>" <<RouterNumber<< "</td><td colspan='2' >" <<" Buffer Size: " <<"</td><td>" <<BufferSize << "</td><td colspan='2' >" <<" DropRate: " <<"</td><td>" << DropRate << "%" << "</td><td colspan='2'>" << "Buffer Initial Usage: " << "</td><td>" << BufferUsedSize<< "</td><td colspan='2'>" << " Fillage: " <<"</td><td>" <<Fillage<< "%" << "</td></tr>" ;
 		fd<<std::endl;
 		ReportMTX.unlock();
 	}

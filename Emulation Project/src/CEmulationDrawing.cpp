@@ -19,10 +19,12 @@ CEmulationDrawing::CEmulationDrawing() :
 	mXMLprs(NULL),
 	mElementsPos(new ElementMap()),
 	mLinesPos(new LinesMap()),
+	mConnectionRelation(new LineRel()),
 	mStartDrag(false),
 	mDragRef(NULL),
 	canvasW(0),canvasH(0),
 	noPos(std::pair<int,int>(NO_POS,NO_POS)),
+	mConDragRef(std::vector< Point* >()),
 	mImgBuffers(ImageBuffers())
 {
 	this->add_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::POINTER_MOTION_MASK); //yeah!
@@ -63,6 +65,7 @@ CEmulationDrawing::~CEmulationDrawing()
 {
 	delete mElementsPos;
 	delete mLinesPos;
+	delete mConnectionRelation;
 }
 
 void CEmulationDrawing::resetDrawing(string xml_path)
@@ -72,6 +75,7 @@ void CEmulationDrawing::resetDrawing(string xml_path)
 	mXMLprs = new CXMLBasicParser();
 	mXMLprs->ParseXML(mXMLPath);
 	//clear info vectors or what not
+	mConnectionRelation->clear();
 	mElementsPos->clear();
 	mLinesPos->clear();
 	next_source_con_pos(true);
@@ -88,11 +92,20 @@ int CEmulationDrawing::physical_routers_count()
 	return count;
 }
 
+void CEmulationDrawing::set_lines_count()
+{
+	int p = mXMLprs->GetPhysicalConnections().size();
+	int v = mXMLprs->GetVirtualConnections().size();
+	mLinesPos->resize((p+v)*2);
+}
+
 void CEmulationDrawing::initial_positions()
 {
 	if (mXMLPath.length()==0) {return;}
 	vector<RouterInformation> routers = mXMLprs->GetRoutersInformation();
 	multimap<unsigned int,string> phCon = mXMLprs->GetPhysicalConnections();
+	//resize the vector so it wont re-allocate memory mid-init and fuck up the Point references at mConnectionRelation
+	set_lines_count();
 	int x_percent=CNVS_PAD;
 	int y_percent=50;
 	//TODO: this works for only two physical routers which are both on either side of the screen
@@ -101,17 +114,24 @@ void CEmulationDrawing::initial_positions()
 	std::pair<int,int> pos;
 	LineP line_pos;
 	vector<RouterInformation>::iterator it = routers.begin();
+	bool isPhysical = false;
 	//router & physical connections positions
 	for (;it!=routers.end();++it)
 	{
 		unsigned int id = (*it).sRouterNumber;
+		isPhysical = mXMLprs->isPhysicalRouter(id);
+		mConnectionRelation->insert(std::pair<unsigned int ,std::vector< Point* > >(id,std::vector< Point* >()));
 		//is source element
-		if (mXMLprs->isPhysicalRouter(id))
+		if (isPhysical)
 		{
 			pos = next_source_router_pos();
 			//insert lines for physical routers
 			line_pos = LineP(pos,next_source_con_pos());
-			mLinesPos->insert(std::pair< unsigned int,LineP >(id,line_pos));
+			//mLinesPos->insert(std::pair< unsigned int,LineP >(id,line_pos));
+			mLinesPos->push_back(line_pos);
+			//add relation of connection and router
+			mConnectionRelation->at(id).push_back(&(mLinesPos->back().first));
+//			cout << "inserted reference " << id << " with: " << mLinesPos->back().first.first << "," << mLinesPos->back().first.second  << " Mem " << &(mLinesPos->back().first) << std::endl;
 		}
 		else
 		{
@@ -123,45 +143,31 @@ void CEmulationDrawing::initial_positions()
 
 	//virtual connection positions
 	ElementMap::iterator eit = mElementsPos->begin();
-	vector< pair<int,int> > positions;
+	std::map<int unsigned,Point > positions;
 	for(;eit!=mElementsPos->end();++eit)
 	{
 		positions = get_connected_routers(eit->first);
-		vector< pair<int,int> >::iterator pit = positions.begin();
+		std::map<int unsigned,Point >::iterator pit = positions.begin();
 		for(;pit!=positions.end();++pit)
 		{
-			line_pos = LineP(eit->second,(*pit));
-			mLinesPos->insert(std::pair< unsigned int,LineP >(eit->first,line_pos));
+			line_pos = LineP(eit->second,(*pit).second);
+			mLinesPos->push_back(line_pos);
+			mConnectionRelation->at(eit->first).push_back(&(mLinesPos->back().first));
+			mConnectionRelation->at((*pit).first).push_back(&(mLinesPos->back().second));
 		}
 	}
-	///printout
+//	///printout
 //	LinesMap::iterator lit = mLinesPos->begin();
 //	for (;lit!=mLinesPos->end();++lit)
 //	{
-//		cout << "id: " << lit->first;
-//		cout << "p1: " << lit->second.first.first << ":" << lit->second.first.second << "  ";
-//		cout << "p2: " << lit->second.second.first << ":" << lit->second.second.second << endl;
+//		cout << "p1: " << lit->first.first << ":" << lit->first.second << " Mem " << &(lit->first) << "  ";
+//		cout << "p2: " << lit->second.first << ":" << lit->second.second << " Mem " << &(lit->second) << endl;
 //	}
+//
+//	print_relations();
 
 }
 
-void CEmulationDrawing::quickNdirty_lines_update()
-{
-	mLinesPos->clear();
-	LineP line_pos;
-	ElementMap::iterator eit = mElementsPos->begin();
-	vector< pair<int,int> > positions;
-	for(;eit!=mElementsPos->end();++eit)
-	{
-		positions = get_connected_routers(eit->first);
-		vector< pair<int,int> >::iterator pit = positions.begin();
-		for(;pit!=positions.end();++pit)
-		{
-			line_pos = LineP(eit->second,(*pit));
-			mLinesPos->insert(std::pair< unsigned int,LineP >(eit->first,line_pos));
-		}
-	}
-}
 
 std::pair<int, int> CEmulationDrawing::next_source_router_pos(bool reset)
 {
@@ -199,12 +205,12 @@ int CEmulationDrawing::pixel2percent(int pixel, int pixel_value)
 	return (int) v;
 }
 
-vector<std::pair<int, int> > CEmulationDrawing::get_connected_routers(int id)
+std::map<int unsigned,Point > CEmulationDrawing::get_connected_routers(int id)
 {
 	//typedef to the rescue!
 	typedef multimap<unsigned int,unsigned int> VirCons;
 
-	vector<std::pair<int, int> > ret = vector<std::pair<int, int> >();
+	std::map<int unsigned,Point > ret = std::map<int unsigned,std::pair<int, int> >();
 
 	if (mXMLPath.length()==0) {return ret;}
 	VirCons vCons = mXMLprs->GetVirtualConnections();
@@ -215,7 +221,7 @@ vector<std::pair<int, int> > CEmulationDrawing::get_connected_routers(int id)
 	VirCons::iterator it = range.first;
 	for (;it!=range.second;++it)
 	{
-		ret.push_back((mElementsPos->at(it->second)));
+		ret.insert(std::pair<int unsigned,Point>(it->second,(mElementsPos->at(it->second))));
 	}
 	return ret;
 
@@ -238,6 +244,34 @@ int CEmulationDrawing::get_clicked_element(int px, int py)
 	return NO_POS;
 }
 
+
+void CEmulationDrawing::draw_router_info(int rid,int pos[],const Cairo::RefPtr<Cairo::Context>& cr)
+{
+	//move this all to the initialization
+	Pango::FontDescription font;
+	font.set_family("Monospace");
+	font.set_weight(Pango::WEIGHT_BOLD);
+
+	stringstream ss;
+	ss << rid << "\n" << "Fake Fillage: 0 \n" << "Fake Buffer size: 0\n" << "Fake DropRate: 0" ;
+
+	Glib::RefPtr<Pango::Layout> layout = create_pango_layout(ss.str());
+
+	layout->set_font_description(font);
+
+	int text_width;
+	int text_height;
+
+	//get the text dimensions (it updates the variables -- by reference)
+	layout->get_pixel_size(text_width, text_height);
+
+
+	// Position the text in the middle
+	cr->move_to(pos[0]-(text_width/2), pos[1]+(mImgBuffers.at("RouterImage")->get_height()/2));
+
+	layout->show_in_cairo_context(cr);
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////EVENTS/////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -254,27 +288,18 @@ bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 	//draw connections by positions
 	cr->set_line_width(4.0);
-	quickNdirty_lines_update();
+	//quickNdirty_lines_update();
 	LinesMap::iterator lit = mLinesPos->begin();
 	for (;lit!=mLinesPos->end();++lit)
 	{
-		if (mXMLprs->isPhysicalRouter(lit->first))
-		{
-			cr->set_source_rgb(1,0,0);
-		}
-		else
-		{
-			cr->set_source_rgb(0,0,0);
-		}
+		base_pos[0] = percent2pixel(lit->first.first,canvasW);
+		base_pos[1] = percent2pixel(lit->first.second,canvasH);
 
-		base_pos[0] = percent2pixel(lit->second.first.first,canvasW);
-		base_pos[1] = percent2pixel(lit->second.first.second,canvasH);
-
-		target_pos[0] = percent2pixel(lit->second.second.first,canvasW);
-		target_pos[1] = percent2pixel(lit->second.second.second,canvasH);
+		target_pos[0] = percent2pixel(lit->second.first,canvasW);
+		target_pos[1] = percent2pixel(lit->second.second,canvasH);
 
 		cr->move_to(base_pos[0],base_pos[1]);
-		cr->line_to(target_pos[0],target_pos[1]);
+ 		cr->line_to(target_pos[0],target_pos[1]);
 		cr->stroke();
 	}
 
@@ -292,6 +317,9 @@ bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 				base_pos[0] - mImgBuffers.at(src_name)->get_width()/2,
 				base_pos[1] - mImgBuffers.at(src_name)->get_height()/2);
 		cr->paint();
+
+		cr->set_source_rgb(0,0,0);
+		draw_router_info(it->first,base_pos,cr);
 	}
 
 
@@ -302,29 +330,53 @@ bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 bool CEmulationDrawing::on_button_press_event(GdkEventButton* event)
 {
+	if (mXMLprs == NULL) {return true;}
 	mStartDrag = true;
 	int eid = get_clicked_element(pixel2percent(event->x,canvasW),pixel2percent(event->y,canvasH));
-	if (eid==NO_POS) {mDragRef = NULL;}
-	else {mDragRef = &mElementsPos->at(eid);}
+	if (eid==NO_POS)
+	{
+		mDragRef = NULL;
+		mConDragRef = std::vector< Point* >();
+
+	}
+	else
+	{
+		mDragRef = &mElementsPos->at(eid);
+		//connections to update
+		mConDragRef = mConnectionRelation->at(eid);
+	}
+
 	return true;
 }
 
 bool CEmulationDrawing::on_button_release_event(GdkEventButton* event)
 {
+	if (mXMLprs == NULL) {return true;}
 	mStartDrag = false;
 	mDragRef = NULL;
+	if (event->button == 3) //3 is the right mouse button (NO COSTANT FOR THAT)
+	{
+		int eid = get_clicked_element(pixel2percent(event->x,canvasW),pixel2percent(event->y,canvasH));
+		event->button = eid; //a hacky way to send information upward;
+		return eid==NO_POS; //propagate if false => if clicked on a router
+	}
 	return true;
 }
 
-
 bool CEmulationDrawing::on_motion_notify_event(GdkEventMotion* event)
 {
+	if (mXMLprs == NULL) {return true;}
 	if (mStartDrag && mDragRef!=NULL)
 	{
 		mDragRef->first = pixel2percent(event->x,canvasW);
 		mDragRef->second = pixel2percent(event->y,canvasH);
-//		cout <<  << "," << pixel2percent(event->y,canvasH) << "\n";
-//		cout<< mDragRef->first << "," << mDragRef->second << endl;
+		//update connections positions
+		std::vector< Point* >::iterator it = mConDragRef.begin();
+		for (;it!=mConDragRef.end();++it)
+		{
+			(*it)->first = mDragRef->first;
+			(*it)->second = mDragRef->second;
+		}
 		queue_draw();
 	}
 	return true;

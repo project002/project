@@ -38,7 +38,7 @@ protected:
 	void create_menu_bar();
 	void start_emulation_thread();
 	void loop();
-
+	bool router_prop(GdkEventButton* event);
 	//members
 	Gtk::Grid mGrid;
 	Gtk::Box* mPackingBox;

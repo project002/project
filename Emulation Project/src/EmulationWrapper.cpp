@@ -119,7 +119,7 @@ void EmulationWrapper::StopEmulation()
 	SDataController::getInstance().destroy();
 	SLogger::getInstance().Log("Destroying Logger and exiting program");
 	SLogger::getInstance().DestroyLogger();
-
+	SReport::getInstance().DestroyReport();
 }
 
 void EmulationWrapper::RunEmulation()

@@ -13,9 +13,12 @@
 #include <gdkmm/pixbuf.h>
 #include "CXMLBasicParser.h"
 
-typedef std::pair< std::pair<int,int>,std::pair<int,int> > LineP;
-typedef std::map< unsigned int,std::pair<int,int> > ElementMap;
-typedef std::multimap< unsigned int, LineP > LinesMap;
+typedef std::pair<int,int> Point;
+typedef std::pair< Point , Point > LineP;
+typedef std::map< unsigned int,Point > ElementMap;
+typedef std::map< unsigned int,std::vector< Point* > > LineRel;
+//typedef std::multimap< unsigned int, LineP > LinesMap;
+typedef std::vector< LineP > LinesMap;
 typedef std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > ImageBuffers;
 class CEmulationDrawing : public Gtk::DrawingArea
 {
@@ -32,18 +35,21 @@ private:
 	ElementMap* mElementsPos;
 	//positions of the lines key:element id value : positions (x1,y1),(x2,y2)
 	LinesMap* mLinesPos;
+	//stores references to the connections attached to the router by id
+	LineRel* mConnectionRelation;
 	void insertNewImage(Glib::ustring imageName,Glib::ustring imagePath);
 	void loadImagesSrouces();
 	int physical_routers_count();
 	void initial_positions(); //setup the initial positions of the object in the emulation (in percentage)
 	//indicate drag event start
 	bool mStartDrag;
-	std::pair<int,int>* mDragRef;
+	Point* mDragRef;
 	int canvasW;
 	int canvasH;
-	std::pair<int,int> noPos;
+	Point noPos;
+	std::vector< Point* > mConDragRef;
 
-	vector< std::pair<int,int> > get_connected_routers(int id);
+	std::map<int unsigned,Point > get_connected_routers(int id);
 	/**
 	 * @param reset to reset the next position counter
 	 * @return the next position of a source router, if reset = true return value is meaningless
@@ -69,7 +75,34 @@ private:
 	 */
 	int get_clicked_element(int px,int py);
 
-	void quickNdirty_lines_update();
+	/**
+	 * sets the size of the mLinesPos vector
+	 * according to the number of connections in the emulation.
+	 * this is done so when we create the mConnectionRelation
+	 * memory address won't change in mLinesPos (when it is populated)
+	 */
+	void set_lines_count();
+
+	/**
+	 * @param rid router id
+	 * @parma pos[] an array representing a point x,y of the router
+	 * @param cr the cairo context
+	 */
+	void draw_router_info(int rid,int pos[],const Cairo::RefPtr<Cairo::Context>& cr);
+
+	void print_relations()
+	{
+		LineRel::iterator it= mConnectionRelation->begin();
+		for (;it!=mConnectionRelation->end();++it)
+		{
+			cout << "Router " << it->first << ":" << endl;
+			std::vector< Point* >::iterator vit = it->second.begin();
+			for(;vit!=it->second.end();++vit)
+			{
+				cout << "\tRef:" << (*vit)->first << "," << (*vit)->second << " Mem: " << (*vit) << endl;
+			}
+		}
+	}
 protected:
 	//Override default signal handler:
 	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
