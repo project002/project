@@ -218,7 +218,18 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			{
 				RouterCreate->SetFillage(Fillage);
 			}
+			string fillageArray = currentRouter.attribute(XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE).as_string();
+			if (!fillageArray.empty())
+			{
+				RouterCreate->SetDynamicFillageArray(fillageArray);
+			}
 
+			string dropRateArray = currentRouter.attribute(
+					XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE).as_string();
+			if (!dropRateArray.empty())
+			{
+				RouterCreate->SetDynamicDropRateArray(dropRateArray);
+			}
 			SReport::getInstance().LogRouter(RouterNumber,BufferSize,DropRate,BufferUsedSize,Fillage);
 
 			//TODO: add to gui the init buffer size and fillage rate(in percent)
@@ -279,35 +290,9 @@ void CEmulation::XMLRoutingTableParserAvailability(pugi::xml_document & doc)
 {
 	try
 	{
+		//after consulting with Martin, there is no need for manual table building
 		mStaticRoutingTable= doc.child(XML_LAYER_1_NETWORK).child(XML_LAYER_2_IS_STATIC_TABLE).attribute(XML_STATIC_LAYER_ATTRIBUTE).as_bool();
-		if(mStaticRoutingTable)
-		{
-			XMLParseRoutingTable(doc);
-		}
-		else
-		{
-			mTableSwappingThread = boost::thread(&CEmulation::TableSwapping, this);
-		}
-	}
-	catch (CException & error)
-	{
-		SLogger::getInstance().Log(error.what());
-		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		throw;
-	}
-}
-
-/**
- * Parsing the routing table if its provided and wanted by the user.
- * TODO: parse routing tables - for next semester since only 1 router is available at the moment
- * 		 and the table swapping is enough.
- *
- * @param doc Setup XML tree
- */
-void CEmulation::XMLParseRoutingTable(pugi::xml_document & doc)
-{
-	try
-	{
+		mTableSwappingThread = boost::thread(&CEmulation::TableSwapping, this);
 	}
 	catch (CException & error)
 	{

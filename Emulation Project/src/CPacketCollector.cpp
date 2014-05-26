@@ -6,8 +6,6 @@
  */
 
 #include "CPacketCollector.h"
-//Defining the map
-map<string,unsigned long long int> CPacketCollector::mPacketsStatistics;
 
 CPacketCollector::CPacketCollector(unsigned int bufferSize):mBufferSize(bufferSize)
 {
@@ -129,46 +127,7 @@ void CPacketCollector::PushBack(Crafter::Packet * pkt)
 		throw;
 	}
 }
-void CPacketCollector::AnalyzePacketForStatistics(Crafter::Packet * packet)
-{
-	try
-	{
-		ARP* arp_layer = packet->GetLayer<ARP>();
-		if (arp_layer != NULL)
-		{
-			mPacketsStatistics["ARP"]=mPacketsStatistics["ARP"]+1;
-		}
-		else
-		{
-			IP* ip_layer = packet->GetLayer<IP>();
-			if (ip_layer != NULL)
-			{
-				mPacketsStatistics["IPv4"]=mPacketsStatistics["IPv4"]+1;
-				TCP* tcp_layer = packet->GetLayer<TCP>();
-				if(tcp_layer!=NULL)
-				{
-					mPacketsStatistics["TCP"]=mPacketsStatistics["TCP"]+1;
-				}
-				else
-				{
-					UDP* udp_layer = packet->GetLayer<UDP>();
-					if (udp_layer!=NULL)
-					{
-						mPacketsStatistics["UDP"]=mPacketsStatistics["UDP"]+1;
-					}
-				}
 
-			}
-		}
-	}
-	catch (CException & error)
-	{
-		SLogger::getInstance().Log(error.what());
-		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		throw;
-	}
-
-}
 Crafter::Packet * CPacketCollector::PopFront(double & popTime)
 {
 	try
@@ -213,10 +172,8 @@ void CPacketCollector::FixBufferFillage(double Fillage)
 	{
 		mMtx.lock();
 		double fillPercentage =((double(mPackets.size())/mBufferSize)*(100.0));
-//		cout<< "current fill : "<< fillPercentage<< " WANTED: "<< Fillage <<endl;
 		if (fillPercentage < Fillage)
 		{
-//			cout<<"random packets to add"<<((Fillage-fillPercentage)/100.0)*mBufferSize<< endl;
 			mMtx.unlock();
 			if ((Fillage-fillPercentage)*mBufferSize > 0)
 			{

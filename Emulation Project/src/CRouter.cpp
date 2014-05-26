@@ -10,7 +10,7 @@
 #include <boost/random/uniform_real_distribution.hpp>
 #include "CPhysicalConnection.h"
 
-CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mPacketCollector(NULL),mDropRate(0),mRouterNumber(1024),mThreaded(true),mFillage(0),mInitialBufferUse(0)
+CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mDropRate(0),mFillage(0),mInitialBufferUse(0),mRouterNumber(1024),mPacketCollector(NULL),mThreaded(true)
 {
 	try
 	{
@@ -64,14 +64,11 @@ void CRouter::RequestTables()
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
-
-				//s << "\t " << it->first << "|" << (*iter)->GetMAC() << "|" << it->second << endl;
 				mRoutingTable.insert(pair<string,pair<CConnection const*,string> >(
 						it->first,
 						pair<CConnection const*,string>((*iter),it->second)
 					));
 			}
-			//SLogger::getInstance().Log(s.str().c_str());
 		}
 	}
 	catch(CException & error)
@@ -86,6 +83,7 @@ void CRouter::Sniffer()
 {
 	try
 	{
+		mDropRateArrIterator=mDropRateArr.begin();
 		mPacketCollector= new CPacketCollector(mBufferSize);
 		AddPacketsToBuffer(mInitialBufferUse);
 		mSniffingThread = boost::thread(&CRouter::Sniff, this);
@@ -104,6 +102,7 @@ void CRouter::nonThreadedInit()
 	try
 	{
 		mPacketCollector= new CPacketCollector(mBufferSize);
+		mDropRateArrIterator=mDropRateArr.begin();
 	}
 	catch (CException & error)
 	{
@@ -148,17 +147,71 @@ bool CRouter::ProcessSendPacket(Packet* packet)
 	return (ip_layer->GetTTL() >= 1);
 }
 
+void CRouter::DynamicFillageHandler()
+{
+	try
+	{
+		static double previousChangeTime = SReport::getInstance().GetReportElapsedTime();
+		double elapsedTime=SReport::getInstance().GetReportElapsedTime() - previousChangeTime;
+		if ((*mFillageArrIterator).second < elapsedTime)
+		{
+			mFillageArrIterator++;
+			if (mFillageArrIterator==mFillageArr.end())
+			{
+				mFillageArrIterator = mFillageArr.begin();
+			}
+			SetFillage((*mFillageArrIterator).first);
+			previousChangeTime = SReport::getInstance().GetReportElapsedTime();
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+void CRouter::DynamicDropRateHandler()
+{
+	try
+	{
+		static double previousChangeTime = SReport::getInstance().GetReportElapsedTime();
+		double elapsedTime=SReport::getInstance().GetReportElapsedTime() - previousChangeTime;
+		if ((*mDropRateArrIterator).second < elapsedTime)
+		{
+			mDropRateArrIterator++;
+			if (mDropRateArrIterator==mDropRateArr.end())
+			{
+				mDropRateArrIterator = mDropRateArr.begin();
+			}
+			SetDropRate((*mDropRateArrIterator).first);
+			previousChangeTime = SReport::getInstance().GetReportElapsedTime();
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
 void CRouter::PacketHandler()
 {
 	Packet* packet;
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	map<string,pair< CConnection const*,string> >::iterator con_pos;
+	mFillageArrIterator = mFillageArr.begin();
 	double popTime=0;
 	try
 	{
 		while (true)
 		{
 			boost::this_thread::interruption_point();
+			if(!mFillageArr.empty())
+			{
+				DynamicFillageHandler();
+			}
 			mPacketCollector->FixBufferFillage(mFillage);
 			packet = mPacketCollector->PopFront(popTime);
 			if(packet!=NULL)
@@ -231,7 +284,7 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 		send_connection = (const_cast<CConnection*>(pos->second.first));
 		string dest_ip = send_connection->getGetwayAddress()->getIpStr();
 		if (!dest_ip.compare(pos->first))
-		{SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,true);}
+		{SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,true);}
 		else
 		{
 			Ethernet* eth_layer = pkt->GetLayer<Ethernet>();
@@ -244,11 +297,11 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 					send_connection->SendPacket(pkt,GetRouterNumber());
 					if(send_connection->isPhysical())
 					{
-						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,true);
+						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,true);
 					}
 					else
 					{
-						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,false);
+						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,false);
 					}
 				}
 			}
@@ -256,7 +309,7 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 	}
 	else
 	{
-		SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,true);
+		SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,true);
 	}
 }
 
@@ -272,6 +325,10 @@ void CRouter::Sniff()
 	{
 		while(true)
 		{
+			if (!mDropRateArr.empty())
+			{
+				DynamicDropRateHandler();
+			}
 			list< CConnection const *>::iterator iter = mConnections.begin();
 			for (;iter!=mConnections.end();iter++)
 			{
@@ -329,3 +386,63 @@ CRouter::~CRouter()
 	}
 }
 
+void CRouter::SetDynamicFillageArray(string str)
+{
+	try
+	{
+		std::istringstream in(str);
+		double percentage;
+		double intervalTime;
+		//If no time given the last percentage will not be inserted
+		while (in >> percentage && in >> intervalTime)
+		{
+			if (intervalTime > MAX_INTERVAL_BETWEEN_FILLAGE_CHANGE
+					|| intervalTime < 0)
+			{
+				throw(CException("Interval time is too long"));
+			}
+			if (percentage >= MAX_FILLAGE_RATE || percentage < 0)
+			{
+				throw(CException("Too high fillage percentage"));
+			}
+			mFillageArr.push_back(
+					pair<unsigned int, unsigned int>(percentage, intervalTime));
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+void CRouter::SetDynamicDropRateArray(string str)
+{
+	try
+	{
+		std::istringstream in(str);
+		double dropRate;
+		double intervalTime;
+		//If no time given the last percentage will not be inserted
+		while (in >> dropRate && in >> intervalTime)
+		{
+			if (intervalTime > MAX_INTERVAL_BETWEEN_FILLAGE_CHANGE
+					|| intervalTime < 0)
+			{
+				throw(CException("Interval time is too long"));
+			}
+			if (dropRate >= MAX_DROP_RATE || dropRate < 0)
+			{
+				throw(CException("Too high drop rate percentage"));
+			}
+			mDropRateArr.push_back(
+					pair<unsigned int, unsigned int>(dropRate, intervalTime));
+		}
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}

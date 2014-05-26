@@ -81,12 +81,12 @@ void CPhysicalConnection::startDHCPService()
 	//	mDHCPSniffer->Capture(-1,static_cast<void*> (mDHCPsrv));
 }
 
-bool CPhysicalConnection::SendPacket(Packet* packet,int routerNumber)
+void CPhysicalConnection::SendPacket(Packet* packet,int routerNumber)
 {
 	try
 	{
 		packet->Send(mInterfaceName);
-		return true;
+
 	}
 	catch (CException & error)
 	{
@@ -94,7 +94,7 @@ bool CPhysicalConnection::SendPacket(Packet* packet,int routerNumber)
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		close(mSocket);
 	}
-	return false;
+
 }
 
 string CPhysicalConnection::GetMAC() const

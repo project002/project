@@ -19,6 +19,8 @@
 #define XML_ROUTER_BUFFER_SIZE_ATTRIBUTE "BufferSize"
 #define XML_ROUTER_DROP_RATE_ATTRIBUTE "DropRate"
 #define XML_ROUTER_FILLAGE_ATTRIBUTE "Fillage"
+#define XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE "DynamicFillageArray"
+#define XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE "DynamicDropRateArray"
 
 //#define XML_LAYER_1_NETWORK "Network" -Already defined just here for visual
 #define XML_LAYER_2_VIRTUAL_CONNECTIONS "VirtualConnections"

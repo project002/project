@@ -1,0 +1,37 @@
+/*
+ * CPacketCollector.h
+ *
+ *  Created on: Dec 17, 2013
+ *      Author: root
+ */
+
+#ifndef CPACKETCOLLECTOR_H_
+#define CPACKETCOLLECTOR_H_
+#include "BasicIncludes.h"
+#include <boost/signals2/mutex.hpp>
+#define DEFAULT_BUFFER_SIZE_UNLIMITED 1024
+class CPacketCollector
+{
+public:
+	CPacketCollector(unsigned int bufferSize=DEFAULT_BUFFER_SIZE_UNLIMITED);
+	virtual ~CPacketCollector();
+	void PushBack(Crafter::Packet * pkt);
+	/**
+	 * @return if empty NULL is returned
+	 */
+	Crafter::Packet * PopFront(double & popTime);
+	void FixBufferFillage(double Fillage);
+	void DropRandomPacket();
+	void AddRandomPackets(unsigned int numberOfPackets);
+private:
+	void AnalyzePacketForStatistics(Crafter::Packet * packet);
+	void PrintPacket();
+	list<Crafter::Packet * > mPackets;
+	list<double> mPacketsReceiveTime;
+	unsigned int mBufferSize;
+	static map<string,unsigned long long int> mPacketsStatistics;
+
+	boost::signals2::mutex mMtx;
+};
+
+#endif /* CPACKETCOLLECTOR_H_ */

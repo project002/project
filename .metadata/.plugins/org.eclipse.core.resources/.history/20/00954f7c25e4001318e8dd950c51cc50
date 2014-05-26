@@ -1,0 +1,230 @@
+/*
+ * CGUIGTK.cpp
+ *
+ *  Created on: Mar 9, 2014
+ *      Author: root
+ */
+
+#include "CGUIGTK.h"
+
+CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
+					mMenuBar(Gtk::manage(new Gtk::MenuBar())),
+					mStopButton(Gtk::manage(new Gtk::Button())),
+					mQuickStartButton(Gtk::manage(new Gtk::Button())),
+					mImportXMLPath(""),
+					mEmulation(NULL),
+					mEmulationRunning(false)
+{
+	set_border_width(10);
+	set_default_size(530,300);
+	set_title("Bandwidth Variance Emulation");
+	mGrid.set_column_homogeneous(true);
+	mGrid.set_column_spacing(10);
+	mGrid.set_row_spacing(10);
+	mPackingBox->set_orientation(Gtk::ORIENTATION_VERTICAL);
+	add(*mPackingBox);
+	create_menu_bar();
+	mPackingBox->pack_start(mGrid,true,true,10);
+
+	//quick start button
+	mQuickStartButton->set_label("Quick Start");
+	mQuickStartButton->signal_clicked().connect(sigc::mem_fun(*this,&CGUIGTK::start_emulation_quick));
+	//mPackingBox->pack_start(*mQuickStartButton,Gtk::PACK_SHRINK);
+	mGrid.add(*mQuickStartButton);
+
+	//make stop button
+	mStopButton->set_label("Stop Emulation");
+	mStopButton->signal_clicked().connect(sigc::mem_fun(*this,&CGUIGTK::stop_emulation));
+	//mPackingBox->pack_end(*mStopButton,Gtk::PACK_SHRINK);
+	mGrid.add(*mStopButton);
+	//mGrid.attach_next_to(*mStopButton,*mQuickStartButton,Gtk::POS_BOTTOM,1,1);
+
+	//documentation label
+	mInst.set_label("Emulation Status");
+	mInst.set_alignment(Gtk::ALIGN_CENTER,Gtk::ALIGN_END);
+	//mPackingBox->pack_start(mInst,Gtk::PACK_SHRINK);
+	mGrid.attach(mInst,0,1,2,1);
+
+	//mStateWidget = new CEmuStatWidget(mPackingBox);
+	mStateWidget = new CEmuStatWidget(&mStateWidgetCon);
+	mGrid.attach(mStateWidgetCon,0,2,2,1);
+
+	//window resize event to set the max window width/height
+	//signal_realize().connect(sigc::mem_fun(*this,&CGUIGTK::on_realize));
+
+	//drawing the emulation
+	mDrawing = new CEmulationDrawing();
+	mDrawing->signal_button_release_event().connect(sigc::mem_fun(*this,&CGUIGTK::router_prop));
+	mGrid.attach(*mDrawing,2,0,4,4);
+
+	mPackingBox->show_all();
+}
+
+void CGUIGTK::create_menu_bar()
+{
+	mPackingBox->pack_start(*mMenuBar,Gtk::PACK_SHRINK,0);
+
+	//menu items top 0
+	Gtk::MenuItem* menuitem_file = Gtk::manage(new Gtk::MenuItem("_File", true));
+	mMenuBar->append(*menuitem_file);
+	Gtk::Menu* file_sub_menu = Gtk::manage(new Gtk::Menu());
+	menuitem_file->set_submenu(*file_sub_menu);
+	//submenu items
+	Gtk::MenuItem* import_file = Gtk::manage(new Gtk::MenuItem("Import..", true));
+	//register imoprt file action
+	import_file->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::open_file_browser));
+	file_sub_menu->append(*import_file);
+	Gtk::MenuItem *run_emu = Gtk::manage(new Gtk::MenuItem("Run", true));
+	//register run emulation action
+	run_emu->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::start_emulation_thread));
+	file_sub_menu->append(*run_emu);
+}
+
+void CGUIGTK::start_emulation_quick()
+{
+	open_file_browser();
+	start_emulation_thread();
+}
+
+bool CGUIGTK::open_file_browser()
+{
+	  Gtk::FileChooserDialog dialog("Select the Emulation XML file",
+	          Gtk::FILE_CHOOSER_ACTION_OPEN);
+	  dialog.set_transient_for(*this);
+
+	  //Add response buttons the the dialog:
+	  dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	  dialog.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+
+	  //Add filters, so that only certain file types can be selected:
+
+	  Glib::RefPtr<Gtk::FileFilter> filter_text = Gtk::FileFilter::create();
+	  filter_text->set_name("XML Emulation files");
+	  filter_text->add_mime_type("application/xml");
+	  dialog.add_filter(filter_text);
+
+	  Glib::RefPtr<Gtk::FileFilter> filter_any = Gtk::FileFilter::create();
+	  filter_any->set_name("Any files");
+	  filter_any->add_pattern("*");
+	  dialog.add_filter(filter_any);
+
+	  //Show the dialog and wait for a user response:
+	  int result = dialog.run();
+
+	  //Handle the response:
+	  switch(result)
+	  {
+	    case(Gtk::RESPONSE_OK):
+	    {
+	      mImportXMLPath = dialog.get_filename();
+	      break;
+	    }
+	    default:
+	    {
+	      //how??
+	      break;
+	    }
+	  }
+}
+
+void CGUIGTK::stop_emulation()
+{
+	if (mEmulation!=NULL)
+	{
+		mEmulationRunning = false;
+		mEmulation->StopEmulation();
+		delete mEmulation;
+		mEmulation = NULL;
+	}
+}
+
+void CGUIGTK::start_emulation_thread()
+{
+	mEmulationRunning = true;
+	EmulationThread = Glib::Thread::create(sigc::mem_fun(*this,&CGUIGTK::run_emulation),false);
+	loop();
+}
+
+
+void CGUIGTK::run_emulation() //runs in a seperate thread
+{
+
+	mInst.override_color (Gdk::RGBA("black"), Gtk::STATE_FLAG_NORMAL);
+	mInst.set_label("Run Started");
+	try
+	{
+		if (mEmulation==NULL)
+		{
+			mDrawing->resetDrawing(mImportXMLPath);
+			mEmulation = new EmulationWrapper(mImportXMLPath);
+			mEmulation->RunEmulation();
+			mInst.set_label("Run Ended");
+		}
+	}
+	catch(CException & error)
+	{
+		mEmulationRunning = false;
+		delete mEmulation;
+		mEmulation = NULL;
+		stringstream ss;
+		ss << "Exception On Run:\n" << error.what();
+		mInst.override_color (Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
+		mInst.set_label(ss.str());
+		//throw CException("Emulation Failed");
+	}
+}
+
+
+void CGUIGTK::loop()
+{
+	//stringstream s;
+	while (mEmulationRunning)
+	{
+		while(Gtk::Main::events_pending()) {Gtk::Main::iteration();}
+
+		mStateWidget->loop();
+	}
+}
+
+CGUIGTK::~CGUIGTK()
+{
+	delete mMenuBar;
+	delete mStopButton;
+	delete mPackingBox;
+	delete mStateWidget;
+	if (mEmulation!=NULL)
+	{
+		delete mEmulation;
+		mEmulation = NULL;
+	}
+
+}
+
+bool CGUIGTK::router_prop(GdkEventButton* event)
+{
+	cout << "show router properties that can be changed " << event->button << endl;
+	return true;
+}
+
+bool CGUIGTK::on_delete_event(GdkEventAny* event)
+{
+	if (mEmulation==NULL) {return false;}
+
+	Gtk::MessageDialog dialog(*this, "Unexpected Exit",false, Gtk::MESSAGE_QUESTION,Gtk::BUTTONS_OK_CANCEL);
+	dialog.set_secondary_text("Emulation is still running are you sure you want to exit?");
+    int result = dialog.run();
+	if (result == Gtk::RESPONSE_OK)
+	{
+		stop_emulation();
+		return false;
+	}
+	return true;
+}
+
+//void CGUIGTK::on_realize()
+//{
+////	Gdk::Geometry geometry;
+////	geometry.max_height = 800;
+////	geometry.max_width = 600;
+////	set_geometry_hints((*this).gobj(), geometry, Gdk::HINT_MAX_SIZE);
+//}

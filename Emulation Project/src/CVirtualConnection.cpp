@@ -10,16 +10,16 @@
 #define SECOND_ROUTER_PACKET_COLLECTOR 1
 //Byte Max Value
 #define BM 255
-int unsigned CVirtualConnection::VC_INC = 0;
+#define UNIQUE_IP_FOR_VIRTUAL_CONNECTION "200.200.200.200"
 
-CVirtualConnection::CVirtualConnection():mUniqueIPForConnection(new CUIPV4("200.200.200.200"))
+CVirtualConnection::CVirtualConnection():mUniqueIPForConnection(new CUIPV4(UNIQUE_IP_FOR_VIRTUAL_CONNECTION))
 {
 	try
 	{
+		static int unsigned VC_INC=0;
 		VC_INC += 1;
 		id = VC_INC;
 		mMacAddress = makeSequentialMACAddress();
-		//mMacAddress = makeRandomMACAddress();
 	}
 	catch (CException & error)
 	{
@@ -32,7 +32,6 @@ CVirtualConnection::CVirtualConnection():mUniqueIPForConnection(new CUIPV4("200.
 CVirtualConnection::~CVirtualConnection()
 {
 	delete mUniqueIPForConnection;
-	// TODO Auto-generated destructor stub
 }
 
 string CVirtualConnection::makeSequentialMACAddress()
@@ -51,27 +50,6 @@ string CVirtualConnection::makeSequentialMACAddress()
 		{ss << "00";}
 		if (i>0) {ss << ":";}
 		//_id -= 255;
-	}
-	string mac = ss.str();
-	return mac;
-}
-
-string CVirtualConnection::makeRandomMACAddress()
-{
-	stringstream ss;
-	for (int i = 0; i < 5; i++)
-	{
-		for (int k = 0; k < 2; k++)
-		{
-			int num = random() % 10;
-			ss << num;
-		}
-		ss << ":";
-	}
-	for (int k = 0; k < 2; k++)
-	{
-		int num = random() % 10;
-		ss << num;
 	}
 	string mac = ss.str();
 	return mac;
@@ -138,6 +116,7 @@ vector<pair<string, string> >& CVirtualConnection::GetTable()
 		throw;
 	}
 	mMtx.unlock();
+	return mRoutingToReturn;
 }
 
 Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
@@ -173,7 +152,7 @@ Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
 	return NULL;
 }
 
-bool CVirtualConnection::SendPacket(Packet* packet,int routerNumber)
+void CVirtualConnection::SendPacket(Packet* packet,int routerNumber)
 {
 	try
 	{
@@ -192,12 +171,11 @@ bool CVirtualConnection::SendPacket(Packet* packet,int routerNumber)
 
 			Crafter::Packet * pkt=new Packet(*packet);
 
-			int id = getPacketIdentification(pkt);
-			if (id != -1) {SLogger::getInstance().Logf("::IN:: %d IP Packet ID %d",routerNumber,id);}
+//			int id = getPacketIdentification(pkt);
+//			if (id != -1) {SLogger::getInstance().Logf("::IN:: %d IP Packet ID %d",routerNumber,id);}
 
 			mPacketCollectors[toSend].PushBack(pkt);
-			//TODO copy packet to new packet and push it
-			return false;
+
 		}
 	}
 	catch (CException & error)
@@ -207,8 +185,6 @@ bool CVirtualConnection::SendPacket(Packet* packet,int routerNumber)
 
 		throw;
 	}
-
-	return false;
 }
 
 void CVirtualConnection::AddInvolvedRouter(const unsigned int & routerNumber)

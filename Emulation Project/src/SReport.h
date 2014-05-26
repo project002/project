@@ -56,7 +56,7 @@ public:
 	 * @param routerNumber
 	 * @param hasExitedEmulation
 	 */
-	void LogPacket(long long int packetID,unsigned int routerNumber,double insertTime, bool hasExitedEmulation=false)
+	void LogPacket(long long int packetID,unsigned int routerNumber,double insertTime,double mFillage,double mDropRate, bool hasExitedEmulation=false)
 	{
 		ReportMTX.lock();
 		if (packetID!=0)
@@ -69,7 +69,7 @@ public:
 				std::set< std::pair<double,unsigned int> >::iterator it;
 				for (it = PacketReport[packetID].begin();it!= PacketReport[packetID].end(); it++)
 				{
-					fd<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td></tr>";
+					fd<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td><td>" <<" Total Time "<< "</td><td>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td>" << mDropRate<< "</td></tr>";
 				}
 				fd<<std::endl;
 				PacketReport.erase(packetID);

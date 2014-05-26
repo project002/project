@@ -12,15 +12,27 @@
 #include <sstream>
 #include <stdlib.h>
 #include <string>
+
+/**
+ * Logger of the emulation
+ */
 #include "SLogger.h"
+
+/**
+ * Emulation report
+ */
 #include "SReport.h"
 using namespace std;
 
 /**
- * Packet specific related inclusions
+ * Packet handling library
  */
 #include <crafter.h>
 using namespace Crafter;
+
+/**
+ * OS addresses analyzer
+ */
 #include <ifaddrs.h>
 /**
  * Exception Related Inclusions

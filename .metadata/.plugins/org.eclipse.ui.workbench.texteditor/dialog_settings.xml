@@ -3,7 +3,7 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
 		<item value="170" key="DIALOG_Y_ORIGIN"/>
-		<item value="680" key="DIALOG_HEIGHT"/>
+		<item value="708" key="DIALOG_HEIGHT"/>
 		<item value="1202" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Cantarell|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
@@ -13,24 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Report" key="selection"/>
+		<item value="mConDragRef" key="selection"/>
 		<list key="findhistory">
+			<item value="mConDrafRef"/>
+			<item value="Ref:"/>
+			<item value="ref:"/>
+			<item value="ref"/>
+			<item value="height"/>
+			<item value="width"/>
+			<item value="mXMLprs."/>
 			<item value="Logger"/>
-			<item value="routing table"/>
-			<item value="mRunning"/>
-			<item value="filla"/>
-			<item value="fillage"/>
-			<item value="TableSwapping"/>
-			<item value="routing"/>
-			<item value="device"/>
 		</list>
 		<list key="replacehistory">
+			<item value="mConDragRef"/>
+			<item value="canvasH"/>
+			<item value="canvasW"/>
+			<item value="mXMLprs-&gt;"/>
 			<item value="Report"/>
 			<item value="&gt; &gt;"/>
 			<item value="outputSS"/>
 			<item value="int unsigned"/>
-			<item value="REDIRECT_SYSTEM_FILE"/>
-			<item value="runCmdRedirect"/>
 		</list>
 	</section>
 </section>
