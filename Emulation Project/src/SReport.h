@@ -14,7 +14,6 @@
 using std::ofstream;
 
 
-
 #define TIME_OF_FLUSH_TO_DISK_IN_SECONDS 5
 
 class SReport
@@ -28,26 +27,41 @@ public:
 	void InitReport()
 	{
 		time_t t = time(0);   // get time now
-		std::stringstream fileNameAddons;
+		std::stringstream reportDateAndTimeString;
+
 		struct tm * now = localtime(&t);
-		fileNameAddons <<"Report-"<< (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-'
-				<< now->tm_mday<<'-'<<now->tm_hour<<'-'<<now->tm_min<<'-'<< now->tm_sec<<".html";
-		fd.open(fileNameAddons.str().c_str(), std::fstream::out | std::fstream::trunc);
+		reportDateAndTimeString<< (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-'
+						<< now->tm_mday<<'-'<<now->tm_hour<<'-'<<now->tm_min<<'-'<< now->tm_sec<<".html";
+
+		fd.open((std::string("Report-")+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
 		if (!fd.is_open())
 		{
-			std::cout << "Can't open log file for write.\n";
+			std::cout << "Can't open report file for write.\n";
+			exit (EXIT_FAILURE);
+		}
+
+		gd.open((std::string("Graphs-")+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
+		if (!gd.is_open())
+		{
+			std::cout << "Can't open graph file for write.\n";
 			exit (EXIT_FAILURE);
 		}
 		timer.restart();
-		rawLog("<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><table>");
+		rawLog(fd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><table>");
+		//TODO: verify GD initialization is correct
+		rawLog(gd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><canvas id=\"myChart\" width=\"400\" height=\"400\"></canvas>");
 	}
 	void DestroyReport()
 	{
-		rawLog("</table></body></html>");
+		rawLog(fd,"</table></body></html>");
+
+		//TODO: verify GD finishialization is correct
+		rawLog(gd,"<script src=\"Chart.js\"></script></body></html>");
 		fd.close();
+		gd.close();
 	}
 
-	void rawLog(const char * toLog)
+	void rawLog(ofstream & desc , const char * toLog)
 	{
 		ReportMTX.lock();
 		fd << toLog << std::endl;
@@ -75,6 +89,8 @@ public:
 		if (packetID!=0)
 		{
 			PacketReport[newInsertKey].insert(std::pair<double,unsigned int>(timeElapsed,routerNumber));
+			graphAverageFillage+=mFillage;
+			graphAverageDropRate+=mDropRate;
 			if (hasExitedEmulation)
 			{
 				double totalTimeUntilExit=0;
@@ -82,7 +98,10 @@ public:
 				std::set< std::pair<double,unsigned int> >::iterator it;
 				for (it = PacketReport[newInsertKey].begin();it!= PacketReport[newInsertKey].end(); it++)
 				{
+					graphSpeedCalcSize+=newInsertKey.second; // add the packet size
 					totalTimeUntilExit+=((*it).first - insertTime);
+					graphSpeedCalcTimer+=totalTimeUntilExit; // add packet transfer time
+					totalPacketsTransferred++;
 					ss<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td><td>" <<" Total Time In Router "<< "</td><td>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td>" << mDropRate<< "</td>";
 				}
 				ss<<"<td>" <<" Total Time "<< "</td><td>" << totalTimeUntilExit<< "</td></tr>"<<std::endl;
@@ -93,6 +112,21 @@ public:
 		{
 			fd.write(ss.str().c_str(),ss.str().size());
 			ss.clear();
+			graphAverageFillage=graphAverageFillage/totalPacketsTransferred;
+			graphAverageDropRate=graphAverageDropRate/totalPacketsTransferred;
+
+			//TODO: add to 'gd' file the graph properties
+			// 'timer' - X axis , time that passed since emulation started
+			// 'graphAverageFillage' - Y axis average fillage
+			// 'graphAverageDropRate' - Y axis average fillage
+			// (('1000' / 'graphSpeedCalcTimer') * 'graphSpeedCalcSize') - Y axis - Kbytes per second
+			// total of 4 lines graph.
+
+			graphSpeedCalcSize=0;
+			graphSpeedCalcTimer=0;
+			totalPacketsTransferred=0;
+			graphAverageFillage=0;
+			graphAverageDropRate=0;
 			lastFlushTime=timeElapsed;
 		}
 		ReportMTX.unlock();
@@ -125,43 +159,23 @@ public:
 
 private:
 	double lastFlushTime;
+	//file descriptor
 	ofstream fd;
+	//graphs descriptor
+	ofstream gd;
 	std::stringstream ss;
 	boost::timer timer;
 	boost::signals2::mutex ReportMTX;
-	SReport():lastFlushTime(0){};
-	SReport(SReport const &):lastFlushTime(0){}
+	SReport():lastFlushTime(0),graphSpeedCalcSize(0),graphSpeedCalcTimer(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0){};
+	SReport(SReport const &):lastFlushTime(0),graphSpeedCalcSize(0),graphSpeedCalcTimer(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0){}
 	void operator=(SReport const &);
 	//Report for analysis - < <packet id> - set<time> >
 	std::map< std::pair<long long int,long long int>,std::set< std::pair<double,unsigned int> > > PacketReport;
-
+	double graphSpeedCalcSize;
+	double graphSpeedCalcTimer;
+	unsigned int totalPacketsTransferred;
+	double graphAverageFillage;
+	double graphAverageDropRate;
 };
 
-
-
-
-
-
-/*
-#define COLOR_NORMAL "\x1B[0m"
-#define COLOR_RED "\x1B[31m"
-#define COLOR_GREEN "\x1B[32m"
-#define COLOR_YELLOW "\x1B[33m"
-#define COLOR_BLUE "\x1B[34m"
-#define COLOR_WHITE "\x1B[37m"
-
-static inline void LogColor(const char * text, const char * color = COLOR_NORMAL)
-{
-	printf("%s%s",color,text);
-	printf("%s",COLOR_NORMAL);
-}
-
-static inline void LogColorChange(const char * color = COLOR_NORMAL)
-{
-	printf("%s",color);
-}
-static inline void LogColorReset()
-{
-	printf("%s",COLOR_NORMAL);
-}*/
 #endif /* SREPORT_H_ */

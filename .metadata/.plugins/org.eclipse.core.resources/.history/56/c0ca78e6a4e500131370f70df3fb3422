@@ -1,0 +1,879 @@
+/*
+ * something2svg.h
+ *
+ *  Created on: Aug 16, 2011
+ *      Author: gregor
+ *
+ *
+ *
+ *
+
+Copyright (c) <2013> Gregor Schilling - www.schiso.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ *
+ */
+
+#ifndef SOMETHING2SVG_H_
+#define SOMETHING2SVG_H_
+
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <list>
+#include <math.h>
+#include <limits>
+
+
+typedef unsigned char GLubyte;
+#define VAR float
+
+typedef struct {
+	VAR v[6];
+} VAR6;
+
+using namespace std;
+
+/// SVG temporary buffer
+int SVG_rgb_fill[3];
+int SVG_rgb_line[3];
+string SVG_style;
+string SVG_font_family;
+string SVG_font_weight = "normal";
+double SVG_fs[2]; /// the final size on the paper
+double SVG_line_width = 1.;
+double SVG_font_size = 1.;
+list<VAR> SVG_pl; /// polynom points
+list<unsigned int> SVG_pl_length;
+list<string> SVG_pl_names;
+
+
+/**
+ * add a polygon line to the output buffer
+ */
+
+void SVG_setFontWeight(string weight)
+{
+	SVG_font_weight = weight;
+}
+
+void SVG_setFontSize(VAR size)
+{
+	SVG_font_size = size;
+}
+
+void SVG_setLineWidth(VAR width)
+{
+	SVG_line_width = width;
+}
+
+void SVG_setPaperSize(double x, double y)
+{
+	SVG_fs[0] = x;
+	SVG_fs[1] = y;
+}
+
+/**
+ * -1 for no color
+ */
+void SVG_setColor_fill(int r, int g, int b)
+{
+	SVG_rgb_fill[0] = r;
+	SVG_rgb_fill[1] = g;
+	SVG_rgb_fill[2] = b;
+}
+
+void SVG_setFont2StandartFont()
+{
+	SVG_font_family = "Ariel";
+}
+
+/*
+ * -1 for none
+ */
+void SVG_setColor_line(int r, int g, int b)
+{
+	SVG_rgb_line[0] = r;
+	SVG_rgb_line[1] = g;
+	SVG_rgb_line[2] = b;
+}
+
+
+inline string SVG_rgb_line_string()
+{
+	if(SVG_rgb_line[0] == -1 || SVG_rgb_line[1] == -1 || SVG_rgb_line[2] == -1)
+		return "none";
+
+	char msg[64];
+	sprintf(msg, "rgb(%i,%i,%i)",SVG_rgb_line[0], SVG_rgb_line[1], SVG_rgb_line[2]);
+	return msg;
+}
+
+inline string SVG_rgb_fill_string()
+{
+	if(SVG_rgb_fill[0] == -1 || SVG_rgb_fill[1] == -1 || SVG_rgb_fill[2] == -1)
+		return "none";
+
+	char msg[64];
+	sprintf(msg, "rgb(%i,%i,%i)",SVG_rgb_fill[0], SVG_rgb_fill[1], SVG_rgb_fill[2]);
+	return msg;
+}
+
+void SVG_setStyle(string style)
+{
+	SVG_style = style;
+}
+
+void SVG_setFontFamily(string font)
+{
+	SVG_font_family = font;
+}
+
+void SVG_writeLine(ofstream &f, VAR x1, VAR y1, VAR x2, VAR y2)
+{
+	if(!f.good())
+		return;
+
+	f << "<line x1=" << '"' << x1 <<
+			 '"' <<" y1=" << '"' << y1 <<
+			 '"' <<" x2=" << '"' << x2 <<
+			 '"' <<" y2=" << '"' << y2 <<
+			 '"' << endl << "     style=" << '"' << SVG_style << (SVG_style.length() > 0 ? ";" : "") << "stroke:" << SVG_rgb_line_string() <<
+			 ";stroke-width:" << SVG_line_width << '"' << "/>"
+	<< endl << endl;
+
+}
+
+void SVG_writePolyLine(ofstream &f, VAR *v, unsigned int size)
+{
+	if(!f.good() || !v || size == 0)
+		return;
+
+	f << "<polyline points=" << '"' << v[0];
+	for(int i = 1; i<size; ++i)
+	{
+		f << "," << v[i];
+	}
+	f << '"' << endl;
+	f << "style=" << '"' << SVG_style << ';' << "stroke:" << SVG_rgb_line_string() << ";stroke-width:" << SVG_line_width << '"' << "/>" << endl;
+}
+
+/// As the SVG seems to be crap for this case - > a jpg will have to be generated
+void SVG_writeQuader_String(ofstream &f, VAR x, VAR y, VAR width, VAR height)
+{
+	if(!f.good())
+		return;
+
+	f << "<rect x=\"" << x <<"\" y=\"" << y << "\" width=\"" << width << "\" height=\""
+			<< height << "\" style=\"fill:"<< SVG_rgb_fill_string() << ";stroke:none;stroke-width:1\"/>" << endl << endl;
+}
+
+/**
+ * Writes an SVG xml style text
+ *
+ * input parameters:
+ * t - text
+ * x - x position
+ * y - y position
+ * f - filestream
+ */
+void SVG_writeString(ofstream &f, const VAR x, const VAR y, string t)
+{
+	if(!f.good())
+		return;
+
+	f <<  "<text x=" << '"' << x << '"' <<  " y=" << '"' << y << '"' << " style=\"font-family:" << SVG_font_family <<
+			 ';' <<  endl << "      font-size:" << SVG_font_size << ";font-weight:"<< SVG_font_weight << ";fill:" << SVG_rgb_fill_string() << '"' <<  ">" << endl
+	 << t << endl
+	 << "</text>" << endl << endl;
+}
+
+void SVG_writeString_rotate(ofstream &f, const VAR x, const VAR y, string t, VAR rotate)
+{
+	if(!f.good())
+		return;
+
+	f <<  "<text x=" << '"' << x << '"' <<  " y=" << '"' << y << '"' <<
+			" transform=\"rotate(" << rotate << " " << x << "," << y << ")\"" << " style=\"font-family:" << SVG_font_family <<
+			 ';' <<  endl << "      font-size:" << SVG_font_size << ";font-weight:" << SVG_font_weight << ";fill:" << SVG_rgb_fill_string() << '"' <<  ">" << endl
+	 << t << endl
+	 << "</text>" << endl << endl;
+}
+
+void SVG_write_file_end(ofstream &file)
+{
+	if(!file.good())
+		return;
+
+	file << endl << "</svg>";
+}
+
+/**
+ * iter is an continouse
+ */
+void SVG_writeContinuedPath(ofstream &file, list<VAR>::const_iterator &iter, list<VAR>::const_iterator &end, int size, VAR (&min)[2], VAR (&max)[2], VAR (&c)[4])
+{
+	c[2] = ((*iter)-min[0])/(max[0]-min[0])*(SVG_fs[0]);
+	++iter;
+	c[3] = (-(*iter-min[1])/(max[1]-min[1]))*(SVG_fs[1]);
+	SVG_setColor_fill(-1,-1,-1);
+	bool first = true;
+	 for(unsigned int i = 0; i<size;++i)
+	 {
+			c[0] = c[2];
+			c[1] = c[3];
+
+			++iter;
+			c[2] = ((*iter)-min[0])/(max[0]-min[0])*(SVG_fs[0]);
+			++iter;
+			c[3] = (-(*iter-min[1])/(max[1]-min[1]))*(SVG_fs[1]);
+
+			if(c[0] != 0 || c[1] != 0 || c[2] != 0 || c[3] != 0)
+			{
+				if(first)
+				{
+					file << "<path d=\"M" << c[0] << " " << c[1] << endl;
+					first = false;
+				}else
+				{
+					file << "        L" << c[0] << " " << c[1] << endl;
+				}
+
+
+			}
+	 }
+	 file << "        L" << c[2] << " " << c[3] << " \"" << endl;
+	 // close the path
+	 if(!first)
+	 {
+			file << " style=\"fill:" << SVG_rgb_fill_string() << ";stroke:" << SVG_rgb_line_string() << ";stroke-width:" << SVG_line_width << "\"/>" << endl
+					<< endl;
+	 }
+}
+
+void SVG_write_file_head(ofstream &file)
+{
+	if(!file.good())
+		return;
+
+	file << "<?xml version=" << '"' << "1.0" << '"' << " standalone=" << '"' << "no" << '"' << "?>"
+				 << endl << "<!DOCTYPE svg PUBLIC " << '"' << "-//W3C//DTD SVG 1.1//EN" << '"'
+				 << endl << '"' << "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" << '"' << ">"
+				 << endl
+				 << endl << "<svg width=" << '"' << "100%" << '"' << " height=" <<'"' << "100%" << '"'<< " version=" << '"' << "1.1" << '"'
+				 << endl <<	"xmlns=" << '"' << "http://www.w3.org/2000/svg" << '"' << ">" << endl << endl;
+}
+
+void SVG_writePoint(ofstream &f, VAR x, VAR y, VAR radius)
+{
+	f << "<circle cx=\"" << x <<"\" cy=\"" <<y<<"\" r=\""<<radius<<"\" stroke=\""<< SVG_rgb_line_string()<<
+		 "\" stroke-width=\"" << SVG_line_width << "\" fill=\"" << SVG_rgb_fill_string() << "\"/>"<< endl << endl;
+}
+
+void SVG_write_gridLines(ofstream &f, VAR x_min, VAR x_max, VAR y_min, VAR y_max, VAR x_axis_offset, VAR y_axis_offset,
+		string title,  string X_axis, string Y_axis)
+{
+	char msg[64];
+	/// x,y
+	VAR dist[3];
+	/// x,y
+	VAR begin[3];
+
+	VAR distx = 0.05;
+	VAR disty = 0.05;
+
+	dist[0] = (x_max-x_min);
+	begin[0] = x_min;
+	dist[1] = (y_max-y_min);
+	begin[1] = y_min;
+
+	VAR y_ = 4;
+	VAR x_ = 4;
+
+	SVG_setColor_fill(0,0,0);
+	SVG_setColor_line(0,0,0);
+	SVG_setLineWidth(0);
+	SVG_setFontWeight("bold");
+
+	VAR x,y;
+	VAR r = sqrt(SVG_fs[0]*SVG_fs[1])*0.004;
+
+	VAR ix, iy, i, j;
+
+	for(VAR ix = 0; ix<=x_; ++ix) // /*- x_axis_offset*(x_max - x_min)*/; x_max-i>1.e-4; i+=(dist[0])/(x_+1.))
+	{
+		for(VAR iy = 0; iy<=y_; ++iy) //VAR j = begin[1] /*- y_axis_offset*(y_max - y_min)*/; y_max-j>1.e-4; j+=dist[1]/(y_+1.))
+		{
+			i = begin[0] + ix*dist[0]/x_;
+			j = begin[1] + iy*dist[1]/y_;
+
+			x = (i-x_min)/(x_max-x_min)*(SVG_fs[0]);
+			y = (1.-((j-y_min)/(y_max-y_min))*(SVG_fs[1]));
+
+			SVG_writePoint(f,x,y,r);
+		}
+	}
+
+	/// end rendering lines
+	// X-Axis
+	for(ix = 0; ix<=x_; ++ix)
+	{
+		i = begin[0] + dist[0]/x_*ix;
+		x = (i-x_min)/(x_max-x_min)*(SVG_fs[0])-SVG_font_size*3.5;
+		y = SVG_font_size*2 + y_axis_offset*(SVG_fs[1]);
+
+		sprintf(msg,"%2.1e", i);
+		SVG_writeString(f, x, y, msg);
+	}
+
+	// Y-Axis
+	for(iy = 0; iy<=y_; ++iy)
+	{
+		i = begin[1] + dist[1]*iy/y_;
+		y = SVG_font_size*0.5-(i-y_min)/(y_max-y_min)*(SVG_fs[1]);
+		x = -SVG_font_size*5 - x_axis_offset*(SVG_fs[0]);
+		sprintf(msg,"%2.1e", i);
+		SVG_writeString(f, x,y, msg);
+	}
+
+	SVG_setFontWeight("normal");
+	SVG_setFontSize(SVG_font_size*2);
+
+	/// now draw the x label
+	if(X_axis.length() > 0)
+	{
+		x = ((x_min + x_max - SVG_font_size*X_axis.length()*0.5)*0.5-x_min)/(x_max-x_min)*(SVG_fs[0]);
+		y = SVG_font_size*2.1 + y_axis_offset*(SVG_fs[1]),
+		SVG_writeString(f, x,y, X_axis);
+	}
+
+	if(title.length() > 0)
+	{
+		y = -SVG_font_size; //+(1.-(y_max-y_min)/(y_max-y_min))*(SVG_fs[1]);
+		x = ((x_min + x_max)*0.5-x_min)/(x_max-x_min)*(SVG_fs[0]);
+		SVG_writeString(f, x,y,title);
+	}
+
+	/// draw the y label
+	if(Y_axis.length() > 0)
+	{
+		y = (1.-((y_min+y_max)-y_min)/(y_max-y_min))*(SVG_fs[1]);
+		x = -SVG_font_size*3 - x_axis_offset*(SVG_fs[0]);
+
+		SVG_writeString_rotate(f, x,y, Y_axis, -90);
+		//	renderText(m_axis_str[1], trans, scale, rot);
+	}
+
+}
+
+void SVG_initStandardFile(ofstream &filestream)
+{
+	if(!filestream.good())
+		return;
+
+	SVG_write_file_head(filestream);
+	SVG_setFont2StandartFont();
+	SVG_setPaperSize(700,700);
+	SVG_setLineWidth(sqrt(SVG_fs[0]*SVG_fs[1])*0.007);
+}
+
+/**
+ * buffer - x,y,x,y,...
+ * name   - name of the polynom
+ */
+void SVG_appendPointListBufferAS2DPlot(list<VAR> buffer, string name)
+{
+	list<VAR>::iterator i(buffer.begin()),e(buffer.end());
+
+//	for(;i!=e; ++i)
+//		SVG_pl.push_back(*i);
+	SVG_pl.insert(SVG_pl.end(), buffer.begin(), buffer.end());
+	SVG_pl_length.push_back((unsigned int)((VAR)(buffer.size())*0.5));
+	SVG_pl_names.push_back(name);
+}
+
+void writeSVGPointListBufferAS2DPlot(string filename, GLubyte r, GLubyte g, GLubyte b, string titel = "", string x_axis = "", string y_axis = "")
+{
+	ofstream outfile;
+	outfile.open(filename.c_str());
+
+		if(outfile.fail())
+		{
+			cerr << "No such file in XXYYZZArrays2SVGImage_potnetial_lines(..) with parameter filename = " << filename << endl;
+			return;
+		}
+
+	SVG_initStandardFile(outfile);
+	SVG_setFontSize(sqrt(SVG_fs[0]*SVG_fs[1])*0.025);
+
+
+		VAR c[2*2];
+		SVG_setColor_line(r,g,b);
+		VAR min[2];
+		VAR max[2];
+
+		min[0] = std::numeric_limits<VAR>::max();
+		min[1] = std::numeric_limits<VAR>::max();
+		max[0] = -min[0];
+		max[1] = -min[1];
+
+	 list<VAR>::const_iterator iter(SVG_pl.begin()), end(SVG_pl.end());
+	 list<unsigned int>::iterator ni(SVG_pl_length.begin()), ei(SVG_pl_length.end());
+	 list<string>::iterator nai(SVG_pl_names.begin()), nae(SVG_pl_names.end());
+
+	 for(; ni!=ei; ++ni)
+	 {
+		c[2] = *iter;
+		++iter;
+		c[3] = *iter;
+
+		 for(unsigned int i = 0; i<*ni-1;++i)
+		 {
+			    c[0] = c[2];
+			    c[1] = c[3];
+
+				++iter;
+				c[2] = *iter;
+				++iter;
+				c[3] = *iter;
+
+				min[0] = min[0] > c[0] ? c[0] : min[0];
+				min[0] = min[0] > c[2] ? c[2] : min[0];
+				min[1] = min[1] > c[1] ? c[1] : min[1];
+				min[1] = min[1] > c[3] ? c[3] : min[1];
+
+				max[0] = max[0] < c[0] ? c[0] : max[0];
+				max[0] = max[0] < c[2] ? c[2] : max[0];
+				max[1] = max[1] < c[1] ? c[1] : max[1];
+				max[1] = max[1] < c[3] ? c[3] : max[1];
+		 }
+		 ++iter;
+	 }
+
+	 iter = SVG_pl.begin();
+	 for(ni = SVG_pl_length.begin(); ni!=ei; ++ni)
+	 {
+		 SVG_writeContinuedPath(outfile, iter, end,*ni-1, min,max,c);
+
+		 ++iter;
+		 SVG_setColor_fill(255,255,255);
+		 outfile << "<g>" << endl;
+
+		 SVG_writeQuader_String(outfile,c[2]-SVG_font_size*0.25, c[3]-SVG_font_size*1.5, SVG_font_size*5.5,SVG_font_size*1.25);
+		 SVG_setColor_fill(0,0,0);
+		 SVG_writeString(outfile, c[2]-SVG_font_size*0.2,c[3]-SVG_font_size*0.5, *nai);
+
+		 outfile << "</g>" << endl;
+
+		 if(nai != nae)
+			 ++nai;
+	 }
+
+
+		SVG_write_gridLines(outfile, min[0], max[0], min[1], max[1], 0.005, 0.005, titel, x_axis, y_axis);
+		SVG_write_file_end(outfile);
+		outfile.close();
+}
+void SVG_clearPlotBuffer()
+{
+	SVG_pl.clear();
+	SVG_pl_length.clear();
+	SVG_pl_names.clear();
+}
+
+
+void pointlist2SVG_line(string filename, const list<VAR> &lp, int dim, GLubyte r, GLubyte g, GLubyte b, string titel = "", string x_axis = "", string y_axis = "")
+{
+	ofstream outfile;
+	outfile.open(filename.c_str());
+
+		if(outfile.fail())
+		{
+			cerr << "No such file in XXYYZZArrays2SVGImage_potnetial_lines(..) with parameter filename = " << filename << endl;
+			return;
+		}
+
+	SVG_initStandardFile(outfile);
+	SVG_setFontSize(sqrt(SVG_fs[0]*SVG_fs[1])*0.025);
+
+	list<VAR>::const_iterator iter(lp.begin()), end(lp.end());
+
+		VAR c[dim*2];
+		SVG_setColor_line(r,g,b);
+		VAR min[2];
+		VAR max[2];
+
+		min[0] = std::numeric_limits<VAR>::max();
+		min[1] = std::numeric_limits<VAR>::max();
+		max[0] = -min[0];
+		max[1] = -min[1];
+
+		for(; iter != end; ++iter)
+		{
+
+			for(int i = 0; i<dim-1;++i)
+			{
+				c[0] = *iter;
+				++iter;
+				c[1] = *iter;
+
+				if(iter != end)
+				{
+					++iter;
+					c[2] = *iter;
+					++iter;
+					c[3] = *iter;
+				}
+					else break;
+
+
+				min[0] = min[0] > c[0] ? c[0] : min[0];
+				min[0] = min[0] > c[2] ? c[2] : min[2];
+				min[1] = min[1] > c[1] ? c[1] : min[1];
+				min[1] = min[1] > c[3] ? c[3] : min[1];
+
+				max[0] = min[0] > c[0] ? c[0] : min[0];
+				max[0] = min[0] > c[2] ? c[2] : min[2];
+				max[1] = min[1] > c[1] ? c[1] : min[1];
+				max[1] = min[1] > c[3] ? c[3] : min[1];
+
+
+				SVG_writeLine(outfile,c[0],c[1],c[2],c[3]);
+			}
+
+		}
+
+		SVG_write_gridLines(outfile, min[0], max[0], min[1], max[1], 0,0, titel, x_axis, y_axis);
+
+		outfile.close();
+}
+
+extern list<VAR> generate_markers_from_isolines(list<VAR6> lines);
+/**
+ * Input:
+ * sx - X-Grid-Size
+ * sy - Y-Grid-Size
+ * XX,YY,ZZ Array of sx*sy in clock wise orientation from the lower left bottom counting upwards in y direction
+ *    _ _
+ *  2|4_|6_|
+ *  1|3_|_|
+ *    0  5
+ */
+void XXYYZZArrays2SVGImage_potential_lines(string filename, int sx, int sy, VAR *XX, VAR *YY, VAR *ZZ, string title = "", string X_axis = "", string Y_axis = "", unsigned int lines = 10, VAR *values_2draw = NULL)
+{
+	VAR linewidth = 2.0;
+
+	list<VAR> markers;
+	ofstream outfile;
+
+	outfile.open(filename.c_str());
+
+	if(outfile.fail())
+	{
+		cerr << "No such file in XXYYZZArrays2SVGImage_potnetial_lines(..) with parameter filename = " << filename << endl;
+		return;
+	}
+
+	SVG_initStandardFile(outfile);
+	SVG_setFontWeight("normal");
+	/// render the function. get the limits
+	VAR Z_max = -numeric_limits<VAR>::max();
+	VAR Z_min = numeric_limits<VAR>::max();
+
+	VAR Z_maxp[2];
+	VAR Z_minp[2];
+
+	int offset = 0;
+	for(int i = 0; i<sx;++i)
+	{
+		offset = i*sx;
+		for(int j = 0;j<sy;++j)
+		{
+				if(Z_max < ZZ[offset + j])
+				{
+					Z_max = ZZ[offset + j];
+					Z_maxp[0] = XX[offset + j];
+					Z_maxp[1] = YY[offset + j];
+				}
+				if(Z_min > ZZ[offset + j])
+				{
+					Z_min = ZZ[offset + j];
+					Z_minp[0] = XX[offset + j];
+					Z_minp[1] = YY[offset + j];
+				}
+		}
+	}
+
+	VAR zv =0;
+	VAR dist = Z_max - Z_min;
+
+	int r[4],g[4],b[4];
+	int index = 0;
+
+	list< VAR6 > gp[(sx-1)*(sy)*2];
+	list< VAR6 > line_list;
+
+	VAR values[lines];
+	unsigned int N = lines-1;
+	if(!values_2draw)
+	{
+		for(unsigned int i = 0; i<=N; ++i)
+		{
+			values[i] = Z_min + dist/(VAR)N*(VAR)i;
+		}
+	} else
+	{
+		for(unsigned int i = 0; i<=N; ++i)
+		{
+			values[i] = Z_min + dist*values_2draw[i];
+		}
+	}
+
+	VAR  dv;
+	VAR6 bt;
+
+	// predefine the points
+	for(int i = 0; i<sx-1; ++i)
+	{
+		offset = sx*i;
+
+		for(int j = 0; j<sy-1; ++j)
+		{
+			index = offset + j;
+
+			for(unsigned int t = 0; t < lines; ++t)
+			{
+				/// one line
+				if(i<sx && j<sy)
+				{
+					if(fabs((ZZ[sy*i+j] + ZZ[sy*i+j+1])*0.5 - values[t]) <= 0.5*fabs(ZZ[sy*i+j+1] - ZZ[sy*i+j]))
+					{
+						dv = (ZZ[sy*i+j+1] - ZZ[sy*i+j])/(YY[sy*i+j+1] - YY[sy*i+j]);
+						bt.v[0] = XX[sy*i+j];
+						bt.v[1] = (values[t] - ZZ[sy*i+j])/dv + YY[sy*i+j];
+						bt.v[2] = values[t];
+						gp[i*(sy*2-1)+j*2+1].push_back(bt);
+					}
+				/// other direction
+					if(fabs((ZZ[sy*(i+1)+j] + ZZ[sy*i+j])*0.5 - values[t]) <= 0.5*fabs(ZZ[sy*i+j] - ZZ[sy*(i+1)+j]))
+					{
+
+						dv = (ZZ[sy*(i+1)+j] - ZZ[sy*i+j])/(XX[sy*(i+1)+j] - XX[sy*i+j]);
+						bt.v[0] = (values[t] - ZZ[sy*i+j])/dv + XX[sy*i+j];
+						bt.v[1] = YY[sy*i+j];
+						bt.v[2] = values[t];
+						gp[i*(sy*2-1)+j*2].push_back(bt);
+
+					}
+				}
+				if(j== sy - 2 && fabs((ZZ[sy*(i+1)+j+1] + ZZ[sy*(i)+j+1])*0.5 - values[t]) <= 0.5*fabs(ZZ[sy*(i)+j+1] - ZZ[sy*(i+1)+j+1]))
+					{
+						dv = (ZZ[sy*(i+1)+j+1] - ZZ[sy*(i)+j+1])/(XX[sy*(i+1)+j+1] - XX[sy*(i)+j+1]);
+						bt.v[0] = (values[t] - ZZ[sy*(i)+j+1])/dv + XX[sy*(i)+j+1];
+						bt.v[1] = YY[sy*(i)+j+1];
+						bt.v[2] = values[t];
+						gp[i*(sy*2-1)+j*2+2].push_back(bt);
+
+					}
+				if(i == sx - 2 && fabs((ZZ[sy*(i+1)+j+1] + ZZ[sy*(i+1)+j])*0.5 - values[t]) <= 0.5*fabs(ZZ[sy*(i+1)+j] - ZZ[sy*(i+1)+j+1]))
+				{
+						dv = (ZZ[sy*(i+1)+j+1] - ZZ[sy*(i+1)+j])/(YY[sy*(i+1)+j+1] - YY[sy*(i+1)+j]);
+						bt.v[0] = XX[sy*(i+1)+j];
+						bt.v[1] = (values[t] - ZZ[sy*(i+1)+j])/dv + YY[sy*(i+1)+j];
+						bt.v[2] = values[t];
+						gp[(i+1)*(sy*2-1)+j].push_back(bt);
+
+				}
+			}
+		}
+	}
+
+	unsigned int id1 =0;
+	/// now connect the lines!
+	for(int i = 0; i<sx-1;++i)
+	{
+
+		for(int j = 0; j<sy-1;++j)
+		{
+				list<VAR6>::iterator ix,ex,iy,ey;
+
+				for(int zz = 0; zz <4; ++zz)
+				{
+
+				switch(zz) {
+					case 0 : id1 = i*(sy*2-1)+j*2+zz; break;
+					case 1 : id1 = i*(sy*2-1)+j*2+zz; break;
+					case 2 : if(j==sy-2) id1 = i*(sy*2-1)+(j)*2+2; break;
+					case 3 : if(i==sx-2) id1 = (i+1)*(sy*2-1)+j; break;
+				};
+
+				if(id1 < 0 || id1 >= (sx-1)*(sy)*2)
+					continue;
+
+				ix = gp[id1].begin();
+				ex = gp[id1].end();
+
+				while(ix != ex)
+				{
+					for(int z = 0; z < 4; ++z)
+					{
+						/// x values
+						if(zz==0)
+						{
+							/// select index
+							switch (z) {
+							case 0 : index = id1-2; break;
+							case 1 : index = id1-1; break;
+							case 2 : index = id1+(sy)*2-2; break;
+							case 3 : index = id1-(sy)*2; break;
+							};
+						}
+						else if(zz==1) /// y- values
+						{
+							switch (z) {
+							case 0 : index = id1-1; break;
+							case 1 : index = id1-2; break;
+							case 2 : index = id1-sy*2+1; break;
+							case 3 : index = id1-sy*2; break;
+							};
+						}else if(zz==2)
+						{
+							if(j < sy -2)
+								continue;
+
+							switch (z) {
+							case 0 : index = id1-1; break;
+							case 1 : j == sy - 2 ? index = id1+(sy-1)*2 : index = -1; break;
+							case 2 : index = id1-2; break;
+							case 3 : j == sy - 2 ? index = id1+sy-1 : index = -1; break;
+							};
+						}else if(zz == 3)
+						{
+							if(i < sx -2)
+								continue;
+
+							switch(z) {
+							case 0 : index = id1-((sy-1)*2)+j; break;
+							case 1 : index = id1-((sy-1)*2)+j+1; break;
+							case 2 : index = id1-((sy-1)*2)+j-1; break;
+							case 3 : index = -1; break;
+							};
+						}
+
+						if(index < 0 || index >= (sx-1)*(sy)*2)
+							continue;
+						iy = (gp[index]).begin();
+						ey = (gp[index]).end();
+
+						while(iy != ey)
+						{
+							/// the value is equal - draw the line
+								if((*iy).v[2] == (*ix).v[2])
+								{
+									for(index = 0; index<2; ++index)
+									{
+
+									if(index == 0)
+										zv = (*ix).v[2]-Z_min;
+									else
+										zv = (*iy).v[2]-Z_min;
+									zv = zv/dist;
+									if(zv <= 0.5)
+									{
+										zv *= 2;
+										g[index] = 255.*(zv);
+										b[index] = 255.*(1 - zv);
+										r[index] = 0;
+
+									}
+									else
+									{
+										zv = (zv - 0.5)*2;
+										r[index] = 255.*(zv);
+										g[index] = 255.*(1 - zv);
+										b[index] = 0;
+									}
+
+									if(r[index]>255)
+										r[index] = 255;
+									if(r[index]<0)
+										r[index] =0;
+									if(g[index]>255)
+										g[index] = 255;
+									if(g[index]<0)
+										g[index] = 0;
+
+									}// end of for
+
+									SVG_setColor_line(r[0], g[0], b[0]);
+									SVG_writeLine(outfile,((*ix).v[0]-XX[0])/(XX[sx*sy-1]-XX[0])*(SVG_fs[0]),
+														  (1.-((*ix).v[1]-YY[0])/(YY[sx*sy-1]-YY[0]))*(SVG_fs[1]),
+														  ((*iy).v[0]-XX[0])/(XX[sx*sy-1]-XX[0])*(SVG_fs[0]),
+														  (1.-((*iy).v[1]-YY[0])/(YY[sx*sy-1]-YY[0]))*(SVG_fs[1]));
+
+									bt.v[0] = (*ix).v[0];
+									bt.v[1] = (*ix).v[1];
+									bt.v[2] = (*iy).v[0];
+									bt.v[3] = (*iy).v[1];
+									bt.v[4] = (*ix).v[2];
+									line_list.push_back(bt);
+								}
+							++iy;
+						}
+					}
+					++ix;
+				}
+
+
+			}
+		}
+	}
+
+	SVG_setFontSize(sqrt(SVG_fs[0]*SVG_fs[1])*0.025);
+
+	markers = generate_markers_from_isolines(line_list);
+	list<VAR>::iterator iter(markers.begin()), end(markers.end());
+
+	markers.push_back(Z_minp[0]);
+	markers.push_back(Z_minp[1]);
+	markers.push_back(Z_min);
+	markers.push_back(Z_maxp[0]);
+	markers.push_back(Z_maxp[1]);
+	markers.push_back(Z_max);
+
+	VAR v[3];
+	char msg[64];
+	while(iter!=end)
+	{
+		v[0] = *iter;
+		++iter;
+		v[1] = *iter;
+		++iter;
+		v[2] = *iter;
+		++iter;
+
+		sprintf(msg, "%2.2e", v[2]);
+		SVG_setColor_line(0,0,0);
+		v[0] = (v[0]-XX[0])/(XX[sx*sy-1]-XX[0])*(SVG_fs[0]);
+	    v[1] = (1.-(v[1]-YY[0])/(YY[sx*sy-1]-YY[0]))*(SVG_fs[1]);
+	    SVG_setColor_fill(255,255,255);
+	    outfile << "<g>" << endl;
+	    SVG_writeQuader_String(outfile, v[0]-SVG_font_size*0.25, v[1]-SVG_font_size, SVG_font_size*5.5,SVG_font_size*1.25);
+	    SVG_setColor_fill(0,0,0);
+		SVG_writeString(outfile, v[0], v[1], msg);
+		outfile << "</g>" << endl << endl;
+
+	}
+
+	//	SVG_writeXXYYZZ_gridLines(outfile, sx, sy, XX, YY, ZZ, title, X_axis, Y_axis);
+	SVG_write_gridLines(outfile, XX[0], XX[sx*sy-1], YY[0], YY[sx*sy-1], 0,0, title, X_axis, Y_axis);
+	SVG_write_file_end(outfile);
+	outfile.close();
+}
+
+#endif /* SOMETHING2SVG_H_ */
