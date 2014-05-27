@@ -1,0 +1,5 @@
+<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><table>
+<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><canvas id="myChart" width="400" height="400"></canvas>
+<tr><td colspan='2'>Router: </td><td>3</td><td colspan='2' > Buffer Size: </td><td>1000</td><td colspan='2' > DropRate: </td><td>0%</td><td colspan='2'>Buffer Initial Usage: </td><td>0</td><td colspan='2'> Fillage: </td><td>0%</td></tr>
+<tr><td colspan='2'>Router: </td><td>1</td><td colspan='2' > Buffer Size: </td><td>100</td><td colspan='2' > DropRate: </td><td>0%</td><td colspan='2'>Buffer Initial Usage: </td><td>0</td><td colspan='2'> Fillage: </td><td>0%</td></tr>
+<tr><td colspan='2'>Router: </td><td>2</td><td colspan='2' > Buffer Size: </td><td>100</td><td colspan='2' > DropRate: </td><td>0%</td><td colspan='2'>Buffer Initial Usage: </td><td>0</td><td colspan='2'> Fillage: </td><td>0%</td></tr>

@@ -64,7 +64,7 @@ public:
 	void rawLog(ofstream & desc , const char * toLog)
 	{
 		ReportMTX.lock();
-		fd << toLog << std::endl;
+		desc << toLog << std::endl;
 		ReportMTX.unlock();
 	}
 
