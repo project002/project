@@ -1,0 +1,25 @@
+/*
+ * NetworkComponent.h
+ *
+ *  Created on: May 27, 2014
+ *      Author: root
+ */
+
+#ifndef CNETWORKCOMPONENT_H_
+#define CNETWORKCOMPONENT_H_
+
+
+/**
+ * Base class for all networking equipment
+ */
+class CNetworkComponent
+{
+public:
+
+protected:
+
+private:
+
+};
+
+#endif /* CNETWORKCOMPONENT_H_ */

@@ -9,6 +9,7 @@
 #include <crafter.h>
 #include <map>
 #include <set>
+#include <sstream>
 using std::ofstream;
 
 class SLogger
@@ -21,7 +22,12 @@ public:
 	}
 	void InitLogger()
 	{
-		fd.open("Logger.txt", std::fstream::out | std::fstream::trunc);
+		time_t t = time(0);   // get time now
+		std::stringstream fileNameAddons;
+		struct tm * now = localtime(&t);
+		fileNameAddons << "Logger-" << (now->tm_year + 1900) << '-'
+				<< (now->tm_mon + 1) << '-' << now->tm_mday<<'-'<<now->tm_hour<<'-'<<now->tm_min<<'-'<< now->tm_sec<<".txt";
+		fd.open(fileNameAddons.str().c_str(), std::fstream::out | std::fstream::trunc);
 		if (!fd.is_open())
 		{
 			std::cout << "Can't open log file for write.\n";

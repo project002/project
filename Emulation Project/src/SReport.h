@@ -9,7 +9,13 @@
 #include <crafter.h>
 #include <map>
 #include <set>
+#include <sstream>
+#include <ctime>
 using std::ofstream;
+
+
+
+#define TIME_OF_FLUSH_TO_DISK_IN_SECONDS 5
 
 class SReport
 {
@@ -21,7 +27,12 @@ public:
 	}
 	void InitReport()
 	{
-		fd.open("Report.html", std::fstream::out | std::fstream::trunc);
+		time_t t = time(0);   // get time now
+		std::stringstream fileNameAddons;
+		struct tm * now = localtime(&t);
+		fileNameAddons <<"Report-"<< (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-'
+				<< now->tm_mday<<'-'<<now->tm_hour<<'-'<<now->tm_min<<'-'<< now->tm_sec<<".html";
+		fd.open(fileNameAddons.str().c_str(), std::fstream::out | std::fstream::trunc);
 		if (!fd.is_open())
 		{
 			std::cout << "Can't open log file for write.\n";
@@ -56,24 +67,33 @@ public:
 	 * @param routerNumber
 	 * @param hasExitedEmulation
 	 */
-	void LogPacket(long long int packetID,unsigned int routerNumber,double insertTime,double mFillage,double mDropRate, bool hasExitedEmulation=false)
+	void LogPacket(long long int packetID,long long int packetSize,unsigned int routerNumber,double insertTime,double mFillage,double mDropRate, bool hasExitedEmulation=false)
 	{
 		ReportMTX.lock();
+		double timeElapsed=timer.elapsed();
+		std::pair<long long int, long long int> newInsertKey = std::pair<long long int, long long int>(packetID,packetSize);
 		if (packetID!=0)
 		{
-			double timeElapsed=timer.elapsed();
-			PacketReport[packetID].insert(std::pair<double,unsigned int>(timeElapsed,routerNumber));
+			PacketReport[newInsertKey].insert(std::pair<double,unsigned int>(timeElapsed,routerNumber));
 			if (hasExitedEmulation)
 			{
-				fd << "<tr><td>" << "Packet ID: "<< "</td><td>"<< packetID<< "</td><td>";
+				double totalTimeUntilExit=0;
+				ss << "<tr><td>" << "Packet ID: "<< "</td><td>"<< packetID<< "</td><td>" << "Packet Size: "<< "</td><td>"<< packetSize<< "</td><td>";
 				std::set< std::pair<double,unsigned int> >::iterator it;
-				for (it = PacketReport[packetID].begin();it!= PacketReport[packetID].end(); it++)
+				for (it = PacketReport[newInsertKey].begin();it!= PacketReport[newInsertKey].end(); it++)
 				{
-					fd<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td><td>" <<" Total Time "<< "</td><td>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td>" << mDropRate<< "</td></tr>";
+					totalTimeUntilExit+=((*it).first - insertTime);
+					ss<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td><td>" <<" Total Time In Router "<< "</td><td>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td>" << mDropRate<< "</td>";
 				}
-				fd<<std::endl;
-				PacketReport.erase(packetID);
+				ss<<"<td>" <<" Total Time "<< "</td><td>" << totalTimeUntilExit<< "</td></tr>"<<std::endl;
+				PacketReport.erase(newInsertKey);
 			}
+		}
+		if (timeElapsed - lastFlushTime > TIME_OF_FLUSH_TO_DISK_IN_SECONDS)
+		{
+			fd.write(ss.str().c_str(),ss.str().size());
+			ss.clear();
+			lastFlushTime=timeElapsed;
 		}
 		ReportMTX.unlock();
 	}
@@ -99,18 +119,21 @@ public:
 		vsprintf(str,format,args);
 		va_end(args);
 		Log(str);
+
 	}
 
 
 private:
+	double lastFlushTime;
 	ofstream fd;
+	std::stringstream ss;
 	boost::timer timer;
 	boost::signals2::mutex ReportMTX;
-	SReport(){};
-	SReport(SReport const &){}
+	SReport():lastFlushTime(0){};
+	SReport(SReport const &):lastFlushTime(0){}
 	void operator=(SReport const &);
 	//Report for analysis - < <packet id> - set<time> >
-	std::map<long long int,std::set< std::pair<double,unsigned int> > > PacketReport;
+	std::map< std::pair<long long int,long long int>,std::set< std::pair<double,unsigned int> > > PacketReport;
 
 };
 

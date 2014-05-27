@@ -284,7 +284,7 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 		send_connection = (const_cast<CConnection*>(pos->second.first));
 		string dest_ip = send_connection->getGetwayAddress()->getIpStr();
 		if (!dest_ip.compare(pos->first))
-		{SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,true);}
+		{SReport::getInstance().LogPacket(ip_layer->GetIdentification(),ip_layer->GetTotalLength(),mRouterNumber,popTime,mFillage,mDropRate,true);}
 		else
 		{
 			Ethernet* eth_layer = pkt->GetLayer<Ethernet>();
@@ -297,11 +297,11 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 					send_connection->SendPacket(pkt,GetRouterNumber());
 					if(send_connection->isPhysical())
 					{
-						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,true);
+						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),ip_layer->GetTotalLength(),mRouterNumber,popTime,mFillage,mDropRate,true);
 					}
 					else
 					{
-						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,false);
+						SReport::getInstance().LogPacket(ip_layer->GetIdentification(),ip_layer->GetTotalLength(),mRouterNumber,popTime,mFillage,mDropRate,false);
 					}
 				}
 			}
@@ -309,7 +309,7 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 	}
 	else
 	{
-		SReport::getInstance().LogPacket(ip_layer->GetIdentification(),mRouterNumber,popTime,mFillage,mDropRate,true);
+		SReport::getInstance().LogPacket(ip_layer->GetIdentification(),ip_layer->GetTotalLength(),mRouterNumber,popTime,mFillage,mDropRate,true);
 	}
 }
 
