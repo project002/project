@@ -91,6 +91,7 @@ public:
 			PacketReport[newInsertKey].insert(std::pair<double,unsigned int>(timeElapsed,routerNumber));
 			graphAverageFillage+=mFillage;
 			graphAverageDropRate+=mDropRate;
+			totalPacketsTransferred++;
 			if (hasExitedEmulation)
 			{
 				double totalTimeUntilExit=0;
@@ -101,7 +102,7 @@ public:
 					graphSpeedCalcSize+=newInsertKey.second; // add the packet size
 					totalTimeUntilExit+=((*it).first - insertTime);
 					graphSpeedCalcTimer+=totalTimeUntilExit; // add packet transfer time
-					totalPacketsTransferred++;
+
 					ss<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td><td>" <<" Total Time In Router "<< "</td><td>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td>" << mDropRate<< "</td>";
 				}
 				ss<<"<td>" <<" Total Time "<< "</td><td>" << totalTimeUntilExit<< "</td></tr>"<<std::endl;
