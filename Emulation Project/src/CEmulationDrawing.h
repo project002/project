@@ -37,6 +37,8 @@ private:
 	LinesMap* mLinesPos;
 	//stores references to the connections attached to the router by id
 	LineRel* mConnectionRelation;
+	//text layout
+	Glib::RefPtr<Pango::Layout> mTlayout;
 	void insertNewImage(Glib::ustring imageName,Glib::ustring imagePath);
 	void loadImagesSrouces();
 	int physical_routers_count();

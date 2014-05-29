@@ -185,6 +185,10 @@ void CGUIGTK::loop()
 		while(Gtk::Main::events_pending()) {Gtk::Main::iteration();}
 
 		mStateWidget->loop();
+		//emulation time
+		stringstream ss;
+		ss << "Run Started: " << SLogger::getInstance().getTime();
+		mInst.set_label(ss.str());
 	}
 }
 

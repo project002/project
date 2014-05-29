@@ -1,7 +1,7 @@
 <Network FormatVersion="1" Threaded="true">
 	<StaticTable isStatic="false"></StaticTable>
     <Routers>
-        <Router Number="3" BufferSize="1000" DropRate="0" BufferSizeUsed="0" Fillage="0" DynamicFillageArray="" DynamicDropRateArray="">
+        <Router Number="3" BufferSize="1000" DropRate="0" BufferSizeUsed="0" Fillage="0" DynamicFillageArray="3 30 5 10" DynamicDropRateArray="">
         	<PhysicalConnection>eth1</PhysicalConnection>
         	
         </Router>

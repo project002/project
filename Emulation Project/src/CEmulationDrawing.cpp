@@ -29,6 +29,13 @@ CEmulationDrawing::CEmulationDrawing() :
 {
 	this->add_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::POINTER_MOTION_MASK); //yeah!
 	loadImagesSrouces();
+	//init the text font layout
+	Pango::FontDescription font;
+	font.set_family("Monospace");
+	font.set_weight(Pango::WEIGHT_BOLD);
+	mTlayout = create_pango_layout("");
+	mTlayout->set_font_description(font);
+
 }
 
 void CEmulationDrawing::insertNewImage(Glib::ustring imageName,Glib::ustring imagePath)
@@ -248,28 +255,33 @@ int CEmulationDrawing::get_clicked_element(int px, int py)
 void CEmulationDrawing::draw_router_info(int rid,int pos[],const Cairo::RefPtr<Cairo::Context>& cr)
 {
 	//move this all to the initialization
-	Pango::FontDescription font;
-	font.set_family("Monospace");
-	font.set_weight(Pango::WEIGHT_BOLD);
+//	Pango::FontDescription font;
+//	font.set_family("Monospace");
+//	font.set_weight(Pango::WEIGHT_BOLD);
+
 
 	stringstream ss;
-	ss << rid << "\n" << "Fake Fillage: 0 \n" << "Fake Buffer size: 0\n" << "Fake DropRate: 0" ;
+	ss << rid << "\n" << "Fillage: " << SDataController::getInstance().get_router_data(rid,SDataController::FILLAGE) << "\n";
+	ss << "Buffer: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERUS)<< "\n";
+	ss << "DropRate: " <<  SDataController::getInstance().get_router_data(rid,SDataController::DROPRATE)<< "\n";
 
-	Glib::RefPtr<Pango::Layout> layout = create_pango_layout(ss.str());
+//	Glib::RefPtr<Pango::Layout> layout = create_pango_layout(ss.str());
 
-	layout->set_font_description(font);
+//	layout->set_font_description(font);
+
+	mTlayout->set_text(ss.str());
 
 	int text_width;
 	int text_height;
 
 	//get the text dimensions (it updates the variables -- by reference)
-	layout->get_pixel_size(text_width, text_height);
+	mTlayout->get_pixel_size(text_width, text_height);
 
 
 	// Position the text in the middle
 	cr->move_to(pos[0]-(text_width/2), pos[1]+(mImgBuffers.at("RouterImage")->get_height()/2));
 
-	layout->show_in_cairo_context(cr);
+	mTlayout->show_in_cairo_context(cr);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

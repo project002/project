@@ -56,6 +56,7 @@ public:
 		Log(str);
 	}
 
+	double getTime() {return timer.elapsed();}
 
 private:
 	ofstream fd;

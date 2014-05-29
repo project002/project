@@ -19,6 +19,10 @@ public:
 	static enum DATATYPE {
 		PACKETPROCCES,PACKETDROP,IPPACKET,DHCPPACKET,ARPPACKET
 	} dataType;
+	static enum ROUTERINFO{
+		FILLAGE,DROPRATE,BUFFERUS
+	}routerInfo;
+
 
 	static SDataController &getInstance()
 	{
@@ -30,16 +34,7 @@ public:
 	{
 		clear();
 		messages.push_back("Emulation Started");
-//		gui_refresh = boost::thread(&SDataController::output,this);
 	}
-
-//	std::string get_data()
-//	{
-//		refreshMTX.lock();
-//		std::string temp = mOut;
-//		refreshMTX.unlock();
-//		return temp;
-//	}
 
 	void refresh()
 	{
@@ -75,6 +70,14 @@ public:
 
 		mOut = outputSS.str();
 		return mOut;
+	}
+
+	bool insertRouterData(int unsigned routerID,ROUTERINFO type, float value)
+	{
+		insertMTX.lock();
+		routerSet[routerID][type] = value;
+		insertMTX.unlock();
+		return true;
 	}
 
 	bool insertData(DATATYPE type,int unsigned value)
@@ -133,6 +136,16 @@ public:
 		return data;
 	}
 
+	float get_router_data(int unsigned routerID,ROUTERINFO type)
+	{
+		insertMTX.lock();
+		float data = 0;
+		try {data = routerSet.at(routerID).at(type);}
+		catch(const std::out_of_range & e) {}
+		insertMTX.unlock();
+		return data;
+	}
+
 	double get_dropped_precentage()
 	{
 		refresh();
@@ -149,8 +162,14 @@ public:
 	}
 
 private:
+	typedef std::map<SDataController::ROUTERINFO,float> RouterInfoMap;
+	typedef std::map<int unsigned,RouterInfoMap > RouterSet;
+	typedef std::map<SDataController::DATATYPE,int unsigned> DataSet;
+
 	std::string mOut;
-	std::map<SDataController::DATATYPE,int unsigned> dataSet;
+	DataSet dataSet;
+	//holds a data map for each router in the emulation for live update
+	RouterSet routerSet;
 	std::vector<std::string> messages;
 	boost::signals2::mutex insertMTX;
 	boost::signals2::mutex refreshMTX;
@@ -158,10 +177,9 @@ private:
 	boost::thread gui_refresh;
 	double dropped_packets;
 
-	SDataController():dataSet(std::map<SDataController::DATATYPE,int unsigned>()),
-				dropped_packets(0){}
-	SDataController(const SDataController &):dataSet(std::map<SDataController::DATATYPE,int unsigned>()),
-								 dropped_packets(0){}
+	SDataController():dataSet(DataSet()),routerSet(RouterSet()),dropped_packets(0){}
+
+	SDataController(const SDataController &):dataSet(DataSet()),routerSet(RouterSet()),dropped_packets(0){}
 
 	void operator=(SDataController const &);
 

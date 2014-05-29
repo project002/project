@@ -39,26 +39,26 @@ public:
 			std::cout << "Can't open report file for write.\n";
 			exit (EXIT_FAILURE);
 		}
-
-		gd.open((std::string("Graphs-")+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
-		if (!gd.is_open())
-		{
-			std::cout << "Can't open graph file for write.\n";
-			exit (EXIT_FAILURE);
-		}
+//
+//		gd.open((std::string("Graphs-")+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
+//		if (!gd.is_open())
+//		{
+//			std::cout << "Can't open graph file for write.\n";
+//			exit (EXIT_FAILURE);
+//		}
 		timer.restart();
 		rawLog(fd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><table>");
 		//TODO: verify GD initialization is correct
-		rawLog(gd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><canvas id=\"myChart\" width=\"400\" height=\"400\"></canvas>");
+//		rawLog(gd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><canvas id=\"myChart\" width=\"400\" height=\"400\"></canvas>");
 	}
 	void DestroyReport()
 	{
 		rawLog(fd,"</table></body></html>");
 
 		//TODO: verify GD finishialization is correct
-		rawLog(gd,"<script src=\"Chart.js\"></script></body></html>");
+//		rawLog(gd,"<script src=\"Chart.js\"></script></body></html>");
 		fd.close();
-		gd.close();
+//		gd.close();
 	}
 
 	void rawLog(ofstream & desc , const char * toLog)
@@ -163,7 +163,7 @@ private:
 	//file descriptor
 	ofstream fd;
 	//graphs descriptor
-	ofstream gd;
+	//ofstream gd;
 	std::stringstream ss;
 	boost::timer timer;
 	boost::signals2::mutex ReportMTX;
