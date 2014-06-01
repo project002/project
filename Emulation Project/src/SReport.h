@@ -2,6 +2,7 @@
 #ifndef SREPORT_H_
 #define SREPORT_H_
 
+#include <iostream>
 #include <fstream>
 #include <stdarg.h>
 #include <boost/timer.hpp>
@@ -15,6 +16,7 @@ using std::ofstream;
 
 
 #define TIME_OF_FLUSH_TO_DISK_IN_SECONDS 5
+#define FILENAME "EData/Report-"
 
 class SReport
 {
@@ -33,7 +35,7 @@ public:
 		reportDateAndTimeString<< (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-'
 						<< now->tm_mday<<'-'<<now->tm_hour<<'-'<<now->tm_min<<'-'<< now->tm_sec<<".html";
 
-		fd.open((std::string("Report-")+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
+		fd.open((std::string(FILENAME)+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
 		if (!fd.is_open())
 		{
 			std::cout << "Can't open report file for write.\n";
@@ -46,14 +48,23 @@ public:
 //			std::cout << "Can't open graph file for write.\n";
 //			exit (EXIT_FAILURE);
 //		}
+		std::stringstream ss;
+		ss << "<!DOCTYPE html><html><head><title>Emulation Report</title>" ;
+		ss << "<meta charset='utf-8'>";
+		ss << "<link rel='script/stylesheet' type='text/css' href=href='report.css'/>";
+		ss << "<script src='script/jquery-2.1.1.min.js'></script>";
+		ss << "<script src='script/Chart.min.js'></script>";
+		ss << "<script src='script/report.js'></script>";
+		ss << "</head><body><div id='mc'><table>";
+
 		timer.restart();
-		rawLog(fd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><table>");
+		rawLog(fd,ss.str().c_str());
 		//TODO: verify GD initialization is correct
 //		rawLog(gd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><canvas id=\"myChart\" width=\"400\" height=\"400\"></canvas>");
 	}
 	void DestroyReport()
 	{
-		rawLog(fd,"</table></body></html>");
+		rawLog(fd,"</table></div></body></html>");
 
 		//TODO: verify GD finishialization is correct
 //		rawLog(gd,"<script src=\"Chart.js\"></script></body></html>");
@@ -95,7 +106,7 @@ public:
 			if (hasExitedEmulation)
 			{
 				double totalTimeUntilExit=0;
-				ss << "<tr><td>" << "Packet ID: "<< "</td><td>"<< packetID<< "</td><td>" << "Packet Size: "<< "</td><td>"<< packetSize<< "</td><td>";
+				ss << "<tr class='packetData'><td>" << "Packet ID: "<< "</td><td class='pID'>"<< packetID<< "</td><td>" << "Packet Size: "<< "</td><td class='pSize'>"<< packetSize<< "</td><td>";
 				std::set< std::pair<double,unsigned int> >::iterator it;
 				for (it = PacketReport[newInsertKey].begin();it!= PacketReport[newInsertKey].end(); it++)
 				{
@@ -103,7 +114,7 @@ public:
 					totalTimeUntilExit+=((*it).first - insertTime);
 					graphSpeedCalcTimer+=totalTimeUntilExit; // add packet transfer time
 
-					ss<< "</td><td>" << "Router Number: "<< "</td><td>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td>" << (*it).first<< "</td><td>" <<" Total Time In Router "<< "</td><td>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td>" << mDropRate<< "</td>";
+					ss<< "</td><td>" << "Router Number: "<< "</td><td class='rID'>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td class='insT'>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td class='exitT'>" << (*it).first<< "</td><td>" <<" Total Time In Router "<< "</td><td class='totalT'>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td class='fillage'>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td class='droprate'>" << mDropRate<< "</td>";
 				}
 				ss<<"<td>" <<" Total Time "<< "</td><td>" << totalTimeUntilExit<< "</td></tr>"<<std::endl;
 				PacketReport.erase(newInsertKey);
@@ -135,7 +146,7 @@ public:
 	void LogRouter(unsigned int RouterNumber, unsigned int BufferSize, double DropRate, unsigned int BufferUsedSize, double Fillage)
 	{
 		ReportMTX.lock();
-		fd<< "<tr><td colspan='2'>" <<"Router: "<< "</td><td>" <<RouterNumber<< "</td><td colspan='2' >" <<" Buffer Size: " <<"</td><td>" <<BufferSize << "</td><td colspan='2' >" <<" DropRate: " <<"</td><td>" << DropRate << "%" << "</td><td colspan='2'>" << "Buffer Initial Usage: " << "</td><td>" << BufferUsedSize<< "</td><td colspan='2'>" << " Fillage: " <<"</td><td>" <<Fillage<< "%" << "</td></tr>" ;
+		fd<< "<tr class='routerData'><td colspan='2'>" <<"Router: "<< "</td><td class='rID'>" <<RouterNumber<< "</td><td colspan='2' >" <<" Buffer Size: " <<"</td><td class='buffersize'>" <<BufferSize << "</td><td colspan='2' >" <<" DropRate: " <<"</td><td><span class='droprate'>" << DropRate << "</span>" << "%" << "</td><td colspan='2'>" << "Buffer Initial Usage: " << "</td><td>" << BufferUsedSize<< "</td><td colspan='2'>" << " Fillage: " <<"</td><td><span class='fillage'>" <<Fillage<< "</span>" << "%" << "</td></tr>" ;
 		fd<<std::endl;
 		ReportMTX.unlock();
 	}

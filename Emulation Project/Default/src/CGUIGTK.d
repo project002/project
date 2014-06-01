@@ -983,7 +983,7 @@ src/CGUIGTK.d: ../src/CGUIGTK.cpp ../src/CGUIGTK.h \
  ../src/pugixml.hpp ../src/pugiconfig.hpp ../src/CRouter.h \
  ../src/DInitializationDefs.h ../src/CEmuStatWidget.h \
  ../src/CEmulationDrawing.h ../src/CXMLBasicParser.h ../src/SXMLStructs.h \
- ../src/DParserDefs.h
+ ../src/DParserDefs.h ../src/RouterInfoWidget.h
 
 ../src/CGUIGTK.h:
 
@@ -3078,3 +3078,5 @@ src/CGUIGTK.d: ../src/CGUIGTK.cpp ../src/CGUIGTK.h \
 ../src/SXMLStructs.h:
 
 ../src/DParserDefs.h:
+
+../src/RouterInfoWidget.h:

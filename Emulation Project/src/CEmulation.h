@@ -20,6 +20,7 @@
  */
 #include <boost/thread.hpp>
 #include "boost/date_time/posix_time/posix_time.hpp"
+#define NOT_FOUND -1
 class CEmulation
 {
 public: // Public Functions
@@ -29,6 +30,10 @@ public: // Public Functions
 	void StartEmulation();
 	void StopEmulation();
 	void EmulationBuilder(const char* SetupFile);
+
+	//update router info
+	void updateFillage(unsigned int routerID,int fillage);
+	void updateDropRate(unsigned int routerID,int dropRate);
 
 private: // Private Functions
 	/**
@@ -62,6 +67,7 @@ private: // Private Functions
 	 */
 	void TableSwapping();
 
+	int routerIndexByID(unsigned int routerID);
 private:
 	//Private Members
 	CPhysicalConnectionsHandler * mPhysicalConnectionsHandler;

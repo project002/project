@@ -254,20 +254,13 @@ int CEmulationDrawing::get_clicked_element(int px, int py)
 
 void CEmulationDrawing::draw_router_info(int rid,int pos[],const Cairo::RefPtr<Cairo::Context>& cr)
 {
-	//move this all to the initialization
-//	Pango::FontDescription font;
-//	font.set_family("Monospace");
-//	font.set_weight(Pango::WEIGHT_BOLD);
-
 
 	stringstream ss;
-	ss << rid << "\n" << "Fillage: " << SDataController::getInstance().get_router_data(rid,SDataController::FILLAGE) << "\n";
-	ss << "Buffer: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERUS)<< "\n";
+	ss << rid << "\n";
+	ss << "Buffer Size: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERSIZE) << "\n";
+	ss << "Buffer Fill Init.: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERUS) << "\n";
+	ss << "Fillage: " << SDataController::getInstance().get_router_data(rid,SDataController::FILLAGE) << "\n";
 	ss << "DropRate: " <<  SDataController::getInstance().get_router_data(rid,SDataController::DROPRATE)<< "\n";
-
-//	Glib::RefPtr<Pango::Layout> layout = create_pango_layout(ss.str());
-
-//	layout->set_font_description(font);
 
 	mTlayout->set_text(ss.str());
 
@@ -389,7 +382,7 @@ bool CEmulationDrawing::on_motion_notify_event(GdkEventMotion* event)
 			(*it)->first = mDragRef->first;
 			(*it)->second = mDragRef->second;
 		}
-		queue_draw();
+//		queue_draw();
 	}
 	return true;
 }

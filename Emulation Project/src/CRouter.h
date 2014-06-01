@@ -81,6 +81,7 @@ public:
 	void SetBufferSize(unsigned int bufferSize)
 	{
 		mBufferSize = bufferSize;
+		SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::BUFFERSIZE,mBufferSize);
 	}
 
 	double GetDropRate() const
@@ -158,6 +159,7 @@ public:
 	void SetInitialBufferUse(unsigned int initialBufferUse)
 	{
 		mInitialBufferUse = initialBufferUse;
+		SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::BUFFERUS,mInitialBufferUse);
 	}
 
 	/**

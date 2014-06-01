@@ -12,7 +12,8 @@
 #include "SDataController.h"
 #include "DInitializationDefs.h"
 #include "CSocketNotReadyException.h"
-#include <gtkmm.h>
+//#include <gtkmm.h>
+
 class EmulationWrapper
 {
 public:
@@ -31,6 +32,9 @@ public:
 	void StopEmulation();
 
 	virtual ~EmulationWrapper();
+
+	void updateRouterFillage(unsigned int routerID,int fillage);
+	void updateRouterDropRate(unsigned int routerID,int droprate);
 private:
 	std::string mXMLProperties; //file path to the XML properties path
 	CEmulation * Emulator; //the emulation itself

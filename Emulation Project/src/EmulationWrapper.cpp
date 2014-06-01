@@ -150,3 +150,13 @@ void EmulationWrapper::RunEmulation()
 		throw error;
 	}
 }
+
+void EmulationWrapper::updateRouterFillage(unsigned int routerID, int fillage)
+{
+	if (Emulator!=NULL) {Emulator->updateFillage(routerID,fillage);}
+}
+
+void EmulationWrapper::updateRouterDropRate(unsigned int routerID, int dropRate)
+{
+	if (Emulator!=NULL) {Emulator->updateDropRate(routerID,dropRate);}
+}

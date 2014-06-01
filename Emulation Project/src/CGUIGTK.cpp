@@ -55,9 +55,14 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 	//drawing the emulation
 	mDrawing = new CEmulationDrawing();
 	mDrawing->signal_button_release_event().connect(sigc::mem_fun(*this,&CGUIGTK::router_prop));
-	mGrid.attach(*mDrawing,2,0,4,4);
+	mGrid.attach(*mDrawing,2,1,4,4);
 
 	mPackingBox->show_all();
+
+	//router Info widget
+	rInfo = new RouterInfoWidget();
+	rInfo->signal_info_change().connect(sigc::mem_fun(*this,&CGUIGTK::update_router));
+	mGrid.attach(*rInfo,2,0,4,1);
 }
 
 void CGUIGTK::create_menu_bar()
@@ -132,6 +137,7 @@ void CGUIGTK::stop_emulation()
 {
 	if (mEmulation!=NULL)
 	{
+		print_time(true);
 		mEmulationRunning = false;
 		mEmulation->StopEmulation();
 		delete mEmulation;
@@ -160,7 +166,6 @@ void CGUIGTK::run_emulation() //runs in a seperate thread
 			mDrawing->resetDrawing(mImportXMLPath);
 			mEmulation = new EmulationWrapper(mImportXMLPath);
 			mEmulation->RunEmulation();
-			mInst.set_label("Run Ended");
 		}
 	}
 	catch(CException & error)
@@ -176,6 +181,22 @@ void CGUIGTK::run_emulation() //runs in a seperate thread
 	}
 }
 
+void CGUIGTK::print_time(bool ended)
+{
+	//emulation time
+	if (!mEmulationRunning) {return;}
+	std::string label = ended ? "Run Ended At: " : "Run Started: ";
+	stringstream ss;
+	double time = SLogger::getInstance().getTime();
+	int hour = (time/360);
+	int min = (time - (hour*360))/60;
+	int sec = int(time) % 60;
+	ss << label << std::setw(2) << std::setfill('0') << hour << ":"
+				<< std::setw(2) << std::setfill('0') << min << ":"
+				<< std::setw(2) << std::setfill('0') << sec ;
+	mInst.set_label(ss.str());
+}
+
 
 void CGUIGTK::loop()
 {
@@ -185,10 +206,9 @@ void CGUIGTK::loop()
 		while(Gtk::Main::events_pending()) {Gtk::Main::iteration();}
 
 		mStateWidget->loop();
-		//emulation time
-		stringstream ss;
-		ss << "Run Started: " << SLogger::getInstance().getTime();
-		mInst.set_label(ss.str());
+		print_time();
+		//invalidate the drawing area
+		mDrawing->queue_draw();
 	}
 }
 
@@ -198,6 +218,7 @@ CGUIGTK::~CGUIGTK()
 	delete mStopButton;
 	delete mPackingBox;
 	delete mStateWidget;
+	delete rInfo;
 	if (mEmulation!=NULL)
 	{
 		delete mEmulation;
@@ -208,8 +229,23 @@ CGUIGTK::~CGUIGTK()
 
 bool CGUIGTK::router_prop(GdkEventButton* event)
 {
-	cout << "show router properties that can be changed " << event->button << endl;
+	rInfo->hide();
+	rInfo->setRouterNum(int(event->button));
+	rInfo->show_all();
 	return true;
+}
+
+void CGUIGTK::update_router(bool a, int b)
+{
+	unsigned int router = rInfo->getRouterNumber();
+	int fillage = rInfo->getFillage();
+	int droprate = rInfo->getDropRate();
+	cout << "got the emmiting signal " << router << " : " << fillage << endl;
+	if (mEmulation != NULL)
+	{
+		mEmulation->updateRouterFillage(router,fillage);
+		mEmulation->updateRouterDropRate(router,droprate);
+	}
 }
 
 bool CGUIGTK::on_delete_event(GdkEventAny* event)

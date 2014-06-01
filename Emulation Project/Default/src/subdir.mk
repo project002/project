@@ -20,6 +20,7 @@ CPP_SRCS += \
 ../src/CXMLBuilder.cpp \
 ../src/Emulation\ Project.cpp \
 ../src/EmulationWrapper.cpp \
+../src/RouterInfoWidget.cpp \
 ../src/pugixml.cpp 
 
 OBJS += \
@@ -39,6 +40,7 @@ OBJS += \
 ./src/CXMLBuilder.o \
 ./src/Emulation\ Project.o \
 ./src/EmulationWrapper.o \
+./src/RouterInfoWidget.o \
 ./src/pugixml.o 
 
 CPP_DEPS += \
@@ -58,6 +60,7 @@ CPP_DEPS += \
 ./src/CXMLBuilder.d \
 ./src/Emulation\ Project.d \
 ./src/EmulationWrapper.d \
+./src/RouterInfoWidget.d \
 ./src/pugixml.d 
 
 

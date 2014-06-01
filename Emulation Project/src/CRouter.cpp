@@ -236,7 +236,6 @@ void CRouter::PacketHandler()
 			//update the status of the router info
 			SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::FILLAGE,mFillage);
 			SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::DROPRATE,mDropRate);
-			SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::BUFFERUS,mInitialBufferUse);
 
 			if (!mThreaded) {break;} //loop once when not threaded
 		}

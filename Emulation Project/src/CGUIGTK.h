@@ -22,6 +22,7 @@
 #include "CEmulationDrawing.h"
 #include "SXMLStructs.h"
 #include "CXMLBasicParser.h"
+#include "RouterInfoWidget.h"
 
 class CGUIGTK : public Gtk::Window
 {
@@ -39,6 +40,7 @@ protected:
 	void start_emulation_thread();
 	void loop();
 	bool router_prop(GdkEventButton* event);
+	void update_router(bool a, int b);
 	//members
 	Gtk::Grid mGrid;
 	Gtk::Box* mPackingBox;
@@ -50,11 +52,15 @@ protected:
 	Gtk::Frame mStateWidgetCon;
 	//emulation painting
 	CEmulationDrawing *mDrawing;
+	//router info
+	RouterInfoWidget* rInfo;
 private:
 	std::string mImportXMLPath;
 	EmulationWrapper* mEmulation;
 	bool mEmulationRunning;
 	Glib::Thread* EmulationThread;
+
+	void print_time(bool eneded = false);
 protected:
 	virtual bool on_delete_event (GdkEventAny*event);
 	//virtual void on_realize();

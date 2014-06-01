@@ -84,6 +84,26 @@ void CEmulation::EmulationBuilder(const char* SetupFile)
 	}
 }
 
+int CEmulation::routerIndexByID(unsigned int routerID)
+{
+	for (int unsigned i=0;i<mRouters.size();++i)
+	{
+		if (mRouters[i]->GetRouterNumber() == routerID) {return i;}
+	}
+	return NOT_FOUND;
+}
+
+void CEmulation::updateFillage(unsigned int routerID, int fillage)
+{
+	int index = routerIndexByID(routerID);
+	if (index != NOT_FOUND) {mRouters[index]->SetFillage(fillage);}
+}
+
+void CEmulation::updateDropRate(unsigned int routerID, int dropRate)
+{
+	int index = routerIndexByID(routerID);
+	if (index != NOT_FOUND) {mRouters[index]->SetDropRate(dropRate);}
+}
 
 /**
  * An iterator goes through the Routers vector,
