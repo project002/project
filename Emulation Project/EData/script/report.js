@@ -1,7 +1,8 @@
 $(function() {
 	var dataset = [];
 	var labels = [];
-	$(".packetData").each(function() {
+	$(".packetData").each(function(i,e) {
+		if ((i % 10) !== 0) {return;} //take only 10th of the data 
 		var fil = parseInt($(this).find('.fillage').html(),10);
 		var pid = parseInt($(this).find('.pID').html(),10);
 		dataset.push(fil);
@@ -20,6 +21,7 @@ $(function() {
 				'data':dataset
 			} 
 	]};
+	console.log(data);
 	var ctx = $("#drC")[0].getContext("2d");
 	var chart = new Chart(ctx).Line(data);
 });

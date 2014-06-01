@@ -51,7 +51,7 @@ public:
 		std::stringstream ss;
 		ss << "<!DOCTYPE html><html><head><title>Emulation Report</title>" ;
 		ss << "<meta charset='utf-8'>";
-		ss << "<link rel='script/stylesheet' type='text/css' href=href='report.css'/>";
+		ss << "<link rel='stylesheet' type='text/css' href='script/report.css'/>";
 		ss << "<script src='script/jquery-2.1.1.min.js'></script>";
 		ss << "<script src='script/Chart.min.js'></script>";
 		ss << "<script src='script/report.js'></script>";
