@@ -1,0 +1,25 @@
+0 : Disabling Linux Networking
+0.15 : Validating XML file is present
+0.15 : Building the emulation
+0.15 : name:	lo
+0.15 : name:	loname:	eth0
+0.16 : ip table init complete
+0.16 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0.18 : DHCP service started...
+0.22 : name:	loname:	eth0name:	eth1
+0.24 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.25 : DHCP service started...
+0.29 : name:	loname:	eth0name:	eth1name:	lo
+0.29 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.29 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.29 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+0.29 : Can't find wanted physical connection, make sure XML is provided with legitimate connection name
+0.29 : void CEmulation::XMLAddPhysicalConnectionsToRouter(CRouter*&, pugi::xml_node&)
+0.29 : Can't find wanted physical connection, make sure XML is provided with legitimate connection name
+0.29 : void CEmulation::XMLRoutersParser(pugi::xml_document&)
+0.29 : Can't find wanted physical connection, make sure XML is provided with legitimate connection name
+0.29 : void CEmulation::XMLParser(const char*)
+0.29 : Can't find wanted physical connection, make sure XML is provided with legitimate connection name
+0.29 : void CEmulation::EmulationBuilder(const char*)
+0.32 : Can't find wanted physical connection, make sure XML is provided with legitimate connection name
+0.32 : void EmulationWrapper::RunEmulation()

@@ -1,0 +1,24 @@
+0 : Disabling Linux Networking
+0.14 : Validating XML file is present
+0.14 : Building the emulation
+0.14 : name:	lo
+0.14 : name:	loname:	eth0
+0.15 : ip table init complete
+0.15 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0.17 : DHCP service started...
+0.19 : name:	loname:	eth0name:	eth1
+0.2 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0.2 : DHCP service started...
+0.23 : name:	loname:	eth0name:	eth1name:	lo
+0.23 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+0.23 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+0.23 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+0.24 : Starting the emulation
+0.24 : std::exception
+0.24 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+20.4 : No Handler found for message type:8
+125.39 : No Handler found for message type:8
+136.65 : Emulation exiting
+136.65 : Enabling Networking
+136.65 : Destroying Controller Thread
+136.65 : Destroying Logger and exiting program
