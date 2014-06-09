@@ -15,6 +15,10 @@ var Utils = {
 			case 'ue': return 'Total Time Until Exit';
 			case 'bsz': return 'Buffer Size';
 			case 'bus': return 'Buffer Used Size';
+			case 'gaf' : return 'Average Fillage';
+			case 'gadr': return 'Average DropRate';
+			case 'asp' : return 'Average Speed';
+			case 'te' : return 'At Time:';
 			default : return '';
 		}
 		return '';
@@ -79,10 +83,12 @@ var DisplayData = function(parent_,type,fromIndex,length)
 		if (type==='PD') {fromIndex+=_packetDataOffset;}
 		//make sure it length doesn't go out of bounds
 		var end = fromIndex+length > _data_len ? _data_len : fromIndex+length;
+		var j=1;
 		for (var i=fromIndex;i<end;++i)
 		{
-			if (ts[i].type === type) {table.appendChild(row(ts[i]));}
+			if (ts[i].type === type) {table.appendChild(row(ts[i])); ++j;}
 		}
+		console.log(j+' '+type);
 		parent_.appendChild(table);
 		
 	}();
@@ -176,9 +182,13 @@ $(function() {
 	DisplayData(router_section,'RD',0,10);
 	$$.append(router_section);
 
+	var stat_section = makeSection('Satistics Data');
+	DisplayData(stat_section,'SD',0,ts.length);
+	$$.append(stat_section)
+
 	//make the packets data visible
-	var start = 10;
-	var length = 100;
+	var start = 0;
+	var length = 3000;
 	var packet_section = makeSection("Packet Data: (showing "+start+" - "+(start+length)+")");
 	DisplayData(packet_section,'PD',start,length);
 	$$.append(packet_section);	
@@ -189,5 +199,6 @@ $(function() {
 	var graphs = makeSection("Graphs");	
 	$$.append(graphs);
 	MakeGraph(graphs,'Droprate/Packets',x_prop,y_prop,100,0,ts.length);
+	MakeGraph(graphs,'Fillage/Packets',x_prop,'fil',100,0,ts.length);
 
 });

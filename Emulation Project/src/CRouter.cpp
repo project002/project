@@ -212,7 +212,7 @@ void CRouter::PacketHandler()
 			{
 				DynamicFillageHandler();
 			}
-			mPacketCollector->FixBufferFillage(mFillage);
+			mPacketCollector->FixBufferFillage(mFillage,mDropRate);
 			packet = mPacketCollector->PopFront(popTime);
 			if(packet!=NULL)
 			{

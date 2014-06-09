@@ -10,6 +10,7 @@
 #include <map>
 #include <set>
 #include <sstream>
+#include <sys/time.h>
 using std::ofstream;
 #define DIR_NAME "EData"
 class SLogger
@@ -33,16 +34,18 @@ public:
 			std::cout << "Can't open log file for write.\n";
 			exit (EXIT_FAILURE);
 		}
-		timer.restart();
+		clock_gettime(CLOCK_REALTIME,&ts_begin);
 	}
+
 	void DestroyLogger()
 	{
 		fd.close();
 	}
+
 	void Log(const char * toLog)
 	{
 		LoggerMTX.lock();
-		fd << timer.elapsed() << " : " << toLog << std::endl;
+		fd << getTime() << " : " << toLog << std::endl;
 		LoggerMTX.unlock();
 	}
 
@@ -56,9 +59,15 @@ public:
 		Log(str);
 	}
 
-	double getTime() {return timer.elapsed();}
+	double getTime()
+	{
+		timespec ts;
+		clock_gettime(CLOCK_REALTIME,&ts);
+		return ts.tv_sec-ts_begin.tv_sec;
+	}
 
 private:
+	timespec ts_begin;
 	ofstream fd;
 	boost::timer timer;
 	boost::signals2::mutex LoggerMTX;

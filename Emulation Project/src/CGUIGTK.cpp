@@ -187,13 +187,13 @@ void CGUIGTK::print_time(bool ended)
 	if (!mEmulationRunning) {return;}
 	std::string label = ended ? "Run Ended At: " : "Run Started: ";
 	stringstream ss;
-	double time = SLogger::getInstance().getTime();
-	int hour = (time/360);
-	int min = (time - (hour*360))/60;
-	int sec = int(time) % 60;
+	double timer = SLogger::getInstance().getTime();
+	int hour = (timer/360);
+	int min = (timer - (hour*360))/60;
+	int sec = int(timer) % 60;
 	ss << label << std::setw(2) << std::setfill('0') << hour << ":"
 				<< std::setw(2) << std::setfill('0') << min << ":"
-				<< std::setw(2) << std::setfill('0') << sec ;
+				<< std::setw(2) << std::setfill('0') << sec;
 	mInst.set_label(ss.str());
 }
 

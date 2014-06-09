@@ -13,9 +13,10 @@
 #include <sstream>
 #include <ctime>
 using std::ofstream;
-
+#include "boost/date_time/posix_time/posix_time.hpp"
 
 #define TIME_OF_FLUSH_TO_DISK_IN_SECONDS 5
+#define TIME_OF_ADD_REPORT 3
 #define FILENAME "EData/Report-"
 
 class SReport
@@ -28,6 +29,7 @@ public:
 	}
 	void InitReport()
 	{
+		lastFlushTime=0;
 		time_t t = time(0);   // get time now
 		std::stringstream reportDateAndTimeString;
 
@@ -53,8 +55,8 @@ public:
 		ss << "<meta charset='utf-8'>";
 		ss << "<link rel='stylesheet' type='text/css' href='script/report.css'/>";
 		ss << "<script> var ts = [";
+		startTime = boost::posix_time::microsec_clock::local_time();
 
-		timer.restart();
 		rawLog(fd,ss.str().c_str());
 		//TODO: verify GD initialization is correct
 //		rawLog(gd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><canvas id=\"myChart\" width=\"400\" height=\"400\"></canvas>");
@@ -86,7 +88,8 @@ public:
 	void Log(const char * toLog)
 	{
 		ReportMTX.lock();
-		fd << "<tr><td>" << timer.elapsed() << "</td><td>" << toLog << "</td></tr>";
+		boost::posix_time::time_duration timeD=boost::posix_time::microsec_clock::local_time()-startTime;
+		fd << "<tr><td>" << timeD.total_milliseconds() << "</td><td>" << toLog << "</td></tr>";
 		ReportMTX.unlock();
 	}
 
@@ -99,11 +102,12 @@ public:
 	void LogPacket(long long int packetID,long long int packetSize,unsigned int routerNumber,double insertTime,double mFillage,double mDropRate, bool hasExitedEmulation=false)
 	{
 		ReportMTX.lock();
-		double timeElapsed=timer.elapsed();
+		boost::posix_time::time_duration timeD=boost::posix_time::microsec_clock::local_time()-startTime;
+		double timeInSec =timeD.total_seconds();
 		std::pair<long long int, long long int> newInsertKey = std::pair<long long int, long long int>(packetID,packetSize);
 		if (packetID!=0)
 		{
-			PacketReport[newInsertKey].insert(std::pair<double,unsigned int>(timeElapsed,routerNumber));
+			PacketReport[newInsertKey].insert(std::pair<double,unsigned int>(insertTime,routerNumber));
 			graphAverageFillage+=mFillage;
 			graphAverageDropRate+=mDropRate;
 			totalPacketsTransferred++;
@@ -127,27 +131,35 @@ public:
 				PacketReport.erase(newInsertKey);
 			}
 		}
-		if (timeElapsed - lastFlushTime > TIME_OF_FLUSH_TO_DISK_IN_SECONDS)
+		if (timeInSec - lastFlushTime > TIME_OF_ADD_REPORT)
 		{
-			fd.write(ss.str().c_str(),ss.str().size());
-			ss.clear();
-			graphAverageFillage=graphAverageFillage/totalPacketsTransferred;
-			graphAverageDropRate=graphAverageDropRate/totalPacketsTransferred;
-
+			graphAverageFillage = (totalPacketsTransferred!=0)?(graphAverageFillage / totalPacketsTransferred):0;
+			graphAverageDropRate = (totalPacketsTransferred!=0)?graphAverageDropRate
+					/ totalPacketsTransferred : 0;
+			double avgSpeed = (graphSpeedCalcSize
+					/ (1000 / TIME_OF_ADD_REPORT));
 			//TODO: add to 'gd' file the graph properties
 			// 'timer' - X axis , time that passed since emulation started
 			// 'graphAverageFillage' - Y axis average fillage
 			// 'graphAverageDropRate' - Y axis average fillage
 			// (('1000' / 'graphSpeedCalcTimer') * 'graphSpeedCalcSize') - Y axis - Kbytes per second
 			// total of 4 lines graph.
+			ss << "{'type':'SD','gaf':" << graphAverageFillage << ",'gadr':"
+					<< graphAverageDropRate << ",'asp':" << avgSpeed << ",'te':"
+					<< timeInSec << "}," << std::endl;
 
-			graphSpeedCalcSize=0;
-			graphSpeedCalcTimer=0;
-			totalPacketsTransferred=0;
-			graphAverageFillage=0;
-			graphAverageDropRate=0;
-			lastFlushTime=timeElapsed;
+			graphSpeedCalcSize = 0;
+			graphSpeedCalcTimer = 0;
+			totalPacketsTransferred = 0;
+			graphAverageFillage = 0;
+			graphAverageDropRate = 0;
+
+			fd.write(ss.str().c_str(), ss.str().size());
+			ss.str(std::string());
+			lastFlushTime = timeInSec;
+
 		}
+
 		ReportMTX.unlock();
 	}
 	void LogRouter(unsigned int RouterNumber, unsigned int BufferSize, double DropRate, unsigned int BufferUsedSize, double Fillage)
@@ -161,9 +173,9 @@ public:
 	double GetReportElapsedTime()
 	{
 		ReportMTX.lock();
-		double timeElapsed=timer.elapsed();
+		boost::posix_time::time_duration timeD=boost::posix_time::microsec_clock::local_time()-startTime;
 		ReportMTX.unlock();
-		return timeElapsed;
+		return timeD.total_milliseconds();
 	}
 	void Logf(const char* format,...)
 	{
@@ -178,13 +190,13 @@ public:
 
 
 private:
+	boost::posix_time::ptime startTime;
 	double lastFlushTime;
 	//file descriptor
 	ofstream fd;
 	//graphs descriptor
 	//ofstream gd;
 	std::stringstream ss;
-	boost::timer timer;
 	boost::signals2::mutex ReportMTX;
 	SReport():lastFlushTime(0),graphSpeedCalcSize(0),graphSpeedCalcTimer(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0){};
 	SReport(SReport const &):lastFlushTime(0),graphSpeedCalcSize(0),graphSpeedCalcTimer(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0){}

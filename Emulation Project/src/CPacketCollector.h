@@ -45,7 +45,7 @@ public:
 	 * the wanted fillage.
 	 * @param Fillage wanted fill percentage
 	 */
-	void FixBufferFillage(double Fillage);
+	void FixBufferFillage(double Fillage,double DropRate=0);
 
 	/**
 	 * Dropping of random packet from buffer
@@ -57,7 +57,7 @@ public:
 	 * its initial buffer level
 	 * @param numberOfPackets total int number of packets to be inserted
 	 */
-	void AddRandomPackets(unsigned int numberOfPackets);
+	void AddRandomPackets(unsigned int numberOfPackets,double DropRate=0);
 private:
 
 	/**

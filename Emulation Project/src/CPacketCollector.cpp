@@ -6,7 +6,8 @@
  */
 
 #include "CPacketCollector.h"
-
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real_distribution.hpp>
 CPacketCollector::CPacketCollector(unsigned int bufferSize):mBufferSize(bufferSize)
 {
 	try
@@ -40,10 +41,13 @@ CPacketCollector::~CPacketCollector()
  * or in case the layers arent dynamic it means that they should be otherwise they are deleted here and gone forever.
  * @param numberOfPackets
  */
-void CPacketCollector::AddRandomPackets(unsigned int numberOfPackets)
+void CPacketCollector::AddRandomPackets(unsigned int numberOfPackets,double DropRate)
 {
 	try
 	{
+		boost::random::uniform_real_distribution<> dropRate(0,100);
+		boost::random::mt19937 rng;
+		double randomizedDropRate;
 		mMtx.lock();
 		for (unsigned int i = 0; i < numberOfPackets; i++)
 		{
@@ -68,8 +72,8 @@ void CPacketCollector::AddRandomPackets(unsigned int numberOfPackets)
 			fakePacket->PushLayer(ip_header);
 			fakePacket->PushLayer(tcp_header);
 			fakePacket->PushLayer(payload);
-
-			if (mPackets.size() < mBufferSize)
+			randomizedDropRate= dropRate(rng);
+			if (mPackets.size() < mBufferSize && randomizedDropRate>=DropRate)
 			{
 				mPackets.push_back(fakePacket);
 				mPacketsReceiveTime.push_back(SReport::getInstance().GetReportElapsedTime());
@@ -166,7 +170,7 @@ Crafter::Packet * CPacketCollector::PopFront(double & popTime)
  *
  * @param Fillage whats the current wanted fillage.
  */
-void CPacketCollector::FixBufferFillage(double Fillage)
+void CPacketCollector::FixBufferFillage(double Fillage,double DropRate)
 {
 	try
 	{
@@ -175,9 +179,9 @@ void CPacketCollector::FixBufferFillage(double Fillage)
 		if (fillPercentage < Fillage)
 		{
 			mMtx.unlock();
-			if ((Fillage-fillPercentage)*mBufferSize > 0)
+			if (((Fillage-fillPercentage)/100.0)*mBufferSize > 0)
 			{
-				AddRandomPackets((Fillage-fillPercentage)*mBufferSize);
+				AddRandomPackets(((Fillage-fillPercentage)/100.0)*mBufferSize,DropRate);
 			}
 		}
 		else
