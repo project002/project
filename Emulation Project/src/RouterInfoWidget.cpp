@@ -38,7 +38,6 @@ RouterInfoWidget::RouterInfoWidget():
 
 RouterInfoWidget::~RouterInfoWidget()
 {
-	// TODO Auto-generated destructor stub
 }
 
 

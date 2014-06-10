@@ -14,7 +14,6 @@ EmulationWrapper::EmulationWrapper(std::string XMLProp) :mXMLProperties(XMLProp)
 
 EmulationWrapper::~EmulationWrapper()
 {
-	// TODO Auto-generated destructor stub
 }
 
 int EmulationWrapper::RunCmdRedirect(const char* cmd, bool append)

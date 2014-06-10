@@ -10,8 +10,6 @@
 #include "CGUIGTK.h"
 #include <gtkmm/application.h>
 
-//TODO: here for testing purposes. remove when done
-#include "CXMLBuilder.h"
 
 /**
  * The main function of the program that initializes the loggers

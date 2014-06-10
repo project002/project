@@ -43,13 +43,7 @@ public:
 			std::cout << "Can't open report file for write.\n";
 			exit (EXIT_FAILURE);
 		}
-//
-//		gd.open((std::string("Graphs-")+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
-//		if (!gd.is_open())
-//		{
-//			std::cout << "Can't open graph file for write.\n";
-//			exit (EXIT_FAILURE);
-//		}
+
 		std::stringstream ss;
 		ss << "<!DOCTYPE html><html><head><title>Emulation Report</title>" ;
 		ss << "<meta charset='utf-8'>";
@@ -58,8 +52,6 @@ public:
 		startTime = boost::posix_time::microsec_clock::local_time();
 
 		rawLog(fd,ss.str().c_str());
-		//TODO: verify GD initialization is correct
-//		rawLog(gd,"<!DOCTYPE html><html><head><title>Emulation Report</title></head><body><canvas id=\"myChart\" width=\"400\" height=\"400\"></canvas>");
 	}
 	void DestroyReport()
 	{
@@ -72,10 +64,7 @@ public:
 		ss << "</head><body></body></html>";
 		rawLog(fd,ss.str().c_str());
 
-		//TODO: verify GD finishialization is correct
-//		rawLog(gd,"<script src=\"Chart.js\"></script></body></html>");
 		fd.close();
-//		gd.close();
 	}
 
 	void rawLog(ofstream & desc , const char * toLog)
@@ -138,12 +127,7 @@ public:
 					/ totalPacketsTransferred : 0;
 			double avgSpeed = (graphSpeedCalcSize
 					/ (1000 / TIME_OF_ADD_REPORT));
-			//TODO: add to 'gd' file the graph properties
-			// 'timer' - X axis , time that passed since emulation started
-			// 'graphAverageFillage' - Y axis average fillage
-			// 'graphAverageDropRate' - Y axis average fillage
-			// (('1000' / 'graphSpeedCalcTimer') * 'graphSpeedCalcSize') - Y axis - Kbytes per second
-			// total of 4 lines graph.
+
 			ss << "{'type':'SD','gaf':" << graphAverageFillage << ",'gadr':"
 					<< graphAverageDropRate << ",'asp':" << avgSpeed << ",'te':"
 					<< timeInSec << "}," << std::endl;
@@ -194,8 +178,6 @@ private:
 	double lastFlushTime;
 	//file descriptor
 	ofstream fd;
-	//graphs descriptor
-	//ofstream gd;
 	std::stringstream ss;
 	boost::signals2::mutex ReportMTX;
 	SReport():lastFlushTime(0),graphSpeedCalcSize(0),graphSpeedCalcTimer(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0){};

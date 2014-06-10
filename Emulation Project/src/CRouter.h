@@ -54,6 +54,12 @@ public:
 	void RequestTables();
 
 	/**
+	 * When one router dies all of the routers are emptying their routing tables
+	 * in order to restart and use the new route
+	 */
+	void EmptyTables();
+
+	/**
 	 * Threaded sniffing and packer handling
 	 */
 	void Sniffer();
@@ -91,6 +97,10 @@ public:
 
 	void SetDropRate(double dropRate)
 	{
+		if(dropRate<0 || dropRate>100)
+		{
+			throw (CException("Drop rate given is not in range!"));
+		}
 		mDropRate = dropRate;
 	}
 
@@ -119,16 +129,6 @@ public:
 	 */
 	bool isVirtualRouter()
 	{
-//		//check if all connection are virtual =>| this router is virtual
-//		list<CConnection const *>::iterator it = mConnections.begin();
-//		CVirtualConnection const * cvc;
-//		for (;it!=mConnections.end();++it)
-//		{
-//
-//			cvc = dynamic_cast<CVirtualConnection const *>(*it);
-//			if (cvc == NULL) {return false;}
-//		}
-//		return true; //TODO: changed flow -GAL- to isPhysical
 		//check if all connection are virtual =>| this router is virtual
 		list<CConnection const *>::iterator it = mConnections.begin();
 		for (; it != mConnections.end(); ++it)
@@ -148,6 +148,10 @@ public:
 
 	void SetFillage(double fillage)
 	{
+		if (fillage < 0 || fillage > 100)
+		{
+			throw(CException("Fillage value is not legit!"));
+		}
 		mFillage = fillage;
 	}
 
@@ -168,6 +172,17 @@ public:
 	 */
 	void SetDynamicFillageArray(string str);
 	void SetDynamicDropRateArray(string str);
+
+	bool isRouterAlive() const
+	{
+		return mRouterAlive;
+	}
+
+	void setRouterAlive(bool routerAlive)
+	{
+		mRouterAlive = routerAlive;
+	}
+
 private:
 	/**
 	 * Packet handlers
@@ -201,7 +216,7 @@ private://members
 	double mFillage;
 	unsigned int mInitialBufferUse;
 	unsigned int mRouterNumber;
-
+	bool mRouterAlive;
 	//Thread abilities
 	boost::thread mSniffingThread;
 	boost::thread mPacketsHandlingThread;

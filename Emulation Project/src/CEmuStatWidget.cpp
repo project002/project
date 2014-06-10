@@ -59,7 +59,6 @@ void CEmuStatWidget::loop()
 
 CEmuStatWidget::~CEmuStatWidget()
 {
-	// TODO Auto-generated destructor stub
 	delete mlblPacketsStatus;
 	delete mlblPacketsTypes;
 	delete mtvMessages;

@@ -105,6 +105,40 @@ void CEmulation::updateDropRate(unsigned int routerID, int dropRate)
 	if (index != NOT_FOUND) {mRouters[index]->SetDropRate(dropRate);}
 }
 
+
+void CEmulation::ToggleRouterActivity(unsigned int routerID,const bool active)
+{
+	int index = routerIndexByID(routerID);
+	if (index != NOT_FOUND)
+	{
+		mRouters[index]->setRouterAlive(active);
+		EmptyRoutingTables();
+	}
+}
+
+void CEmulation::EmptyRoutingTables()
+{
+	try
+	{
+		tableSwappingMTX.lock();
+		vector<CRouter *>::iterator iter;
+		for (int unsigned i = 0; i < mRouters.size(); ++i)
+		{
+			for (iter = mRouters.begin(); iter != mRouters.end(); iter++)
+			{
+				(*iter)->EmptyTables();
+			}
+		}
+		tableSwappingMTX.unlock();
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
+
 /**
  * An iterator goes through the Routers vector,
  * each router then requests the routing tables from all of his connections.
@@ -117,7 +151,7 @@ void CEmulation::TableSwapping()
 	{
 		while(mRunning)
 		{
-
+			tableSwappingMTX.lock();
 			vector<CRouter *>::iterator iter;
 			boost::this_thread::interruption_point();
 			//swap table each time for all the connection available
@@ -126,12 +160,15 @@ void CEmulation::TableSwapping()
 			for (int unsigned i=0;i<mRouters.size();++i)
 			{
 				boost::this_thread::interruption_point();
-				for (iter=mRouters.begin();iter!=mRouters.end();iter++)
+				for (iter = mRouters.begin(); iter != mRouters.end(); iter++)
 				{
+
 					boost::this_thread::interruption_point();
 					(*iter)->RequestTables();
+
 				}
 			}
+			tableSwappingMTX.unlock();
 			//Following lines are for the table swapping to take effect every X period
 			//of time.
 			boost::posix_time::time_duration interval(
@@ -223,33 +260,30 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			{
 				RouterCreate->SetBufferSize(BufferSize);
 			}
-			double DropRate = currentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
-			if (DropRate != 0)
-			{
-				RouterCreate->SetDropRate(DropRate);
-			}
+			double DropRate = currentRouter.attribute(
+					XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
+
+			RouterCreate->SetDropRate(DropRate);
+
 			unsigned int BufferUsedSize = currentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
 			if(BufferUsedSize!=0)
 			{
 				RouterCreate->SetInitialBufferUse(BufferUsedSize);
 			}
-			double Fillage = currentRouter.attribute(XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
-			if (Fillage > 0 && Fillage<=BufferSize)
-			{
-				RouterCreate->SetFillage(Fillage);
-			}
-			string fillageArray = currentRouter.attribute(XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE).as_string();
-			if (!fillageArray.empty())
-			{
-				RouterCreate->SetDynamicFillageArray(fillageArray);
-			}
+			double Fillage = currentRouter.attribute(
+					XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
+
+			RouterCreate->SetFillage(Fillage);
+
+			string fillageArray = currentRouter.attribute(
+					XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE).as_string();
+
+			RouterCreate->SetDynamicFillageArray(fillageArray);
 
 			string dropRateArray = currentRouter.attribute(
-					XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE).as_string();
-			if (!dropRateArray.empty())
-			{
-				RouterCreate->SetDynamicDropRateArray(dropRateArray);
-			}
+			XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE).as_string();
+			RouterCreate->SetDynamicDropRateArray(dropRateArray);
+
 			SReport::getInstance().LogRouter(RouterNumber,BufferSize,DropRate,BufferUsedSize,Fillage);
 
 			//TODO: add to gui the init buffer size and fillage rate(in percent)
@@ -325,7 +359,7 @@ void CEmulation::XMLRoutingTableParserAvailability(pugi::xml_document & doc)
 void CEmulation::XMLThreadedOptionParse(pugi::xml_document & doc)
 {
 	pugi::xml_node root = doc.child(XML_LAYER_1_NETWORK);
-	mThreaded = root.attribute("Threaded").as_bool(true); //default to true
+	mThreaded = root.attribute(THREADED_EMULATION).as_bool(true); //default to true
 	if (mThreaded)
 	{SDataController::getInstance().msg("Emulation Running High-End Setting");}
 	else

@@ -9,7 +9,7 @@
 
 CSocketNotReadyException::CSocketNotReadyException()
 {
-	// TODO Auto-generated constructor stub
+
 
 }
 

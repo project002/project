@@ -25,19 +25,66 @@ class CEmulation
 {
 public: // Public Functions
 
+	/**
+	 * C-Tor - initializes the class members
+	 */
 	CEmulation();
+
+	/**
+	 * D-Tor - Deletes all allocated pointers such as routers and physical connection handler
+	 * as well as finishing all the running threads of the emulation
+	 */
 	virtual ~CEmulation();
+
+	/**
+	 * Begin the emulation, starting the routers's sniffer
+	 */
 	void StartEmulation();
+
+	/**
+	 * "Stopping" the emulation.
+	 * Setting the is emulation running member to false, which triggers the destruction of threads
+	 * and finishing the current run.
+	 */
 	void StopEmulation();
+
+	/**
+	 * Creating the physical connections handler and parsing the xml file of the wanted emulation network structure
+	 * @param SetupFile xml file to load the wanted emulation network structure from
+	 */
 	void EmulationBuilder(const char* SetupFile);
 
-	//update router info
+	/**
+	 * Updating 'routerID' router fillage rate the 'fillage'
+	 * @param routerID router number to change
+	 * @param fillage
+	 */
 	void updateFillage(unsigned int routerID,int fillage);
+
+	/**
+	 * Updating 'routerID' router drop rate rate the 'dropRate'
+	 * @param routerID router number to change
+	 * @param dropRate
+	 */
 	void updateDropRate(unsigned int routerID,int dropRate);
+
+	/**
+	 * the functions ability to shut down / revive a router for different path use
+	 * @param routerID router number to toggle
+	 * @param active boolean to toggle the router to active or not
+	 */
+	void ToggleRouterActivity(unsigned int routerID,const bool active);
+
+	/**
+	 * When a router dies / comes back to life
+	 * the routing tables will be emptied in order for the tables to be updated
+	 */
+	void EmptyRoutingTables();
 
 private: // Private Functions
 	/**
 	 * Flag whether or not the emulation is running
+	 * for the easy destruction of multiple threads
 	 */
 	bool mRunning;
 
@@ -82,6 +129,7 @@ private:
 	boost::thread mTableSwappingThread;
 	boost::thread mRunVirtualRouters;
 	boost::signals2::mutex runningUpdMTX;
+	boost::signals2::mutex tableSwappingMTX;
 };
 
 #endif /* CEMULATION_H_ */

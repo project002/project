@@ -10,7 +10,7 @@
 #include <boost/random/uniform_real_distribution.hpp>
 #include "CPhysicalConnection.h"
 
-CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mDropRate(0),mFillage(0),mInitialBufferUse(0),mRouterNumber(1024),mPacketCollector(NULL),mThreaded(true)
+CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mDropRate(0),mFillage(0),mInitialBufferUse(0),mRouterNumber(1024),mRouterAlive(true),mPacketCollector(NULL),mThreaded(true)
 {
 	try
 	{
@@ -48,10 +48,19 @@ void CRouter::AppendConnectionList(list<CVirtualConnection const *> &connectionL
 		throw;
 	}
 }
+
+void CRouter::EmptyTables()
+{
+	mRoutingTable.clear();
+}
 void CRouter::RequestTables()
 {
 	try
 	{
+		if (!isRouterAlive())
+		{
+			return;
+		}
 		list<CConnection const *>::iterator iter;
 		//iterate over all connections
 		stringstream s;
@@ -198,6 +207,10 @@ void CRouter::DynamicDropRateHandler()
 
 void CRouter::PacketHandler()
 {
+	if (!isRouterAlive())
+	{
+		return;
+	}
 	Packet* packet;
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	map<string,pair< CConnection const*,string> >::iterator con_pos;
@@ -321,6 +334,10 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 
 void CRouter::Sniff()
 {
+	if (!isRouterAlive())
+	{
+		return;
+	}
 	Packet* temp_packet;
 	boost::random::uniform_real_distribution<> dropRate(0,100);
 	boost::random::mt19937 rng;

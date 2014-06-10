@@ -40,7 +40,6 @@ public:
 	 * this also holds the MAC addresses that the ip is connected to
 	 */
 	vector<pair< string,string> > mLocal_Table;
-	//TODO: find these consts in the crafeter lib
 	static const byte OPCODE_REQ  = 0x01; //Opcode for Request
 	static const byte OPCODE_REP  = 0x02; //Opcode for Replay
 	static const byte MT_DISCOVER = Crafter::DHCPOptions::DHCPDISCOVER; //Message Type Discover

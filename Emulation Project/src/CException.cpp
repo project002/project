@@ -8,7 +8,6 @@
 
 CException::CException()
 {
-	// TODO Auto-generated constructor stub
 
 }
 

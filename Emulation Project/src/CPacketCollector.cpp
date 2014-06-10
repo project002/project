@@ -37,7 +37,6 @@ CPacketCollector::~CPacketCollector()
 
 /**
  * Adding number of fake packets to packet collector
- * FIXME: TODO:if the program crash it probably means that delete packet isnt deleting the layers allocated in this function
  * or in case the layers arent dynamic it means that they should be otherwise they are deleted here and gone forever.
  * @param numberOfPackets
  */
