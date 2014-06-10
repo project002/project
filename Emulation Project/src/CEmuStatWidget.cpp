@@ -23,7 +23,7 @@ CEmuStatWidget::CEmuStatWidget(Gtk::Container* MainPack)
 	mGrid.add(mStatusFrame);
 
 	mlblPacketsTypes = Gtk::manage(new Gtk::Label());
-	mlblPacketsTypes->set_text("IP Packets:\nARP Packets:\nDHCP PAckets:");
+	mlblPacketsTypes->set_text("IP Packets:\nARP Packets:\nDHCP PAckets:\nSpeed KB:");
 	mTypeFrame.set_label("Packets Types:");
 	mTypeFrame.set_shadow_type(Gtk::SHADOW_IN);
 	mTypeFrame.add(*mlblPacketsTypes);
@@ -50,7 +50,7 @@ void CEmuStatWidget::loop()
 	int ipc = SDataController::getInstance().get_data(SDataController::IPPACKET);
 	int arpc = SDataController::getInstance().get_data(SDataController::ARPPACKET);
 	int dhcpc = SDataController::getInstance().get_data(SDataController::DHCPPACKET);
-	ss1 << "IP Packets:" << ipc << "\nARP Packets:" << arpc << "\nDHCP Packets:" << dhcpc;
+	ss1 << "IP Packets:" << ipc << "\nARP Packets:" << arpc << "\nDHCP Packets:" << dhcpc << "\n Speed KB:ADD SPEED HERE";
 	mlblPacketsTypes->set_text(ss1.str());
 
 	std::string messages = SDataController::getInstance().get_messages();

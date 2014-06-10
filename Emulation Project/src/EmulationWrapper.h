@@ -80,6 +80,12 @@ private:
 	 */
 	void EnableNetworkManager();
 
+	/**
+	 * the procedure to stop the emulation when any exception is thrown
+	 * msg : the error massage to send to log
+	 */
+	void exceptionHalt(const char * msg);
+
 
 };
 

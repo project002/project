@@ -83,11 +83,12 @@ public:
 	bool insertData(DATATYPE type,int unsigned value)
 	{
 		insertMTX.lock();
-		std::pair<std::map<DATATYPE,int unsigned>::iterator,bool> ret;
-		ret = dataSet.insert(std::pair<DATATYPE,int unsigned>(type,value));
+		std::pair<std::map<DATATYPE,long long int unsigned>::iterator,bool> ret;
+		long long unsigned int v = value;
+		ret = dataSet.insert(std::pair<DATATYPE,int unsigned>(type,v));
 		if (!ret.second)
 		{
-			dataSet.at(type) = value;
+			dataSet.at(type) = v;
 			insertMTX.unlock();
 			return true;
 		}
@@ -126,10 +127,10 @@ public:
 		messages.push_back(std::string(str));
 	}
 
-	int unsigned get_data(DATATYPE type)
+	long long int unsigned get_data(DATATYPE type)
 	{
 		insertMTX.lock();
-		int unsigned data = 0;
+		long long int unsigned data = 0;
 		try {data = dataSet.at(type);}
 		catch(const std::out_of_range & e) {}
 		insertMTX.unlock();
@@ -164,7 +165,7 @@ public:
 private:
 	typedef std::map<SDataController::ROUTERINFO,float> RouterInfoMap;
 	typedef std::map<int unsigned,RouterInfoMap > RouterSet;
-	typedef std::map<SDataController::DATATYPE,int unsigned> DataSet;
+	typedef std::map<SDataController::DATATYPE,long long int unsigned> DataSet;
 
 	std::string mOut;
 	DataSet dataSet;
@@ -185,10 +186,10 @@ private:
 
 	double calcLostPacketsPercent()
 	{
-		int unsigned processed = get_data(PACKETPROCCES);
-		int unsigned dropped = get_data(PACKETDROP);
+		long long int unsigned processed = get_data(PACKETPROCCES);
+		long long int unsigned dropped = get_data(PACKETDROP);
 
-		int unsigned packets = processed+dropped;
+		long long int unsigned packets = processed+dropped;
 		if (packets == 0) {return 0;}
 		double dropped_percentage = (100.0/packets)*dropped;
 		return dropped_percentage;

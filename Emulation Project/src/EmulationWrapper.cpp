@@ -138,14 +138,16 @@ void EmulationWrapper::RunEmulation()
 		SLogger::getInstance().Log("Starting the emulation");
 		Emulator->StartEmulation();
 	}
+	catch (CDHCPMsgTypeException & error)
+	{
+		const char* msg = error.what();
+		exceptionHalt(msg);
+		std::cout << "thrown an dhcp exception" << std::endl;
+		throw new CException(msg);
+	}
 	catch (CException & error)
 	{
-		if (Emulator!=NULL) {delete Emulator;}
-		SLogger::getInstance().Log(error.what());
-		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		SLogger::getInstance().DestroyLogger();
-		SReport::getInstance().DestroyReport();
-		EnableNetworkManager();
+		exceptionHalt(error.what());
 		throw error;
 	}
 }
@@ -158,4 +160,14 @@ void EmulationWrapper::updateRouterFillage(unsigned int routerID, int fillage)
 void EmulationWrapper::updateRouterDropRate(unsigned int routerID, int dropRate)
 {
 	if (Emulator!=NULL) {Emulator->updateDropRate(routerID,dropRate);}
+}
+
+void EmulationWrapper::exceptionHalt(const char * msg)
+{
+	if (Emulator!=NULL) {delete Emulator;}
+	SLogger::getInstance().Log(msg);
+	SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+	SLogger::getInstance().DestroyLogger();
+	SReport::getInstance().DestroyReport();
+	EnableNetworkManager();
 }

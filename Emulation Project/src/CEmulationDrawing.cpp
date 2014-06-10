@@ -25,6 +25,7 @@ CEmulationDrawing::CEmulationDrawing() :
 	canvasW(0),canvasH(0),
 	noPos(std::pair<int,int>(NO_POS,NO_POS)),
 	mConDragRef(std::vector< Point* >()),
+	mForceDragRefresh(false),
 	mImgBuffers(ImageBuffers())
 {
 	this->add_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::POINTER_MOTION_MASK); //yeah!
@@ -359,13 +360,14 @@ bool CEmulationDrawing::on_button_release_event(GdkEventButton* event)
 	if (mXMLprs == NULL) {return true;}
 	mStartDrag = false;
 	mDragRef = NULL;
-	if (event->button == 3) //3 is the right mouse button (NO COSTANT FOR THAT)
-	{
+//	if (event->button == 3) //3 is the right mouse button (NO COSTANT FOR THAT)
+//	{
 		int eid = get_clicked_element(pixel2percent(event->x,canvasW),pixel2percent(event->y,canvasH));
-		event->button = eid; //a hacky way to send information upward;
+		//event->button = eid; //a hacky way to send information upward;
+		event->x_root = eid;
 		return eid==NO_POS; //propagate if false => if clicked on a router
-	}
-	return true;
+//	}
+//	return true;
 }
 
 bool CEmulationDrawing::on_motion_notify_event(GdkEventMotion* event)
@@ -373,16 +375,24 @@ bool CEmulationDrawing::on_motion_notify_event(GdkEventMotion* event)
 	if (mXMLprs == NULL) {return true;}
 	if (mStartDrag && mDragRef!=NULL)
 	{
-		mDragRef->first = pixel2percent(event->x,canvasW);
-		mDragRef->second = pixel2percent(event->y,canvasH);
+		int px = pixel2percent(event->x,canvasW);
+		int py = pixel2percent(event->y,canvasH);
+
+		if (px<0) {px=0;}
+		if (px>100) {px=100;}
+		if (py<0) {py = 0;}
+		if (py>100) {py=100;}
+
+		mDragRef->first = px;
+		mDragRef->second = py;
 		//update connections positions
 		std::vector< Point* >::iterator it = mConDragRef.begin();
 		for (;it!=mConDragRef.end();++it)
 		{
-			(*it)->first = mDragRef->first;
-			(*it)->second = mDragRef->second;
+			(*it)->first = px;
+			(*it)->second = py;
 		}
-//		queue_draw();
+		if (mForceDragRefresh) {queue_draw();}
 	}
 	return true;
 }

@@ -60,12 +60,12 @@ void RouterInfoWidget::showWidget()
 
 void RouterInfoWidget::updateFillage()
 {
-	std::cout << "update fillage to " << spnFillage.get_value_as_int() << " emmiting signal\n";
+//	std::cout << "update fillage to " << spnFillage.get_value_as_int() << " emmiting signal\n";
 	routerInfoChanged.emit(true,1); //values are pretty much irrelevant
 }
 
 void RouterInfoWidget::updateDrop()
 {
-	std::cout << "update drop to " << spnFillage.get_value_as_int() << " emmiting signal\n";
+//	std::cout << "update drop to " << spnFillage.get_value_as_int() << " emmiting signal\n";
 	routerInfoChanged.emit(true,1); //values are pretty much irrelevant
 }

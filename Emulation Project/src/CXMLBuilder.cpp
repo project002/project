@@ -123,7 +123,7 @@ void CXMLBuilder::GenerateNextFileName()
 		while(true)
 		{
 			stringstream ss;
-			ss.clear();
+			ss.str(std::string());
 			ss<<"Setup_"<<fileNumber<<".xml";
 		    boost::filesystem::path myfile(ss.str().c_str());
 		    if( !boost::filesystem::exists(myfile) )
@@ -205,6 +205,11 @@ bool CXMLBuilder::AddRouter(RouterInformation routerInfo)
 				routerInfo.sUsedBufferSize;
 		mCurrentRouter.append_attribute(XML_ROUTER_FILLAGE_ATTRIBUTE) =
 				routerInfo.sFillage;
+		mCurrentRouter.append_attribute(
+				XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE) =
+				routerInfo.sDynamicFillage.c_str();
+		mCurrentRouter.append_attribute(
+				XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE)=routerInfo.sDynamicDropRate.c_str();
 		return true;
 	}
 	catch (CException & error)
@@ -449,6 +454,8 @@ RouterInformation CXMLBuilder::GetCurrentRouterInformation()
 		rtInfo.sDropRate = mCurrentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
 		rtInfo.sUsedBufferSize = mCurrentRouter.attribute(XML_ROUTER_INITIAL_USED_BUFFER_SIZE_ATTRIBUTE).as_int();
 		rtInfo.sFillage = mCurrentRouter.attribute(XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
+		rtInfo.sDynamicFillage = mCurrentRouter.attribute(XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE).as_string();
+		rtInfo.sDynamicDropRate = mCurrentRouter.attribute(XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE).as_string();
 
 		return rtInfo;
 	}
@@ -490,6 +497,8 @@ bool CXMLBuilder::EditCurrentRouterInformation(RouterInformation routerInfo)
 					routerInfo.sUsedBufferSize;
 			mCurrentRouter.attribute(XML_ROUTER_FILLAGE_ATTRIBUTE) =
 					routerInfo.sFillage;
+			mCurrentRouter.attribute(XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE)=routerInfo.sDynamicFillage.c_str();
+			mCurrentRouter.attribute(XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE)=routerInfo.sDynamicDropRate.c_str();
 			return true;
 		}
 		else

@@ -26,6 +26,12 @@ public:
 	CEmulationDrawing();
 	void resetDrawing(string xml_path);
 	virtual ~CEmulationDrawing();
+	/**
+	 * makes the drag action on the cavans to also
+	 * refresh the canvas (use only if the canvas is not
+	 * refreshed externally)
+	 */
+	void forceDragRefresh() {mForceDragRefresh = true;}
 private:
 	//setup xml path
 	string mXMLPath;
@@ -50,6 +56,8 @@ private:
 	int canvasH;
 	Point noPos;
 	std::vector< Point* > mConDragRef;
+	//allow canvas refresh when dragging (when refresh of the canvas is not external)
+	bool mForceDragRefresh;
 
 	std::map<int unsigned,Point > get_connected_routers(int id);
 	/**

@@ -83,12 +83,10 @@ var DisplayData = function(parent_,type,fromIndex,length)
 		if (type==='PD') {fromIndex+=_packetDataOffset;}
 		//make sure it length doesn't go out of bounds
 		var end = fromIndex+length > _data_len ? _data_len : fromIndex+length;
-		var j=1;
 		for (var i=fromIndex;i<end;++i)
 		{
-			if (ts[i].type === type) {table.appendChild(row(ts[i])); ++j;}
+			if (ts[i].type === type) {table.appendChild(row(ts[i]));}
 		}
-		console.log(j+' '+type);
 		parent_.appendChild(table);
 		
 	}();
@@ -184,11 +182,14 @@ $(function() {
 
 	var stat_section = makeSection('Satistics Data');
 	DisplayData(stat_section,'SD',0,ts.length);
+	var t = document.createElement('h3');
+	t.innerHTML = '<blink>Emulation Overall Satistics TODO</blink>';
+	stat_section.appendChild(t);
 	$$.append(stat_section)
 
 	//make the packets data visible
 	var start = 0;
-	var length = 3000;
+	var length = 1000;
 	var packet_section = makeSection("Packet Data: (showing "+start+" - "+(start+length)+")");
 	DisplayData(packet_section,'PD',start,length);
 	$$.append(packet_section);	

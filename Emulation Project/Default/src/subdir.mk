@@ -18,6 +18,8 @@ CPP_SRCS += \
 ../src/CSocketNotReadyException.cpp \
 ../src/CVirtualConnection.cpp \
 ../src/CXMLBuilder.cpp \
+../src/CreateEmulationWin.cpp \
+../src/DialogRouterEdit.cpp \
 ../src/Emulation\ Project.cpp \
 ../src/EmulationWrapper.cpp \
 ../src/RouterInfoWidget.cpp \
@@ -38,6 +40,8 @@ OBJS += \
 ./src/CSocketNotReadyException.o \
 ./src/CVirtualConnection.o \
 ./src/CXMLBuilder.o \
+./src/CreateEmulationWin.o \
+./src/DialogRouterEdit.o \
 ./src/Emulation\ Project.o \
 ./src/EmulationWrapper.o \
 ./src/RouterInfoWidget.o \
@@ -58,6 +62,8 @@ CPP_DEPS += \
 ./src/CSocketNotReadyException.d \
 ./src/CVirtualConnection.d \
 ./src/CXMLBuilder.d \
+./src/CreateEmulationWin.d \
+./src/DialogRouterEdit.d \
 ./src/Emulation\ Project.d \
 ./src/EmulationWrapper.d \
 ./src/RouterInfoWidget.d \

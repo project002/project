@@ -11,6 +11,7 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 					mMenuBar(Gtk::manage(new Gtk::MenuBar())),
 					mStopButton(Gtk::manage(new Gtk::Button())),
 					mQuickStartButton(Gtk::manage(new Gtk::Button())),
+					emCrt(NULL),
 					mImportXMLPath(""),
 					mEmulation(NULL),
 					mEmulationRunning(false)
@@ -75,14 +76,23 @@ void CGUIGTK::create_menu_bar()
 	Gtk::Menu* file_sub_menu = Gtk::manage(new Gtk::Menu());
 	menuitem_file->set_submenu(*file_sub_menu);
 	//submenu items
-	Gtk::MenuItem* import_file = Gtk::manage(new Gtk::MenuItem("Import..", true));
-	//register imoprt file action
-	import_file->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::open_file_browser));
-	file_sub_menu->append(*import_file);
-	Gtk::MenuItem *run_emu = Gtk::manage(new Gtk::MenuItem("Run", true));
-	//register run emulation action
-	run_emu->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::start_emulation_thread));
-	file_sub_menu->append(*run_emu);
+		//create emulation button
+		Gtk::MenuItem *crt_emu = Gtk::manage(new Gtk::MenuItem("Create Emulation", true));
+		//register run emulation action
+		crt_emu->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::open_creation_win));
+		file_sub_menu->append(*crt_emu);
+
+		//import button
+		Gtk::MenuItem* import_file = Gtk::manage(new Gtk::MenuItem("Import..", true));
+		//register imoprt file action
+		import_file->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::open_file_browser));
+		file_sub_menu->append(*import_file);
+
+		//run button
+		Gtk::MenuItem *run_emu = Gtk::manage(new Gtk::MenuItem("Run", true));
+		//register run emulation action
+		run_emu->signal_activate().connect(sigc::mem_fun(*this,&CGUIGTK::start_emulation_thread));
+		file_sub_menu->append(*run_emu);
 }
 
 void CGUIGTK::start_emulation_quick()
@@ -188,8 +198,8 @@ void CGUIGTK::print_time(bool ended)
 	std::string label = ended ? "Run Ended At: " : "Run Started: ";
 	stringstream ss;
 	double timer = SLogger::getInstance().getTime();
-	int hour = (timer/360);
-	int min = (timer - (hour*360))/60;
+	int hour = (timer/3600);
+	int min = (timer - (hour*3600))/60;
 	int sec = int(timer) % 60;
 	ss << label << std::setw(2) << std::setfill('0') << hour << ":"
 				<< std::setw(2) << std::setfill('0') << min << ":"
@@ -229,9 +239,12 @@ CGUIGTK::~CGUIGTK()
 
 bool CGUIGTK::router_prop(GdkEventButton* event)
 {
-	rInfo->hide();
-	rInfo->setRouterNum(int(event->button));
-	rInfo->show_all();
+	if (event->button == 3) //right mouse button
+	{
+		rInfo->hide();
+		rInfo->setRouterNum(int(event->x_root));
+		rInfo->show_all();
+	}
 	return true;
 }
 
@@ -240,12 +253,18 @@ void CGUIGTK::update_router(bool a, int b)
 	unsigned int router = rInfo->getRouterNumber();
 	int fillage = rInfo->getFillage();
 	int droprate = rInfo->getDropRate();
-	cout << "got the emmiting signal " << router << " : " << fillage << endl;
+	//cout << "got the emmiting signal " << router << " : " << fillage << endl;
 	if (mEmulation != NULL)
 	{
 		mEmulation->updateRouterFillage(router,fillage);
 		mEmulation->updateRouterDropRate(router,droprate);
 	}
+}
+
+void CGUIGTK::open_creation_win()
+{
+	if (emCrt == NULL) {emCrt = new CreateEmulationWin();}
+	emCrt->show();
 }
 
 bool CGUIGTK::on_delete_event(GdkEventAny* event)
