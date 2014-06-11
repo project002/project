@@ -43,6 +43,8 @@ protected:
 	void loop();
 	bool router_prop(GdkEventButton* event);
 	void update_router(bool a, int b);
+	//menu item bar
+	Gtk::MenuItem* menuitem_file;
 	//members
 	Gtk::Grid mGrid;
 	Gtk::Box* mPackingBox;
@@ -65,6 +67,8 @@ private:
 	Glib::Thread* EmulationThread;
 
 	void print_time(bool eneded = false);
+
+	void sentivity_while_running(bool isEmuationRunning);
 protected:
 	virtual bool on_delete_event (GdkEventAny*event);
 	//virtual void on_realize();

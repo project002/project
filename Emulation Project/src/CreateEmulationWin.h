@@ -16,9 +16,12 @@
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/textview.h>
 #include <gtkmm/messagedialog.h>
+#include <netdb.h>
+#include <ifaddrs.h>
 #include "CEmulationDrawing.h"
 #include "CXMLBuilder.h"
 #include "DialogRouterEdit.h"
+#include "SDataController.h"
 
 class CreateEmulationWin: public Gtk::Window
 {
@@ -49,6 +52,10 @@ private:
 	std::string tempFilename;
 
 	DialogRouterEdit* DlgRouterEdit;
+
+	std::vector<std::string> pCons;
+
+	void initPhysicalConnections();
 };
 
 #endif /* CREATEEMULATIONWIN_H_ */

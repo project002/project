@@ -32,6 +32,11 @@ public:
 	 * refreshed externally)
 	 */
 	void forceDragRefresh() {mForceDragRefresh = true;}
+//	/**
+//	 * makes the drawing show only static data from the
+//	 * xml file
+//	 */
+//	void getStaticData() {mStaticData = true;}
 private:
 	//setup xml path
 	string mXMLPath;
@@ -58,6 +63,8 @@ private:
 	std::vector< Point* > mConDragRef;
 	//allow canvas refresh when dragging (when refresh of the canvas is not external)
 	bool mForceDragRefresh;
+	//make the router data come statically from the xml file and not the emulation
+//	bool mStaticData;
 
 	std::map<int unsigned,Point > get_connected_routers(int id);
 	/**

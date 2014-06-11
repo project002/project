@@ -26,6 +26,7 @@ CEmulationDrawing::CEmulationDrawing() :
 	noPos(std::pair<int,int>(NO_POS,NO_POS)),
 	mConDragRef(std::vector< Point* >()),
 	mForceDragRefresh(false),
+//	mStaticData(false),
 	mImgBuffers(ImageBuffers())
 {
 	this->add_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::POINTER_MOTION_MASK); //yeah!
@@ -258,6 +259,7 @@ void CEmulationDrawing::draw_router_info(int rid,int pos[],const Cairo::RefPtr<C
 
 	stringstream ss;
 	ss << rid << "\n";
+
 	ss << "Buffer Size: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERSIZE) << "\n";
 	ss << "Buffer Fill Init.: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERUS) << "\n";
 	ss << "Fillage: " << SDataController::getInstance().get_router_data(rid,SDataController::FILLAGE) << "\n";

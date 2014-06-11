@@ -71,7 +71,7 @@ void CGUIGTK::create_menu_bar()
 	mPackingBox->pack_start(*mMenuBar,Gtk::PACK_SHRINK,0);
 
 	//menu items top 0
-	Gtk::MenuItem* menuitem_file = Gtk::manage(new Gtk::MenuItem("_File", true));
+	menuitem_file = Gtk::manage(new Gtk::MenuItem("_File", true));
 	mMenuBar->append(*menuitem_file);
 	Gtk::Menu* file_sub_menu = Gtk::manage(new Gtk::Menu());
 	menuitem_file->set_submenu(*file_sub_menu);
@@ -153,18 +153,20 @@ void CGUIGTK::stop_emulation()
 		delete mEmulation;
 		mEmulation = NULL;
 		mImportXMLPath = "";
+		sentivity_while_running(mEmulationRunning);
 	}
 }
 
 void CGUIGTK::start_emulation_thread()
 {
 	mEmulationRunning = true;
+	sentivity_while_running(mEmulationRunning);
 	EmulationThread = Glib::Thread::create(sigc::mem_fun(*this,&CGUIGTK::run_emulation),false);
 	loop();
 }
 
 
-void CGUIGTK::run_emulation() //runs in a seperate thread
+void CGUIGTK::run_emulation() //runs in a separate thread
 {
 
 	mInst.override_color (Gdk::RGBA("black"), Gtk::STATE_FLAG_NORMAL);
@@ -176,6 +178,7 @@ void CGUIGTK::run_emulation() //runs in a seperate thread
 			mDrawing->resetDrawing(mImportXMLPath);
 			mEmulation = new EmulationWrapper(mImportXMLPath);
 			mEmulation->RunEmulation();
+			//disable problematic buttons
 		}
 	}
 	catch(CException & error)
@@ -188,6 +191,7 @@ void CGUIGTK::run_emulation() //runs in a seperate thread
 		mInst.override_color (Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
 		mInst.set_label(ss.str());
 		//throw CException("Emulation Failed");
+		sentivity_while_running(mEmulationRunning);
 	}
 }
 
@@ -264,7 +268,15 @@ void CGUIGTK::update_router(bool a, int b)
 void CGUIGTK::open_creation_win()
 {
 	if (emCrt == NULL) {emCrt = new CreateEmulationWin();}
+	emCrt->set_transient_for(*this);
+	emCrt->set_modal(true);
 	emCrt->show();
+}
+
+void CGUIGTK::sentivity_while_running(bool isEmuationRunning)
+{
+	menuitem_file->set_sensitive(!isEmuationRunning);
+	mQuickStartButton->set_sensitive(!isEmuationRunning);
 }
 
 bool CGUIGTK::on_delete_event(GdkEventAny* event)

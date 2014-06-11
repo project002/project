@@ -17,6 +17,7 @@ CreateEmulationWin::CreateEmulationWin():
 			tempFilename("tempfile.xml"),
 			DlgRouterEdit(NULL)
 {
+	initPhysicalConnections();
 	set_border_width(10);
 	set_default_size(630,300);
 	set_title("Emulation Creation");
@@ -79,7 +80,7 @@ void CreateEmulationWin::init_win()
 	std::cout << "INIT shit when the window show" << std::endl;
 	if (XMLBuilder == NULL) {XMLBuilder = new CXMLBuilder(tempFilename);}
 	XMLBuilder->Finalize(); //refreshes the file to a empty file
-//	mDrawing->resetDrawing(tempFilename);
+	mDrawing->resetDrawing(tempFilename);
 
 }
 
@@ -94,15 +95,66 @@ void CreateEmulationWin::add_router_dialog()
 {
 	if (XMLBuilder == NULL || mDrawing == NULL) {return;}
 	if (DlgRouterEdit == NULL) {DlgRouterEdit = new DialogRouterEdit("Router Details",*this,true);}
-	DlgRouterEdit->run();
-	std::cout << "this happens right after?\n";
+	DlgRouterEdit->setAvailablePhysicalConnections(pCons);
+	int res = DlgRouterEdit->run();
 	RouterInformation t;
-	t.sBufferSize = 10;
-	t.sDropRate = 0;
+	std::vector<std::string> chosenCon = std::vector<std::string>();
+	switch(res)
+	{
+		case Gtk::RESPONSE_CANCEL: DlgRouterEdit->hide(); return;
+		case Gtk::RESPONSE_OK:
+			t = DlgRouterEdit->getData();
+			SDataController::getInstance().insertRouterData(t.sRouterNumber,SDataController::DROPRATE,t.sDropRate);
+			SDataController::getInstance().insertRouterData(t.sRouterNumber,SDataController::FILLAGE,t.sFillage);
+			SDataController::getInstance().insertRouterData(t.sRouterNumber,SDataController::BUFFERSIZE,t.sBufferSize);
+			SDataController::getInstance().insertRouterData(t.sRouterNumber,SDataController::BUFFERUS,t.sUsedBufferSize);
+			chosenCon  = DlgRouterEdit->getPhysicalConnections();
+			DlgRouterEdit->hide();
+			break;
+	}
+
 
 	bool added = XMLBuilder->AddRouter(t);
-	if (added) {std::cout << "router added\n";} else {std::cout << "not added\n";}
+	if (added)
+	{
+		std::cout << "router added\n";
+		std::vector<std::string>::iterator it;
+		//add physical connections if any
+		for(it=chosenCon.begin();it!=chosenCon.end();++it)
+		{
+			XMLBuilder->AddPhysicalConnection((*it));
+		}
+	}
+	else
+	{
+		std::cout << "not added\n";
+	}
 	XMLBuilder->Finalize();
 	mDrawing->resetDrawing(tempFilename);
 	mDrawing->queue_draw();
+}
+
+void CreateEmulationWin::initPhysicalConnections()
+{
+	struct ifaddrs *ifaddr;
+	struct ifaddrs *ifa;
+
+	std::string name = "";
+
+	if (getifaddrs(&ifaddr) == -1) {std::cout << "no available interface list\n"; return;}
+
+	for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
+	{
+		if (ifa->ifa_addr == NULL) {continue;}
+		name = std::string(ifa->ifa_name);
+		if (name.compare("lo")==0) {continue;}
+//		std::cout << name << std::endl;
+		pCons.push_back(name);
+	}
+	freeifaddrs(ifaddr);
+	ifa = NULL;
+
+	//remove duplicates
+	sort( pCons.begin(), pCons.end() );
+	pCons.erase( unique( pCons.begin(), pCons.end() ), pCons.end() );
 }
