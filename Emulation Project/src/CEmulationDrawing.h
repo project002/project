@@ -20,6 +20,7 @@ typedef std::map< unsigned int,std::vector< Point* > > LineRel;
 //typedef std::multimap< unsigned int, LineP > LinesMap;
 typedef std::vector< LineP > LinesMap;
 typedef std::map< Glib::ustring,Glib::RefPtr<Gdk::Pixbuf> > ImageBuffers;
+typedef std::vector<std::pair<std::string,Point> > LabelsPos;
 class CEmulationDrawing : public Gtk::DrawingArea
 {
 public:
@@ -32,11 +33,8 @@ public:
 	 * refreshed externally)
 	 */
 	void forceDragRefresh() {mForceDragRefresh = true;}
-//	/**
-//	 * makes the drawing show only static data from the
-//	 * xml file
-//	 */
-//	void getStaticData() {mStaticData = true;}
+
+	Point get_router_position(int unsigned rID) {return mElementsPos->at(rID);}
 private:
 	//setup xml path
 	string mXMLPath;
@@ -48,6 +46,8 @@ private:
 	LinesMap* mLinesPos;
 	//stores references to the connections attached to the router by id
 	LineRel* mConnectionRelation;
+	//hold the physical connection labels positions
+	LabelsPos* mLabelPositions;
 	//text layout
 	Glib::RefPtr<Pango::Layout> mTlayout;
 	void insertNewImage(Glib::ustring imageName,Glib::ustring imagePath);
@@ -56,6 +56,8 @@ private:
 	void initial_positions(); //setup the initial positions of the object in the emulation (in percentage)
 	//indicate drag event start
 	bool mStartDrag;
+	//indicates the currently focused (selected) router ID
+	int unsigned mSelectedRouterID;
 	Point* mDragRef;
 	int canvasW;
 	int canvasH;
@@ -107,6 +109,12 @@ private:
 	 */
 	void draw_router_info(int rid,int pos[],const Cairo::RefPtr<Cairo::Context>& cr);
 
+	/**
+	 * draws the interface name of the physical connections
+	 * @param cr the cairo context
+	 */
+	void draw_connections_info(const Cairo::RefPtr<Cairo::Context>& cr);
+
 	void print_relations()
 	{
 		LineRel::iterator it= mConnectionRelation->begin();
@@ -120,6 +128,13 @@ private:
 			}
 		}
 	}
+
+	/**
+	 * counts then number of physical connections in the router
+	 * @param rID the id of the router
+	 * @return number of physical connections
+	 */
+	int get_physical_con_count(int unsigned rID);
 protected:
 	//Override default signal handler:
 	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);

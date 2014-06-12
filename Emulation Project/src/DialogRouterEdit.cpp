@@ -76,10 +76,24 @@ DialogRouterEdit::~DialogRouterEdit()
 {
 }
 
-void DialogRouterEdit::okay_clicked()
+void DialogRouterEdit::setInitialData(RouterInformation ri)
 {
-	hide();
+	mRData = ri;
+	spnRID.set_value(ri.sRouterNumber);
+	spnRID.set_sensitive(false);
+	spnDrop.set_value(ri.sDropRate);
+	spnFill.set_value(ri.sFillage);
+	spnInitBufSz.set_value(ri.sUsedBufferSize);
+	spnBufSz.set_value(ri.sBufferSize);
+	entAutoFill.set_text(ri.sDynamicFillage);
+	entAutoDrop.set_text(ri.sDynamicDropRate);
 }
+
+void DialogRouterEdit::resetToNormal()
+{
+	spnRID.set_sensitive(true);
+}
+
 
 RouterInformation DialogRouterEdit::getData()
 {
@@ -113,6 +127,7 @@ std::vector<std::string> DialogRouterEdit::getPhysicalConnections()
 	}
 	return chosenCons;
 }
+
 
 void DialogRouterEdit::addPhysicalCon()
 {

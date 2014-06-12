@@ -11,7 +11,7 @@
 #include "DParserDefs.h"
 #define DEFAULT_THREADED_EMULATION "true"
 #define DEFAULT_FORMAT_VERSION 1
-#define MAXIMUM_DROP_RATE_IN_PERCENTAGE 7
+#define MAXIMUM_DROP_RATE_IN_PERCENTAGE 100
 #define MAXIMUM_FILLAGE_IN_PERCENTAGE 100
 #define MINIMAL_BUFFER_SIZE_IN_PACKETS 0
 
@@ -141,6 +141,12 @@ void CXMLBuilder::GenerateNextFileName()
 		throw;
 	}
 }
+
+void CXMLBuilder::SetNewFilename(string filename)
+{
+	mCurrentFileName = filename;
+}
+
 /**
  * Function adds to the xml file the basic lines needed in the xml which includes
  * - Network
@@ -173,6 +179,21 @@ void CXMLBuilder::BuildDefaultXMLInformation()
 	}
 }
 
+void CXMLBuilder::SetThreaded(bool isThreaded)
+{
+	try
+	{
+
+		mNetworkNode.attribute(THREADED_EMULATION) = isThreaded;
+
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
 /**
  * Adding a router to the XML file
  * @param routerInfo holding router number buffer size and drop rate wanted
@@ -210,6 +231,11 @@ bool CXMLBuilder::AddRouter(RouterInformation routerInfo)
 				routerInfo.sDynamicFillage.c_str();
 		mCurrentRouter.append_attribute(
 				XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE)=routerInfo.sDynamicDropRate.c_str();
+
+		mCurrentRouter.append_attribute(
+				XML_ROUTER_X_POS_ATTRIBUTE) ;
+		mCurrentRouter.append_attribute(
+				XML_ROUTER_Y_POS_ATTRIBUTE);
 		return true;
 	}
 	catch (CException & error)
@@ -219,6 +245,26 @@ bool CXMLBuilder::AddRouter(RouterInformation routerInfo)
 		throw;
 	}
 }
+
+/**
+ * Updates the position (in percentage) of the router in the graphical view
+ * if there is no position to update, it creates the attribute
+ * @param routerNumber the number of the router to add the position
+ * @return true if changed else false
+ */
+bool CXMLBuilder::UpdatePosition(unsigned int routerNumber,unsigned int xPos,unsigned int yPos)
+{
+	if (!SetCurrentRouter(routerNumber))
+	{
+		return false;
+	}
+	mCurrentRouter.attribute(
+			XML_ROUTER_X_POS_ATTRIBUTE) = xPos;
+	mCurrentRouter.attribute(
+			XML_ROUTER_Y_POS_ATTRIBUTE) = yPos;
+	return true;
+}
+
 
 /**
  * Function adds a physical connection to the last added router or
@@ -535,10 +581,10 @@ bool CXMLBuilder::AddVirtualConnection(unsigned int firstRouter,
 
 		pugi::xml_node firstRouter = virtualCon.append_child(
 				XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER);
-		firstRouter.append_child(pugi::node_pcdata).set_value(s1.str().c_str());
+		firstRouter.append_attribute(XML_ROUTER_NUMBER_ATTRIBUTE).set_value(s1.str().c_str());
 		pugi::xml_node secondRouter = virtualCon.append_child(
 				XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER);
-		secondRouter.append_child(pugi::node_pcdata).set_value(s2.str().c_str());
+		secondRouter.append_attribute(XML_ROUTER_NUMBER_ATTRIBUTE).set_value(s2.str().c_str());
 
 		return true;
 	}
@@ -598,6 +644,17 @@ bool CXMLBuilder::IsVirtualConnectionExist(unsigned int firstRouter,
 	}
 }
 
+/**
+ * removes any virtual connection that has the given router number in it
+ * @param router router number
+ * @return true if removed or there was nothing to remove else false
+ */
+bool CXMLBuilder::RemoveVirtualConnectionWith(unsigned int router)
+{
+	//TODO : something something
+	return true;
+}
+
 bool CXMLBuilder::RemoveVirtualConnection(unsigned int firstRouter,
 		unsigned int secondRouter)
 {
@@ -655,3 +712,4 @@ bool CXMLBuilder::RemoveVirtualConnection(unsigned int firstRouter,
 		throw;
 	}
 }
+

@@ -94,7 +94,7 @@ void CRouter::Sniffer()
 	{
 		mDropRateArrIterator=mDropRateArr.begin();
 		mPacketCollector= new CPacketCollector(mBufferSize);
-		AddPacketsToBuffer(mInitialBufferUse);
+		mPacketCollector->FixBufferFillage(mInitialBufferUse,0);
 		mSniffingThread = boost::thread(&CRouter::Sniff, this);
 		mPacketsHandlingThread = boost::thread(&CRouter::PacketHandler, this);
 	}

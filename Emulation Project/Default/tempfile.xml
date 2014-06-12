@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
 <Network FormatVersion="1" Threaded="true">
-	<Routers />
-	<VirtualConnections />
+	<Routers>
+		<Router Number="1" BufferSize="100" DropRate="0" BufferSizeUsed="0" Fillage="0" DynamicFillageArray="" DynamicDropRateArray="" xPos="35" yPos="65" />
+	</Routers>
+	<VirtualConnections>
+		<VirtualConnection>
+			<Router Number="1" />
+			<Router Number="2" />
+		</VirtualConnection>
+	</VirtualConnections>
 </Network>

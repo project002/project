@@ -20,8 +20,11 @@
 #include <ifaddrs.h>
 #include "CEmulationDrawing.h"
 #include "CXMLBuilder.h"
+#include "CXMLBasicParser.h"
 #include "DialogRouterEdit.h"
 #include "SDataController.h"
+
+typedef std::vector<unsigned int> RouterVec;
 
 class CreateEmulationWin: public Gtk::Window
 {
@@ -33,9 +36,15 @@ protected:
 	void reset_win();
 	void init_win();
 	//mouse button clicks on drawing area
-	bool handle_router_click(GdkEventButton* event);
+	bool handle_router_release(GdkEventButton* event);
 	//button clicks
 	void add_router_dialog();
+	void connect_routers();
+	void remove_routers();
+	void saveEmulationFile();
+	void toggleHighEnd();
+	void loadEmulation();
+	void updateRouter(int unsigned rid);
 
 	Gtk::Box* mPackingBox;
 	Gtk::Grid mGrid;
@@ -46,6 +55,11 @@ protected:
 	Gtk::Button* remRouter;
 	Gtk::Button* connectRouters;
 	Gtk::Button* saveEmulation;
+	Gtk::Button* openEmulation;
+	//checkbox
+	Gtk::CheckButton* HighEnd;
+	//status bar
+	Gtk::Label* statusBar;
 	//xml creator
 	CXMLBuilder* XMLBuilder;
 private:
@@ -55,7 +69,15 @@ private:
 
 	std::vector<std::string> pCons;
 
+	RouterVec selectedRouters;
+
 	void initPhysicalConnections();
+
+	void refresh();
+
+	void loadEmulationToCreator(std::string filename);
+
+	void updateDrawingModule(RouterInformation t);
 };
 
 #endif /* CREATEEMULATIONWIN_H_ */

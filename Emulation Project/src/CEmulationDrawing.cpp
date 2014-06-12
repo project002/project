@@ -14,13 +14,16 @@
 //canvas padding for the physical router & connection
 #define CNVS_PAD 20
 #define NO_POS -2
+#define NO_SEL 0
 CEmulationDrawing::CEmulationDrawing() :
 	mXMLPath(),
 	mXMLprs(NULL),
 	mElementsPos(new ElementMap()),
 	mLinesPos(new LinesMap()),
 	mConnectionRelation(new LineRel()),
+	mLabelPositions(new LabelsPos()),
 	mStartDrag(false),
+	mSelectedRouterID(NO_SEL),
 	mDragRef(NULL),
 	canvasW(0),canvasH(0),
 	noPos(std::pair<int,int>(NO_POS,NO_POS)),
@@ -68,6 +71,8 @@ void CEmulationDrawing::loadImagesSrouces()
 	//insert router image
 	insertNewImage("RouterImage","ricon.png");
 	insertNewImage("RouterImageSource","rsicon.png");
+	insertNewImage("RouterImageSel","ricon_sel.png");
+	insertNewImage("RouterImageSourceSel","rsicon_sel.png");
 }
 
 CEmulationDrawing::~CEmulationDrawing()
@@ -75,6 +80,7 @@ CEmulationDrawing::~CEmulationDrawing()
 	delete mElementsPos;
 	delete mLinesPos;
 	delete mConnectionRelation;
+	delete mLabelPositions;
 }
 
 void CEmulationDrawing::resetDrawing(string xml_path)
@@ -83,10 +89,11 @@ void CEmulationDrawing::resetDrawing(string xml_path)
 	if (mXMLprs != NULL) {delete mXMLprs;}
 	mXMLprs = new CXMLBasicParser();
 	mXMLprs->ParseXML(mXMLPath);
-	//clear info vectors or what not
+	//clear info vectors and what not
 	mConnectionRelation->clear();
 	mElementsPos->clear();
 	mLinesPos->clear();
+	mLabelPositions->clear();
 	next_source_con_pos(true);
 	next_source_router_pos(true);
 	initial_positions();
@@ -105,19 +112,20 @@ void CEmulationDrawing::set_lines_count()
 {
 	int p = mXMLprs->GetPhysicalConnections().size();
 	int v = mXMLprs->GetVirtualConnections().size();
-	mLinesPos->resize((p+v)*2);
+	mLinesPos->resize(((p+v)*((p+v))-1)/2);
 }
 
 void CEmulationDrawing::initial_positions()
 {
+	//typedef!!!
+	typedef multimap<unsigned int,string> PhyCons;
 	if (mXMLPath.length()==0) {return;}
 	vector<RouterInformation> routers = mXMLprs->GetRoutersInformation();
-	multimap<unsigned int,string> phCon = mXMLprs->GetPhysicalConnections();
+	PhyCons phCon = mXMLprs->GetPhysicalConnections();
 	//resize the vector so it wont re-allocate memory mid-init and fuck up the Point references at mConnectionRelation
 	set_lines_count();
 	int x_percent=CNVS_PAD;
 	int y_percent=50;
-	//TODO: this works for only two physical routers which are both on either side of the screen
 	int pRoutersNum = physical_routers_count();
 	int percent_inc = (100-(CNVS_PAD*2))/((routers.size()+1)-pRoutersNum);
 	std::pair<int,int> pos;
@@ -130,26 +138,45 @@ void CEmulationDrawing::initial_positions()
 		unsigned int id = (*it).sRouterNumber;
 		isPhysical = mXMLprs->isPhysicalRouter(id);
 		mConnectionRelation->insert(std::pair<unsigned int ,std::vector< Point* > >(id,std::vector< Point* >()));
+		//check if there is a position in the file itself
+		Point rPos = mXMLprs->GetRouterPosition(id);
+		bool posPresent = (rPos.first!=0 || rPos.second);
 		//is source element
 		if (isPhysical)
 		{
-			pos = next_source_router_pos();
-			//insert lines for physical routers
-			line_pos = LineP(pos,next_source_con_pos());
-			//mLinesPos->insert(std::pair< unsigned int,LineP >(id,line_pos));
-			mLinesPos->push_back(line_pos);
-			//add relation of connection and router
-			mConnectionRelation->at(id).push_back(&(mLinesPos->back().first));
-//			cout << "inserted reference " << id << " with: " << mLinesPos->back().first.first << "," << mLinesPos->back().first.second  << " Mem " << &(mLinesPos->back().first) << std::endl;
+			if (posPresent) {pos = rPos;} else {pos = next_source_router_pos();}
+			//make this foreach physical connection this router has
+			std::pair<PhyCons::iterator,PhyCons::iterator> range = phCon.equal_range(id);
+			for (PhyCons::iterator n = range.first; n!=range.second;++n)
+			{
+				mXMLprs->GetPhysicalConnections();
+
+				//insert lines for physical routers
+				line_pos = LineP(pos,next_source_con_pos());
+				//mLinesPos->insert(std::pair< unsigned int,LineP >(id,line_pos));
+				mLinesPos->push_back(line_pos);
+				//add relation of connection and router
+				mConnectionRelation->at(id).push_back(&(mLinesPos->back().first));
+	//			cout << "inserted reference " << id << " with: " << mLinesPos->back().first.first << "," << mLinesPos->back().first.second  << " Mem " << &(mLinesPos->back().first) << std::endl;
+				mLabelPositions->push_back(std::pair<string,Point>(n->second,line_pos.second));
+			}
 		}
 		else
 		{
-			x_percent += percent_inc;
-			pos = std::pair<int,int>(x_percent,y_percent);
+			if (posPresent)
+			{
+				pos = rPos;
+			}
+			else
+			{
+				x_percent += percent_inc;
+				pos = std::pair<int,int>(x_percent,y_percent);
+			}
 		}
 		mElementsPos->insert(std::pair< unsigned int,std::pair<int,int> >(id,pos));
 	}
 
+	try {
 	//virtual connection positions
 	ElementMap::iterator eit = mElementsPos->begin();
 	std::map<int unsigned,Point > positions;
@@ -165,6 +192,9 @@ void CEmulationDrawing::initial_positions()
 			mConnectionRelation->at((*pit).first).push_back(&(mLinesPos->back().second));
 		}
 	}
+
+	}
+	catch (std::exception & err) {cout << "Fix This Thing With Missing Connection By Renoving All The Routers Virtual Connections When It Is Removed\n";}
 //	///printout
 //	LinesMap::iterator lit = mLinesPos->begin();
 //	for (;lit!=mLinesPos->end();++lit)
@@ -172,7 +202,7 @@ void CEmulationDrawing::initial_positions()
 //		cout << "p1: " << lit->first.first << ":" << lit->first.second << " Mem " << &(lit->first) << "  ";
 //		cout << "p2: " << lit->second.first << ":" << lit->second.second << " Mem " << &(lit->second) << endl;
 //	}
-//
+
 //	print_relations();
 
 }
@@ -236,6 +266,14 @@ std::map<int unsigned,Point > CEmulationDrawing::get_connected_routers(int id)
 
 }
 
+int CEmulationDrawing::get_physical_con_count(unsigned int rID)
+{
+	//typedef!!!
+	typedef multimap<unsigned int,string> PhyCons;
+	PhyCons cons = mXMLprs->GetPhysicalConnections();
+	return cons.count(rID);
+}
+
 int CEmulationDrawing::get_clicked_element(int px, int py)
 {
 	ElementMap::iterator eit = mElementsPos->begin();
@@ -280,6 +318,24 @@ void CEmulationDrawing::draw_router_info(int rid,int pos[],const Cairo::RefPtr<C
 	mTlayout->show_in_cairo_context(cr);
 }
 
+void CEmulationDrawing::draw_connections_info(const Cairo::RefPtr<Cairo::Context>& cr)
+{
+	int text_width;
+	int text_height;
+	int x,y;
+	for (LabelsPos::iterator it=mLabelPositions->begin(); it!=mLabelPositions->end(); ++it)
+	{
+		mTlayout->set_text(it->first);
+		mTlayout->get_pixel_size(text_width, text_height);
+		x = percent2pixel(it->second.first,canvasW);
+		y = percent2pixel(it->second.second,canvasH);
+		x = it->second.first == 100 ? x-text_width : x;
+		y = it->second.second == 100 ? y - text_height : y;
+		cr->move_to(x,y);
+		mTlayout->show_in_cairo_context(cr);
+	}
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////EVENTS/////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -310,12 +366,21 @@ bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
  		cr->line_to(target_pos[0],target_pos[1]);
 		cr->stroke();
 	}
+	draw_connections_info(cr);
 
 	//draw elements by positions
 	ElementMap::iterator it = mElementsPos->begin();
 	for (;it!=mElementsPos->end();++it)
 	{
-		string src_name = mXMLprs->isPhysicalRouter(it->first) ? "RouterImageSource" : "RouterImage";
+		string src_name = "RouterImage";
+		if (mXMLprs->isPhysicalRouter(it->first))
+		{
+			src_name = (it->first == mSelectedRouterID) ? "RouterImageSourceSel" : "RouterImageSource";
+		}
+		else
+		{
+			src_name = (it->first == mSelectedRouterID) ? "RouterImageSel" : "RouterImage";
+		}
 		base_pos[0] = percent2pixel(it->second.first,canvasW);
 		base_pos[1] = percent2pixel(it->second.second,canvasH);
 
@@ -345,15 +410,16 @@ bool CEmulationDrawing::on_button_press_event(GdkEventButton* event)
 	{
 		mDragRef = NULL;
 		mConDragRef = std::vector< Point* >();
-
+		mSelectedRouterID = NO_SEL;
 	}
 	else
 	{
+		mSelectedRouterID = eid;
 		mDragRef = &mElementsPos->at(eid);
 		//connections to update
 		mConDragRef = mConnectionRelation->at(eid);
 	}
-
+	if (mForceDragRefresh) {queue_draw();}
 	return true;
 }
 

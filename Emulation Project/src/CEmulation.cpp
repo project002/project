@@ -287,7 +287,7 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 			SReport::getInstance().LogRouter(RouterNumber,BufferSize,DropRate,BufferUsedSize,Fillage);
 
 			//TODO: add to gui the init buffer size and fillage rate(in percent)
-			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%%",RouterNumber,BufferSize,DropRate);
+			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%% ",RouterNumber,BufferSize,DropRate);
 			mRouters.push_back(RouterCreate);
 		}
 	}

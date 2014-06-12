@@ -44,7 +44,18 @@ public:
 	{
 		return (mPhysicalConnections.count(routerNumber) != 0);
 	}
+	pair<int, int> GetRouterPosition(unsigned int routerNumber)
+	{
+		if (mPositionMap.find(routerNumber)!=mPositionMap.end())
+		{
+			return mPositionMap[routerNumber];
+		}
+		return pair<int,int>(0,0);
+	}
+	bool isThreaded(){return doc.child(XML_LAYER_1_NETWORK).attribute(THREADED_EMULATION).as_bool(false);}
 private:
+	//map router number and its position
+	map< unsigned int,pair <int,int> > mPositionMap;
 	pugi::xml_document doc;
 	// router num to router nums
 	multimap<unsigned int,unsigned int> mConnectionsBetweenRouters;
@@ -110,6 +121,11 @@ private:
 			sRouterInfo.sFillage = currentRouter.attribute(
 					XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
 
+			int xPos=currentRouter.attribute(
+					XML_ROUTER_X_POS_ATTRIBUTE).as_int();
+			int yPos=currentRouter.attribute(
+					XML_ROUTER_Y_POS_ATTRIBUTE).as_int();
+			mPositionMap[sRouterInfo.sRouterNumber]=pair<int,int>(xPos,yPos);
 			mRoutersInformation.push_back(sRouterInfo);
 		}
 	}

@@ -18,6 +18,7 @@ public:
 	CXMLBuilder(string fileName);
 	virtual ~CXMLBuilder();
 	bool AddRouter(RouterInformation routerInfo);
+	bool UpdatePosition(unsigned int routerNumber,unsigned int xPos,unsigned int yPos);
 	bool AddPhysicalConnection(string pcName);
 	bool RemoveRouter(unsigned int routerNumber);
 	bool RemovePhysicalConnection(string pcName);
@@ -26,7 +27,10 @@ public:
 	bool EditCurrentRouterInformation(RouterInformation routerInfo);
 	bool AddVirtualConnection(unsigned int firstRouter,unsigned int secondRouter);
 	bool RemoveVirtualConnection(unsigned int firstRouter,unsigned int secondRouter);
+	bool RemoveVirtualConnectionWith(unsigned int router);
+	void SetNewFilename(string filename);
 	void Finalize();
+	void SetThreaded(bool isThreaded);
 private:
 	bool IsVirtualConnectionExist(unsigned int firstRouter,unsigned int secondRouter);
 	void GenerateNextFileName();

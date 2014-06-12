@@ -27,8 +27,9 @@ public:
 
 	void setFreeRouterNumber(int unsigned numid) {freeRouterNum = numid;}
 	void setAvailablePhysicalConnections(std::vector<std::string> names) {phyCons = names;}
+	void setInitialData(RouterInformation ri);
+	void resetToNormal();
 protected:
-	void okay_clicked();
     void on_my_response(int response_id);
     void addPhysicalCon();
 
