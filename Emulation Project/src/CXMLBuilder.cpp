@@ -272,10 +272,14 @@ bool CXMLBuilder::UpdatePosition(unsigned int routerNumber,unsigned int xPos,uns
  * @param pcName interface name
  * @return true if was added succesfuly
  */
-bool CXMLBuilder::AddPhysicalConnection(string pcName)
+bool CXMLBuilder::AddPhysicalConnection(string pcName, int routerNumber)
 {
 	try
 	{
+		if ((routerNumber!=-1) && !SetCurrentRouter(routerNumber))
+		{
+			return false;
+		}
 		if(!CheckPhysicalConnectionCorrectness(pcName) || mNoCurrentRouterChosen)
 		{
 			return false;
@@ -346,6 +350,16 @@ bool CXMLBuilder::CheckRouterCorrectness(RouterInformation routerInfo)
 		{
 			return false;
 		}
+
+		if (!IsNumberString(routerInfo.sDynamicDropRate))
+		{
+			return false;
+		}
+		if (!IsNumberString(routerInfo.sDynamicFillage))
+		{
+			return false;
+		}
+
 		if (!IsRouterNumberFree(routerInfo.sRouterNumber))
 		{
 			return false;
@@ -360,6 +374,26 @@ bool CXMLBuilder::CheckRouterCorrectness(RouterInformation routerInfo)
 	}
 }
 
+bool CXMLBuilder::IsNumberString(string toCheck)
+{
+	try
+	{
+		for (unsigned int i = 0; i < toCheck.length(); i++)
+		{
+			if (!((toCheck[i] >= '0' && toCheck[i] <= '9') || toCheck[i] == ' '))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
 /**
  * Verify that the router number given is not a duplication
  * @param newRouterNumber
@@ -403,6 +437,7 @@ bool CXMLBuilder::RemoveRouter(unsigned int routerNumber)
 			return false;
 		}
 		mRoutersNode.remove_child(mCurrentRouter);
+		RemoveVirtualConnectionWith(routerNumber);
 		mNoCurrentRouterChosen=true;
 		return true;
 	}
@@ -419,11 +454,11 @@ bool CXMLBuilder::RemoveRouter(unsigned int routerNumber)
  * @param pcName
  * @return true if removed succesfuly
  */
-bool CXMLBuilder::RemovePhysicalConnection(string pcName)
+bool CXMLBuilder::RemovePhysicalConnection(string pcName, int routerNumber)
 {
 	try
 	{
-		if (mNoCurrentRouterChosen)
+		if ((routerNumber!=-1) && !SetCurrentRouter(routerNumber))
 		{
 			return false;
 		}
@@ -472,10 +507,10 @@ bool CXMLBuilder::SetCurrentRouter(unsigned int routerNumber)
 			{
 				mCurrentRouter=currentRouter;
 				mNoCurrentRouterChosen=false;
-				break;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	catch (CException & error)
 	{
@@ -489,12 +524,19 @@ bool CXMLBuilder::SetCurrentRouter(unsigned int routerNumber)
  * the current router info when the user chooses to edit it.
  * @return current router information
  */
-RouterInformation CXMLBuilder::GetCurrentRouterInformation()
+RouterInformation CXMLBuilder::GetCurrentRouterInformation( int routerNumber)
 {
 	try
 	{
 		RouterInformation rtInfo;
-
+		if ((routerNumber!=-1) && !SetCurrentRouter(routerNumber))
+		{
+			return rtInfo;
+		}
+		if (mNoCurrentRouterChosen)
+		{
+			return rtInfo;
+		}
 		rtInfo.sRouterNumber = mCurrentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_int();
 		rtInfo.sBufferSize = mCurrentRouter.attribute(XML_ROUTER_BUFFER_SIZE_ATTRIBUTE).as_int();
 		rtInfo.sDropRate = mCurrentRouter.attribute(XML_ROUTER_DROP_RATE_ATTRIBUTE).as_double();
@@ -516,20 +558,17 @@ bool CXMLBuilder::EditCurrentRouterInformation(RouterInformation routerInfo)
 {
 	try
 	{
-		if (routerInfo.sBufferSize < MINIMAL_BUFFER_SIZE_IN_PACKETS)
+		if(!SetCurrentRouter(routerInfo.sRouterNumber))
 		{
 			return false;
 		}
-		if (routerInfo.sDropRate > MAXIMUM_DROP_RATE_IN_PERCENTAGE)
+		//Verify the router info correctness and that there are no duplication of routers
+		if (!CheckRouterCorrectness(routerInfo) && IsRouterNumberFree(routerInfo.sRouterNumber))
 		{
 			return false;
 		}
-		if (routerInfo.sFillage>MAXIMUM_FILLAGE_IN_PERCENTAGE)
-		{
-			return false;
-		}
-		if( routerInfo.sRouterNumber == mCurrentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_uint() ||
-				IsRouterNumberFree(routerInfo.sRouterNumber))
+
+		if( routerInfo.sRouterNumber == mCurrentRouter.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_uint())
 		{
 			//Appending attributes of router number buffer size and drop rate
 			//according to the information passed to the function
@@ -575,6 +614,7 @@ bool CXMLBuilder::AddVirtualConnection(unsigned int firstRouter,
 		s1<<firstRouter;
 		stringstream s2;
 		s2<<secondRouter;
+
 		//Appending a router
 		pugi::xml_node virtualCon = mVirtualConnectionsNode.append_child(
 				XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS);
@@ -601,10 +641,6 @@ bool CXMLBuilder::IsVirtualConnectionExist(unsigned int firstRouter,
 {
 	try
 	{
-		stringstream s1;
-		stringstream s2;
-		s1<<firstRouter;
-		s2<<secondRouter;
 		bool first=false;
 		bool second=false;
 		for (pugi::xml_node currentVirtualCon = mVirtualConnectionsNode.child(
@@ -618,11 +654,11 @@ bool CXMLBuilder::IsVirtualConnectionExist(unsigned int firstRouter,
 					currentVirtualVal = currentVirtualVal.next_sibling(
 					XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER))
 			{
-				if(!s1.str().compare(currentVirtualVal.child_value()))
+				if(firstRouter==currentVirtualVal.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_uint())
 				{
 					first=true;
 				}
-				if(!s2.str().compare(currentVirtualVal.child_value()))
+				if(secondRouter==currentVirtualVal.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_uint())
 				{
 					second=true;
 				}
@@ -651,21 +687,48 @@ bool CXMLBuilder::IsVirtualConnectionExist(unsigned int firstRouter,
  */
 bool CXMLBuilder::RemoveVirtualConnectionWith(unsigned int router)
 {
-	//TODO : something something
-	return true;
+	return (RemoveVirtualConnection(router,router,true));
+}
+
+
+
+bool CXMLBuilder::IsInterfaceAvailable(string pcName)
+{
+	try
+	{
+		for (pugi::xml_node currentRouter = mRoutersNode.child(
+				XML_LAYER_3_INDIVIDUAL_ROUTERS); currentRouter; currentRouter =
+				currentRouter.next_sibling(XML_LAYER_3_INDIVIDUAL_ROUTERS))
+		{
+			for (pugi::xml_node physicalCon = currentRouter.child(
+			XML_LAYER_4_INDIVIDUAL_ROUTERS_PHYSICAL_CONNECTION); physicalCon;
+					physicalCon = physicalCon.next_sibling(
+					XML_LAYER_4_INDIVIDUAL_ROUTERS_PHYSICAL_CONNECTION))
+			{
+				string interfaceName = physicalCon.child_value();
+				if (!interfaceName.compare(pcName))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
 }
 
 bool CXMLBuilder::RemoveVirtualConnection(unsigned int firstRouter,
-		unsigned int secondRouter)
+		unsigned int secondRouter,bool removeAll)
 {
 	try
 	{
 		bool first=false;
 		bool second=false;
-		stringstream s1;
-		stringstream s2;
-		s1<<firstRouter;
-		s2<<secondRouter;
 		for (pugi::xml_node currentVirtualCon = mVirtualConnectionsNode.child(
 		XML_LAYER_3_INDIVIDUAL_VIRTUAL_CONNECTIONS); currentVirtualCon;
 				currentVirtualCon = currentVirtualCon.next_sibling(
@@ -685,25 +748,39 @@ bool CXMLBuilder::RemoveVirtualConnection(unsigned int firstRouter,
 								currentVirtualVal.next_sibling(
 										XML_LAYER_4_INDIVIDUAL_VIRTUAL_CONNECTIONS_ROUTER_NUMBER))
 				{
-					if (!s1.str().compare(currentVirtualVal.value()))
+					if(firstRouter==currentVirtualVal.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_uint())
 					{
-						first = true;
+						first=true;
 					}
-					if (!s2.str().compare(currentVirtualVal.value()))
+					if(secondRouter==currentVirtualVal.attribute(XML_ROUTER_NUMBER_ATTRIBUTE).as_uint())
 					{
-						second = true;
+						second=true;
 					}
 				}
-				if (first && second)
+				if (first && second && !removeAll)
 				{
 					mVirtualConnectionsNode.remove_child(currentVirtualCon);
-					break;
+					return true;
+				}
+				else
+				{
+					if((first || second) && removeAll)
+					{
+						mVirtualConnectionsNode.remove_child(currentVirtualCon);
+					}
 				}
 				first=false;
 				second=false;
 			}
 		}
-		return true;
+		if(!removeAll)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 	catch (CException & error)
 	{

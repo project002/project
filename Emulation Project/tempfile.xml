@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Network FormatVersion="1" Threaded="true">
 	<Routers>
-		<Router Number="3" BufferSize="1000" DropRate="0" BufferSizeUsed="0" Fillage="0" DynamicFillageArray="" DynamicDropRateArray="" xPos="26" yPos="57">
+		<Router Number="3" BufferSize="1000" DropRate="0" BufferSizeUsed="0" Fillage="0" DynamicFillageArray="" DynamicDropRateArray="" xPos="24" yPos="72">
 			<PhysicalConnection>eth1</PhysicalConnection>
 		</Router>
-		<Router Number="1" BufferSize="100" DropRate="0" BufferSizeUsed="0" Fillage="10" DynamicFillageArray="" DynamicDropRateArray="" xPos="66" yPos="65">
+		<Router Number="1" BufferSize="100" DropRate="0" BufferSizeUsed="0" Fillage="10" DynamicFillageArray="" DynamicDropRateArray="" xPos="77" yPos="67">
 			<PhysicalConnection>eth0</PhysicalConnection>
 		</Router>
-		<Router Number="5" BufferSize="100" DropRate="0" BufferSizeUsed="0" Fillage="0" DynamicFillageArray="" DynamicDropRateArray="" xPos="46" yPos="31" />
+		<Router Number="2" BufferSize="100" DropRate="7" BufferSizeUsed="10" Fillage="0" DynamicFillageArray="" DynamicDropRateArray="" xPos="49" yPos="34" />
 	</Routers>
 	<VirtualConnections>
 		<VirtualConnection>
@@ -15,19 +15,7 @@
 			<Router Number="1" />
 		</VirtualConnection>
 		<VirtualConnection>
-			<Router Number="3" />
-			<Router Number="2" />
-		</VirtualConnection>
-		<VirtualConnection>
-			<Router Number="3" />
 			<Router Number="1" />
-		</VirtualConnection>
-		<VirtualConnection>
-			<Router Number="3" />
-			<Router Number="5" />
-		</VirtualConnection>
-		<VirtualConnection>
-			<Router Number="5" />
 			<Router Number="3" />
 		</VirtualConnection>
 	</VirtualConnections>

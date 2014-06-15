@@ -120,6 +120,10 @@ private:
 
 			sRouterInfo.sFillage = currentRouter.attribute(
 					XML_ROUTER_FILLAGE_ATTRIBUTE).as_double();
+			sRouterInfo.sDynamicFillage = currentRouter.attribute(
+					XML_ROUTER_DYNAMIC_FILLAGE_ARRAY_ATTRIBUTE).as_string();
+			sRouterInfo.sDynamicDropRate = currentRouter.attribute(
+					XML_ROUTER_DYNAMIC_DROP_RATE_ARRAY_ATTRIBUTE).as_string();
 
 			int xPos=currentRouter.attribute(
 					XML_ROUTER_X_POS_ATTRIBUTE).as_int();

@@ -11,6 +11,7 @@ CreateEmulationWin::CreateEmulationWin():
 			mPackingBox(Gtk::manage(new Gtk::Box())),
 			addRouter(Gtk::manage(new Gtk::Button())),
 			remRouter(Gtk::manage(new Gtk::Button())),
+			remVCon(Gtk::manage(new Gtk::Button())),
 			connectRouters(Gtk::manage(new Gtk::Button())),
 			saveEmulation(Gtk::manage(new Gtk::Button())),
 			openEmulation(Gtk::manage(new Gtk::Button())),
@@ -49,18 +50,22 @@ CreateEmulationWin::CreateEmulationWin():
 	//add router button
 	addRouter->set_label("Add Router");
 	addRouter->signal_clicked().connect(sigc::mem_fun(*this,&CreateEmulationWin::add_router_dialog));
-	mGrid.attach(*addRouter,0,1,4,1);
+	mGrid.attach(*addRouter,0,1,3,1);
 
 	//remove router button
 	remRouter->set_label("Remove Selected Routers");
 	remRouter->signal_clicked().connect(sigc::mem_fun(*this,&CreateEmulationWin::remove_routers));
-	mGrid.attach(*remRouter,4,1,4,1);
+	mGrid.attach(*remRouter,3,1,3,1);
 
 	//connect routers button
 	connectRouters->set_label("Connect Selected Routers");
 	connectRouters->signal_clicked().connect(sigc::mem_fun(*this,&CreateEmulationWin::connect_routers));
-	mGrid.attach(*connectRouters,8,1,4,1);
+	mGrid.attach(*connectRouters,6,1,3,1);
 
+	//remove connection button
+	remVCon->set_label("Remove Connection");
+	remVCon->signal_clicked().connect(sigc::mem_fun(*this,&CreateEmulationWin::remove_connection));
+	mGrid.attach(*remVCon,9,1,3,1);
 
 
 	mDrawing = new CEmulationDrawing();
@@ -89,13 +94,11 @@ CreateEmulationWin::~CreateEmulationWin()
 
 void CreateEmulationWin::reset_win()
 {
-	std::cout << "RESET shit when the window hides" << std::endl;
 	if (XMLBuilder != NULL) {delete XMLBuilder; XMLBuilder = NULL;}
 }
 
 void CreateEmulationWin::init_win()
 {
-	std::cout << "INIT shit when the window show" << std::endl;
 	if (XMLBuilder == NULL) {XMLBuilder = new CXMLBuilder(tempFilename);}
 	XMLBuilder->Finalize(); //refreshes the file to a empty file
 	mDrawing->resetDrawing(tempFilename);
@@ -208,8 +211,6 @@ void CreateEmulationWin::remove_routers()
 			ss << "Removed Router " << *i;
 			statusBar->set_text(ss.str());
 		}
-		//remove virtual connections
-		//XMLBuilder->RemoveVirtualConnectionWith(*i);
 	}
 	if (is_changed) {refresh();}
 }
@@ -218,6 +219,25 @@ void CreateEmulationWin::toggleHighEnd()
 {
 	bool selected = HighEnd->get_active();
 	XMLBuilder->SetThreaded(selected);
+}
+
+void CreateEmulationWin::remove_connection()
+{
+	if (selectedRouters.size() < 2)
+	{
+		statusBar->set_text("No Router/s Selected To Be Disconnected");
+		return;
+	}
+	bool ret = XMLBuilder->RemoveVirtualConnection(selectedRouters.front(),selectedRouters.back());
+	if (ret)
+	{
+		statusBar->set_text("Removed Connection");
+		refresh();
+	}
+	else
+	{
+		statusBar->set_text("Connection doesn't exist");
+	}
 }
 
 void CreateEmulationWin::updateDrawingModule(RouterInformation t)
@@ -232,7 +252,12 @@ void CreateEmulationWin::add_router_dialog()
 {
 	if (XMLBuilder == NULL || mDrawing == NULL) {return;}
 	if (DlgRouterEdit == NULL) {DlgRouterEdit = new DialogRouterEdit("Router Details",*this,true);}
-	DlgRouterEdit->setAvailablePhysicalConnections(pCons);
+	PhysicalLabels availPCon = PhysicalLabels();
+	for (PhysicalLabels::iterator it = pCons.begin();it!=pCons.end();++it)
+	{
+		if (XMLBuilder->IsInterfaceAvailable(*it)) {availPCon.push_back(*it);}
+	}
+	DlgRouterEdit->setAvailablePhysicalConnections(availPCon);
 	int res = DlgRouterEdit->run();
 	RouterInformation t;
 	std::vector<std::string> chosenCon = std::vector<std::string>();

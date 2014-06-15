@@ -25,6 +25,7 @@
 #include "SDataController.h"
 
 typedef std::vector<unsigned int> RouterVec;
+typedef std::vector<std::string> PhysicalLabels;
 
 class CreateEmulationWin: public Gtk::Window
 {
@@ -41,6 +42,7 @@ protected:
 	void add_router_dialog();
 	void connect_routers();
 	void remove_routers();
+	void remove_connection();
 	void saveEmulationFile();
 	void toggleHighEnd();
 	void loadEmulation();
@@ -53,6 +55,7 @@ protected:
 	//buttons
 	Gtk::Button* addRouter;
 	Gtk::Button* remRouter;
+	Gtk::Button* remVCon;
 	Gtk::Button* connectRouters;
 	Gtk::Button* saveEmulation;
 	Gtk::Button* openEmulation;
@@ -67,7 +70,7 @@ private:
 
 	DialogRouterEdit* DlgRouterEdit;
 
-	std::vector<std::string> pCons;
+	PhysicalLabels pCons;
 
 	RouterVec selectedRouters;
 

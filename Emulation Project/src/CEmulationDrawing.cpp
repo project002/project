@@ -112,7 +112,7 @@ void CEmulationDrawing::set_lines_count()
 {
 	int p = mXMLprs->GetPhysicalConnections().size();
 	int v = mXMLprs->GetVirtualConnections().size();
-	mLinesPos->resize(((p+v)*((p+v))-1)/2);
+	mLinesPos->resize((((p+v)*((p+v))-1)/2)+4);
 }
 
 void CEmulationDrawing::initial_positions()
@@ -194,15 +194,15 @@ void CEmulationDrawing::initial_positions()
 	}
 
 	}
-	catch (std::exception & err) {cout << "Fix This Thing With Missing Connection By Renoving All The Routers Virtual Connections When It Is Removed\n";}
-//	///printout
+	catch (std::exception & err) {cout << "Missing Router For Connection";}
+	///printout
 //	LinesMap::iterator lit = mLinesPos->begin();
 //	for (;lit!=mLinesPos->end();++lit)
 //	{
 //		cout << "p1: " << lit->first.first << ":" << lit->first.second << " Mem " << &(lit->first) << "  ";
 //		cout << "p2: " << lit->second.first << ":" << lit->second.second << " Mem " << &(lit->second) << endl;
 //	}
-
+//
 //	print_relations();
 
 }
@@ -212,11 +212,13 @@ std::pair<int, int> CEmulationDrawing::next_source_router_pos(bool reset)
 {
 	static int i=0;
 	static int r=4;
-	int source_pos[][2] = {{CNVS_PAD,50},{100-CNVS_PAD,50},{50,CNVS_PAD},{50,100-CNVS_PAD}}; //matrix of source positions in percent
+	static int offset = 0;
+	offset = ((i+1) % 5 == 0) ? ((offset+5) % 50) : offset;
+	int source_pos[][2] = {{CNVS_PAD,50+offset},{100-CNVS_PAD,50+offset},{50+offset,CNVS_PAD},{50+offset,100-CNVS_PAD}}; //matrix of source positions in percent
 	if (i>=r) {i=0;}
 	std::pair<int,int> ret = std::pair<int,int>(source_pos[i][0],source_pos[i][1]);
 	i++;
-	if (reset) {i=0;}
+	if (reset) {i=0; offset=0;}
 	return ret;
 }
 
@@ -224,11 +226,13 @@ std::pair<int, int> CEmulationDrawing::next_source_con_pos(bool reset)
 {
 	static int i=0;
 	static int r=4;
-	int source_pos[][2] = {{0,50},{100,50},{50,0},{50,100}}; //matrix of source positions in percent
+	static int offset = 0;
+	offset = ((i+1) % 5 == 0) ? ((offset+5) % 50) : offset;
+	int source_pos[][2] = {{0,50+offset},{100,50+offset},{50+offset,0},{50+offset,100}}; //matrix of source positions in percent
 	if (i>=r) {i=0;}
 	std::pair<int,int> ret = std::pair<int,int>(source_pos[i][0],source_pos[i][1]);
 	i++;
-	if (reset) {i=0;}
+	if (reset) {i=0; offset=0;}
 	return ret;
 }
 

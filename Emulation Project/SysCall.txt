@@ -3,5 +3,5 @@ Stopping network connection manager: NetworkManager.
 1
 Default incoming policy changed to 'deny'
 (be sure to update your rules accordingly)
-ERROR: Could not load logging rules
+ERROR: problem running ufw-init
 Starting network connection manager: NetworkManager.
