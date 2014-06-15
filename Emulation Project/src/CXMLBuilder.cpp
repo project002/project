@@ -9,7 +9,7 @@
 #include <fstream>
 #include <boost/filesystem.hpp>
 #include "DParserDefs.h"
-#define DEFAULT_THREADED_EMULATION "true"
+#define DEFAULT_THREADED_EMULATION "false"
 #define DEFAULT_FORMAT_VERSION 1
 #define MAXIMUM_DROP_RATE_IN_PERCENTAGE 100
 #define MAXIMUM_FILLAGE_IN_PERCENTAGE 100

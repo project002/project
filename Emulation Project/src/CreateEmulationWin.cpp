@@ -413,6 +413,7 @@ void CreateEmulationWin::loadEmulationToCreator(std::string filename)
 	parser.ParseXML(filename);
 	bool is_high = parser.isThreaded();
 	XMLBuilder->SetThreaded(is_high);
+	HighEnd->set_active(is_high);
 	rInfo r = parser.GetRoutersInformation();
 	PCons pc = parser.GetPhysicalConnections();
 	//add routers

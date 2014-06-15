@@ -30,6 +30,8 @@ public:
 	void InitReport()
 	{
 		lastFlushTime=0;
+		PDcount = 0;
+		SDcount = 0;
 		time_t t = time(0);   // get time now
 		std::stringstream reportDateAndTimeString;
 
@@ -57,6 +59,8 @@ public:
 	{
 		std::stringstream ss;
 		ss << "{}];";
+		ss << "var PDcount = " << PDcount << ";";
+		ss << "var SDcount = " << SDcount << ";";
 		ss << "</script>";
 		ss << "<script src='script/jquery-2.1.1.min.js'></script>";
 		ss << "<script src='script/Chart.min.js'></script>";
@@ -104,19 +108,20 @@ public:
 			{
 				double totalTimeUntilExit=0;
 				//ss << "<tr class='packetData'><td>" << "Packet ID: "<< "</td><td class='pID'>"<< packetID<< "</td><td>" << "Packet Size: "<< "</td><td class='pSize'>"<< packetSize<< "</td><td>";
-				ss << "{'type':'PD','pID':"<< packetID<< ",'pSize':"<< packetSize;
+
 				std::set< std::pair<double,unsigned int> >::iterator it;
 				for (it = PacketReport[newInsertKey].begin();it!= PacketReport[newInsertKey].end(); it++)
 				{
+					ss << "{'type':'PD','pID':"<< packetID<< ",'pSize':"<< packetSize;
 					graphSpeedCalcSize+=newInsertKey.second; // add the packet size
 					totalTimeUntilExit+=((*it).first - insertTime);
 					graphSpeedCalcTimer+=totalTimeUntilExit; // add packet transfer time
 
-					//ss<< "</td><td>" << "Router Number: "<< "</td><td class='rID'>" << (*it).second<< "</td><td>" << " Insert Time: "<< "</td><td class='insT'>" << insertTime << "</td><td>" <<" Exit Time "<< "</td><td class='exitT'>" << (*it).first<< "</td><td>" <<" Total Time In Router "<< "</td><td class='totalT'>" << (*it).first - insertTime<< "</td><td>" <<" Fillage "<< "</td><td class='fillage'>" << mFillage<< "</td><td>" <<" DropRate "<< "</td><td class='droprate'>" << mDropRate<< "</td>";
-					ss<< ",'rID':" << (*it).second<< ",'insT':" << insertTime << ",'exitT':" << (*it).first<< ",'totalT':" << (*it).first - insertTime<< ",'fil':" << mFillage<< ",'dp':" << mDropRate;
+					ss<< ",'rID':" << (*it).second<< ",'insT':" << (*it).first << ",'exitT':" << (*it).first<< ",'totalT':" << (*it).first - insertTime<< ",'fil':" << mFillage<< ",'dp':" << mDropRate;
+
+					ss<<",'ue':" << totalTimeUntilExit<< "},"<<std::endl;
+					PDcount++;
 				}
-				//ss<<"<td>" <<" Total Time "<< "</td><td class='untilExit'>" << totalTimeUntilExit<< "</td></tr>"<<std::endl;
-				ss<<",'ue':" << totalTimeUntilExit<< "},"<<std::endl;
 				PacketReport.erase(newInsertKey);
 			}
 		}
@@ -125,13 +130,13 @@ public:
 			graphAverageFillage = (totalPacketsTransferred!=0)?(graphAverageFillage / totalPacketsTransferred):0;
 			graphAverageDropRate = (totalPacketsTransferred!=0)?graphAverageDropRate
 					/ totalPacketsTransferred : 0;
-			double avgSpeed = (graphSpeedCalcSize
-					/ (1000 / TIME_OF_ADD_REPORT));
+			double avgSpeed = ((graphSpeedCalcSize
+					/1024 )/ TIME_OF_ADD_REPORT);
 
 			ss << "{'type':'SD','gaf':" << graphAverageFillage << ",'gadr':"
 					<< graphAverageDropRate << ",'asp':" << avgSpeed << ",'te':"
 					<< timeInSec << "}," << std::endl;
-
+			SDcount++;
 			graphSpeedCalcSize = 0;
 			graphSpeedCalcTimer = 0;
 			totalPacketsTransferred = 0;
@@ -190,6 +195,8 @@ private:
 	unsigned int totalPacketsTransferred;
 	double graphAverageFillage;
 	double graphAverageDropRate;
+	long long int PDcount;
+	long long int SDcount;
 };
 
 #endif /* SREPORT_H_ */

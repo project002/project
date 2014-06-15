@@ -359,7 +359,7 @@ void CEmulation::XMLRoutingTableParserAvailability(pugi::xml_document & doc)
 void CEmulation::XMLThreadedOptionParse(pugi::xml_document & doc)
 {
 	pugi::xml_node root = doc.child(XML_LAYER_1_NETWORK);
-	mThreaded = root.attribute(THREADED_EMULATION).as_bool(true); //default to true
+	mThreaded = root.attribute(THREADED_EMULATION).as_bool(false); //default to true
 	if (mThreaded)
 	{SDataController::getInstance().msg("Emulation Running High-End Setting");}
 	else

@@ -1,0 +1,22 @@
+html,body
+{
+	margin:0;
+	padding:0;
+	color:#eee;
+	background-color: #272822;
+}
+
+table .row .label
+{
+	color:#777;
+}
+
+table .row td
+{
+	/*display:inline-block;*/
+	padding-right:20px;
+	text-align: center;
+	border-collapse: collapse;
+	border-bottom:2px #000 solid;
+	border-spacing: 0;
+}

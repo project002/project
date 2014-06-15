@@ -66,10 +66,8 @@ void CRouter::RequestTables()
 		stringstream s;
 		for(iter = mConnections.begin();iter!=mConnections.end();iter++)
 		{
-			//s <<"Print Routing Table For " << (*iter)->GetMAC() << endl;
 			//iterate over all ips in the table you got from the connection
 			vector< pair<string,string> >& tables=const_cast<CConnection*>(*iter)->GetTable();
-			//print table
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
@@ -77,6 +75,8 @@ void CRouter::RequestTables()
 						it->first,
 						pair<CConnection const*,string>((*iter),it->second)
 					));
+				cout<<"ROUTER ID "<< mRouterNumber<< " IP : "<<  it->first << " MAC : " << it->second << " CON MAC: "<< (*iter)->GetMAC()<<"\n";
+
 			}
 		}
 	}
