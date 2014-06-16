@@ -57,15 +57,31 @@ var Utils = {
 		}
 		return ts.length;
 	},
-        //format seconds to hr:min:sec
-        format_seconds : function(seconds)
+    getDataOffset : function(type,startIndex)
+    {
+        var count = 0;
+        var reverse = false;
+        if (type==='PD') {reverse = ((100/PDcount)*startIndex) > 50;}
+        if (type==='SD') {reverse = ((100/SDcount)*startIndex) > 50;}
+        var i = reverse ? ts.length-1 : 0;
+        while (count<=startIndex) 
         {
-            var t = [seconds % 60,
-                     Math.floor(seconds / 60) % 60,
-                     Math.floor(seconds / 3600)];
-            for (var i in t) {t[i] = t[i] < 10 ? "0"+t[i] : t[i];}
-            return t[2]+":"+t[1]+":"+t[0];
+            if (ts[i].type === type) {++count;}
+            if (reverse) {--i;} else {++i;}
+            if (reverse && i<0) {break;}
+            if (!reverse && i>=ts.length) {break;}
         }
+        return i;
+    },
+    //format seconds to hr:min:sec
+    format_seconds : function(seconds)
+    {
+        var t = [seconds % 60,
+                 Math.floor(seconds / 60) % 60,
+                 Math.floor(seconds / 3600)];
+        for (var i in t) {t[i] = t[i] < 10 ? "0"+t[i] : t[i];}
+        return t[2]+":"+t[1]+":"+t[0];
+    }
 };
 
 var Stats = {
@@ -157,17 +173,18 @@ var DisplayData = function(parent_,type,fromIndex,length)
 		//make sure it length doesn't go out of bounds
 //		var end = fromIndex+length > _data_len ? _data_len : fromIndex+length;
 //		for (var i=fromIndex;i<end;++i)
-                var i = fromIndex;
+                var i = Utils.getDataOffset(type,fromIndex);
                 var count = 0;
                 while (i<_data_len && count<length)
 		{
-                    if (ts[i].type === type) 
+                    if (window.ts[i].type === type) 
                     {
-                        table.appendChild(row(count+fromIndex+1,ts[i])); //+1 for index to start from 1 not 0
+                        table.appendChild(row(count+fromIndex+1,window.ts[i])); //+1 for index to start from 1 not 0
                         count++;
                     }
                     ++i;
 		}
+                $(parent_).find('table').remove();
 		parent_.appendChild(table);
 		
 	}();
@@ -178,7 +195,7 @@ var DisplayData = function(parent_,type,fromIndex,length)
 * name String : the name of the graph
 * X String : the tag for the X-axis of the graph
 * Y String : the tag fot the Y-axis of the graph
-* resolution int: how many sampling to take from the dataset (size of 'length' means all of them)
+* resolution int: how many samples to take from the dataset (size of 'length' means all of them)
 * fromIndex int: the start of the graph data in the data set
 * length int : the length of the graph data in the data set
 */
@@ -205,8 +222,10 @@ var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length)
 				_labels.push(ts[i][X]);
 				_dataset.push(ts[i][Y]);
 			// }
+		
 		}
-		console.log(_dataset);
+		// console.log("L:"+_labels);
+		// console.log("D:"+_dataset);
 	}
 
 	var getGraphDataset = function()
@@ -232,6 +251,7 @@ var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length)
 		if (length < 1) {return;}
 		if (Utils.getName(X) === '') {return;}
 		if (Utils.getName(Y) === '') {return;}
+		if (resolution > length) {resolution = length;}
 		_data_len = PDcount;
 		_cid += X+Y;
 		$(parent_).append("<h3>"+name+"</h3><canvas id='"+_cid+"' width='1000' height='500'></canvas>");
@@ -250,6 +270,7 @@ var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length)
  * @param int end the end value
  * @param function vformat function that formats the start & end values visually
  * @param function callback the value change callback get called with the new values
+ * gets the percentages of the range (ps,pe)
  */
 var Range = function(parent,start,end,vformat,callback)
 {
@@ -258,7 +279,8 @@ var Range = function(parent,start,end,vformat,callback)
       rs : null, //range start
       rsl: null, //range start label
       re : null, //range end 
-      rel: null  //range end label
+      rel: null,  //range end label
+      btn: null //button to activate the select
     };
     var drage = false;
     var drags = false;
@@ -304,6 +326,12 @@ var Range = function(parent,start,end,vformat,callback)
         vis.rel.innerHTML = vformat(range_e);
         vis.re.appendChild(vis.rel);
         
+        
+        vis.btn = document.createElement('button');
+        vis.btn.setAttribute('class','range-btn');
+        vis.btn.innerHTML = "Show Selection";
+        p.appendChild(vis.btn);
+        
         parent.appendChild(p);
     };
     
@@ -311,13 +339,21 @@ var Range = function(parent,start,end,vformat,callback)
     {
         drage = false;
         drags = false;
-        callback(range_s,range_e);
+    };
+    
+    var select_range = function()
+    {
+        if (len < 1) {return;}
+        var ps = (100/len)*range_s;
+        var pe = (100/len)*range_e;
+        callback.apply(RangeCallbacks,[ps,pe]);
     };
     
     var register_events = function()
     {
-         $(vis.rs).mousedown(function() {drags=true;});
-         $(vis.re).mousedown(function() {drage=true;});
+        $(vis.rs).mousedown(function() {drags=true;});
+        $(vis.re).mousedown(function() {drage=true;});
+        $(vis.btn).click(select_range);
          
         $(window).mouseup(end_drag);
         $(window).mousemove(function(e) {
@@ -341,13 +377,14 @@ var Range = function(parent,start,end,vformat,callback)
                     var v = len-Math.floor((len/range)*right);
                     if (drags) {range_s = v;}
                     if (drage) {range_e = v;}
-                    console.log(range_s+" :: "+range_e);
                     if (range_e <= range_s) 
                     {
-                        range_e = range_s+1;
+                        if (drage) {range_e = range_s+1;}
+                        if (drags) {range_s = range_e-1;}
                         v = drage ? range_e : (drags ? range_s : v);
                         return;
                     }
+                    // console.log(range_s+" :: "+range_e);
                     $$l.html(vformat(v));
                 }
                 $$.css('right',right+'px');
@@ -379,45 +416,205 @@ var makeSection  = function(name)
 	return sec;
 };
 
+/**
+* pElem DomElement the parent element
+* start int the start of the input selection
+* end int the end of the input selection
+**/
+var GraphCreate = function(pElem,start,end)
+{
+	var range = null;
+	var prop_x_sel = null;
+	var prop_y_sel = null;
+	var samplesNum = null;
+	var keys = [];
+	var localParent = null;
+	var graphView = null;
+
+	var update_sel = function(ps,pe)
+	{
+		var start = Math.floor((PDcount/100)*ps);
+    	var end = Math.ceil((PDcount/100)*pe);
+    	var count = end-start;
+
+
+    	var xprop = prop_x_sel.options[prop_x_sel.selectedIndex].value;
+    	var yprop = prop_y_sel.options[prop_y_sel.selectedIndex].value;
+    	var samp  = parseInt(samplesNum.value,10);
+    	// console.log(start+","+(end-start));
+    	graphView.innerHTML = "";
+    	MakeGraph(graphView,Utils.getName(xprop)+"/"+Utils.getName(yprop),xprop,yprop,samp,start,end-start);
+	}
+
+	var label = function(str,forElem) 
+	{
+		var l = document.createElement('lable');
+		l.innerHTML = str;
+		var r = "s"+Math.random();
+		l.setAttribute('for',r);
+		forElem.setAttribute('id',r);
+		return l;
+	}
+
+	var select_prop = function()
+	{
+		var s = document.createElement('select');
+		for (var i=0;i<keys.length;++i)
+		{
+			var o = document.createElement('option');
+			o.value = keys[i];
+			o.innerHTML = Utils.getName(keys[i]);
+			s.appendChild(o);
+		}
+		return s;
+	}
+
+	var samples_con = function()
+	{
+		var ins = document.createElement('input');
+		ins.setAttribute('type','text');
+		ins.setAttribute('class','g_sam');
+		ins.setAttribute('value',100);
+		return ins;
+	}
+
+	var numeric_only = function(e)
+	{
+		var key = e.keyCode || e.which;
+		switch (key)
+		{
+			case 8: //backspace
+			case 46: //delete
+			case 39: //arrows right left
+			case 37: return true;
+		}
+		key = String.fromCharCode( key );
+		var regex = /[0-9]|\./;
+		if( !regex.test(key) ) 
+		{
+			e.preventDefault();
+			return false;
+  		}
+  		return true;
+	}
+
+	var init = function()
+	{
+		if (typeof pElem === 'undefined') {return;}
+		//gather the keys from an actual row in the dataset
+		var pdOffset = Utils.getDataOffset('PD',0);
+		var example_row = window.ts[pdOffset];
+		for (var key in example_row) {keys.push(key);} 
+
+		
+		localParent = document.createElement('div');
+		localParent.setAttribute('class','graph_sel');
+
+		graphView = document.createElement('div');
+		graphView.setAttribute('class','graph_view');
+
+		//local parent fot the controls
+
+		prop_x_sel = select_prop();
+		psxl = label('X:',prop_x_sel);
+		prop_y_sel = select_prop();
+		psyl = label("Y:",prop_y_sel);
+		samplesNum = samples_con();
+		saml = label("Samples:",samplesNum);
+		$(samplesNum).keypress(numeric_only);
+
+		localParent.appendChild(psxl);
+		localParent.appendChild(prop_x_sel);
+		localParent.appendChild(psyl);
+		localParent.appendChild(prop_y_sel);
+		localParent.appendChild(saml);
+		localParent.appendChild(samplesNum);
+
+		range = new Range(localParent,start,end,Utils.format_seconds,update_sel);	
+
+		pElem.appendChild(localParent);
+
+		//local parent to the graph view
+
+		pElem.appendChild(graphView);
+
+	}();
+};
+
+var RangeCallbacks = {
+  SDparent : null,
+  PDparent : null,
+  countWarn : 10000,
+  range : function(ps,pe,len)
+  {
+    var start = Math.floor((len/100)*ps);
+    var end = Math.ceil((len/100)*pe);
+    var count = end-start;
+    if (count > RangeCallbacks.countWarn) 
+    {
+        var a =confirm("This will show more than 10,000 (~"+count+")entries, are you sure?");
+        if (!a) {return false;}
+    }
+    return [start,end-start];
+  },
+  SDrange : function(ps,pe)
+  {
+    var ret = RangeCallbacks.range(ps,pe,SDcount);
+    if (ret===false) {return;}
+    {DisplayData(RangeCallbacks.SDparent,'SD',ret[0],ret[1]);}
+  },
+  PDrange : function(ps,pe)
+  {
+    var ret = RangeCallbacks.range(ps,pe,PDcount);
+    if (ret===false) {return;}
+    {DisplayData(RangeCallbacks.PDparent,'PD',ret[0],ret[1]);}
+  }
+};
+
 $(function() {
-	// console.log(PDcount);
-	// console.log(SDcount);
+//    console.log(PDcount);
+//    console.log(SDcount);
     ts.pop(); //remove the dummy element in the end
-	var $$ = $('body');
+    var $$ = $('body');
     var run_time = Stats.getEmulationDuration();
-	$$.append("<h1>Emulation Report:  ("+Utils.format_seconds(run_time)+")</h1>");
-	
-	var router_section = makeSection('Routers Data');
-	DisplayData(router_section,'RD',0,10);
-	$$.append(router_section);
+    $$.append("<h1>Emulation Report:  ("+Utils.format_seconds(run_time)+")</h1>");
 
-	var stat_section = makeSection('Satistics Data');
-        var temp  = function() {console.log('update')};
-        Range(stat_section,0,run_time,Utils.format_seconds,temp);
-	DisplayData(stat_section,'SD',0,ts.length);
-        $$.append(stat_section);
-        
-        var overall_stat_section = makeSection('Overall Satistics');
-	var t = document.createElement('table');
-        var cols = ['gaf','gadr','asp'];
-        for (var i in cols) {t.innerHTML += Stats.formatMean('SD',cols[i]);}
-	overall_stat_section.appendChild(t);
-        $$.append(overall_stat_section);
-	
+    var router_section = makeSection('Routers Data');
+    DisplayData(router_section,'RD',0,10);
+    $$.append(router_section);
 
-	//make the packets data visible
-	var start = 0;
-	var length = 5000;
-	var packet_section = makeSection("Packet Data: (showing "+start+" - "+(start+length)+")");
-	DisplayData(packet_section,'PD',start,length);
-	$$.append(packet_section);	
+    var stat_section = makeSection('Satistics Data');
+    var start = 0;
+    var end = 10;
+    RangeCallbacks.SDparent = stat_section;
+    Range(stat_section,0,run_time,Utils.format_seconds,RangeCallbacks.SDrange);
+    DisplayData(stat_section,'SD',start,end-start);
+    $$.append(stat_section);
 
-	//make the graph section dynamic by properties
-	var x_prop = 'pID'; //packetID
-	var y_prop = 'dp'; //DropRate
-	var graphs = makeSection("Graphs");	
-	$$.append(graphs);
-	MakeGraph(graphs,'Droprate/Packets',x_prop,y_prop,100,0,ts.length);
-	MakeGraph(graphs,'Fillage/Packets',x_prop,'pSize',100,0,ts.length);
+    var overall_stat_section = makeSection('Overall Satistics');
+    var t = document.createElement('table');
+    var cols = ['gaf','gadr','asp'];
+    for (var i in cols) {t.innerHTML += Stats.formatMean('SD',cols[i]);}
+    overall_stat_section.appendChild(t);
+    $$.append(overall_stat_section);
+
+
+    //make the packets data visible
+    start = 0;
+    end = 50;
+    var packet_section = makeSection("Packet Data:");
+    RangeCallbacks.PDparent = packet_section;
+    Range(packet_section,0,run_time,Utils.format_seconds,RangeCallbacks.PDrange);
+    DisplayData(packet_section,'PD',start,end-start);
+    $$.append(packet_section);	
+
+    //make the graph section dynamic by properties
+    var x_prop = 'pID'; //packetID
+    var y_prop = 'dp'; //DropRate
+    var graphs = makeSection("Graphs");	
+    $$.append(graphs);
+    // MakeGraph(graphs,'Droprate/Packets',x_prop,y_prop,100,0,PDcount);
+    // MakeGraph(graphs,'Fillage/Packets',x_prop,'pSize',100,0,PDcount);
+    GraphCreate(graphs,0,run_time);
 
 });

@@ -66,6 +66,8 @@ public:
 	 * @return true if the connection is physical
 	 */
 	virtual bool isPhysical()const=0;
+
+	virtual void ClearTables(){}
 protected:
 	int mSocket;
 };

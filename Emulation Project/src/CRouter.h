@@ -173,14 +173,19 @@ public:
 	void SetDynamicFillageArray(string str);
 	void SetDynamicDropRateArray(string str);
 
-	bool isRouterAlive() const
+	bool isRouterAlive()
 	{
-		return mRouterAlive;
+		mRouterAliveMtx.lock();
+		bool temp= mRouterAlive;
+		mRouterAliveMtx.unlock();
+		return temp;
 	}
 
 	void setRouterAlive(bool routerAlive)
 	{
+		mRouterAliveMtx.lock();
 		mRouterAlive = routerAlive;
+		mRouterAliveMtx.unlock();
 	}
 
 private:
@@ -226,6 +231,11 @@ private://members
 
 	bool mThreaded; //determins if the router is threaded or not
 	boost::signals2::mutex mMtx;
+
+	boost::signals2::mutex mRouterAliveMtx;
+
+
+	boost::signals2::mutex mConnectionsMtx;
 
 	//dynamic fillage handles ( buffer leve )
 	vector< pair< double,double > > mFillageArr;

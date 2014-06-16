@@ -128,3 +128,26 @@ table .row td
     text-align: center;
     border:1px solid #eee;
 }
+
+.range-btn
+{
+    position:absolute;
+    top:0;
+    right: -250px;
+    height:20px;
+    width:150px;
+    border-width: 0;
+    color:#eee;
+    background-color:#666;
+    border-radius: 3px;
+    padding:5px;
+    line-height:0;
+    
+}
+
+.range-btn:hover
+{
+    cursor: pointer;
+    border:1px solid #eee;
+    background-color: #999;
+}

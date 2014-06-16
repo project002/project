@@ -43,6 +43,7 @@ protected:
 	void loop();
 	bool router_prop(GdkEventButton* event);
 	void update_router(bool a, int b);
+	void refresh_tables();
 	//menu item bar
 	Gtk::MenuItem* menuitem_file;
 	//members
@@ -51,6 +52,7 @@ protected:
 	Gtk::MenuBar* mMenuBar;
 	Gtk::Button* mStopButton;
 	Gtk::Button* mQuickStartButton;
+	Gtk::Button* mFrshTables;
 	Gtk::Label mInst;
 	CEmuStatWidget* mStateWidget;
 	Gtk::Frame mStateWidgetCon;

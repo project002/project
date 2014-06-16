@@ -36,7 +36,9 @@ void CRouter::AppendConnectionList(list<CVirtualConnection const *> &connectionL
 		for (list<CVirtualConnection const *>::iterator iter= connectionList.begin();
 				iter!=connectionList.end();iter++)
 		{
+			mConnectionsMtx.lock();
 			mConnections.push_back((*iter));
+			mConnectionsMtx.unlock();
 			CVirtualConnection * virtualRef=const_cast<CVirtualConnection*>((*iter));
 			virtualRef->AddRoutingTableReference(&mRoutingTable,mRouterNumber);
 		}
@@ -52,6 +54,22 @@ void CRouter::AppendConnectionList(list<CVirtualConnection const *> &connectionL
 void CRouter::EmptyTables()
 {
 	mRoutingTable.clear();
+	list<CConnection const *>::iterator iter;
+	mConnectionsMtx.lock();
+	for (iter = mConnections.begin(); iter != mConnections.end(); iter++)
+	{
+		if (!(*iter)->isPhysical())
+		{
+			const_cast<CConnection*>(*iter)->ClearTables();
+		}
+	}
+	vector<CConnection const *> shuffledlist;
+	std::copy( mConnections.begin(), mConnections.end(), std::back_inserter( shuffledlist ) );
+	random_shuffle(shuffledlist.begin(),shuffledlist.end());
+	mConnections= list<CConnection const *>();
+	std::copy( shuffledlist.begin(), shuffledlist.end(), std::back_inserter( mConnections ) );
+	mConnectionsMtx.unlock();
+
 }
 void CRouter::RequestTables()
 {
@@ -61,9 +79,11 @@ void CRouter::RequestTables()
 		{
 			return;
 		}
+		cout<<"**********************************\n";
 		list<CConnection const *>::iterator iter;
 		//iterate over all connections
 		stringstream s;
+		mConnectionsMtx.lock();
 		for(iter = mConnections.begin();iter!=mConnections.end();iter++)
 		{
 			//iterate over all ips in the table you got from the connection
@@ -79,6 +99,7 @@ void CRouter::RequestTables()
 
 			}
 		}
+		mConnectionsMtx.unlock();
 	}
 	catch(CException & error)
 	{
@@ -160,8 +181,8 @@ void CRouter::DynamicFillageHandler()
 {
 	try
 	{
-		static double previousChangeTime = SReport::getInstance().GetReportElapsedTime();
-		double elapsedTime=SReport::getInstance().GetReportElapsedTime() - previousChangeTime;
+		static double previousChangeTime = SReport::getInstance().GetReportElapsedTimeInSeconds();
+		double elapsedTime=SReport::getInstance().GetReportElapsedTimeInSeconds() - previousChangeTime;
 		if ((*mFillageArrIterator).second < elapsedTime)
 		{
 			mFillageArrIterator++;
@@ -170,7 +191,7 @@ void CRouter::DynamicFillageHandler()
 				mFillageArrIterator = mFillageArr.begin();
 			}
 			SetFillage((*mFillageArrIterator).first);
-			previousChangeTime = SReport::getInstance().GetReportElapsedTime();
+			previousChangeTime = SReport::getInstance().GetReportElapsedTimeInSeconds();
 		}
 	}
 	catch (CException & error)
@@ -184,8 +205,8 @@ void CRouter::DynamicDropRateHandler()
 {
 	try
 	{
-		static double previousChangeTime = SReport::getInstance().GetReportElapsedTime();
-		double elapsedTime=SReport::getInstance().GetReportElapsedTime() - previousChangeTime;
+		static double previousChangeTime = SReport::getInstance().GetReportElapsedTimeInSeconds();
+		double elapsedTime=SReport::getInstance().GetReportElapsedTimeInSeconds() - previousChangeTime;
 		if ((*mDropRateArrIterator).second < elapsedTime)
 		{
 			mDropRateArrIterator++;
@@ -194,7 +215,7 @@ void CRouter::DynamicDropRateHandler()
 				mDropRateArrIterator = mDropRateArr.begin();
 			}
 			SetDropRate((*mDropRateArrIterator).first);
-			previousChangeTime = SReport::getInstance().GetReportElapsedTime();
+			previousChangeTime = SReport::getInstance().GetReportElapsedTimeInSeconds();
 		}
 	}
 	catch (CException & error)
@@ -350,6 +371,7 @@ void CRouter::Sniff()
 			{
 				DynamicDropRateHandler();
 			}
+			mConnectionsMtx.lock();
 			list< CConnection const *>::iterator iter = mConnections.begin();
 			for (;iter!=mConnections.end();iter++)
 			{
@@ -370,6 +392,7 @@ void CRouter::Sniff()
 					}
 				}
 			}
+			mConnectionsMtx.unlock();
 			if (!mThreaded) {break;} //loop once when not threaded
 		}
 	}
@@ -392,7 +415,9 @@ CRouter::~CRouter()
 {
 	try
 	{
+		mConnectionsMtx.lock();
 		mConnections.clear();
+		mConnectionsMtx.unlock();
 		if(mPacketCollector!=NULL)
 		{
 			delete mPacketCollector;

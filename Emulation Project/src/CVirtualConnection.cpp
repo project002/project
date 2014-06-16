@@ -119,6 +119,22 @@ vector<pair<string, string> >& CVirtualConnection::GetTable()
 	return mRoutingToReturn;
 }
 
+void CVirtualConnection::ClearTables()
+{
+	try
+	{
+		mMtx.lock();
+		mCombinedRoutingTable.clear();
+		mRoutingToReturn.clear();
+		mMtx.unlock();
+	}
+	catch (CException & error)
+	{
+		SLogger::getInstance().Log(error.what());
+		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
+		throw;
+	}
+}
 Crafter::Packet* CVirtualConnection::GetPacket(int routerNumber)
 {
 	try

@@ -162,6 +162,12 @@ void EmulationWrapper::updateRouterDropRate(unsigned int routerID, int dropRate)
 	if (Emulator!=NULL) {Emulator->updateDropRate(routerID,dropRate);}
 }
 
+void EmulationWrapper::refreshTables()
+{
+	if (Emulator==NULL) {return;}
+	Emulator->EmptyRoutingTables();
+}
+
 void EmulationWrapper::exceptionHalt(const char * msg)
 {
 	if (Emulator!=NULL) {delete Emulator;}

@@ -171,13 +171,11 @@ void CEmulation::TableSwapping()
 			tableSwappingMTX.unlock();
 			//Following lines are for the table swapping to take effect every X period
 			//of time.
+			boost::posix_time::time_duration nowTD = SReport::getInstance().GetReportElapsedTimeInTD();
 			boost::posix_time::time_duration interval(
-					boost::posix_time::seconds(TABLE_SWAPPING_INTERVALS));
-			boost::posix_time::ptime timer =
-					boost::posix_time::microsec_clock::local_time() + interval;
+					boost::posix_time::seconds(TABLE_SWAPPING_INTERVALS) + nowTD);
 
-			boost::this_thread::sleep(
-					timer - boost::posix_time::microsec_clock::local_time());
+			boost::this_thread::sleep(interval - nowTD);
 		}
 	}
 	catch(CException & error)

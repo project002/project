@@ -94,6 +94,11 @@ public:
 	 * @return true if the connection is physical
 	 */
 	bool isPhysical()const{return false;}
+
+	/**
+	 * clearing the routing tables
+	 */
+	virtual void ClearTables();
 private:
 
 	/**

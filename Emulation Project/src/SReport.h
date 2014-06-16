@@ -15,10 +15,39 @@
 using std::ofstream;
 #include "boost/date_time/posix_time/posix_time.hpp"
 
+struct classcomp {
+  bool operator() (const std::pair< std::pair<double,double> ,unsigned int >& lhs, const std::pair< std::pair<double,double> ,unsigned int >& rhs) const
+  {
+	  if (lhs.first.first<rhs.first.first)
+	  {
+		  return true;
+	  }else
+	  {
+		  if(lhs.first.first==rhs.first.first && lhs.first.second<rhs.first.second)
+		  {
+			  return true;
+		  }else
+		  {
+			  if (lhs.first.first==rhs.first.first && lhs.first.second==rhs.first.second && lhs.second!=rhs.second)
+			  {
+				  return true;
+			  }
+		  }
+	  }
+	  return false;
+  }
+};
 #define TIME_OF_FLUSH_TO_DISK_IN_SECONDS 5
 #define TIME_OF_ADD_REPORT 3
 #define FILENAME "EData/Report-"
+typedef std::pair<double,double> InsertExit;
+typedef std::pair< InsertExit ,unsigned int > InsertExitRouter;
+typedef std::vector< InsertExitRouter> InsertExitRouterSet;
+typedef std::pair<long long int,long long int> PacketIDSize;
+typedef std::map< PacketIDSize,InsertExitRouterSet > PacketInfoMap;
 
+
+#define KB_SIZE_IN_BYTES 1024
 class SReport
 {
 public:
@@ -100,26 +129,28 @@ public:
 		std::pair<long long int, long long int> newInsertKey = std::pair<long long int, long long int>(packetID,packetSize);
 		if (packetID!=0)
 		{
-			PacketReport[newInsertKey].insert(std::pair<double,unsigned int>(insertTime,routerNumber));
+			PacketReport[newInsertKey].push_back(InsertExitRouter(InsertExit(insertTime,timeD.total_milliseconds()),routerNumber));
 			graphAverageFillage+=mFillage;
 			graphAverageDropRate+=mDropRate;
 			totalPacketsTransferred++;
 			if (hasExitedEmulation)
 			{
 				double totalTimeUntilExit=0;
-				//ss << "<tr class='packetData'><td>" << "Packet ID: "<< "</td><td class='pID'>"<< packetID<< "</td><td>" << "Packet Size: "<< "</td><td class='pSize'>"<< packetSize<< "</td><td>";
 
-				std::set< std::pair<double,unsigned int> >::iterator it;
+				InsertExitRouterSet::iterator it;
 				for (it = PacketReport[newInsertKey].begin();it!= PacketReport[newInsertKey].end(); it++)
 				{
 					ss << "{'type':'PD','pID':"<< packetID<< ",'pSize':"<< packetSize;
 					graphSpeedCalcSize+=newInsertKey.second; // add the packet size
-					totalTimeUntilExit+=((*it).first - insertTime);
-					graphSpeedCalcTimer+=totalTimeUntilExit; // add packet transfer time
+					totalTimeUntilExit+=((*it).first.second - (*it).first.first);
 
-					ss<< ",'rID':" << (*it).second<< ",'insT':" << (*it).first << ",'exitT':" << (*it).first<< ",'totalT':" << (*it).first - insertTime<< ",'fil':" << mFillage<< ",'dp':" << mDropRate;
-
-					ss<<",'ue':" << totalTimeUntilExit<< "},"<<std::endl;
+					ss<< ",'rID':" << (*it).second<< ",'insT':" <<
+							(*it).first.first << ",'exitT':"  <<
+							(*it).first.second<< ",'totalT':" <<
+							((*it).first.second - (*it).first.first)<<
+							",'fil':" << mFillage<< ",'dp':" <<
+							mDropRate<<",'ue':" << totalTimeUntilExit<<
+							"},"<<std::endl;
 					PDcount++;
 				}
 				PacketReport.erase(newInsertKey);
@@ -130,15 +161,14 @@ public:
 			graphAverageFillage = (totalPacketsTransferred!=0)?(graphAverageFillage / totalPacketsTransferred):0;
 			graphAverageDropRate = (totalPacketsTransferred!=0)?graphAverageDropRate
 					/ totalPacketsTransferred : 0;
-			double avgSpeed = ((graphSpeedCalcSize
-					/1024 )/ TIME_OF_ADD_REPORT);
+			double avgSpeed = (graphSpeedCalcSize
+					/(KB_SIZE_IN_BYTES *TIME_OF_ADD_REPORT));
 
 			ss << "{'type':'SD','gaf':" << graphAverageFillage << ",'gadr':"
 					<< graphAverageDropRate << ",'asp':" << avgSpeed << ",'te':"
 					<< timeInSec << "}," << std::endl;
 			SDcount++;
 			graphSpeedCalcSize = 0;
-			graphSpeedCalcTimer = 0;
 			totalPacketsTransferred = 0;
 			graphAverageFillage = 0;
 			graphAverageDropRate = 0;
@@ -166,6 +196,22 @@ public:
 		ReportMTX.unlock();
 		return timeD.total_milliseconds();
 	}
+
+	double GetReportElapsedTimeInSeconds()
+	{
+		ReportMTX.lock();
+		boost::posix_time::time_duration timeD=boost::posix_time::microsec_clock::local_time()-startTime;
+		ReportMTX.unlock();
+		return timeD.total_seconds();
+	}
+
+	boost::posix_time::time_duration GetReportElapsedTimeInTD()
+	{
+		ReportMTX.lock();
+		boost::posix_time::time_duration timeD=boost::posix_time::microsec_clock::local_time()-startTime;
+		ReportMTX.unlock();
+		return timeD;
+	}
 	void Logf(const char* format,...)
 	{
 		va_list args;
@@ -185,18 +231,16 @@ private:
 	ofstream fd;
 	std::stringstream ss;
 	boost::signals2::mutex ReportMTX;
-	SReport():lastFlushTime(0),graphSpeedCalcSize(0),graphSpeedCalcTimer(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0){};
-	SReport(SReport const &):lastFlushTime(0),graphSpeedCalcSize(0),graphSpeedCalcTimer(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0){}
+	SReport():lastFlushTime(0),graphSpeedCalcSize(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0),PDcount(0),SDcount(0){};
+	SReport(SReport const &):lastFlushTime(0),graphSpeedCalcSize(0),totalPacketsTransferred(0),graphAverageFillage(0),graphAverageDropRate(0),PDcount(0),SDcount(0){}
 	void operator=(SReport const &);
 	//Report for analysis - < <packet id> - set<time> >
-	std::map< std::pair<long long int,long long int>,std::set< std::pair<double,unsigned int> > > PacketReport;
+	PacketInfoMap PacketReport;
 	double graphSpeedCalcSize;
-	double graphSpeedCalcTimer;
 	unsigned int totalPacketsTransferred;
 	double graphAverageFillage;
 	double graphAverageDropRate;
 	long long int PDcount;
 	long long int SDcount;
 };
-
 #endif /* SREPORT_H_ */

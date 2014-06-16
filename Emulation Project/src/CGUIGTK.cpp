@@ -11,6 +11,7 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 					mMenuBar(Gtk::manage(new Gtk::MenuBar())),
 					mStopButton(Gtk::manage(new Gtk::Button())),
 					mQuickStartButton(Gtk::manage(new Gtk::Button())),
+					mFrshTables(Gtk::manage(new Gtk::Button())),
 					emCrt(NULL),
 					mImportXMLPath(""),
 					mEmulation(NULL),
@@ -58,12 +59,18 @@ CGUIGTK::CGUIGTK() :mPackingBox(Gtk::manage(new Gtk::Box())),
 	mDrawing->signal_button_release_event().connect(sigc::mem_fun(*this,&CGUIGTK::router_prop));
 	mGrid.attach(*mDrawing,2,1,4,4);
 
+	//refresh tables button
+	mFrshTables->set_label("Tables Refresh");
+	mFrshTables->signal_clicked().connect(sigc::mem_fun(*this,&CGUIGTK::refresh_tables));
+	mFrshTables->set_sensitive(false);
+	mGrid.attach(*mFrshTables,5,0,1,1);
+
 	mPackingBox->show_all();
 
 	//router Info widget
 	rInfo = new RouterInfoWidget();
 	rInfo->signal_info_change().connect(sigc::mem_fun(*this,&CGUIGTK::update_router));
-	mGrid.attach(*rInfo,2,0,4,1);
+	mGrid.attach(*rInfo,2,0,3,1);
 }
 
 void CGUIGTK::create_menu_bar()
@@ -277,6 +284,14 @@ void CGUIGTK::sentivity_while_running(bool isEmuationRunning)
 {
 	menuitem_file->set_sensitive(!isEmuationRunning);
 	mQuickStartButton->set_sensitive(!isEmuationRunning);
+	mFrshTables->set_sensitive(isEmuationRunning);
+}
+
+void CGUIGTK::refresh_tables()
+{
+	if (mEmulation==NULL) {return;}
+	if (!mEmulationRunning) {return;}
+	mEmulation->refreshTables();
 }
 
 bool CGUIGTK::on_delete_event(GdkEventAny* event)
