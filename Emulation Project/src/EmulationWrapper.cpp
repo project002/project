@@ -177,3 +177,9 @@ void EmulationWrapper::exceptionHalt(const char * msg)
 	SReport::getInstance().DestroyReport();
 	EnableNetworkManager();
 }
+
+void EmulationWrapper::toggleRouter(unsigned int rID,const bool active)
+{
+	if (Emulator==NULL) {return;}
+	Emulator->ToggleRouterActivity(rID,active);
+}

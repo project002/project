@@ -77,20 +77,8 @@
 			<Router Number="6" />
 		</VirtualConnection>
 		<VirtualConnection>
-			<Router Number="15" />
-			<Router Number="14" />
-		</VirtualConnection>
-		<VirtualConnection>
 			<Router Number="12" />
 			<Router Number="14" />
-		</VirtualConnection>
-		<VirtualConnection>
-			<Router Number="13" />
-			<Router Number="14" />
-		</VirtualConnection>
-		<VirtualConnection>
-			<Router Number="15" />
-			<Router Number="13" />
 		</VirtualConnection>
 		<VirtualConnection>
 			<Router Number="12" />
@@ -98,15 +86,27 @@
 		</VirtualConnection>
 		<VirtualConnection>
 			<Router Number="13" />
-			<Router Number="12" />
+			<Router Number="14" />
 		</VirtualConnection>
 		<VirtualConnection>
-			<Router Number="15" />
-			<Router Number="4" />
+			<Router Number="13" />
+			<Router Number="12" />
 		</VirtualConnection>
 		<VirtualConnection>
 			<Router Number="13" />
 			<Router Number="11" />
+		</VirtualConnection>
+		<VirtualConnection>
+			<Router Number="15" />
+			<Router Number="14" />
+		</VirtualConnection>
+		<VirtualConnection>
+			<Router Number="15" />
+			<Router Number="13" />
+		</VirtualConnection>
+		<VirtualConnection>
+			<Router Number="15" />
+			<Router Number="4" />
 		</VirtualConnection>
 	</VirtualConnections>
 </Network>

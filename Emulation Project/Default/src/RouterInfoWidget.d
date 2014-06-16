@@ -1,7 +1,7 @@
 src/RouterInfoWidget.d: ../src/RouterInfoWidget.cpp \
  ../src/RouterInfoWidget.h ../src/BasicIncludes.h ../src/SLogger.h \
- ../src/SReport.h ../src/CException.h ../src/CUIPV4.h \
- ../src/SDataController.h /usr/include/gtkmm-3.0/gtkmm/grid.h \
+ ../src/SReport.h ../src/SDataController.h ../src/CException.h \
+ ../src/CUIPV4.h /usr/include/gtkmm-3.0/gtkmm/grid.h \
  /usr/include/glibmm-2.4/glibmm/ustring.h \
  /usr/lib/i386-linux-gnu/glibmm-2.4/include/glibmmconfig.h \
  /usr/include/glibmm-2.4/glibmm/unicode.h /usr/include/glib-2.0/glib.h \
@@ -690,7 +690,9 @@ src/RouterInfoWidget.d: ../src/RouterInfoWidget.cpp \
  /usr/include/gdkmm-3.0/gdkmm/pixbufanimationiter.h \
  /usr/include/glibmm-2.4/glibmm/timeval.h \
  /usr/include/gtkmm-3.0/gtkmm/entrybuffer.h \
- /usr/include/gtkmm-3.0/gtkmm/button.h
+ /usr/include/gtkmm-3.0/gtkmm/button.h \
+ /usr/include/gtkmm-3.0/gtkmm/checkbutton.h \
+ /usr/include/gtkmm-3.0/gtkmm/togglebutton.h
 
 ../src/RouterInfoWidget.h:
 
@@ -700,11 +702,11 @@ src/RouterInfoWidget.d: ../src/RouterInfoWidget.cpp \
 
 ../src/SReport.h:
 
+../src/SDataController.h:
+
 ../src/CException.h:
 
 ../src/CUIPV4.h:
-
-../src/SDataController.h:
 
 /usr/include/gtkmm-3.0/gtkmm/grid.h:
 
@@ -2171,3 +2173,7 @@ src/RouterInfoWidget.d: ../src/RouterInfoWidget.cpp \
 /usr/include/gtkmm-3.0/gtkmm/entrybuffer.h:
 
 /usr/include/gtkmm-3.0/gtkmm/button.h:
+
+/usr/include/gtkmm-3.0/gtkmm/checkbutton.h:
+
+/usr/include/gtkmm-3.0/gtkmm/togglebutton.h:

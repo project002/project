@@ -1,0 +1,32 @@
+0 : Disabling Linux Networking
+0 : Validating XML file is present
+0 : Building the emulation
+0 : name:	lo
+0 : name:	loname:	eth0
+0 : ip table init complete
+0 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0 : DHCP service started...
+0 : name:	loname:	eth0name:	eth1
+0 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0 : DHCP service started...
+0 : name:	loname:	eth0name:	eth1name:	lo
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	lo
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	loname:	eth0
+0 : name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1name:	loname:	eth0name:	eth1
+0 : Starting the emulation
+12 : last added ip address: 10.0.0.3 for MAC: 00:24:81:22:a0:b5
+12 : Started Handshake Offering 10.0.0.3
+12 : Handshake Finished With Setting 10.0.0.3
+20 : last added ip address: 10.0.0.4 for MAC: 00:0a:e4:d4:8e:49
+20 : Started Handshake Offering 10.0.0.4
+21 : Started Handshake Offering 10.0.0.4[@] No response to DHCP offer with ip 10.0.0.4
+25 : last added ip address: 10.0.0.4 for MAC: 00:0a:e4:d4:8e:49
+25 : Started Handshake Offering 10.0.0.4
+25 : Started Handshake Offering 10.0.0.4[@] No response to DHCP offer with ip 10.0.0.4
+32 : last added ip address: 10.0.0.4 for MAC: 00:0a:e4:d4:8e:49
+32 : Started Handshake Offering 10.0.0.4
+32 : Handshake Finished With Setting 10.0.0.4
+36 : No Handler found for message type:8
+39 : No Handler found for message type:8

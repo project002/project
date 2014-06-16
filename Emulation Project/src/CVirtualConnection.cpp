@@ -115,8 +115,6 @@ vector<pair<string, string> >& CVirtualConnection::GetTable()
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
 		throw;
 	}
-	mMtx.unlock();
-	return mRoutingToReturn;
 }
 
 void CVirtualConnection::ClearTables()
@@ -224,7 +222,6 @@ void CVirtualConnection::AddInvolvedRouter(const unsigned int & routerNumber)
 	{
 		SLogger::getInstance().Log(error.what());
 		SLogger::getInstance().Log(__PRETTY_FUNCTION__);
-		mMtx.unlock();
 		throw;
 	}
 }

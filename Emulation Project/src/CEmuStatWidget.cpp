@@ -50,7 +50,8 @@ void CEmuStatWidget::loop()
 	int ipc = SDataController::getInstance().get_data(SDataController::IPPACKET);
 	int arpc = SDataController::getInstance().get_data(SDataController::ARPPACKET);
 	int dhcpc = SDataController::getInstance().get_data(SDataController::DHCPPACKET);
-	ss1 << "IP Packets:" << ipc << "\nARP Packets:" << arpc << "\nDHCP Packets:" << dhcpc << "\n Speed KB:ADD SPEED HERE";
+	int avgseed = SDataController::getInstance().get_data(SDataController::AVGSPEED);
+	ss1 << "IP Packets:" << ipc << "\nARP Packets:" << arpc << "\nDHCP Packets:" << dhcpc << "\n Speed KB:" << avgseed;
 	mlblPacketsTypes->set_text(ss1.str());
 
 	std::string messages = SDataController::getInstance().get_messages();

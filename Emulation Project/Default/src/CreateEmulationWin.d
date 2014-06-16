@@ -975,8 +975,8 @@ src/CreateEmulationWin.d: ../src/CreateEmulationWin.cpp \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h ../src/CEmulationDrawing.h \
  ../src/CXMLBasicParser.h ../src/BasicIncludes.h ../src/SLogger.h \
- ../src/SReport.h ../src/CException.h ../src/CUIPV4.h \
- ../src/SDataController.h ../src/pugixml.hpp ../src/pugiconfig.hpp \
+ ../src/SReport.h ../src/SDataController.h ../src/CException.h \
+ ../src/CUIPV4.h ../src/pugixml.hpp ../src/pugiconfig.hpp \
  ../src/SXMLStructs.h ../src/DParserDefs.h ../src/CXMLBuilder.h \
  ../src/DialogRouterEdit.h
 
@@ -3032,11 +3032,11 @@ src/CreateEmulationWin.d: ../src/CreateEmulationWin.cpp \
 
 ../src/SReport.h:
 
+../src/SDataController.h:
+
 ../src/CException.h:
 
 ../src/CUIPV4.h:
-
-../src/SDataController.h:
 
 ../src/pugixml.hpp:
 

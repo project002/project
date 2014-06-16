@@ -185,6 +185,7 @@ public:
 	{
 		mRouterAliveMtx.lock();
 		mRouterAlive = routerAlive;
+		SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::NOTACTIVE,mRouterAlive ? 0 : 1);
 		mRouterAliveMtx.unlock();
 	}
 
@@ -230,12 +231,14 @@ private://members
 	CPacketCollector * mPacketCollector;
 
 	bool mThreaded; //determins if the router is threaded or not
-	boost::signals2::mutex mMtx;
+//	boost::signals2::mutex mMtx;
 
 	boost::signals2::mutex mRouterAliveMtx;
 
 
 	boost::signals2::mutex mConnectionsMtx;
+
+//	boost::signals2::mutex mRTableMtx;
 
 	//dynamic fillage handles ( buffer leve )
 	vector< pair< double,double > > mFillageArr;

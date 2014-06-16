@@ -28,7 +28,7 @@ var Utils = {
             switch(key)
             {
                     case 'pID': return '';
-                    case 'pSize': return ' KB';
+                    case 'pSize': return ' B';
                     case 'rID': return '';
                     case 'insT': return 'ms';
                     case 'exitT': return 'ms';
@@ -544,7 +544,7 @@ var GraphCreate = function(pElem,start,end)
 var RangeCallbacks = {
   SDparent : null,
   PDparent : null,
-  countWarn : 10000,
+  countWarn : 5000,
   range : function(ps,pe,len)
   {
     var start = Math.floor((len/100)*ps);

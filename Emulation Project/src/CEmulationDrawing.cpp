@@ -300,7 +300,8 @@ void CEmulationDrawing::draw_router_info(int rid,int pos[],const Cairo::RefPtr<C
 {
 
 	stringstream ss;
-	ss << rid << "\n";
+	string inactive = SDataController::getInstance().get_router_data(rid,SDataController::NOTACTIVE) == 1 ? " INACTIVE " : "";
+	ss << rid << inactive << "\n";
 
 	ss << "Buffer Size: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERSIZE) << "\n";
 	ss << "Buffer Fill Init.: " << SDataController::getInstance().get_router_data(rid,SDataController::BUFFERUS) << "\n";

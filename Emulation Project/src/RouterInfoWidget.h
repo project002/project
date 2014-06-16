@@ -13,6 +13,7 @@
 #include <gtkmm/label.h>
 #include <gtkmm/spinbutton.h>
 #include <gtkmm/button.h>
+#include <gtkmm/checkbutton.h>
 
 class RouterInfoWidget: public Gtk::Grid
 {
@@ -22,6 +23,7 @@ public:
 	void setRouterNum(int num) {routerNum = num;}
 	int getFillage() {return spnFillage.get_value_as_int();}
 	int getDropRate() {return spnDrop.get_value_as_int();}
+	bool getActive() {return chkActive.get_active();}
 	int getRouterNumber() {return routerNum;}
 	typedef sigc::signal<void, bool, int> router_info_signal;
 	router_info_signal signal_info_change() {return routerInfoChanged;}
@@ -30,6 +32,7 @@ protected:
 	void showWidget();
 	void updateFillage();
 	void updateDrop();
+	void updateActive();
 private:
 	int routerNum;
 	//router info changed signal
@@ -47,6 +50,9 @@ private:
 	Gtk::Label lblDrop;
 	Glib::RefPtr<Gtk::Adjustment> adjDrop;
 	Gtk::SpinButton spnDrop;
+
+	//toggle activity
+	Gtk::CheckButton chkActive;
 };
 
 #endif /* ROUTERINFOWIDGET_H_ */

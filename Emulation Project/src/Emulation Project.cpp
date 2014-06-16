@@ -9,6 +9,7 @@
 //#include "EmulationWrapper.h"
 #include "CGUIGTK.h"
 #include <gtkmm/application.h>
+#include "CShell.h"
 
 
 /**
@@ -23,9 +24,21 @@ int main(int argc, char *argv[])
 {
 	try
 	{
-		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc,argv,"org.NetworkEmulation");
-		CGUIGTK window;
-		app->run(window);
+		//usage: Emulation Project  shell ../something.xml
+		//if the console command is present an xml file path is expected
+		if (argc > 1 && strcmp(argv[1],"shell")==0)
+		{
+			if (argc == 2) {cout << "usage: Emulation Project shell [xmlfilepath]\n"; return(EXIT_SUCCESS);}
+			char* filepath = argv[2];
+			CShell shell(filepath);
+			shell.run();
+		}
+		else
+		{
+			Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc,argv,"org.NetworkEmulation");
+			CGUIGTK window;
+			app->run(window);
+		}
 
 		return(EXIT_SUCCESS);
 	}

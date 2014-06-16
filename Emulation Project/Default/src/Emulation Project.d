@@ -974,18 +974,17 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp ../src/CGUIGTK.h \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h ../src/EmulationWrapper.h \
  ../src/CEmulation.h ../src/BasicIncludes.h ../src/SLogger.h \
- ../src/SReport.h ../src/CException.h ../src/CUIPV4.h \
- ../src/SDataController.h ../src/CPhysicalConnection.h \
- ../src/CPacketCollector.h ../src/CDHCPService.h \
- ../src/CDHCPMsgTypeException.h ../src/H_SNIFFER_FUNC.h \
- ../src/CConnection.h ../src/CSocketNotReadyException.h \
- ../src/CVirtualConnection.h ../src/CPhysicalConnectionsHandler.h \
- ../src/pugixml.hpp ../src/pugiconfig.hpp ../src/CRouter.h \
- ../src/DInitializationDefs.h ../src/CEmuStatWidget.h \
- ../src/CEmulationDrawing.h ../src/CXMLBasicParser.h ../src/SXMLStructs.h \
- ../src/DParserDefs.h ../src/RouterInfoWidget.h \
- ../src/CreateEmulationWin.h ../src/CXMLBuilder.h \
- ../src/DialogRouterEdit.h
+ ../src/SReport.h ../src/SDataController.h ../src/CException.h \
+ ../src/CUIPV4.h ../src/CPhysicalConnection.h ../src/CPacketCollector.h \
+ ../src/CDHCPService.h ../src/CDHCPMsgTypeException.h \
+ ../src/H_SNIFFER_FUNC.h ../src/CConnection.h \
+ ../src/CSocketNotReadyException.h ../src/CVirtualConnection.h \
+ ../src/CPhysicalConnectionsHandler.h ../src/pugixml.hpp \
+ ../src/pugiconfig.hpp ../src/CRouter.h ../src/DInitializationDefs.h \
+ ../src/CEmuStatWidget.h ../src/CEmulationDrawing.h \
+ ../src/CXMLBasicParser.h ../src/SXMLStructs.h ../src/DParserDefs.h \
+ ../src/RouterInfoWidget.h ../src/CreateEmulationWin.h \
+ ../src/CXMLBuilder.h ../src/DialogRouterEdit.h ../src/CShell.h
 
 ../src/CGUIGTK.h:
 
@@ -3039,11 +3038,11 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp ../src/CGUIGTK.h \
 
 ../src/SReport.h:
 
+../src/SDataController.h:
+
 ../src/CException.h:
 
 ../src/CUIPV4.h:
-
-../src/SDataController.h:
 
 ../src/CPhysicalConnection.h:
 
@@ -3088,3 +3087,5 @@ src/Emulation\ Project.d: ../src/Emulation\ Project.cpp ../src/CGUIGTK.h \
 ../src/CXMLBuilder.h:
 
 ../src/DialogRouterEdit.h:
+
+../src/CShell.h:

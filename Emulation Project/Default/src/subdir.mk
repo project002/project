@@ -15,6 +15,7 @@ CPP_SRCS += \
 ../src/CPhysicalConnection.cpp \
 ../src/CPhysicalConnectionsHandler.cpp \
 ../src/CRouter.cpp \
+../src/CShell.cpp \
 ../src/CSocketNotReadyException.cpp \
 ../src/CVirtualConnection.cpp \
 ../src/CXMLBuilder.cpp \
@@ -37,6 +38,7 @@ OBJS += \
 ./src/CPhysicalConnection.o \
 ./src/CPhysicalConnectionsHandler.o \
 ./src/CRouter.o \
+./src/CShell.o \
 ./src/CSocketNotReadyException.o \
 ./src/CVirtualConnection.o \
 ./src/CXMLBuilder.o \
@@ -59,6 +61,7 @@ CPP_DEPS += \
 ./src/CPhysicalConnection.d \
 ./src/CPhysicalConnectionsHandler.d \
 ./src/CRouter.d \
+./src/CShell.d \
 ./src/CSocketNotReadyException.d \
 ./src/CVirtualConnection.d \
 ./src/CXMLBuilder.d \

@@ -19,7 +19,7 @@ CEmulation::CEmulation(): mPhysicalConnectionsHandler(new CPhysicalConnectionsHa
 {
 	try
 	{
-		mRunning = false;
+		setRunning(false);
 	}
 	catch(CException & error)
 	{
@@ -149,7 +149,7 @@ void CEmulation::TableSwapping()
 {
 	try
 	{
-		while(mRunning)
+		while(isRunning())
 		{
 			tableSwappingMTX.lock();
 			vector<CRouter *>::iterator iter;
@@ -284,7 +284,6 @@ void CEmulation::XMLRoutersParser(pugi::xml_document & doc)
 
 			SReport::getInstance().LogRouter(RouterNumber,BufferSize,DropRate,BufferUsedSize,Fillage);
 
-			//TODO: add to gui the init buffer size and fillage rate(in percent)
 			SDataController::getInstance().msg("Created Router %d :: Buffer Of %d Packets :: DropRate %.1f%% ",RouterNumber,BufferSize,DropRate);
 			mRouters.push_back(RouterCreate);
 		}
@@ -344,7 +343,7 @@ void CEmulation::XMLRoutingTableParserAvailability(pugi::xml_document & doc)
 	{
 		//after consulting with Martin, there is no need for manual table building
 		mStaticRoutingTable= doc.child(XML_LAYER_1_NETWORK).child(XML_LAYER_2_IS_STATIC_TABLE).attribute(XML_STATIC_LAYER_ATTRIBUTE).as_bool();
-		mTableSwappingThread = boost::thread(&CEmulation::TableSwapping, this);
+		//mTableSwappingThread = boost::thread(&CEmulation::TableSwapping, this);
 	}
 	catch (CException & error)
 	{
@@ -406,7 +405,8 @@ void CEmulation::StartEmulation()
 	try
 	{
 		vector<CRouter *>::iterator iter;
-		mRunning = true;
+		setRunning(true);
+
 		//STARTing sniffer on all routers
 		for (iter=mRouters.begin();iter!=mRouters.end();iter++)
 		{
@@ -420,6 +420,8 @@ void CEmulation::StartEmulation()
 				(*iter)->Sniffer();
 			}
 		}
+
+		mTableSwappingThread = boost::thread(&CEmulation::TableSwapping, this);
 		if (!mThreaded)
 		{
 			//if not threaded make the thread to run all the routers
@@ -430,9 +432,7 @@ void CEmulation::StartEmulation()
 		while(true)
 		{
 			//keep busy
-			runningUpdMTX.lock();
-			if (!mRunning) {break;}
-			runningUpdMTX.unlock();
+			if (!isRunning()) {break;}
 		}
 
 		if(!mStaticRoutingTable)
@@ -451,9 +451,7 @@ void CEmulation::StartEmulation()
 
 void CEmulation::StopEmulation()
 {
-	runningUpdMTX.lock();
-	mRunning = false;
-	runningUpdMTX.unlock();
+	setRunning(false);
 }
 
 
@@ -461,7 +459,7 @@ void CEmulation::virtualRoutersSequence()
 {
 	if (mThreaded) {return;}
 	vector<CRouter *>::iterator it;
-	while (mRunning)
+	while (isRunning())
 	{
 		boost::this_thread::interruption_point();
 		it = mVirtualRouters.begin();

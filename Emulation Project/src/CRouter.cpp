@@ -10,7 +10,15 @@
 #include <boost/random/uniform_real_distribution.hpp>
 #include "CPhysicalConnection.h"
 
-CRouter::CRouter():mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),mDropRate(0),mFillage(0),mInitialBufferUse(0),mRouterNumber(1024),mRouterAlive(true),mPacketCollector(NULL),mThreaded(true)
+CRouter::CRouter():
+	mBufferSize(DEFAULT_ROUTER_BUFFER_SIZE),
+	mDropRate(0),
+	mFillage(0),
+	mInitialBufferUse(0),
+	mRouterNumber(1024),
+	mRouterAlive(true),
+	mPacketCollector(NULL),
+	mThreaded(true)
 {
 	try
 	{
@@ -40,7 +48,9 @@ void CRouter::AppendConnectionList(list<CVirtualConnection const *> &connectionL
 			mConnections.push_back((*iter));
 			mConnectionsMtx.unlock();
 			CVirtualConnection * virtualRef=const_cast<CVirtualConnection*>((*iter));
+//			mRTableMtx.lock();
 			virtualRef->AddRoutingTableReference(&mRoutingTable,mRouterNumber);
+//			mRTableMtx.unlock();
 		}
 	}
 	catch(CException & error)
@@ -53,7 +63,9 @@ void CRouter::AppendConnectionList(list<CVirtualConnection const *> &connectionL
 
 void CRouter::EmptyTables()
 {
+//	mRTableMtx.lock();
 	mRoutingTable.clear();
+//	mRTableMtx.unlock();
 	list<CConnection const *>::iterator iter;
 	mConnectionsMtx.lock();
 	for (iter = mConnections.begin(); iter != mConnections.end(); iter++)
@@ -79,7 +91,6 @@ void CRouter::RequestTables()
 		{
 			return;
 		}
-		cout<<"**********************************\n";
 		list<CConnection const *>::iterator iter;
 		//iterate over all connections
 		stringstream s;
@@ -91,13 +102,14 @@ void CRouter::RequestTables()
 			vector< pair<string,string> >::iterator it=tables.begin();
 			for (;it!=tables.end();it++)
 			{
+//				mRTableMtx.lock();
 				mRoutingTable.insert(pair<string,pair<CConnection const*,string> >(
 						it->first,
 						pair<CConnection const*,string>((*iter),it->second)
 					));
-				cout<<"ROUTER ID "<< mRouterNumber<< " IP : "<<  it->first << " MAC : " << it->second << " CON MAC: "<< (*iter)->GetMAC()<<"\n";
-
+//				mRTableMtx.unlock();
 			}
+
 		}
 		mConnectionsMtx.unlock();
 	}
@@ -164,9 +176,9 @@ bool CRouter::ProcessSendPacket(Packet* packet)
 	map<string,pair< CConnection const*,string> >::iterator table_pos;
 	IP* ip_layer = packet->GetLayer<IP>();
 	Ethernet* eth_layer = packet->GetLayer<Ethernet>();
-
+//	mRTableMtx.lock();
 	table_pos = mRoutingTable.find(ip_layer->GetDestinationIP());
-
+//	mRTableMtx.unlock();
 	string DestMAC = table_pos->second.second;
 	string SrcMAC = table_pos->second.first->GetMAC();
 
@@ -268,6 +280,7 @@ void CRouter::PacketHandler()
 				delete packet;
 			}
 			//update the status of the router info
+			//SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::ACTIVE,mRouterAlive ? 1 : 0);
 			SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::FILLAGE,mFillage);
 			SDataController::getInstance().insertRouterData(mRouterNumber,SDataController::DROPRATE,mDropRate);
 
@@ -288,10 +301,12 @@ void CRouter::HandleArp(Packet * pkt)
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	map<string,pair< CConnection const*,string> >::iterator con_pos;
 	ARP* arp_layer = pkt->GetLayer<ARP>();
+//	mRTableMtx.lock();
 	con_pos = mRoutingTable.find(arp_layer->GetSenderIP());
 	pos = mRoutingTable.find(arp_layer->GetTargetIP());
 	if (pos != mRoutingTable.end() && con_pos != mRoutingTable.end())
 	{
+//		mRTableMtx.unlock();
 		Ethernet* eth_layer = pkt->GetLayer<Ethernet>();
 		if (arp_layer->GetOperation() == ARP::Request && eth_layer != NULL)
 		{
@@ -310,15 +325,22 @@ void CRouter::HandleArp(Packet * pkt)
 			delete newpkt;
 		}
 	}
+	else
+	{
+//		mRTableMtx.unlock();
+	}
+
 }
 void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 {
 	CConnection* send_connection;
 	map<string,pair< CConnection const*,string> >::iterator pos;
 	IP* ip_layer = pkt->GetLayer<IP>();
+//	mRTableMtx.lock();
 	pos = mRoutingTable.find(ip_layer->GetDestinationIP());
 	if (pos != mRoutingTable.end())
 	{
+//		mRTableMtx.unlock();
 		send_connection = (const_cast<CConnection*>(pos->second.first));
 		string dest_ip = send_connection->getGetwayAddress()->getIpStr();
 		if (!dest_ip.compare(pos->first))
@@ -347,6 +369,7 @@ void CRouter::HandleIPv4(Packet * pkt,const double popTime)
 	}
 	else
 	{
+//		mRTableMtx.unlock();
 		SReport::getInstance().LogPacket(ip_layer->GetIdentification(),ip_layer->GetTotalLength(),mRouterNumber,popTime,mFillage,mDropRate,true);
 	}
 }

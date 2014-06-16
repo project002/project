@@ -1,0 +1,22 @@
+0 : Disabling Linux Networking
+0 : Validating XML file is present
+0 : Building the emulation
+0 : name:	lo
+0 : name:	loname:	eth0
+0 : ip table init complete
+0 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+0 : DHCP service started...
+0 : name:	loname:	eth0name:	eth1
+0 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+0 : DHCP service started...
+0 : name:	loname:	eth0name:	eth1name:	lo
+0 : name:	loname:	eth0name:	eth1name:	loname:	lo
+0 : Error parsing file, make sure a *valid* XML file is present in the Emulation base folder
+
+0 : void CEmulation::XMLParser(const char*)
+0 : Error parsing file, make sure a *valid* XML file is present in the Emulation base folder
+
+0 : void CEmulation::EmulationBuilder(const char*)
+0 : Error parsing file, make sure a *valid* XML file is present in the Emulation base folder
+
+0 : void EmulationWrapper::exceptionHalt(const char*)

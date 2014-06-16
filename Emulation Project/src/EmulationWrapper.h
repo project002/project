@@ -36,6 +36,7 @@ public:
 	void updateRouterFillage(unsigned int routerID,int fillage);
 	void updateRouterDropRate(unsigned int routerID,int droprate);
 	void refreshTables();
+	void toggleRouter(int unsigned rID,const bool active);
 private:
 	std::string mXMLProperties; //file path to the XML properties path
 	CEmulation * Emulator; //the emulation itself

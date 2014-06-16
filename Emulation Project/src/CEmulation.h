@@ -81,6 +81,21 @@ public: // Public Functions
 	 */
 	void EmptyRoutingTables();
 
+	bool isRunning()
+	{
+		runningUpdMTX.lock();
+		bool isRun=mRunning;
+		runningUpdMTX.unlock();
+		return isRun;
+	}
+
+	void setRunning(bool running)
+	{
+		runningUpdMTX.lock();
+		mRunning = running;
+		runningUpdMTX.unlock();
+	}
+
 private: // Private Functions
 	/**
 	 * Flag whether or not the emulation is running

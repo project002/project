@@ -1,0 +1,5 @@
+0 : Disabling Linux Networking
+1 : Validating XML file is present
+1 : Please enter a setup xml file name as first argument
+
+1 : void EmulationWrapper::EmulationParametersValidator()

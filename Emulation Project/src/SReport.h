@@ -12,8 +12,10 @@
 #include <set>
 #include <sstream>
 #include <ctime>
+#include "SDataController.h"
 using std::ofstream;
 #include "boost/date_time/posix_time/posix_time.hpp"
+
 
 struct classcomp {
   bool operator() (const std::pair< std::pair<double,double> ,unsigned int >& lhs, const std::pair< std::pair<double,double> ,unsigned int >& rhs) const
@@ -138,10 +140,10 @@ public:
 				double totalTimeUntilExit=0;
 
 				InsertExitRouterSet::iterator it;
+				graphSpeedCalcSize+=newInsertKey.second; // add the packet size
 				for (it = PacketReport[newInsertKey].begin();it!= PacketReport[newInsertKey].end(); it++)
 				{
 					ss << "{'type':'PD','pID':"<< packetID<< ",'pSize':"<< packetSize;
-					graphSpeedCalcSize+=newInsertKey.second; // add the packet size
 					totalTimeUntilExit+=((*it).first.second - (*it).first.first);
 
 					ss<< ",'rID':" << (*it).second<< ",'insT':" <<
@@ -168,6 +170,7 @@ public:
 					<< graphAverageDropRate << ",'asp':" << avgSpeed << ",'te':"
 					<< timeInSec << "}," << std::endl;
 			SDcount++;
+			SDataController::getInstance().insertData(SDataController::AVGSPEED,int(avgSpeed));
 			graphSpeedCalcSize = 0;
 			totalPacketsTransferred = 0;
 			graphAverageFillage = 0;

@@ -261,14 +261,16 @@ bool CGUIGTK::router_prop(GdkEventButton* event)
 
 void CGUIGTK::update_router(bool a, int b)
 {
+//	cout << "update router" << endl;
 	unsigned int router = rInfo->getRouterNumber();
 	int fillage = rInfo->getFillage();
 	int droprate = rInfo->getDropRate();
-	//cout << "got the emmiting signal " << router << " : " << fillage << endl;
+	bool isActive = rInfo->getActive();
 	if (mEmulation != NULL)
 	{
 		mEmulation->updateRouterFillage(router,fillage);
 		mEmulation->updateRouterDropRate(router,droprate);
+		mEmulation->toggleRouter(router,isActive);
 	}
 }
 
@@ -291,6 +293,7 @@ void CGUIGTK::refresh_tables()
 {
 	if (mEmulation==NULL) {return;}
 	if (!mEmulationRunning) {return;}
+//	cout << "table refersh" << endl;
 	mEmulation->refreshTables();
 }
 

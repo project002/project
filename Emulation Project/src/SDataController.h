@@ -7,20 +7,22 @@
 #ifndef CBASICGUI_H_
 #define CBASICGUI_H_
 #include <iostream>
+#include <sstream>
 #include <map>
 #include <vector>
 #include <boost/thread.hpp>
-
 #define REFRESH_RATE 0.5
+
+using namespace std;
 
 class SDataController
 {
 public:
 	static enum DATATYPE {
-		PACKETPROCCES,PACKETDROP,IPPACKET,DHCPPACKET,ARPPACKET
+		PACKETPROCCES,PACKETDROP,IPPACKET,DHCPPACKET,ARPPACKET,AVGSPEED
 	} dataType;
 	static enum ROUTERINFO{
-		FILLAGE,DROPRATE,BUFFERUS,BUFFERSIZE
+		FILLAGE,DROPRATE,BUFFERUS,BUFFERSIZE,NOTACTIVE
 	}routerInfo;
 
 
