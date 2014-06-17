@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Network FormatVersion="1" Threaded="false">
+	<Routers>
+		<Router Number="1" BufferSize="9990" DropRate="0" BufferSizeUsed="0" Fillage="0" DynamicFillageArray="" DynamicDropRateArray="" xPos="" yPos="">
+			<PhysicalConnection>eth0</PhysicalConnection>
+			<PhysicalConnection>eth1</PhysicalConnection>
+		</Router>
+	</Routers>
+	<VirtualConnections />
+</Network>

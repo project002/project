@@ -36,6 +36,59 @@ table .row td
 	border-spacing: 0;
 }
 
+table .row:hover
+{
+    background-color:#555;
+}
+
+.sec
+{
+    position:relative;
+}
+
+.csv_e
+{
+    position:absolute;
+    top:0;
+    right:100px;
+    height:40px;
+    width:150px;
+    border-width: 0;
+    color:#eee;
+    background-color:#666;
+    border-radius: 3px;
+    padding:5px;
+    line-height:0;
+    margin:0;
+    
+}
+
+/*graph controls*/
+.graph_sel > label
+{
+    padding:2px 4px;
+    margin:0 10px;
+    text-align: left;
+}
+
+.graph_sel > option,
+.graph_sel > select,
+.graph_sel > input
+{
+    border:2px solid #eee;
+    color:#eee;
+    background: #555;
+    border-radius: 3px;
+    padding:2px;
+}
+
+.graph_sel .range-sel
+{
+    margin-top:50px;
+    margin-bottom:20px;
+    margin-left:80px;
+}
+
 /*range style*/
 
 .range-sel,
@@ -59,7 +112,8 @@ table .row td
     height:20px;
     display: block;
     position:relative;
-    margin:4px 120px;
+    margin:15px 120px;
+    margin-left: 80px;
 }
 
 .range-start

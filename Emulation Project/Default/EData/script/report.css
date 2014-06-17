@@ -1,0 +1,207 @@
+html,body
+{
+	margin:0;
+	padding:10px;
+	color:#eee;
+	background-color: #272822;
+        font-family: Arial,Roman,serif;
+        letter-spacing: 1px;
+}
+
+.spmean
+{
+    padding-left:20px;
+}
+
+table .row .label
+{
+	color:#777;
+}
+
+table .row .index
+{
+    color:#aaa;
+    padding-right: 2px;
+    padding-left:2px;
+    text-align: left;
+}
+
+table .row td
+{
+	/*display:inline-block;*/
+	padding-right:10px;
+	text-align: center;
+	border-collapse: collapse;
+	border-bottom:2px #000 solid;
+	border-spacing: 0;
+}
+
+table .row:hover
+{
+    background-color:#555;
+}
+
+.sec
+{
+    position:relative;
+}
+
+.csv_e
+{
+    position:absolute;
+    top:0;
+    right:100px;
+    height:40px;
+    width:150px;
+    border-width: 0;
+    color:#eee;
+    background-color:#666;
+    border-radius: 3px;
+    padding:5px;
+    line-height:0;
+    margin:0;
+    
+}
+
+/*graph controls*/
+.graph_sel > label
+{
+    padding:2px 4px;
+    margin:0 10px;
+    text-align: left;
+}
+
+.graph_sel > option,
+.graph_sel > select,
+.graph_sel > input
+{
+    border:2px solid #eee;
+    color:#eee;
+    background: #555;
+    border-radius: 3px;
+    padding:2px;
+}
+
+.graph_sel .range-sel
+{
+    margin-top:50px;
+    margin-bottom:20px;
+    margin-left:80px;
+}
+
+/*range style*/
+
+.range-sel,
+.range-start,
+.range-end,
+.range-line,
+.range-rel,
+.range-rsl
+{
+    
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    -o-user-select: none;
+    user-select: none;
+}
+
+.range-sel
+{
+    width:50%;
+    height:20px;
+    display: block;
+    position:relative;
+    margin:15px 120px;
+    margin-left: 80px;
+}
+
+.range-start
+{
+    width:100px;
+    padding-right:10px;
+    position:absolute;
+    left:-100px;
+    top:0;
+    text-align: right;
+}
+
+.range-end
+{
+    width:100px;
+    padding-left:10px;
+    position:absolute;
+    right:-100px;
+    top:0;
+    text-align: left;
+}
+
+.range-line
+{
+    width:98%;
+    margin:0 1%;
+    height:2px;
+    background-color:#888;
+    position:absolute;
+    left:0;
+    top:8px;
+}
+
+.range-re,
+.range-rs
+{
+    position:absolute;
+    width:10px;
+    height:100%;
+    top:0;
+    z-index:10;
+    background-color:#555;
+    cursor: move;
+}
+
+.range-re
+{
+    right:0;
+}
+
+.range-rs
+{
+    right:98%;
+}
+
+.range-rel,
+.range-rsl
+{
+    width:60px;
+    color:#777;
+    font-size: 11px;
+    position:absolute;
+    top:-20px;
+    left:-30px;
+    background-color: #272822;
+    text-align: center;
+    border:1px solid #eee;
+}
+
+.range-btn
+{
+    position:absolute;
+    top:0;
+    right: -250px;
+    height:20px;
+    width:150px;
+    border-width: 0;
+    color:#eee;
+    background-color:#666;
+    border-radius: 3px;
+    padding:5px;
+    line-height:0;
+    
+}
+
+.range-btn:hover
+{
+    cursor: pointer;
+    border:1px solid #eee;
+    background-color: #999;
+}

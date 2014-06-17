@@ -8,6 +8,7 @@
 #include "RouterInfoWidget.h"
 
 RouterInfoWidget::RouterInfoWidget():
+	initFlag(false),
 	btnDone("Done"),
 	lblTitle("Router"),
 	lblFillage("Fillage:"),
@@ -17,7 +18,6 @@ RouterInfoWidget::RouterInfoWidget():
 	adjDrop(Gtk::Adjustment::create(0.,0.,100.0,1.,1.,1.)),
 	spnDrop(adjDrop),
 	chkActive("Active")
-
 {
 	set_column_spacing(10);
 	//events
@@ -53,6 +53,7 @@ void RouterInfoWidget::hideWidget()
 
 void RouterInfoWidget::showWidget()
 {
+	initFlag = true;
 	std::stringstream ss;
 	ss << "Router " << routerNum << ": ";
 	lblTitle.set_label(ss.str());
@@ -62,23 +63,26 @@ void RouterInfoWidget::showWidget()
 	spnFillage.set_value(Fillage);
 	spnDrop.set_value(DropRate);
 	chkActive.set_active(SDataController::getInstance().get_router_data(routerNum,SDataController::NOTACTIVE) == 0);
+	initFlag = false;
 }
 
 void RouterInfoWidget::updateFillage()
 {
+	if (initFlag) {return;}
 //	std::cout << "update fillage to " << spnFillage.get_value_as_int() << " emmiting signal\n";
 	routerInfoChanged.emit(true,1); //values are pretty much irrelevant
 }
 
 void RouterInfoWidget::updateDrop()
 {
+	if (initFlag) {return;}
 //	std::cout << "update drop to " << spnFillage.get_value_as_int() << " emmiting signal\n";
 	routerInfoChanged.emit(true,1); //values are pretty much irrelevant
 }
 
 void RouterInfoWidget::updateActive()
 {
-	if (chkActive.get_active() == (SDataController::getInstance().get_router_data(routerNum,SDataController::NOTACTIVE) == 0)) {return;}
+	if (initFlag) {return;}
 //	std::cout << "update ACTIVE to " << chkActive.get_active() << " emmiting signal\n";
 	routerInfoChanged.emit(true,1); //values are pretty much irrelevant
 }

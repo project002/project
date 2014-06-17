@@ -1,0 +1,39 @@
+0 : Disabling Linux Networking
+1 : Validating XML file is present
+1 : Building the emulation
+1 : name:	lo
+1 : name:	loname:	eth0
+1 : last added ip address: 10.0.0.3 for MAC: 00:02:b3:33:ca:d8
+1 : DHCP service started...
+1 : name:	loname:	eth0name:	eth1
+1 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+1 : DHCP service started...
+2 : name:	loname:	eth0name:	eth1name:	lo
+2 : name:	loname:	eth0name:	eth1name:	loname:	lo
+2 : Starting the emulation
+2 : std::exception
+2 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+2 : Running Virtual Routers Thread With 11 Routers
+2 : std::exception
+2 : virtual Crafter::Packet* CPhysicalConnection::GetPacket(int)
+5 : last added ip address: 10.0.0.4 for MAC: 00:24:81:22:a0:b5
+5 : Started Handshake Offering 10.0.0.4
+5 : Started Handshake Offering 10.0.0.4[@] No response to DHCP offer with ip 10.0.0.4
+9 : last added ip address: 10.0.0.4 for MAC: 00:24:81:22:a0:b5
+9 : Started Handshake Offering 10.0.0.4
+10 : Handshake Finished With Setting 10.0.0.4
+11 : last added ip address: 10.0.0.1 for MAC: 00:0a:e4:d4:8e:49
+11 : Started Handshake Offering 10.0.0.1
+11 : Started Handshake Offering 10.0.0.1[@] No response to DHCP offer with ip 10.0.0.1
+15 : last added ip address: 10.0.0.1 for MAC: 00:0a:e4:d4:8e:49
+15 : Started Handshake Offering 10.0.0.1
+15 : Started Handshake Offering 10.0.0.1[@] No response to DHCP offer with ip 10.0.0.1
+23 : last added ip address: 10.0.0.1 for MAC: 00:0a:e4:d4:8e:49
+23 : Started Handshake Offering 10.0.0.1
+23 : Handshake Finished With Setting 10.0.0.1
+26 : No Handler found for message type:8
+30 : No Handler found for message type:8
+49 : Emulation exiting
+49 : Enabling Networking
+49 : Destroying Controller Thread
+49 : Destroying Logger and exiting program

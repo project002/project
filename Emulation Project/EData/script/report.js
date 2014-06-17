@@ -18,7 +18,7 @@ var Utils = {
                     case 'gaf' : return 'Average Fillage';
                     case 'gadr': return 'Average DropRate';
                     case 'asp' : return 'Average Speed';
-                    case 'te' : return 'At Time:';
+                    case 'te' : return 'Time';
                     default : return '';
             }
             return '';
@@ -71,7 +71,7 @@ var Utils = {
             if (reverse && i<0) {break;}
             if (!reverse && i>=ts.length) {break;}
         }
-        return i;
+        return i-1;
     },
     //format seconds to hr:min:sec
     format_seconds : function(seconds)
@@ -199,7 +199,7 @@ var DisplayData = function(parent_,type,fromIndex,length)
 * fromIndex int: the start of the graph data in the data set
 * length int : the length of the graph data in the data set
 */
-var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length)
+var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length,type)
 {
 
 	var _cid = 'gd';
@@ -208,7 +208,7 @@ var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length)
 	var _chart = null;
 	var _dataset = [];
 	var _labels = [];
-
+        var _type = (typeof type === 'undefined') ? 'PD' : type;
 
 	var gatherData = function()
 	{
@@ -217,15 +217,15 @@ var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length)
 		for (var i=(fromIndex+_packetOffset);i<end;i+=sn)
 		{
 			//n samples of the data
-			// if ((i % sn)===0)
-			// {
+			 if (ts[i].type === _type)
+			 {
 				_labels.push(ts[i][X]);
 				_dataset.push(ts[i][Y]);
-			// }
+			 }
 		
 		}
-		// console.log("L:"+_labels);
-		// console.log("D:"+_dataset);
+//		 console.log("L:"+_labels);
+//		 console.log("D:"+_dataset);
 	}
 
 	var getGraphDataset = function()
@@ -254,7 +254,7 @@ var MakeGraph = function(parent_,name,X,Y,resolution,fromIndex,length)
 		if (resolution > length) {resolution = length;}
 		_data_len = PDcount;
 		_cid += X+Y;
-		$(parent_).append("<h3>"+name+"</h3><canvas id='"+_cid+"' width='1000' height='500'></canvas>");
+		$(parent_).append("<h3>"+name+"</h3><canvas id='"+_cid+"' width='1400' height='500'></canvas>");
 		var ctx = $("#"+_cid)[0].getContext("2d");
 		_chart = new Chart(ctx);
 		gatherData();
@@ -405,23 +405,29 @@ var Range = function(parent,start,end,vformat,callback)
     }();
 };
 
-var makeSection  = function(name)
+var makeSection  = function(name,exportb)
 {
 	var sec = document.createElement('section');
-	sec.setAttribute('id','name_d');
-	sec.setAttribute('class','sec name');
+	sec.setAttribute('class','sec');
 	var title = document.createElement('h2');
+        title.setAttribute('class','sec-title');
 	title.innerHTML = name;
 	sec.appendChild(title);
-	return sec;
+        if (typeof exportb === 'string') {CSVexport(sec,exportb);}
+        var content = document.createElement('div');
+        content.setAttribute('class','sec-content');
+        sec.appendChild(content);
+        $("body").append(sec);
+	return content;
 };
 
 /**
 * pElem DomElement the parent element
 * start int the start of the input selection
 * end int the end of the input selection
+* type string the type key of the data
 **/
-var GraphCreate = function(pElem,start,end)
+var GraphCreate = function(pElem,start,end,type)
 {
 	var range = null;
 	var prop_x_sel = null;
@@ -433,22 +439,22 @@ var GraphCreate = function(pElem,start,end)
 
 	var update_sel = function(ps,pe)
 	{
-		var start = Math.floor((PDcount/100)*ps);
-    	var end = Math.ceil((PDcount/100)*pe);
-    	var count = end-start;
+            var start = Math.floor((PDcount/100)*ps);
+            var end = Math.ceil((PDcount/100)*pe);
+            var count = end-start;
 
 
-    	var xprop = prop_x_sel.options[prop_x_sel.selectedIndex].value;
-    	var yprop = prop_y_sel.options[prop_y_sel.selectedIndex].value;
-    	var samp  = parseInt(samplesNum.value,10);
-    	// console.log(start+","+(end-start));
-    	graphView.innerHTML = "";
-    	MakeGraph(graphView,Utils.getName(xprop)+"/"+Utils.getName(yprop),xprop,yprop,samp,start,end-start);
+            var xprop = prop_x_sel.options[prop_x_sel.selectedIndex].value;
+            var yprop = prop_y_sel.options[prop_y_sel.selectedIndex].value;
+            var samp  = parseInt(samplesNum.value,10);
+            // console.log(start+","+(end-start));
+            graphView.innerHTML = "";
+            MakeGraph(graphView,Utils.getName(xprop)+"/"+Utils.getName(yprop),xprop,yprop,samp,start,end-start,type);
 	}
 
 	var label = function(str,forElem) 
 	{
-		var l = document.createElement('lable');
+		var l = document.createElement('label');
 		l.innerHTML = str;
 		var r = "s"+Math.random();
 		l.setAttribute('for',r);
@@ -459,12 +465,14 @@ var GraphCreate = function(pElem,start,end)
 	var select_prop = function()
 	{
 		var s = document.createElement('select');
+                
 		for (var i=0;i<keys.length;++i)
 		{
-			var o = document.createElement('option');
-			o.value = keys[i];
-			o.innerHTML = Utils.getName(keys[i]);
-			s.appendChild(o);
+                    if (keys[i] === 'type') {continue;}
+                    var o = document.createElement('option');
+                    o.value = keys[i];
+                    o.innerHTML = Utils.getName(keys[i]);
+                    s.appendChild(o);
 		}
 		return s;
 	}
@@ -474,7 +482,7 @@ var GraphCreate = function(pElem,start,end)
 		var ins = document.createElement('input');
 		ins.setAttribute('type','text');
 		ins.setAttribute('class','g_sam');
-		ins.setAttribute('value',100);
+		ins.setAttribute('value',50);
 		return ins;
 	}
 
@@ -502,10 +510,9 @@ var GraphCreate = function(pElem,start,end)
 	{
 		if (typeof pElem === 'undefined') {return;}
 		//gather the keys from an actual row in the dataset
-		var pdOffset = Utils.getDataOffset('PD',0);
+		var pdOffset = Utils.getDataOffset(type,0);
 		var example_row = window.ts[pdOffset];
 		for (var key in example_row) {keys.push(key);} 
-
 		
 		localParent = document.createElement('div');
 		localParent.setAttribute('class','graph_sel');
@@ -540,6 +547,70 @@ var GraphCreate = function(pElem,start,end)
 
 	}();
 };
+
+var CSVexport = function(container,type)
+{
+    var _sep = "";
+    var trow = function(i)
+    {
+        var row = "";
+        for(var k in ts[i])
+        {
+            if (k === 'type') {continue;}
+            row += _sep+ts[i][k];
+            _sep = ",";
+        }
+        return row;
+    };
+    
+    var thead = function(i)
+    {
+        var row = "";
+        for(var k in ts[i])
+        {
+            if (k === 'type') {continue;}
+            row += _sep+Utils.getName(k);
+            _sep = ",";
+        }
+        return row;
+    };
+    
+    var exportCSV = function()
+    {
+        var w=window.open('text/plain','CSV',
+                    'width=450,height=250'
+                     +',menubar=0'
+                     +',toolbar=1'
+                     +',status=0'
+                     +',scrollbars=1'
+                     +',resizable=1');
+        var offset = Utils.getDataOffset(type,0);
+        w.document.writeln(thead(offset));
+        var count = type==='PD' ? PDcount : 0;
+        count = type==='SD' ? SDcount : count;
+        var counter = 0;
+        var i = offset;
+        while(counter<count)
+        {
+            if (ts[i].type === type)
+            {
+                ++counter;
+                w.document.writeln(trow(i));
+            }
+            ++i;
+        }
+        w.document.close();
+    };
+    
+    var init = function()
+    {
+        var btn = document.createElement('button');
+        btn.setAttribute('class','csv_e');
+        btn.innerHTML = "Export to CSV";
+        $(btn).click(exportCSV);
+        container.appendChild(btn);
+    }();
+}
 
 var RangeCallbacks = {
   SDparent : null,
@@ -581,40 +652,41 @@ $(function() {
 
     var router_section = makeSection('Routers Data');
     DisplayData(router_section,'RD',0,10);
-    $$.append(router_section);
 
-    var stat_section = makeSection('Satistics Data');
+    var stat_section = makeSection('Satistics Data',"SD");
     var start = 0;
     var end = 10;
     RangeCallbacks.SDparent = stat_section;
     Range(stat_section,0,run_time,Utils.format_seconds,RangeCallbacks.SDrange);
     DisplayData(stat_section,'SD',start,end-start);
-    $$.append(stat_section);
 
     var overall_stat_section = makeSection('Overall Satistics');
     var t = document.createElement('table');
     var cols = ['gaf','gadr','asp'];
     for (var i in cols) {t.innerHTML += Stats.formatMean('SD',cols[i]);}
     overall_stat_section.appendChild(t);
-    $$.append(overall_stat_section);
 
 
     //make the packets data visible
     start = 0;
     end = 50;
-    var packet_section = makeSection("Packet Data:");
+    var packet_section = makeSection("Packet Data:","PD");
     RangeCallbacks.PDparent = packet_section;
     Range(packet_section,0,run_time,Utils.format_seconds,RangeCallbacks.PDrange);
     DisplayData(packet_section,'PD',start,end-start);
-    $$.append(packet_section);	
+
+    var satGraph = makeSection("Satistics Graphs");
+    GraphCreate(satGraph,0,run_time,'SD');
 
     //make the graph section dynamic by properties
     var x_prop = 'pID'; //packetID
     var y_prop = 'dp'; //DropRate
-    var graphs = makeSection("Graphs");	
-    $$.append(graphs);
-    // MakeGraph(graphs,'Droprate/Packets',x_prop,y_prop,100,0,PDcount);
-    // MakeGraph(graphs,'Fillage/Packets',x_prop,'pSize',100,0,PDcount);
-    GraphCreate(graphs,0,run_time);
-
+    var graphs = makeSection("Custom Graphs");	
+    GraphCreate(graphs,0,run_time,'PD');
+    
+    //simple toggle
+    $(".sec-content").hide();
+    $(".sec-title").css('cursor','pointer');
+    $(".sec-title").click(function() {$(this.parentNode).find('.sec-content').toggle();});
+    
 });

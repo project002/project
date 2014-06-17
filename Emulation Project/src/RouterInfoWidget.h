@@ -35,6 +35,7 @@ protected:
 	void updateActive();
 private:
 	int routerNum;
+	bool initFlag; //indicates init of view
 	//router info changed signal
 	router_info_signal routerInfoChanged;
 	//done button
