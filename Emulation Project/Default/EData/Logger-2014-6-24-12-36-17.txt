@@ -1,0 +1,16 @@
+0 : Disabling Linux Networking
+1 : Validating XML file is present
+1 : Building the emulation
+1 : name:	lo
+1 : name:	loname:	eth0
+1 : ip table init complete
+1 : last added ip address: 10.0.0.1 for MAC: 00:02:b3:33:ca:d8
+1 : DHCP service started...
+1 : name:	loname:	eth0name:	eth1
+1 : last added ip address: 10.0.0.2 for MAC: 00:24:81:21:b7:1c
+1 : DHCP service started...
+1 : name:	loname:	eth0name:	eth1name:	lo
+1 : name:	loname:	eth0name:	eth1name:	loname:	eth1
+1 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	lo
+1 : name:	loname:	eth0name:	eth1name:	loname:	eth1name:	loname:	eth1
+1 : Starting the emulation

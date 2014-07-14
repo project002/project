@@ -31,7 +31,7 @@ public:
 		fd.open(fileNameAddons.str().c_str(), std::fstream::out | std::fstream::trunc);
 		if (!fd.is_open())
 		{
-			std::cout << "Can't open log file for write.\n";
+			std::cout << "Can't open log file for write.\n";// DONT DELETE COUT
 			exit (EXIT_FAILURE);
 		}
 		clock_gettime(CLOCK_REALTIME,&ts_begin);

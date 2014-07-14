@@ -50,6 +50,8 @@ private:
 	LabelsPos* mLabelPositions;
 	//text layout
 	Glib::RefPtr<Pango::Layout> mTlayout;
+	//pacjet path vector
+	std::vector<unsigned int> mPacketPath;
 	void insertNewImage(Glib::ustring imageName,Glib::ustring imagePath);
 	void loadImagesSrouces();
 	int physical_routers_count();
@@ -135,6 +137,18 @@ private:
 	 * @return number of physical connections
 	 */
 	int get_physical_con_count(int unsigned rID);
+
+
+	/**
+	 * checks if the connection in that position is
+	 * part of the packet path
+	 * @param start start position of the connection
+	 * @param end end position of the connection
+	 * @return true if the given connectio in that position is part of the path else false
+	 */
+	bool is_line_in_path(int start[],int end[]);
+
+	bool pointC(Point& p1,Point& p2) {return p1.first == p1.first && p1.second == p2.second;}
 protected:
 	//Override default signal handler:
 	virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);

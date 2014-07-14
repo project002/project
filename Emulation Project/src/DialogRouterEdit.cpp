@@ -109,7 +109,7 @@ RouterInformation DialogRouterEdit::getData()
 
 void DialogRouterEdit::on_my_response(int response_id)
 {
-	std::cout << response_id << std::endl;
+//	std::cout << response_id << std::endl;
 }
 
 std::vector<std::string> DialogRouterEdit::getPhysicalConnections()
@@ -122,7 +122,7 @@ std::vector<std::string> DialogRouterEdit::getPhysicalConnections()
 		if ((*itr)->get_active())
 		{
 			chosenCons.push_back((*itr)->get_label());
-			std::cout << chosenCons.back() << "\n";
+//			std::cout << chosenCons.back() << "\n";
 		}
 	}
 	return chosenCons;
@@ -142,7 +142,7 @@ void DialogRouterEdit::addPhysicalCon()
 	std::vector<std::string>::iterator it = phyCons.begin();
 	for (;it!=phyCons.end();++it)
 	{
-		std::cout << "added " << (*it) << std::endl;
+//		std::cout << "added " << (*it) << std::endl;
 		chkConList.push_back(new Gtk::CheckButton((*it)));
 		boxCon.add(*(chkConList.back()));
 	}

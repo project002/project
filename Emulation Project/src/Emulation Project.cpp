@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		//if the console command is present an xml file path is expected
 		if (argc > 1 && strcmp(argv[1],"shell")==0)
 		{
-			if (argc == 2) {cout << "usage: Emulation Project shell [xmlfilepath]\n"; return(EXIT_SUCCESS);}
+			if (argc == 2) {cout << "usage: Emulation Project shell [xmlfilepath]\n"; return(EXIT_SUCCESS);} // DONT DELETE COUT
 			char* filepath = argv[2];
 			CShell shell(filepath);
 			shell.run();

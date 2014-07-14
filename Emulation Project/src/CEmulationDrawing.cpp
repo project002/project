@@ -341,6 +341,34 @@ void CEmulationDrawing::draw_connections_info(const Cairo::RefPtr<Cairo::Context
 	}
 }
 
+bool CEmulationDrawing::is_line_in_path(int start[], int end[])
+{
+//	std::vector<unsigned int> it = mPacketPath.begin();
+//	bool ret  = false;
+//	for (;it!=mPacketPath.end();++it)
+//	{
+//		Point rp = mElementsPos[*it];
+//		LinesMap::iterator lit = mLinesPos->begin();
+//		for (;lit!=mLinesPos->end();++lit)
+//		{
+//			if (pointC(rp,(*lit).first) || pointC(rp,(*lit).second))
+//			{
+//				ret = ((*lit).first.first == start[0] && (*lit).first.second == start[1]) &&
+//					  ((*lit).second.first == end[0] && (*lit).second.second == end[1]);
+//				if (ret) {return ret;}
+//				else
+//				{
+//					ret = ((*lit).first.first == start[0] && (*lit).first.second == start[1]) &&
+//						  ((*lit).second.first == end[0] && (*lit).second.second == end[1]);
+//				}
+//			}
+//
+//		}
+//	}
+	return false;
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////EVENTS/////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -369,6 +397,15 @@ bool CEmulationDrawing::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 		cr->move_to(base_pos[0],base_pos[1]);
  		cr->line_to(target_pos[0],target_pos[1]);
+ 		//change color by path
+ 		mPacketPath = SDataController::getInstance().get_path();
+// 		cout << "path:";
+// 		for(std::vector<unsigned int>::iterator it= mPacketPath.begin();it!=mPacketPath.end();++it)
+// 		{
+// 			cout << (*it) << ",";
+// 		}
+// 		cout << "\n";
+
 		cr->stroke();
 	}
 	draw_connections_info(cr);

@@ -142,7 +142,7 @@ void EmulationWrapper::RunEmulation()
 	{
 		const char* msg = error.what();
 		exceptionHalt(msg);
-		std::cout << "thrown an dhcp exception" << std::endl;
+//		std::cout << "thrown an dhcp exception" << std::endl;
 		throw new CException(msg);
 	}
 	catch (CException & error)

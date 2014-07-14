@@ -25,6 +25,10 @@ public:
 		FILLAGE,DROPRATE,BUFFERUS,BUFFERSIZE,NOTACTIVE
 	}routerInfo;
 
+	typedef std::map<SDataController::ROUTERINFO,float> RouterInfoMap;
+	typedef std::map<int unsigned,RouterInfoMap > RouterSet;
+	typedef std::map<SDataController::DATATYPE,long long int unsigned> DataSet;
+	typedef std::vector<unsigned int> PathVec;
 
 	static SDataController &getInstance()
 	{
@@ -164,19 +168,30 @@ public:
 		refreshMTX.unlock();
 	}
 
+	void set_path(PathVec path)
+	{
+		insertPathMTX.lock();
+		pathVec = path;
+		insertPathMTX.unlock();
+	}
+
+	PathVec& get_path()
+	{
+		return pathVec;
+	}
+
 private:
-	typedef std::map<SDataController::ROUTERINFO,float> RouterInfoMap;
-	typedef std::map<int unsigned,RouterInfoMap > RouterSet;
-	typedef std::map<SDataController::DATATYPE,long long int unsigned> DataSet;
 
 	std::string mOut;
 	DataSet dataSet;
+	PathVec pathVec;  //holds the path of the routers the last updated packet passed thorugh
 	//holds a data map for each router in the emulation for live update
 	RouterSet routerSet;
 	std::vector<std::string> messages;
 	boost::signals2::mutex insertMTX;
 	boost::signals2::mutex refreshMTX;
 	boost::signals2::mutex insertRouterMTX;
+	boost::signals2::mutex insertPathMTX;
 	boost::thread gui_refresh;
 	double dropped_packets;
 

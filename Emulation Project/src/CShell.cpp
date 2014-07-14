@@ -10,6 +10,8 @@
 CShell::CShell(char* xmlfile):
 	mFilepath(std::string(xmlfile)),
 	mEmulation(NULL),
+	EmulationThread(NULL),
+	InputThread(NULL),
 	mEmulationRunning(false)
 {
 	// TODO Auto-generated constructor stub

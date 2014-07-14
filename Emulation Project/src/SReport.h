@@ -73,7 +73,7 @@ public:
 		fd.open((std::string(FILENAME)+reportDateAndTimeString.str()).c_str(), std::fstream::out | std::fstream::trunc);
 		if (!fd.is_open())
 		{
-			std::cout << "Can't open report file for write.\n";
+			std::cout << "Can't open report file for write.\n"; // DONT DELETE COUT
 			exit (EXIT_FAILURE);
 		}
 
@@ -128,6 +128,7 @@ public:
 		ReportMTX.lock();
 		boost::posix_time::time_duration timeD=boost::posix_time::microsec_clock::local_time()-startTime;
 		double timeInSec =timeD.total_seconds();
+		vector<int unsigned> packetPath = vector<int unsigned>(); //use to update the path visually
 		std::pair<long long int, long long int> newInsertKey = std::pair<long long int, long long int>(packetID,packetSize);
 		if (packetID!=0)
 		{
@@ -138,14 +139,15 @@ public:
 			if (hasExitedEmulation)
 			{
 				double totalTimeUntilExit=0;
-
 				InsertExitRouterSet::iterator it;
 				graphSpeedCalcSize+=newInsertKey.second; // add the packet size
+				packetPath.clear();
 				for (it = PacketReport[newInsertKey].begin();it!= PacketReport[newInsertKey].end(); it++)
 				{
+
 					ss << "{'type':'PD','pID':"<< packetID<< ",'pSize':"<< packetSize;
 					totalTimeUntilExit+=((*it).first.second - (*it).first.first);
-
+					packetPath.push_back((*it).second);
 					ss<< ",'rID':" << (*it).second<< ",'insT':" <<
 							(*it).first.first << ",'exitT':"  <<
 							(*it).first.second<< ",'totalT':" <<
@@ -171,6 +173,8 @@ public:
 					<< timeInSec << "}," << std::endl;
 			SDcount++;
 			SDataController::getInstance().insertData(SDataController::AVGSPEED,int(avgSpeed));
+			//update the packet path visually
+			SDataController::getInstance().set_path(packetPath);
 			graphSpeedCalcSize = 0;
 			totalPacketsTransferred = 0;
 			graphAverageFillage = 0;
